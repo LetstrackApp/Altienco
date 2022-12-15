@@ -1,0 +1,36 @@
+
+/* Class = "UILabel"; text = "MOBILE*"; ObjectID = "E3I-cG-QeZ"; */
+"E3I-cG-QeZ.text" = "MOBILE*";
+
+/* Class = "UILabel"; text = "OTP has been sent to +91 9833333333"; ObjectID = "RLn-pM-j8T"; */
+"RLn-pM-j8T.text" = "OTP has been sent to +91 9833333333";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "Ugy-iq-95V"; */
+"Ugy-iq-95V.normalTitle" = "Next";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "Wl2-Kh-GV5"; */
+"Wl2-Kh-GV5.normalTitle" = "Next";
+
+/* Class = "UILabel"; text = "Signing up is easy."; ObjectID = "Y7u-lj-bMV"; */
+"Y7u-lj-bMV.text" = "Signing up is easy.";
+
+/* Class = "UIButton"; normalTitle = "RESEND"; ObjectID = "dmC-kH-wrC"; */
+"dmC-kH-wrC.normalTitle" = "RESEND";
+
+/* Class = "UILabel"; text = "+91"; ObjectID = "du8-Mu-ElC"; */
+"du8-Mu-ElC.text" = "+91";
+
+/* Class = "UILabel"; text = "CHOOSE YOUR PREFERRED LANGUAGE"; ObjectID = "oCs-CS-fFV"; */
+"oCs-CS-fFV.text" = "CHOOSE YOUR PREFERRED LANGUAGE";
+
+/* Class = "UITextField"; placeholder = "0000000000"; ObjectID = "p68-tB-6OW"; */
+"p68-tB-6OW.placeholder" = "0000000000";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "p6j-GF-h3E"; */
+"p6j-GF-h3E.normalTitle" = "Next";
+
+/* Class = "UIButton"; normalTitle = "   ENGLISH"; ObjectID = "rhz-BK-L8u"; */
+"rhz-BK-L8u.normalTitle" = "   ENGLISH";
+
+/* Class = "UILabel"; text = "Did you get SMS OTP? (10sec)"; ObjectID = "rrs-8z-Tmi"; */
+"rrs-8z-Tmi.text" = "Did you get SMS OTP? (10sec)";

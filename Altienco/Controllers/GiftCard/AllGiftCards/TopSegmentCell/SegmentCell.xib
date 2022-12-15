@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-SemiBold.ttf">
+            <string>Poppins-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="SegmentCell" id="gTV-IL-0wX" customClass="SegmentCell" customModule="Altienco" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="94" height="34"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="94" height="34"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FEATURED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fX7-2c-owN">
+                        <rect key="frame" x="10" y="5" width="74" height="24"/>
+                        <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="14"/>
+                        <color key="textColor" red="0.035294117647058823" green="0.39215686274509803" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gvc-QJ-1CR">
+                        <rect key="frame" x="10" y="32" width="74" height="1"/>
+                        <color key="backgroundColor" red="0.035294117647058823" green="0.39215686274509803" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="6v4-cb-BOb"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="fX7-2c-owN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="56d-Xj-gZo"/>
+                <constraint firstAttribute="trailing" secondItem="fX7-2c-owN" secondAttribute="trailing" constant="10" id="KqH-Je-NE1"/>
+                <constraint firstItem="Gvc-QJ-1CR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="TFf-9j-D8H"/>
+                <constraint firstAttribute="bottom" secondItem="fX7-2c-owN" secondAttribute="bottom" constant="5" id="hSA-C2-K9e"/>
+                <constraint firstAttribute="trailing" secondItem="Gvc-QJ-1CR" secondAttribute="trailing" constant="10" id="lNQ-gn-myx"/>
+                <constraint firstAttribute="bottom" secondItem="Gvc-QJ-1CR" secondAttribute="bottom" constant="1" id="qrd-JB-bsU"/>
+                <constraint firstItem="fX7-2c-owN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="y5T-r9-VcT"/>
+            </constraints>
+            <size key="customSize" width="94" height="34"/>
+            <connections>
+                <outlet property="filterName" destination="fX7-2c-owN" id="H1I-ua-Xf6"/>
+                <outlet property="selectedView" destination="Gvc-QJ-1CR" id="2FF-tm-lLK"/>
+            </connections>
+            <point key="canvasLocation" x="163.768115942029" y="103.125"/>
+        </collectionViewCell>
+    </objects>
+</document>

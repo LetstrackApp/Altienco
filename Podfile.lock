@@ -1,0 +1,83 @@
+PODS:
+  - Alamofire (4.9.1)
+  - Cosmos (23.0.0)
+  - DotsLoading (1.0.0)
+  - DropDown (2.3.13)
+  - FlagKit (2.2)
+  - GoogleMaps (7.2.0):
+    - GoogleMaps/Maps (= 7.2.0)
+  - GoogleMaps/Base (7.2.0)
+  - GoogleMaps/Maps (7.2.0):
+    - GoogleMaps/Base
+  - IQKeyboardManagerSwift (6.5.10)
+  - Localize-Swift (3.2.0):
+    - Localize-Swift/LocalizeSwiftCore (= 3.2.0)
+    - Localize-Swift/UIKit (= 3.2.0)
+  - Localize-Swift/LocalizeSwiftCore (3.2.0)
+  - Localize-Swift/UIKit (3.2.0):
+    - Localize-Swift/LocalizeSwiftCore
+  - OTPFieldView (1.0.1)
+  - OTPInputView (0.1.2)
+  - SDWebImage (5.14.2):
+    - SDWebImage/Core (= 5.14.2)
+  - SDWebImage/Core (5.14.2)
+  - SideMenu (6.5.0)
+  - SkeletonView (1.30.4)
+  - SOPullUpView (1.1.0)
+  - SVProgressHUD (2.2.5)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.5)
+  - Cosmos
+  - DotsLoading
+  - DropDown
+  - FlagKit
+  - GoogleMaps
+  - IQKeyboardManagerSwift
+  - Localize-Swift
+  - OTPFieldView
+  - OTPInputView
+  - SDWebImage
+  - SideMenu
+  - SkeletonView
+  - SOPullUpView
+  - SVProgressHUD
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Cosmos
+    - DotsLoading
+    - DropDown
+    - FlagKit
+    - GoogleMaps
+    - IQKeyboardManagerSwift
+    - Localize-Swift
+    - OTPFieldView
+    - OTPInputView
+    - SDWebImage
+    - SideMenu
+    - SkeletonView
+    - SOPullUpView
+    - SVProgressHUD
+
+SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
+  DotsLoading: 1721e46a85d2424e5febbe705fb9e8b23cfea2db
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  FlagKit: eca7dc89064b0c986302ba9acefad1bf80a435b1
+  GoogleMaps: 65ce5426e2398bb81433c8076f2ab6419c2c5537
+  IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
+  Localize-Swift: 6f4475136bdb0d7b2882ea3d4ea919d70142b232
+  OTPFieldView: 700a752fe62c41d1c4914c78aa500fb30d97c255
+  OTPInputView: 8a7cc613e29d264f799d121169d00a745cae4c00
+  SDWebImage: b9a731e1d6307f44ca703b3976d18c24ca561e84
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
+  SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
+  SOPullUpView: a18cab4bdce7cc07c227e705cc4270e0a36ca2fa
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+
+PODFILE CHECKSUM: bbc2a339bd134b1d48733143855418fc6cb7434e
+
+COCOAPODS: 1.11.2

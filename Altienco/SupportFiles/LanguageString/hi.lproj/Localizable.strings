@@ -1,0 +1,84 @@
+/* 
+  Localizable.strings
+  LMDispatcher
+
+  Created by APPLE on 10/09/20.
+  Copyright © 2020 Letstrack. All rights reserved.
+*/
+"Step1" = "Step 1: ";
+"Step2" = "Step 2: ";
+"Step3" = "Step 3: ";
+"Step4" = "Step 4: ";
+
+
+"langTitle" = "अपना प्रचारित भाषा चुनें(hindi)";
+"next" = "आगे(hindi)";
+"addBalance" = "ADD BALANCE";
+"PROCEED" = "आगे(hindi)";
+"register" = "Register";
+"agree" = "I agree with ";
+"terms" = "terms & conditions ";
+"add" = "ADD";
+"countrySCTitle" = "Enter the OTP sent to your mobile (hindi)";
+"mobile" = "मोबाइल(hindi)";
+"otptitle" = "OTP को भेज दिया गया है(hindi)";
+"optAlertMsg" = "क्या आपको एसएमएस ओटीपी मिला?(hindi) ";
+"resend" = "पुनः भेजें(hindi)";
+"resendOTP" = "OTP पुनः भेजें(hindi) ";
+"changePhoto" = "Change Photo(hindi)";
+// bussines Sign
+"storeTitle" = "STORE NAME*(hindi)";
+"addressTitle" = "COMPLETE ADDRESS*(hindi)";
+"stateTitle" = "STATE*(hindi)";
+"cityTitle" = "CITY*(hindi)";
+"optionalTitle" = "Optional information(hindi)";
+"signupTitle" = "Let’s set up your nature of business.(hindi)";
+"gstTtile" = "GSTIN NUMBER(hindi)";
+"panTitle" = "PAN NUMBER(hindi)";
+"tinTitle" = "TIN NUMBER(hindi)";
+// userSignup
+"USignupTitle" = "We would love to know about you too.(hindi)";
+"firstName" = "FIRST NAME*";
+"lastName" = "LAST NAME*";
+"email" = "EMAIL*";
+"password" = "PASSWORD*";
+"gender" = "GENDER*";
+"inviteCode" = "INVITE CODE";
+"privacy" = "By proceeding, I agree to LTlastmile Terms of Use and acknowledge that I have read the Privacy Policy.(hindi)";
+"conditionText" = "I also agree that LTlastmile may contact me by email, phone or sms (including by automated means) at the email address or number I provide, including for marketing purposes.(hindi)";
+"signup" = "Signup(hindi)";
+// signupWelcome
+"welcomeTitle" = "Welcome to LTlastmile.(hindi)";
+"welcomeSubTitle" = "You have completed your sign up process.(hindi)";
+"welcomeLastSubTitle" = "First list your business with 3 easy steps and start earning.(hindi)";
+"startListing" = "Start Listing(hindi)";
+"changePhoto" = "Change Photo(hindi)";
+// UserProfile
+"welocme" = "Welcome(hindi)";
+"userSubTitle" = "Start listing your profile with these simple steps.(hindi)";
+"userStep1" = "Take a picture for your profile*(hindi)";
+"verifyAadhaar" = "Verify Aadhaar Card*(hindi)";
+"addRider" = "Add Your Rider*(hindi)";
+"addVehichle" = "Add Your Vehicle(hindi)";
+"laterButton" = "Don’t have vehicle, add later from menu(hindi)";
+"startOrder" = "Start Taking Orders(hindi)";
+//AddRider
+"riderPicTtile" = "Take a picture of your rider*(hindi)";
+"verifyLicence" = "Verify Driver’s Licence*(hindi)";
+"addThisRider" = "Add This Rider(hindi)";
+"startTakingOrders" = "Start Taking Orders(hindi)";
+//VerifyAadhaar
+"AadhaarCrad" = "AADHAAR CARD*(hindi)";
+"verify" = "Verify(hindi)";
+//VerifyNumber
+"riderNumbertitle" = "Enter Rider’s Mobile Number(hindi)";
+
+"close" = "Close";
+"ok" = "Ok";
+"changeOrder" = "CHANGE ORDER";
+
+"warning" = "WARNING";
+"notification_access" = "Please enable access to Notifications in the Settings app.";
+"signTitle" = "Add Proof Of Delivery";
+"receiverName" = "Receiver name";
+

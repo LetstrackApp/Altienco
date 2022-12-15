@@ -1,0 +1,1496 @@
+[
+    {
+        "country_id": 1,
+        "name": "Afghanistan",
+        "iso_code": "AFG",
+        "iso_code2": "AF",
+        "mobileCode": "+93",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 3,
+        "name": "Albania",
+        "iso_code": "ALB",
+        "iso_code2": "AL",
+        "mobileCode": "+355",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 4,
+        "name": "Algeria",
+        "iso_code": "DZA",
+        "iso_code2": "DZ",
+        "mobileCode": "+213",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 5,
+        "name": "American Samoa",
+        "iso_code": "ASM",
+        "iso_code2": "AS",
+        "mobileCode": "+1-684",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 7,
+        "name": "Angola",
+        "iso_code": "AGO",
+        "iso_code2": "AO",
+        "mobileCode": "+244",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 8,
+        "name": "Anguilla",
+        "iso_code": "AIA",
+        "iso_code2": "AI",
+        "mobileCode": "+1-264",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 10,
+        "name": "Antigua And Barbuda",
+        "iso_code": "ATG",
+        "iso_code2": "AG",
+        "mobileCode": "+1-268",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 11,
+        "name": "Argentina",
+        "iso_code": "ARG",
+        "iso_code2": "AR",
+        "mobileCode": "+54",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 12,
+        "name": "Armenia",
+        "iso_code": "ARM",
+        "iso_code2": "AM",
+        "mobileCode": "+374",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 13,
+        "name": "Aruba",
+        "iso_code": "ABW",
+        "iso_code2": "AW",
+        "mobileCode": "+297",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 14,
+        "name": "Australia",
+        "iso_code": "AUS",
+        "iso_code2": "AU",
+        "mobileCode": "+61",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 16,
+        "name": "Azerbaijan",
+        "iso_code": "AZE",
+        "iso_code2": "AZ",
+        "mobileCode": "+994",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 17,
+        "name": "Bahrain",
+        "iso_code": "BHR",
+        "iso_code2": "BH",
+        "mobileCode": "+973",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 18,
+        "name": "Bangladesh",
+        "iso_code": "BGD",
+        "iso_code2": "BD",
+        "mobileCode": "+880",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 19,
+        "name": "Barbados",
+        "iso_code": "BRB",
+        "iso_code2": "BB",
+        "mobileCode": "+1-246",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 21,
+        "name": "Belgium",
+        "iso_code": "BEL",
+        "iso_code2": "BE",
+        "mobileCode": "+32",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 22,
+        "name": "Belize",
+        "iso_code": "BLZ",
+        "iso_code2": "BZ",
+        "mobileCode": "+501",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 23,
+        "name": "Benin",
+        "iso_code": "BEN",
+        "iso_code2": "BJ",
+        "mobileCode": "+229",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 24,
+        "name": "Bermuda",
+        "iso_code": "BMU",
+        "iso_code2": "BM",
+        "mobileCode": "+1-441",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 25,
+        "name": "Bhutan",
+        "iso_code": "BTN",
+        "iso_code2": "BT",
+        "mobileCode": "+975",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 26,
+        "name": "Bolivia",
+        "iso_code": "BOL",
+        "iso_code2": "BO",
+        "mobileCode": "+591",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 27,
+        "name": "Bonaire, Sint Eustatius and Saba",
+        "iso_code": "BES",
+        "iso_code2": "BQ",
+        "mobileCode": "+599",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 29,
+        "name": "Botswana",
+        "iso_code": "BWA",
+        "iso_code2": "BW",
+        "mobileCode": "+267",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 31,
+        "name": "Brazil",
+        "iso_code": "BRA",
+        "iso_code2": "BR",
+        "mobileCode": "+55",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 35,
+        "name": "Burkina Faso",
+        "iso_code": "BFA",
+        "iso_code2": "BF",
+        "mobileCode": "+226",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 36,
+        "name": "Burundi",
+        "iso_code": "BDI",
+        "iso_code2": "BI",
+        "mobileCode": "+257",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 37,
+        "name": "Cambodia",
+        "iso_code": "KHM",
+        "iso_code2": "KH",
+        "mobileCode": "+855",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 38,
+        "name": "Cameroon",
+        "iso_code": "CMR",
+        "iso_code2": "CM",
+        "mobileCode": "+237",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 39,
+        "name": "Canada",
+        "iso_code": "CAN",
+        "iso_code2": "CA",
+        "mobileCode": "+1",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 40,
+        "name": "Cape Verde",
+        "iso_code": "CPV",
+        "iso_code2": "CV",
+        "mobileCode": "+238",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 41,
+        "name": "Cayman Islands",
+        "iso_code": "CYM",
+        "iso_code2": "KY",
+        "mobileCode": "+1-345",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 42,
+        "name": "Central African Republic",
+        "iso_code": "CAF",
+        "iso_code2": "CF",
+        "mobileCode": "+236",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 43,
+        "name": "Chad",
+        "iso_code": "TCD",
+        "iso_code2": "TD",
+        "mobileCode": "+235",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 44,
+        "name": "Chile",
+        "iso_code": "CHL",
+        "iso_code2": "CL",
+        "mobileCode": "+56",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 45,
+        "name": "China",
+        "iso_code": "CHN",
+        "iso_code2": "CN",
+        "mobileCode": "+86",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 48,
+        "name": "Colombia",
+        "iso_code": "COL",
+        "iso_code2": "CO",
+        "mobileCode": "+57",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 49,
+        "name": "Comoros",
+        "iso_code": "COM",
+        "iso_code2": "KM",
+        "mobileCode": "+269",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 50,
+        "name": "Congo",
+        "iso_code": "COG",
+        "iso_code2": "CG",
+        "mobileCode": "+242",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 52,
+        "name": "Costa Rica",
+        "iso_code": "CRI",
+        "iso_code2": "CR",
+        "mobileCode": "+506",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 53,
+        "name": "Cote D'Ivoire (Ivory Coast)",
+        "iso_code": "CIV",
+        "iso_code2": "CI",
+        "mobileCode": "+225",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 56,
+        "name": "CuraÃ§ao",
+        "iso_code": "CUW",
+        "iso_code2": "CW",
+        "mobileCode": "+599",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 57,
+        "name": "Cyprus",
+        "iso_code": "CYP",
+        "iso_code2": "CY",
+        "mobileCode": "+357",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 58,
+        "name": "Czech Republic",
+        "iso_code": "CZE",
+        "iso_code2": "CZ",
+        "mobileCode": "+420",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 59,
+        "name": "Democratic Republic of the Congo",
+        "iso_code": "COD",
+        "iso_code2": "CD",
+        "mobileCode": "+243",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 61,
+        "name": "Djibouti",
+        "iso_code": "DJI",
+        "iso_code2": "DJ",
+        "mobileCode": "+253",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 62,
+        "name": "Dominica",
+        "iso_code": "DMA",
+        "iso_code2": "DM",
+        "mobileCode": "+1-767",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 63,
+        "name": "Dominican Republic",
+        "iso_code": "DOM",
+        "iso_code2": "DO",
+        "mobileCode": "+1-809 and",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 65,
+        "name": "Ecuador",
+        "iso_code": "ECU",
+        "iso_code2": "EC",
+        "mobileCode": "+593",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 66,
+        "name": "Egypt",
+        "iso_code": "EGY",
+        "iso_code2": "EG",
+        "mobileCode": "+20",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 67,
+        "name": "El Salvador",
+        "iso_code": "SLV",
+        "iso_code2": "SV",
+        "mobileCode": "+503",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 68,
+        "name": "Equatorial Guinea",
+        "iso_code": "GNQ",
+        "iso_code2": "GQ",
+        "mobileCode": "+240",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 69,
+        "name": "Eritrea",
+        "iso_code": "ERI",
+        "iso_code2": "ER",
+        "mobileCode": "+291",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 71,
+        "name": "Ethiopia",
+        "iso_code": "ETH",
+        "iso_code2": "ET",
+        "mobileCode": "+251",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 74,
+        "name": "Fiji Islands",
+        "iso_code": "FJI",
+        "iso_code2": "FJ",
+        "mobileCode": "+679",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 76,
+        "name": "France",
+        "iso_code": "FRA",
+        "iso_code2": "FR",
+        "mobileCode": "+33",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 77,
+        "name": "French Guiana",
+        "iso_code": "GUF",
+        "iso_code2": "GF",
+        "mobileCode": "+594",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 80,
+        "name": "Gabon",
+        "iso_code": "GAB",
+        "iso_code2": "GA",
+        "mobileCode": "+241",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 81,
+        "name": "Gambia The",
+        "iso_code": "GMB",
+        "iso_code2": "GM",
+        "mobileCode": "+220",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 82,
+        "name": "Georgia",
+        "iso_code": "GEO",
+        "iso_code2": "GE",
+        "mobileCode": "+995",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 83,
+        "name": "Germany",
+        "iso_code": "DEU",
+        "iso_code2": "DE",
+        "mobileCode": "+49",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 84,
+        "name": "Ghana",
+        "iso_code": "GHA",
+        "iso_code2": "GH",
+        "mobileCode": "+233",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 86,
+        "name": "Greece",
+        "iso_code": "GRC",
+        "iso_code2": "GR",
+        "mobileCode": "+30",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 88,
+        "name": "Grenada",
+        "iso_code": "GRD",
+        "iso_code2": "GD",
+        "mobileCode": "+1-473",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 91,
+        "name": "Guatemala",
+        "iso_code": "GTM",
+        "iso_code2": "GT",
+        "mobileCode": "+502",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 93,
+        "name": "Guinea",
+        "iso_code": "GIN",
+        "iso_code2": "GN",
+        "mobileCode": "+224",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 94,
+        "name": "Guinea-Bissau",
+        "iso_code": "GNB",
+        "iso_code2": "GW",
+        "mobileCode": "+245",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 95,
+        "name": "Guyana",
+        "iso_code": "GUY",
+        "iso_code2": "GY",
+        "mobileCode": "+592",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 96,
+        "name": "Haiti",
+        "iso_code": "HTI",
+        "iso_code2": "HT",
+        "mobileCode": "+509",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 98,
+        "name": "Honduras",
+        "iso_code": "HND",
+        "iso_code2": "HN",
+        "mobileCode": "+504",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 102,
+        "name": "India",
+        "iso_code": "IND",
+        "iso_code2": "IN",
+        "mobileCode": "+91",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 103,
+        "name": "Indonesia",
+        "iso_code": "IDN",
+        "iso_code2": "ID",
+        "mobileCode": "+62",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 105,
+        "name": "Iraq",
+        "iso_code": "IRQ",
+        "iso_code2": "IQ",
+        "mobileCode": "+964",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 106,
+        "name": "Ireland",
+        "iso_code": "IRL",
+        "iso_code2": "IE",
+        "mobileCode": "+353",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 107,
+        "name": "Israel",
+        "iso_code": "ISR",
+        "iso_code2": "IL",
+        "mobileCode": "+972",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 108,
+        "name": "Italy",
+        "iso_code": "ITA",
+        "iso_code2": "IT",
+        "mobileCode": "+39",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 109,
+        "name": "Jamaica",
+        "iso_code": "JAM",
+        "iso_code2": "JM",
+        "mobileCode": "+1-876",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 110,
+        "name": "Japan",
+        "iso_code": "JPN",
+        "iso_code2": "JP",
+        "mobileCode": "+81",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 112,
+        "name": "Jordan",
+        "iso_code": "JOR",
+        "iso_code2": "JO",
+        "mobileCode": "+962",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 113,
+        "name": "Kazakhstan",
+        "iso_code": "KAZ",
+        "iso_code2": "KZ",
+        "mobileCode": "+7",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 114,
+        "name": "Kenya",
+        "iso_code": "KEN",
+        "iso_code2": "KE",
+        "mobileCode": "+254",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 117,
+        "name": "Kuwait",
+        "iso_code": "KWT",
+        "iso_code2": "KW",
+        "mobileCode": "+965",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 118,
+        "name": "Kyrgyzstan",
+        "iso_code": "KGZ",
+        "iso_code2": "KG",
+        "mobileCode": "+996",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 119,
+        "name": "Laos",
+        "iso_code": "LAO",
+        "iso_code2": "LA",
+        "mobileCode": "+856",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 121,
+        "name": "Lebanon",
+        "iso_code": "LBN",
+        "iso_code2": "LB",
+        "mobileCode": "+961",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 122,
+        "name": "Lesotho",
+        "iso_code": "LSO",
+        "iso_code2": "LS",
+        "mobileCode": "+266",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 123,
+        "name": "Liberia",
+        "iso_code": "LBR",
+        "iso_code2": "LR",
+        "mobileCode": "+231",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 126,
+        "name": "Lithuania",
+        "iso_code": "LTU",
+        "iso_code2": "LT",
+        "mobileCode": "+370",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 127,
+        "name": "Luxembourg",
+        "iso_code": "LUX",
+        "iso_code2": "LU",
+        "mobileCode": "+352",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 130,
+        "name": "Madagascar",
+        "iso_code": "MDG",
+        "iso_code2": "MG",
+        "mobileCode": "+261",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 131,
+        "name": "Malawi",
+        "iso_code": "MWI",
+        "iso_code2": "MW",
+        "mobileCode": "+265",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 132,
+        "name": "Malaysia",
+        "iso_code": "MYS",
+        "iso_code2": "MY",
+        "mobileCode": "+60",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 134,
+        "name": "Mali",
+        "iso_code": "MLI",
+        "iso_code2": "ML",
+        "mobileCode": "+223",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 138,
+        "name": "Martinique",
+        "iso_code": "MTQ",
+        "iso_code2": "MQ",
+        "mobileCode": "+596",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 139,
+        "name": "Mauritania",
+        "iso_code": "MRT",
+        "iso_code2": "MR",
+        "mobileCode": "+222",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 140,
+        "name": "Mauritius",
+        "iso_code": "MUS",
+        "iso_code2": "MU",
+        "mobileCode": "+230",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 142,
+        "name": "Mexico",
+        "iso_code": "MEX",
+        "iso_code2": "MX",
+        "mobileCode": "+52",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 144,
+        "name": "Moldova",
+        "iso_code": "MDA",
+        "iso_code2": "MD",
+        "mobileCode": "+373",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 148,
+        "name": "Montserrat",
+        "iso_code": "MSR",
+        "iso_code2": "MS",
+        "mobileCode": "+1-664",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 149,
+        "name": "Morocco",
+        "iso_code": "MAR",
+        "iso_code2": "MA",
+        "mobileCode": "+212",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 150,
+        "name": "Mozambique",
+        "iso_code": "MOZ",
+        "iso_code2": "MZ",
+        "mobileCode": "+258",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 151,
+        "name": "Myanmar",
+        "iso_code": "MMR",
+        "iso_code2": "MM",
+        "mobileCode": "+95",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 152,
+        "name": "Namibia",
+        "iso_code": "NAM",
+        "iso_code2": "NA",
+        "mobileCode": "+264",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 154,
+        "name": "Nepal",
+        "iso_code": "NPL",
+        "iso_code2": "NP",
+        "mobileCode": "+977",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 155,
+        "name": "Netherlands",
+        "iso_code": "NLD",
+        "iso_code2": "NL",
+        "mobileCode": "+31",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 158,
+        "name": "Nicaragua",
+        "iso_code": "NIC",
+        "iso_code2": "NI",
+        "mobileCode": "+505",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 159,
+        "name": "Niger",
+        "iso_code": "NER",
+        "iso_code2": "NE",
+        "mobileCode": "+227",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 160,
+        "name": "Nigeria",
+        "iso_code": "NGA",
+        "iso_code2": "NG",
+        "mobileCode": "+234",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 166,
+        "name": "Oman",
+        "iso_code": "OMN",
+        "iso_code2": "OM",
+        "mobileCode": "+968",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 167,
+        "name": "Pakistan",
+        "iso_code": "PAK",
+        "iso_code2": "PK",
+        "mobileCode": "+92",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 169,
+        "name": "Palestinian Territory Occupied",
+        "iso_code": "PSE",
+        "iso_code2": "PS",
+        "mobileCode": "+970",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 170,
+        "name": "Panama",
+        "iso_code": "PAN",
+        "iso_code2": "PA",
+        "mobileCode": "+507",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 172,
+        "name": "Paraguay",
+        "iso_code": "PRY",
+        "iso_code2": "PY",
+        "mobileCode": "+595",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 173,
+        "name": "Peru",
+        "iso_code": "PER",
+        "iso_code2": "PE",
+        "mobileCode": "+51",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 174,
+        "name": "Philippines",
+        "iso_code": "PHL",
+        "iso_code2": "PH",
+        "mobileCode": "+63",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 176,
+        "name": "Poland",
+        "iso_code": "POL",
+        "iso_code2": "PL",
+        "mobileCode": "+48",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 177,
+        "name": "Portugal",
+        "iso_code": "PRT",
+        "iso_code2": "PT",
+        "mobileCode": "+351",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 178,
+        "name": "Puerto Rico",
+        "iso_code": "PRI",
+        "iso_code2": "PR",
+        "mobileCode": "+1-787 and",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 179,
+        "name": "Qatar",
+        "iso_code": "QAT",
+        "iso_code2": "QA",
+        "mobileCode": "+974",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 180,
+        "name": "Reunion",
+        "iso_code": "REU",
+        "iso_code2": "RE",
+        "mobileCode": "+262",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 181,
+        "name": "Romania",
+        "iso_code": "ROU",
+        "iso_code2": "RO",
+        "mobileCode": "+40",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 182,
+        "name": "Russia",
+        "iso_code": "RUS",
+        "iso_code2": "RU",
+        "mobileCode": "+7",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 183,
+        "name": "Rwanda",
+        "iso_code": "RWA",
+        "iso_code2": "RW",
+        "mobileCode": "+250",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 185,
+        "name": "Saint Kitts And Nevis",
+        "iso_code": "KNA",
+        "iso_code2": "KN",
+        "mobileCode": "+1-869",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 186,
+        "name": "Saint Lucia",
+        "iso_code": "LCA",
+        "iso_code2": "LC",
+        "mobileCode": "+1-758",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 188,
+        "name": "Saint Vincent And The Grenadines",
+        "iso_code": "VCT",
+        "iso_code2": "VC",
+        "mobileCode": "+1-784",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 190,
+        "name": "Saint-Martin (French part)",
+        "iso_code": "MAF",
+        "iso_code2": "MF",
+        "mobileCode": "+590",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 191,
+        "name": "Samoa",
+        "iso_code": "WSM",
+        "iso_code2": "WS",
+        "mobileCode": "+685",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 194,
+        "name": "Saudi Arabia",
+        "iso_code": "SAU",
+        "iso_code2": "SA",
+        "mobileCode": "+966",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 195,
+        "name": "Senegal",
+        "iso_code": "SEN",
+        "iso_code2": "SN",
+        "mobileCode": "+221",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 197,
+        "name": "Seychelles",
+        "iso_code": "SYC",
+        "iso_code2": "SC",
+        "mobileCode": "+248",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 198,
+        "name": "Sierra Leone",
+        "iso_code": "SLE",
+        "iso_code2": "SL",
+        "mobileCode": "+232",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 199,
+        "name": "Singapore",
+        "iso_code": "SGP",
+        "iso_code2": "SG",
+        "mobileCode": "+65",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 200,
+        "name": "Sint Maarten (Dutch part)",
+        "iso_code": "SXM",
+        "iso_code2": "SX",
+        "mobileCode": "+1721",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 204,
+        "name": "Somalia",
+        "iso_code": "SOM",
+        "iso_code2": "SO",
+        "mobileCode": "+252",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 205,
+        "name": "South Africa",
+        "iso_code": "ZAF",
+        "iso_code2": "ZA",
+        "mobileCode": "+27",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 209,
+        "name": "Spain",
+        "iso_code": "ESP",
+        "iso_code2": "ES",
+        "mobileCode": "+34",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 210,
+        "name": "Sri Lanka",
+        "iso_code": "LKA",
+        "iso_code2": "LK",
+        "mobileCode": "+94",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 211,
+        "name": "Sudan",
+        "iso_code": "SDN",
+        "iso_code2": "SD",
+        "mobileCode": "+249",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 212,
+        "name": "Suriname",
+        "iso_code": "SUR",
+        "iso_code2": "SR",
+        "mobileCode": "+597",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 214,
+        "name": "Swaziland",
+        "iso_code": "SWZ",
+        "iso_code2": "SZ",
+        "mobileCode": "+268",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 215,
+        "name": "Sweden",
+        "iso_code": "SWE",
+        "iso_code2": "SE",
+        "mobileCode": "+46",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 216,
+        "name": "Switzerland",
+        "iso_code": "CHE",
+        "iso_code2": "CH",
+        "mobileCode": "+41",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 219,
+        "name": "Tajikistan",
+        "iso_code": "TJK",
+        "iso_code2": "TJ",
+        "mobileCode": "+992",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 220,
+        "name": "Tanzania",
+        "iso_code": "TZA",
+        "iso_code2": "TZ",
+        "mobileCode": "+255",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 221,
+        "name": "Thailand",
+        "iso_code": "THA",
+        "iso_code2": "TH",
+        "mobileCode": "+66",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 222,
+        "name": "The Bahamas",
+        "iso_code": "BHS",
+        "iso_code2": "BS",
+        "mobileCode": "+1-242",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 223,
+        "name": "Togo",
+        "iso_code": "TGO",
+        "iso_code2": "TG",
+        "mobileCode": "+228",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 225,
+        "name": "Tonga",
+        "iso_code": "TON",
+        "iso_code2": "TO",
+        "mobileCode": "+676",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 226,
+        "name": "Trinidad And Tobago",
+        "iso_code": "TTO",
+        "iso_code2": "TT",
+        "mobileCode": "+1-868",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 227,
+        "name": "Tunisia",
+        "iso_code": "TUN",
+        "iso_code2": "TN",
+        "mobileCode": "+216",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 228,
+        "name": "Turkey",
+        "iso_code": "TUR",
+        "iso_code2": "TR",
+        "mobileCode": "+90",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 230,
+        "name": "Turks And Caicos Islands",
+        "iso_code": "TCA",
+        "iso_code2": "TC",
+        "mobileCode": "+1-649",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 232,
+        "name": "Uganda",
+        "iso_code": "UGA",
+        "iso_code2": "UG",
+        "mobileCode": "+256",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 233,
+        "name": "Ukraine",
+        "iso_code": "UKR",
+        "iso_code2": "UA",
+        "mobileCode": "+380",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 234,
+        "name": "United Arab Emirates",
+        "iso_code": "ARE",
+        "iso_code2": "AE",
+        "mobileCode": "+971",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 235,
+        "name": "United Kingdom",
+        "iso_code": "GBR",
+        "iso_code2": "GB",
+        "mobileCode": "+44",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 236,
+        "name": "United States",
+        "iso_code": "USA",
+        "iso_code2": "US",
+        "mobileCode": "+1",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 238,
+        "name": "Uruguay",
+        "iso_code": "URY",
+        "iso_code2": "UY",
+        "mobileCode": "+598",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 239,
+        "name": "Uzbekistan",
+        "iso_code": "UZB",
+        "iso_code2": "UZ",
+        "mobileCode": "+998",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 240,
+        "name": "Vanuatu",
+        "iso_code": "VUT",
+        "iso_code2": "VU",
+        "mobileCode": "+678",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 242,
+        "name": "Venezuela",
+        "iso_code": "VEN",
+        "iso_code2": "VE",
+        "mobileCode": "+58",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 243,
+        "name": "Vietnam",
+        "iso_code": "VNM",
+        "iso_code2": "VN",
+        "mobileCode": "+84",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 244,
+        "name": "Virgin Islands (British)",
+        "iso_code": "VGB",
+        "iso_code2": "VG",
+        "mobileCode": "+1-284",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 248,
+        "name": "Yemen",
+        "iso_code": "YEM",
+        "iso_code2": "YE",
+        "mobileCode": "+967",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 249,
+        "name": "Zambia",
+        "iso_code": "ZMB",
+        "iso_code2": "ZM",
+        "mobileCode": "+260",
+        "isActive": false,
+        "regions": null
+    },
+    {
+        "country_id": 250,
+        "name": "Zimbabwe",
+        "iso_code": "ZWE",
+        "iso_code2": "ZW",
+        "mobileCode": "+263",
+        "isActive": false,
+        "regions": null
+    }
+]

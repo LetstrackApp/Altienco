@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CalenderVC" customModule="LMRider" customModuleProvider="target">
+            <connections>
+                <outlet property="calenderView" destination="aZz-wf-6oM" id="pf7-Zf-U5f"/>
+                <outlet property="currentDateLabel" destination="6sY-oc-h8h" id="Dpq-ct-nrr"/>
+                <outlet property="koyomi" destination="Kvb-TZ-kUl" id="W2o-aX-rnF"/>
+                <outlet property="segmentedControl" destination="vru-zA-XlB" id="QZ7-B6-ale"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aZz-wf-6oM">
+                    <rect key="frame" x="30" y="144" width="354" height="618"/>
+                    <subviews>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vru-zA-XlB">
+                            <rect key="frame" x="78.5" y="100" width="197" height="32"/>
+                            <segments>
+                                <segment title="First"/>
+                                <segment title="Second"/>
+                                <segment title=""/>
+                            </segments>
+                            <connections>
+                                <action selector="tappedControl:" destination="-1" eventType="valueChanged" id="du1-VP-MuA"/>
+                            </connections>
+                        </segmentedControl>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Max 7 Days History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfo-Sh-aya">
+                            <rect key="frame" x="78" y="141" width="198.5" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.22352941179999999" green="0.36078431370000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sY-oc-h8h">
+                            <rect key="frame" x="156.5" y="172" width="41.5" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Kvb-TZ-kUl" customClass="Koyomi" customModule="Koyomi">
+                            <rect key="frame" x="27" y="207.5" width="300" height="260"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="300" id="eZO-8l-He2"/>
+                                <constraint firstAttribute="height" constant="260" id="q4X-Y0-S3d"/>
+                            </constraints>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="C1A-fl-7fD">
+                                <size key="itemSize" width="50" height="50"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <cells/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="sectionSpace">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cellSpace">
+                                    <real key="value" value="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="weekHeight">
+                                    <real key="value" value="35"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="weekCellHeight">
+                                    <real key="value" value="25"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </collectionView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="vru-zA-XlB" firstAttribute="centerX" secondItem="aZz-wf-6oM" secondAttribute="centerX" id="2g7-RW-vbH"/>
+                        <constraint firstItem="vru-zA-XlB" firstAttribute="top" secondItem="aZz-wf-6oM" secondAttribute="top" constant="100" id="4JF-BD-BxL"/>
+                        <constraint firstItem="xfo-Sh-aya" firstAttribute="top" secondItem="vru-zA-XlB" secondAttribute="bottom" constant="10" id="N4k-0J-fuY"/>
+                        <constraint firstItem="vru-zA-XlB" firstAttribute="centerX" secondItem="xfo-Sh-aya" secondAttribute="centerX" id="Qjz-gE-Hnh"/>
+                        <constraint firstItem="6sY-oc-h8h" firstAttribute="top" secondItem="xfo-Sh-aya" secondAttribute="bottom" constant="10" id="at0-kN-emd"/>
+                        <constraint firstItem="vru-zA-XlB" firstAttribute="centerX" secondItem="Kvb-TZ-kUl" secondAttribute="centerX" id="hLq-ki-Yvo"/>
+                        <constraint firstItem="6sY-oc-h8h" firstAttribute="centerX" secondItem="vru-zA-XlB" secondAttribute="centerX" id="jpV-dh-aYI"/>
+                        <constraint firstItem="Kvb-TZ-kUl" firstAttribute="top" secondItem="6sY-oc-h8h" secondAttribute="bottom" constant="15" id="spb-b9-PPf"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="0.0" alpha="0.70309749119999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="aZz-wf-6oM" secondAttribute="bottom" constant="100" id="CYd-sP-76r"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aZz-wf-6oM" secondAttribute="trailing" constant="30" id="E8E-Dw-aWW"/>
+                <constraint firstItem="aZz-wf-6oM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="FZA-79-p0d"/>
+                <constraint firstItem="aZz-wf-6oM" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="100" id="k5k-29-RYn"/>
+            </constraints>
+            <point key="canvasLocation" x="34.782608695652179" y="87.723214285714278"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

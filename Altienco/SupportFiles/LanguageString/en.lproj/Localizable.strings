@@ -1,0 +1,84 @@
+/* 
+  Localizable.strings
+  LMDispatcher
+
+  Created by APPLE on 10/09/20.
+  Copyright © 2020 Letstrack. All rights reserved.
+*/
+"Step1" = "Step 1: ";
+"Step2" = "Step 2: ";
+"Step3" = "Step 3: ";
+"Step4" = "Step 4: ";
+
+
+"langTitle" = "CHOOSE YOUR PREFERRED LANGUAGE";
+"next" = "Next";
+"add" = "ADD";
+"PROCEED" = "PROCEED";
+"addBalance" = "ADD BALANCE";
+"countrySCTitle" = "Enter the OTP sent to your mobile";
+"mobile" = "MOBILE";
+"otptitle" = "OTP has been sent to";
+"optAlertMsg" = "Did you get SMS OTP? ";
+"resend" = "Resend";
+"resendOTP" = "Resend OTP ";
+"register" = "Register";
+"agree" = "I agree with ";
+"terms" = "terms & conditions ";
+// bussines Sign
+"storeTitle" = "STORE NAME*";
+"addressTitle" = "COMPLETE ADDRESS*";
+"stateTitle" = "STATE*";
+"cityTitle" = "CITY*";
+"optionalTitle" = "Optional information";
+"signupTitle" = "Let’s set up your nature of business.";
+"gstTtile" = "GSTIN NUMBER";
+"panTitle" = "PAN NUMBER";
+"tinTitle" = "TIN NUMBER";
+
+// userSignup
+"USignupTitle" = "We would love to know about you too.";
+"firstName" = "FIRST NAME*";
+"lastName" = "LAST NAME*";
+"email" = "EMAIL*";
+"password" = "PASSWORD*";
+"gender" = "GENDER*";
+"inviteCode" = "INVITE CODE";
+"privacy" = "By proceeding, I agree to LTlastmile Terms of Use and acknowledge that I have read the Privacy Policy.";
+"conditionText" = "I also agree that LTlastmile may contact me by email, phone or sms (including by automated means) at the email address or number I provide, including for marketing purposes.";
+"signup" = "Signup";
+"changePhoto" = "Change Photo";
+// signupWelcome
+"welcomeTitle" = "Welcome to LTlastmile.";
+"welcomeSubTitle" = "You have completed your sign up process.";
+"welcomeLastSubTitle" = "First list your business with 3 easy steps and start earning.";
+"startListing" = "Start Listing";
+// UserProfile
+"welocme" = "Welcome";
+"userSubTitle" = "Start listing your profile with these simple steps.";
+"userStep1" = "Take a picture for your profile*";
+"verifyAadhaar" = "Verify Aadhaar Card*";
+"addRider" = "Add Your Rider*";
+"addVehichle" = "Add Your Vehicle";
+"laterButton" = "Don’t have vehicle, add later from menu";
+"startOrder" = "Start Taking Orders";
+//AddRider
+"riderPicTtile" = "Take a picture of your rider*";
+"verifyLicence" = "Verify Driver’s Licence*";
+"addThisRider" = "Add This Rider";
+"startTakingOrders" = "Start Taking Orders";
+//VerifyAadhaar
+"AadhaarCrad" = "AADHAAR CARD*";
+"verify" = "Verify";
+//VerifyNumber
+"riderNumbertitle" = "Enter Rider’s Mobile Number";
+
+"close" = "Close";
+"ok" = "Ok";
+"changeOrder" = "CHANGE ORDER";
+
+
+"warning" = "WARNING";
+"notification_access" = "Please enable access to Notifications in the Settings app.";
+"signTitle" = "Add Proof Of Delivery";
+"receiverName" = "Receiver name";

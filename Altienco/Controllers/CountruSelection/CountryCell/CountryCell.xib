@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyCell" customModule="LMDispatcher" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="MyCell" id="8ea-uE-Xbp" customClass="MyCell" customModule="LMDispatcher" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="210" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="logo_0" translatesAutoresizingMaskIntoConstraints="NO" id="Acb-PY-iAR">
+                    <rect key="frame" x="8" y="11.5" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="F7Z-Kk-YIk"/>
+                        <constraint firstAttribute="height" constant="20" id="ac5-ke-U50"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="kil-e3-gsY"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="optionLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5b-qy-Uac">
+                    <rect key="frame" x="36" y="10" width="90" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="H5b-qy-Uac" firstAttribute="top" secondItem="8ea-uE-Xbp" secondAttribute="top" constant="10" id="LDP-cS-31b"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="H5b-qy-Uac" secondAttribute="trailing" constant="8" id="N13-Rw-3MG"/>
+                <constraint firstItem="Acb-PY-iAR" firstAttribute="centerY" secondItem="8ea-uE-Xbp" secondAttribute="centerY" constant="1.5" id="USB-et-BEg"/>
+                <constraint firstAttribute="bottom" secondItem="H5b-qy-Uac" secondAttribute="bottom" constant="10" id="W4V-ZR-QPd"/>
+                <constraint firstItem="Acb-PY-iAR" firstAttribute="leading" secondItem="8ea-uE-Xbp" secondAttribute="leading" constant="8" id="cTf-oR-eH8"/>
+                <constraint firstItem="H5b-qy-Uac" firstAttribute="leading" secondItem="Acb-PY-iAR" secondAttribute="trailing" constant="8" id="nT1-wV-pFq"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="mcf-Tn-9F8"/>
+            <connections>
+                <outlet property="logoImageView" destination="Acb-PY-iAR" id="Cjy-M3-PZE"/>
+                <outlet property="optionLabel" destination="H5b-qy-Uac" id="SKH-xS-wjf"/>
+            </connections>
+            <point key="canvasLocation" x="514.49275362318849" y="408.48214285714283"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="logo_0" width="128" height="128"/>
+    </resources>
+</document>
