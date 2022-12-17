@@ -25,6 +25,7 @@ pod 'Alamofire', '~> 4.5'
 	## pod 'Firebase/Analytics'
 	##pod 'Koyomi', '~> 0.1.6'
 	pod 'OTPFieldView'
+pod 'lottie-ios', '~> 3.0.5'
 
 
 

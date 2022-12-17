@@ -180,11 +180,17 @@ class WalletDenominationVC: UIViewController, GoToRootDelegate {
             DispatchQueue.main.async { [weak self] in
                 if status == true, let responce = result{
                     self?.setupWalletBal(walletBal: responce.first?.WalletAmount ?? 0.0)
-                    let viewController: SuccessGatwayVC = SuccessGatwayVC()
-                    viewController.denominationPrice = Double(self?.resposeData[self?.SelectedIndex ?? 0].denominationValue ?? 0)
-                    viewController.delegate = self
-                    viewController.modalPresentationStyle = .overFullScreen
-                    self?.navigationController?.present(viewController, animated: true)
+                    
+                    if let amount = self?.resposeData[self?.SelectedIndex ?? 0].denominationValue {
+                        let obj = AlertViewVC.init(type: .transactionSucessfull(amount: amount))
+                        obj.modalPresentationStyle = .overFullScreen
+                        self?.present(obj, animated: false, completion: nil)
+                    }
+//                    let viewController: SuccessGatwayVC = SuccessGatwayVC()
+//                    viewController.denominationPrice = Double(self?.resposeData[self?.SelectedIndex ?? 0].denominationValue ?? 0)
+//                    viewController.delegate = self
+//                    viewController.modalPresentationStyle = .overFullScreen
+//                    self?.navigationController?.present(viewController, animated: true)
                 }
                 else {
                     self?.callFailureScreen()

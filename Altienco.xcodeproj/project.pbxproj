@@ -14,6 +14,11 @@
 		0431245D294CCF6400830CF2 /* UiView+Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431245C294CCF6400830CF2 /* UiView+Anchor.swift */; };
 		0431245F294CD12C00830CF2 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431245E294CD12C00830CF2 /* UIImage+Extension.swift */; };
 		04312461294CD28B00830CF2 /* ContactPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04312460294CD28B00830CF2 /* ContactPicker.swift */; };
+		0466135C294E116C00EC444B /* AlertViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466135B294E116C00EC444B /* AlertViewVC.swift */; };
+		0466135F294E11FB00EC444B /* TransactionSuccessFull.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0466135E294E11FB00EC444B /* TransactionSuccessFull.xib */; };
+		04661361294E120700EC444B /* TransactionSuccessFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04661360294E120700EC444B /* TransactionSuccessFull.swift */; };
+		04661370294E2F9500EC444B /* alertSound.mpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0466136F294E2F9500EC444B /* alertSound.mpeg */; };
+		04661374294E398E00EC444B /* txnSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = 04661373294E398E00EC444B /* txnSuccess.json */; };
 		049F8754294D970400B3ED6B /* AddAndShowBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F8753294D970400B3ED6B /* AddAndShowBalance.swift */; };
 		049F8756294D971400B3ED6B /* AddAndShowBalance.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049F8755294D971400B3ED6B /* AddAndShowBalance.xib */; };
 		049F8758294D9C7C00B3ED6B /* ViewLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F8757294D9C7C00B3ED6B /* ViewLoadable.swift */; };
@@ -266,6 +271,11 @@
 		0431245C294CCF6400830CF2 /* UiView+Anchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiView+Anchor.swift"; sourceTree = "<group>"; };
 		0431245E294CD12C00830CF2 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		04312460294CD28B00830CF2 /* ContactPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPicker.swift; sourceTree = "<group>"; };
+		0466135B294E116C00EC444B /* AlertViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewVC.swift; sourceTree = "<group>"; };
+		0466135E294E11FB00EC444B /* TransactionSuccessFull.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionSuccessFull.xib; sourceTree = "<group>"; };
+		04661360294E120700EC444B /* TransactionSuccessFull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSuccessFull.swift; sourceTree = "<group>"; };
+		0466136F294E2F9500EC444B /* alertSound.mpeg */ = {isa = PBXFileReference; lastKnownFileType = video.mpeg; path = alertSound.mpeg; sourceTree = "<group>"; };
+		04661373294E398E00EC444B /* txnSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = txnSuccess.json; sourceTree = "<group>"; };
 		049F8753294D970400B3ED6B /* AddAndShowBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAndShowBalance.swift; sourceTree = "<group>"; };
 		049F8755294D971400B3ED6B /* AddAndShowBalance.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAndShowBalance.xib; sourceTree = "<group>"; };
 		049F8757294D9C7C00B3ED6B /* ViewLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLoadable.swift; sourceTree = "<group>"; };
@@ -531,9 +541,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0466135A294E113F00EC444B /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				0466135D294E11D800EC444B /* Views */,
+				0466135B294E116C00EC444B /* AlertViewVC.swift */,
+			);
+			path = AlertView;
+			sourceTree = "<group>";
+		};
+		0466135D294E11D800EC444B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0466135E294E11FB00EC444B /* TransactionSuccessFull.xib */,
+				04661360294E120700EC444B /* TransactionSuccessFull.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		04661362294E155800EC444B /* json */ = {
+			isa = PBXGroup;
+			children = (
+				04661373294E398E00EC444B /* txnSuccess.json */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+		0466136E294E2F6E00EC444B /* sound */ = {
+			isa = PBXGroup;
+			children = (
+				0466136F294E2F9500EC444B /* alertSound.mpeg */,
+			);
+			path = sound;
+			sourceTree = "<group>";
+		};
 		049F8752294D96C500B3ED6B /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				0466135A294E113F00EC444B /* AlertView */,
 				049F8753294D970400B3ED6B /* AddAndShowBalance.swift */,
 				049F8755294D971400B3ED6B /* AddAndShowBalance.xib */,
 			);
@@ -705,6 +750,8 @@
 		18E28706250A363000F25971 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
+				0466136E294E2F6E00EC444B /* sound */,
+				04661362294E155800EC444B /* json */,
 				A7C28C6726022B9B009E8838 /* FontStyle */,
 				18E287EF250F7DAD00F25971 /* Loader */,
 				18E28707250A364200F25971 /* LanguageString */,
@@ -1631,6 +1678,7 @@
 				18E28724250A435700F25971 /* VerifyOtpVC.xib in Resources */,
 				C6A6B70728C59BD900BCF7E2 /* SuccessRechargeVC.xib in Resources */,
 				C6ACE7CF28B9FA080004E671 /* OPeratorListCell.xib in Resources */,
+				04661370294E2F9500EC444B /* alertSound.mpeg in Resources */,
 				C6A6816528DAC01900AE9D62 /* DenominationVC.xib in Resources */,
 				C6B3688C294498BD0084733C /* ukImage.png in Resources */,
 				C627CAA928F8E08200396943 /* SettingAuthCell.xib in Resources */,
@@ -1672,7 +1720,9 @@
 				C6C2723B292BBEA60091CEFC /* countryCodes.json in Resources */,
 				C68B129A292C80EA00856156 /* WalletPaymentVC.xib in Resources */,
 				C68713F628E62940002E7254 /* OperatorCell.xib in Resources */,
+				0466135F294E11FB00EC444B /* TransactionSuccessFull.xib in Resources */,
 				C6AD012B291CCF1200C5DEC9 /* GiftCardCell.xib in Resources */,
+				04661374294E398E00EC444B /* txnSuccess.json in Resources */,
 				C687FCA728B8919D00A85040 /* FailureWalletVC.xib in Resources */,
 				18E286FB250A2F2A00F25971 /* SelectLanguageVC.xib in Resources */,
 			);
@@ -1869,6 +1919,7 @@
 				C6A8190128CAAEC00097E595 /* VoucherHistoryViewModel.swift in Sources */,
 				C6A818F928CA8D610097E595 /* HistoryModel.swift in Sources */,
 				C6896138292739FA0058D14B /* ReviewRangeCardVC.swift in Sources */,
+				04661361294E120700EC444B /* TransactionSuccessFull.swift in Sources */,
 				C6A6B6E328C540DB00BCF7E2 /* VerifyPinViewModel.swift in Sources */,
 				0431245F294CD12C00830CF2 /* UIImage+Extension.swift in Sources */,
 				C68730A22921426A00C8596D /* FixedGiftCardModel.swift in Sources */,
@@ -1904,6 +1955,7 @@
 				C6342CF52937AB4F00814F40 /* SuccessGatwayVC.swift in Sources */,
 				C627CA9A28F8D76B00396943 /* SettingPermissionFooterView.swift in Sources */,
 				C6C4B2DA28EC3FAE00756327 /* UsedMarkViewModel.swift in Sources */,
+				0466135C294E116C00EC444B /* AlertViewVC.swift in Sources */,
 				C6342CEC29374BC100814F40 /* AllNotificationViewModel.swift in Sources */,
 				C6A563D628A264D40084295F /* WalletVC.swift in Sources */,
 			);

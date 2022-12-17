@@ -156,7 +156,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     func setupNavigationBarAppearance() {
-        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().tintColor = .black
         UINavigationBar.appearance().isTranslucent = false
         let navbarTitleAtt = [
             NSAttributedString.Key.font:UIFont.SF_Bold(18.0),

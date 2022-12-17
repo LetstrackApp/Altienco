@@ -126,9 +126,11 @@ class OperatorPlanVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.setupValue()
         self.updateProfilePic()
         self.showNotify()
+        setupLeftnavigation()
     }
     func showNotify(){
         if UserDefaults.isNotificationRead == "1"{
@@ -190,7 +192,7 @@ class OperatorPlanVC: UIViewController {
                 else{
                     self?.nextButton.isHidden = true
                     self?.planVIew.isHidden = true
-                    self?.showAlert(withTitle: "", message: message)
+                   // self?.showAlert(withTitle: "", message: message)
                     self?.recordNotFound.isHidden = false
                     self?.recordNotFound.text = lngConst.supportMsg
                 }

@@ -29,9 +29,8 @@ class OPeratorPlansViewModel {
             if let data = JSONResponse as? NSDictionary {
                 var operatorList = [OPeratorPlansResponseObj]()
                 if data["Message_Code"] as? Bool == true,
-                   let result = data["Result"] as? NSDictionary
-                {
-                    if result["status"] as? Bool == true{
+                   let result = data["Result"] as? NSDictionary {
+                    if result["status"] as? Bool == true {
                         if let resultData = result["data"] as? NSDictionary{
                             for dict in resultData["planList"] as? Array ?? []{
                                 operatorList.append(OPeratorPlansResponseObj.init(json: dict as! [String : Any]))
@@ -39,7 +38,7 @@ class OPeratorPlansViewModel {
                         }
                         complition(operatorList, true, "")
                     }
-                    else{
+                    else {
                         if let message = result["message"] as? String{
                             complition(nil, false, message)
                         }

@@ -16,6 +16,7 @@ PODS:
   - Localize-Swift/LocalizeSwiftCore (3.2.0)
   - Localize-Swift/UIKit (3.2.0):
     - Localize-Swift/LocalizeSwiftCore
+  - lottie-ios (3.0.7)
   - OTPFieldView (1.0.1)
   - OTPInputView (0.1.2)
   - SDWebImage (5.14.2):
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - GoogleMaps
   - IQKeyboardManagerSwift
   - Localize-Swift
+  - lottie-ios (~> 3.0.5)
   - OTPFieldView
   - OTPInputView
   - SDWebImage
@@ -53,6 +55,7 @@ SPEC REPOS:
     - GoogleMaps
     - IQKeyboardManagerSwift
     - Localize-Swift
+    - lottie-ios
     - OTPFieldView
     - OTPInputView
     - SDWebImage
@@ -70,6 +73,7 @@ SPEC CHECKSUMS:
   GoogleMaps: 65ce5426e2398bb81433c8076f2ab6419c2c5537
   IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
   Localize-Swift: 6f4475136bdb0d7b2882ea3d4ea919d70142b232
+  lottie-ios: c38c3178ae8c4a8f200661aa5f80b9f1ca7f56b3
   OTPFieldView: 700a752fe62c41d1c4914c78aa500fb30d97c255
   OTPInputView: 8a7cc613e29d264f799d121169d00a745cae4c00
   SDWebImage: b9a731e1d6307f44ca703b3976d18c24ca561e84
@@ -78,6 +82,6 @@ SPEC CHECKSUMS:
   SOPullUpView: a18cab4bdce7cc07c227e705cc4270e0a36ca2fa
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: bbc2a339bd134b1d48733143855418fc6cb7434e
+PODFILE CHECKSUM: ffbe7674933902ea66e4b553aba925c4bf6bf43e
 
 COCOAPODS: 1.11.2

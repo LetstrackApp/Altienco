@@ -116,7 +116,11 @@ the 16 digit pin
     let denomination = "denomination"
     let callingCard = "calling card"
     let supportMsg = "Something went wrong Please try again! If problem persists, please contact our support team"
+    let addAnotherCard = "ADD ANOTHER CARD"
 
+    func txnSucessMeg(amount:String) -> String {
+        return "You've added \(amount) successfully in your altienco wallet"
+    }
     
 }
 

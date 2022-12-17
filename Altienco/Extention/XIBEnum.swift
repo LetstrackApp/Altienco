@@ -8,7 +8,7 @@
 
 import Foundation
 public enum xibName {
-    
+    public static let transactionSuccessFull = "TransactionSuccessFull"
     public static let addAndShowBalance = "AddAndShowBalance"
     public static let operatorPlanVC =  "OperatorPlanVC"
     

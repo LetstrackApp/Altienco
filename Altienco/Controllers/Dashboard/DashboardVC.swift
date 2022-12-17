@@ -511,6 +511,8 @@ extension DashboardVC {
     
     func showWallet()
     {
+        
+
         let viewController: WalletPaymentVC = WalletPaymentVC()
         self.navigationController?.pushViewController(viewController, animated: true)
     }

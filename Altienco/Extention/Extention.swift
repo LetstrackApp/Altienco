@@ -213,7 +213,32 @@ class circularBTN : UIButton{
 
 
 
-extension UIViewController{
+extension UIViewController {
+    
+    
+    func setupLeftnavigation(){
+      let image =  UIImage(named: "ic_back")?.withInset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 5))
+        let buttonItem = UIBarButtonItem(image: image,
+                                         landscapeImagePhone: nil,
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(backButtonTapped(_:)))
+        buttonItem.tintColor = .black
+        self.navigationItem.leftBarButtonItem = buttonItem
+        
+        
+    }
+    
+    @IBAction func backButtonTapped(_ sender: Any){
+        if self.navigationController?.viewControllers.count ?? 0 > 1 {
+            self.navigationController?.popViewController(animated: true)
+        }
+        else {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    
     func setupNav( title : String){
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()

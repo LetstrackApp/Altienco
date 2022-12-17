@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TransactionSuccessFull" customModule="Altienco" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="445"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S26-0U-3uC">
+                    <rect key="frame" x="24" y="10" width="366" height="335"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tfw-ae-Yde" customClass="AnimationView" customModule="Lottie">
+                            <rect key="frame" x="133" y="34" width="100" height="100"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="XM5-we-Lzg"/>
+                                <constraint firstAttribute="height" constant="100" id="jAn-mA-Lx9"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You've added £100 successfully in your altienco wallet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kht-ph-2fB">
+                            <rect key="frame" x="20" y="165" width="326" height="63"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cem-Yg-9UM">
+                            <rect key="frame" x="20" y="267" width="326" height="45"/>
+                            <color key="backgroundColor" red="0.0078431372550000003" green="0.1647058824" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="jgc-uJ-Dhu"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="ADD ANOTHER CARD">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="Tfw-ae-Yde" firstAttribute="centerX" secondItem="S26-0U-3uC" secondAttribute="centerX" id="46j-ci-RIQ"/>
+                        <constraint firstAttribute="trailing" secondItem="Cem-Yg-9UM" secondAttribute="trailing" constant="20" id="N5w-gi-GjS"/>
+                        <constraint firstAttribute="bottom" secondItem="Cem-Yg-9UM" secondAttribute="bottom" constant="23" id="Pc3-1E-AXV"/>
+                        <constraint firstAttribute="trailing" secondItem="kht-ph-2fB" secondAttribute="trailing" constant="20" id="c48-zj-D0r"/>
+                        <constraint firstItem="kht-ph-2fB" firstAttribute="top" secondItem="Tfw-ae-Yde" secondAttribute="bottom" constant="31" id="em5-qU-5i6"/>
+                        <constraint firstItem="Tfw-ae-Yde" firstAttribute="top" secondItem="S26-0U-3uC" secondAttribute="top" constant="34" id="mY5-Jd-cdv"/>
+                        <constraint firstItem="Cem-Yg-9UM" firstAttribute="leading" secondItem="S26-0U-3uC" secondAttribute="leading" constant="20" id="oPh-Me-azU"/>
+                        <constraint firstItem="kht-ph-2fB" firstAttribute="leading" secondItem="S26-0U-3uC" secondAttribute="leading" constant="20" id="tMz-RH-FUG"/>
+                        <constraint firstItem="Cem-Yg-9UM" firstAttribute="top" secondItem="kht-ph-2fB" secondAttribute="bottom" constant="39" id="v7n-Ht-1lz"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="S26-0U-3uC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="239-OR-REz"/>
+                <constraint firstAttribute="bottom" secondItem="S26-0U-3uC" secondAttribute="bottom" constant="100" id="VrH-3y-ZfO"/>
+                <constraint firstItem="S26-0U-3uC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="ZEY-fV-DCI"/>
+                <constraint firstAttribute="trailing" secondItem="S26-0U-3uC" secondAttribute="trailing" constant="24" id="glc-YL-eaR"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="addAnother" destination="Cem-Yg-9UM" id="Oec-Lr-49v"/>
+                <outlet property="animatorView" destination="Tfw-ae-Yde" id="wzR-s7-fdH"/>
+                <outlet property="container" destination="S26-0U-3uC" id="PX8-37-6yX"/>
+                <outlet property="titleView" destination="kht-ph-2fB" id="Xb0-eC-hAQ"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="-60.602678571428569"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="Tfw-ae-Yde"/>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

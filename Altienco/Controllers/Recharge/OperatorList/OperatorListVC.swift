@@ -69,9 +69,7 @@ class OperatorListVC: UIViewController {
     @IBOutlet weak var repeatContainer: UIView!
     @IBOutlet weak var addButton: UIButton!{
         didSet{
-            DispatchQueue.main.async {
                 self.addButton.setupNextButton(title: lngConst.add)
-            }
         }
     }
     @IBOutlet weak var lastVoucherView: UIView!{
@@ -89,7 +87,8 @@ class OperatorListVC: UIViewController {
         super.viewDidLoad()
         voucherHistory = VoucherHistoryViewModel()
         viewModel = OperatorListViewModel()
-        self.operatorCollection.register(UINib(nibName: "GiftCardCell", bundle:nil), forCellWithReuseIdentifier: "GiftCardCell")
+        self.operatorCollection.register(UINib(nibName: "GiftCardCell", bundle:nil),
+                                         forCellWithReuseIdentifier: "GiftCardCell")
         self.initiateModel()
         // Do any additional setup after loading the view.
     }
@@ -102,10 +101,12 @@ class OperatorListVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.setupValue()
         self.callHistoryData()
         self.updateProfilePic()
         self.showNotify()
+        setupLeftnavigation()
     }
     
     
