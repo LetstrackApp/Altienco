@@ -27,9 +27,13 @@ extension UserDefaults {
     class var getUserData:  UserModel?   {
         if let savedPerson = UserDefaults.standard.object(forKey: UserDefaults.Keys.userModel) as? Data {
             let decoder = JSONDecoder()
-            if let loadedPerson = try? decoder.decode(UserModel.self, from: savedPerson) {
-                return loadedPerson
+            do {
+                return try decoder.decode(UserModel.self, from: savedPerson)
             }
+            catch{
+                return nil
+            }
+            
         }
         return nil
     }

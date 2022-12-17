@@ -126,13 +126,13 @@ class OperatorListVC: UIViewController {
                 if UserDefaults.getAvtarImage == "1"{
                     self.profileImage.image = UIImage(named: aString)
                 }else{
-                let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
-                 
-                self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
+                    let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
+                    
+                    self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
                 }
             }
         }
-
+        
     }
     
     func setupValue(){
@@ -140,14 +140,14 @@ class OperatorListVC: UIViewController {
             self.userName.text = "Hi \(firstname)"
         }
         if let currencySymbol = UserDefaults.getUserData?.currencySymbol, let walletAmount = UserDefaults.getUserData?.walletAmount{
-        self.walletBalance.text = "\(currencySymbol)" + "\(walletAmount)"
+            self.walletBalance.text = "\(currencySymbol)" + "\(walletAmount)"
         }
     }
     
     @IBAction func showWallet(_ sender: Any)
-        {
-            let viewController: WalletPaymentVC = WalletPaymentVC()
-            self.navigationController?.pushViewController(viewController, animated: true)
+    {
+        let viewController: WalletPaymentVC = WalletPaymentVC()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     func initiateModel() {
@@ -155,11 +155,11 @@ class OperatorListVC: UIViewController {
         (UserDefaults.getUserData?.countryCode == CountryCode.UK.ISOcode) || (UserDefaults.getUserData?.countryCode == CountryCode.UK.ISOcode2) ? (countryCode = CountryCode.UK.countryID) : (countryCode = CountryCode.IN.countryID)
         viewModel?.getOperator(countryID: countryCode ?? 102, transactionTypeId: TransactionTypeId.PhoneRecharge.rawValue, langCode: "en") { (operatorList, status, msg) in
             DispatchQueue.main.async { [weak self] in
-            if status == true && msg == "", let operatorlist = operatorList{
-                self?.operatorList = operatorlist
-            }else{
-                self?.showAlert(withTitle: "Alert", message: msg)
-            }
+                if status == true && msg == "", let operatorlist = operatorList{
+                    self?.operatorList = operatorlist
+                }else{
+                    self?.showAlert(withTitle: "Alert", message: msg)
+                }
                 self?.operatorList.count ?? 0 > 0 ? (self?.emptyMsg.isHidden = true) : (self?.emptyMsg.isHidden = false)
                 self?.operatorCollection.reloadData()
             }
@@ -174,15 +174,15 @@ class OperatorListVC: UIViewController {
             let model = VoucherHistoryRequestObj.init(customerId: "\(customerID)", isRequiredAll: false, langCode: "en", operatorId: 0, pinBankUsedStatus: 0, pageNum: self.pageNum, pageSize: self.pageSize, transactionTypeId: 1)
             voucherHistory?.getHistory(model: model)
             voucherHistory?.historyList.bind(listener: { (data) in
-            if data.isEmpty == false{
-            DispatchQueue.main.async {
-                self.initializeHistoryView()
-                self.voucherHistoryContainer.isHidden = false
-                }}
+                if data.isEmpty == false{
+                    DispatchQueue.main.async {
+                        self.initializeHistoryView()
+                        self.voucherHistoryContainer.isHidden = false
+                    }}
                 else{
                     self.voucherHistoryContainer.isHidden = true
                 }
-        })
+            })
         }
     }
     
@@ -208,7 +208,7 @@ class OperatorListVC: UIViewController {
                 self.dateTime.text = time.convertToDisplayFormat()}
         }
     }
-
+    
     @IBAction func walletView(_ sender: Any) {
         let viewController: WalletPaymentVC = WalletPaymentVC()
         self.navigationController?.pushViewController(viewController, animated: true)
@@ -260,10 +260,9 @@ class OperatorListVC: UIViewController {
         }
     }
     func callOperatorPlans(operatorID: Int, imageURL: String, OperatorName: String){
-        let viewController: OperatorPlanVC = OperatorPlanVC()
-        viewController.OperatorID = operatorID
-        viewController.OperatorName = OperatorName
-        viewController.imageUrl = imageURL
+        let viewController: OperatorPlanVC = OperatorPlanVC(OperatorID: operatorID,
+                                                            OperatorName: OperatorName,
+                                                            imageUrl: imageURL)
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
@@ -273,7 +272,7 @@ extension OperatorListVC: BackToUKRechargeDelegate {
         if status, let val = result{
             self.successVoucher(mPin: val.mPIN ?? "", denominationValue: "\(val.dinominationValue ?? 0)", walletBalance: val.walletAmount ?? 0.0, msgToShare: val.msgToShare ?? "", voucherID: val.voucherID ?? 0)
         }
-        }
+    }
 }
 
 
@@ -283,19 +282,19 @@ extension OperatorListVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-       
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GiftCardCell", for: indexPath) as! GiftCardCell
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GiftCardCell", for: indexPath) as! GiftCardCell
         if let image = self.operatorList[indexPath.row].imageURL {
-                var imageUrl = image
-                imageUrl = imageUrl.replacingOccurrences(of: " ", with: "%20")
-                cell.operatorLogo.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "ic_operatorLogo"))
-            }
-            else{
-                cell.operatorLogo.image = UIImage(named: "ic_operatorLogo")
-            }
-            cell.operatorName.text = self.operatorList[indexPath.row].operatorName
-            cell.showDenomination.isHidden = true
-            return cell
+            var imageUrl = image
+            imageUrl = imageUrl.replacingOccurrences(of: " ", with: "%20")
+            cell.operatorLogo.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "ic_operatorLogo"))
+        }
+        else{
+            cell.operatorLogo.image = UIImage(named: "ic_operatorLogo")
+        }
+        cell.operatorName.text = self.operatorList[indexPath.row].operatorName
+        cell.showDenomination.isHidden = true
+        return cell
         
     }
     
@@ -304,9 +303,11 @@ extension OperatorListVC: UICollectionViewDelegate, UICollectionViewDataSource, 
         if collectionView == operatorCollection{
             DispatchQueue.main.async {
                 if indexPath.row < self.operatorList.count {
-                    let newString = self.operatorList[indexPath.row].imageURL ?? ""
-                    self.callOperatorPlans(operatorID: self.operatorList[indexPath.row].operatorID ?? 0, imageURL: newString, OperatorName: self.operatorList[indexPath.row].operatorName ?? "")
-
+                    let operatorValue = self.operatorList[indexPath.row]
+                    self.callOperatorPlans(operatorID: operatorValue.operatorID ?? 0,
+                                           imageURL: operatorValue.imageURL ?? "",
+                                           OperatorName: operatorValue.operatorName ?? "")
+                    
                 }
             }
         }
@@ -320,4 +321,4 @@ extension OperatorListVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     
-    }
+}

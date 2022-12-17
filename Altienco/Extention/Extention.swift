@@ -12,6 +12,14 @@ import UIKit
 
 extension UIView {
     
+    func shakeView() {
+        let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        animation.duration = 0.6
+        animation.values = [-20.0, 20.0, -20.0, 20.0, -10.0, 10.0, -5.0, 5.0, 0.0 ]
+        layer.add(animation, forKey: "shake")
+    }
+    
     // OUTPUT 1
     func dropShadow(color: UIColor, scale: Bool = true) {
         DispatchQueue.main.async {
@@ -50,9 +58,9 @@ extension UIView {
         layer.shadowRadius = shadowRadius
     }
     func roundCorners(with CACornerMask: CACornerMask, radius: CGFloat) {
-              self.layer.cornerRadius = radius
-              self.layer.maskedCorners = [CACornerMask]
-        }
+        self.layer.cornerRadius = radius
+        self.layer.maskedCorners = [CACornerMask]
+    }
 }
 
 extension String {
@@ -220,7 +228,7 @@ extension UIViewController{
         let clickableBtn = UIButton(type: .custom)
         clickableBtn.backgroundColor = .clear
         clickableBtn.frame = CGRect(x:(self.view.frame.size.width/3), y:0, width: 100, height: 50)
-         clickableBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        clickableBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         navigationController?.navigationBar.addSubview(clickableBtn)
     }
     
@@ -253,10 +261,10 @@ extension UIViewController {
     var topbarHeight: CGFloat {
         if #available(iOS 13.0, *) {
             return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
-                (self.navigationController?.navigationBar.frame.height ?? 0.0)
+            (self.navigationController?.navigationBar.frame.height ?? 0.0)
         } else {
             let topBarHeight = UIApplication.shared.statusBarFrame.size.height +
-                (self.navigationController?.navigationBar.frame.height ?? 0.0)
+            (self.navigationController?.navigationBar.frame.height ?? 0.0)
             return topBarHeight
         }
     }
@@ -276,7 +284,7 @@ extension UILabel {
             self.attributedText = attributeString
         }
     }
-
+    
 }
 
 extension UIViewController{
@@ -284,7 +292,7 @@ extension UIViewController{
         var arr = array
         let element = arr.remove(at: fromIndex)
         arr.insert(element, at: toIndex)
-
+        
         return arr
     }
     
@@ -292,69 +300,71 @@ extension UIViewController{
 }
 extension UIViewController {
     @objc func dialToDispatcher() {
-
-    if let url = URL(string: "tel://\("")"),
-       UIApplication.shared.canOpenURL(url) {
+        
+        if let url = URL(string: "tel://\("")"),
+           UIApplication.shared.canOpenURL(url) {
             Helper.showToast("Calling \(UserDefaults.getUserData?.firstName ?? "") \(UserDefaults.getUserData?.lastName ?? "")", delay: Helper.DELAY_LONG)
-          if #available(iOS 10, *) {
-            UIApplication.shared.open(url, options: [:], completionHandler:nil)
-           } else {
-               UIApplication.shared.openURL(url)
-           }
-       } else {
-                // add error message here
-        Helper.showToast("Invalid number", delay: Helper.DELAY_LONG)
-       }
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler:nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        } else {
+            // add error message here
+            Helper.showToast("Invalid number", delay: Helper.DELAY_LONG)
+        }
     }
 }
 
 extension UIButton{
     func dialNumber(number : String, name: String) {
-
-     if let url = URL(string: "tel://\(number)"),
-       UIApplication.shared.canOpenURL(url) {
-        Helper.showToast("Calling "+name, delay: Helper.DELAY_LONG)
-          if #available(iOS 10, *) {
-            UIApplication.shared.open(url, options: [:], completionHandler:nil)
-           } else {
-               UIApplication.shared.openURL(url)
-           }
-       } else {
-                // add error message here
-        Helper.showToast("Invalid number", delay: Helper.DELAY_LONG)
-       }
+        
+        if let url = URL(string: "tel://\(number)"),
+           UIApplication.shared.canOpenURL(url) {
+            Helper.showToast("Calling "+name, delay: Helper.DELAY_LONG)
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler:nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        } else {
+            // add error message here
+            Helper.showToast("Invalid number", delay: Helper.DELAY_LONG)
+        }
     }
 }
 
 extension String {
-
-  func decode() -> String {
-      let data = self.data(using: .utf8)!
-      return String(data: data, encoding: .nonLossyASCII) ?? self
-  }
-
-  func encode() -> String {
-      let data = self.data(using: .nonLossyASCII, allowLossyConversion: true)!
-      return String(data: data, encoding: .utf8)!
-  }
+    
+    func decode() -> String {
+        let data = self.data(using: .utf8)!
+        return String(data: data, encoding: .nonLossyASCII) ?? self
+    }
+    
+    func encode() -> String {
+        let data = self.data(using: .nonLossyASCII, allowLossyConversion: true)!
+        return String(data: data, encoding: .utf8)!
+    }
 }
 
 
 extension UILabel{
-func setCharacterSpacing(_ spacing: CGFloat){
-    let attributedStr = NSMutableAttributedString(string: self.text ?? "")
-    attributedStr.addAttribute(NSAttributedString.Key.kern, value: spacing, range: NSMakeRange(0, attributedStr.length))
-    self.attributedText = attributedStr
- }
+    func setCharacterSpacing(_ spacing: CGFloat){
+        let attributedStr = NSMutableAttributedString(string: self.text ?? "")
+        attributedStr.addAttribute(NSAttributedString.Key.kern, value: spacing, range: NSMakeRange(0, attributedStr.length))
+        self.attributedText = attributedStr
+    }
 }
 
 
 
 extension UIButton{
     
-    func setupNextButton(title: String, space: Double = 2.0){
+    func setupNextButton(title: String,
+                         space: Double = 2.0,
+                         cornerRadius:CGFloat = 0){
         self.titleLabel?.text = title
-        self.layer.cornerRadius = self.layer.frame.size.height/3
+        self.layer.cornerRadius = cornerRadius == 0 ? self.layer.frame.size.height/3 :  cornerRadius
         self.titleLabel?.font = UIFont.SF_Regular(14.0)
         self.clipsToBounds=true
         self.layer.shadowColor = UIColor.black.cgColor
@@ -375,20 +385,20 @@ extension UITapGestureRecognizer {
         guard let attrString = label.attributedText else {
             return false
         }
-
+        
         let layoutManager = NSLayoutManager()
         let textContainer = NSTextContainer(size: .zero)
         let textStorage = NSTextStorage(attributedString: attrString)
-
+        
         layoutManager.addTextContainer(textContainer)
         textStorage.addLayoutManager(layoutManager)
-
+        
         textContainer.lineFragmentPadding = 0
         textContainer.lineBreakMode = label.lineBreakMode
         textContainer.maximumNumberOfLines = label.numberOfLines
         let labelSize = label.bounds.size
         textContainer.size = labelSize
-
+        
         let locationOfTouchInLabel = self.location(in: label)
         let textBoundingBox = layoutManager.usedRect(for: textContainer)
         let textContainerOffset = CGPoint(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x, y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
@@ -399,20 +409,20 @@ extension UITapGestureRecognizer {
 }
 extension UIView {
     private static let kRotationAnimationKey = "rotationanimationkey"
-
+    
     func rotate(duration: Double = 0.5) {
         if layer.animation(forKey: UIView.kRotationAnimationKey) == nil {
             let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
-
+            
             rotationAnimation.fromValue = 0.0
             rotationAnimation.toValue = Float.pi * 2.0
             rotationAnimation.duration = duration
             rotationAnimation.repeatCount = Float.infinity
-
+            
             layer.add(rotationAnimation, forKey: UIView.kRotationAnimationKey)
         }
     }
-
+    
     func stopRotating() {
         if layer.animation(forKey: UIView.kRotationAnimationKey) != nil {
             layer.removeAnimation(forKey: UIView.kRotationAnimationKey)
@@ -427,7 +437,7 @@ extension UIView {
 ///
 ///
 extension Collection {
-
+    
     func unfoldSubSequences(limitedTo maxLength: Int) -> UnfoldSequence<SubSequence,Index> {
         sequence(state: startIndex) { start in
             guard start < endIndex else { return nil }
@@ -436,7 +446,7 @@ extension Collection {
             return self[start..<end]
         }
     }
-
+    
     func every(n: Int) -> UnfoldSequence<Element,Index> {
         sequence(state: startIndex) { index in
             guard index < endIndex else { return nil }
@@ -444,18 +454,18 @@ extension Collection {
             return self[index]
         }
     }
-
+    
     var pairs: [SubSequence] { .init(unfoldSubSequences(limitedTo: 2)) }
 }
 
 extension StringProtocol where Self: RangeReplaceableCollection {
-
+    
     mutating func insert<S: StringProtocol>(separator: S, every n: Int) {
         for index in indices.every(n: n).dropFirst().reversed() {
             insert(contentsOf: separator, at: index)
         }
     }
-
+    
     func inserting<S: StringProtocol>(separator: S, every n: Int) -> Self {
         .init(unfoldSubSequences(limitedTo: n).joined(separator: separator))
     }
@@ -477,9 +487,9 @@ extension UIApplication {
             return topViewController(presented)
         }
         
-//        if let slide = viewController as? SlideMenuController {
-//            return topViewController(slide.mainViewController)
-//        }
+        //        if let slide = viewController as? SlideMenuController {
+        //            return topViewController(slide.mainViewController)
+        //        }
         return viewController
     }
 }

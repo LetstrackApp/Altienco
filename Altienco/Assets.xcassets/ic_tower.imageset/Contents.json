@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "0 splashscreen.png",
+      "filename" : "ic_tower.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "0 splashscreen@2x.png",
+      "filename" : "ic_tower@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "0 splashscreen@3x.png",
+      "filename" : "ic_tower@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

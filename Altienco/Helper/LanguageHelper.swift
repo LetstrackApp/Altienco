@@ -37,7 +37,7 @@ struct langguageConstent{
     let gstTtile = "gstTtile".localized()
     let panTitle = "panTitle".localized()
     let tinTitle = "tinTitle".localized()
-
+    
     let USignupTitle = "USignupTitle".localized()
     let firstName = "firstName".localized()
     let lastName = "lastName".localized()
@@ -82,5 +82,43 @@ struct langguageConstent{
     let notification_access = "notification_access".localized()
     let signatureTitle = "signTitle".localized()
     let receiverName = "receiverName".localized()
+    let selectCountery = " Please select country first "
 
+    let empytMobile = " Mobile number \n can not be empty "
+    let notValidMobile = " Please enter a valid \n mobile number "
+    let verificationHint = "We may send a verification code to this number"
+    let phoneNumber =  "Phone Number"
+    
+    let whatYouGetDes = """
+You will get freedom to recharge phone, buy
+calling cards, pay utility bills, book movies/tickets,
+or avail various services from other partner
+applications.
+"""
+    let step2Des = """
+Enter the 16 Digit Pin and Verify
+"""
+    let step1Des =  """
+Scratch the altienco card to get
+the 16 digit pin
+"""
+ let addMoneyToAltiencocard =   "Add money from altienco card"
+    
+    let altiencoCard  = "altienco card"
+    
+    let step1 = "\u{2022} Step 1"
+    let step2 = "\u{2022} Step 2"
+    let what_you_get = "What you get"
+    let wlecomeAddBalance = "Welcome, let's add some balance"
+    let add_newBalance_now = "+ADD BALANCE NOW"
+    let generatecCllingCard = "Generate calling card"
+    let pleaseSelectDenomination = "Please select denomination"
+    let denomination = "denomination"
+    let callingCard = "calling card"
+    let supportMsg = "Something went wrong Please try again! If problem persists, please contact our support team"
+
+    
 }
+
+
+

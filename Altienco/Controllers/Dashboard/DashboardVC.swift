@@ -11,7 +11,7 @@ import SideMenu
 import SkeletonView
 
 class DashboardVC: UIViewController {
-
+    
     var adResponse = [AdvertismentResponseObj]()
     var advertismentModel : AdvertismentViewModel?
     var notificationDataViewModel : NewNotificationViewModel?
@@ -40,32 +40,15 @@ class DashboardVC: UIViewController {
             advertismentView.dropShadow(shadowRadius: 2, offsetSize: CGSize(width: 0, height: 0), shadowOpacity: 0.3, shadowColor: .black)
         }
     }
-    @IBOutlet weak var walletBalance: UILabel!{
-        didSet{
-            walletBalance.font = UIFont.SF_Bold(30.0)
-            walletBalance.textColor = appColor.blackText
-        }
-    }
-    @IBOutlet weak var walletText: UILabel!{
-        didSet{
-            walletText.font = UIFont.SF_Regular(12.0)
-            walletText.textColor = appColor.lightGrayText
-        }
-    }
+    
     @IBOutlet weak var walletView: UIView!{
-    didSet{
-        walletView.layer.cornerRadius = 8.0
-        walletView.clipsToBounds=true
-        walletView.dropShadow(shadowRadius: 2, offsetSize: CGSize(width: 0, height: 0), shadowOpacity: 0.3, shadowColor: .black)
-    }
-}
-    @IBOutlet weak var addWallet: UIButton!{
         didSet{
-            DispatchQueue.main.async {
-                self.addWallet.setupNextButton(title: lngConst.add)
-            }
+            walletView.layer.cornerRadius = 8.0
+            walletView.clipsToBounds=true
+            walletView.dropShadow(shadowRadius: 2, offsetSize: CGSize(width: 0, height: 0), shadowOpacity: 0.3, shadowColor: .black)
         }
     }
+    
     @IBOutlet weak var serviceView: UIView!{
         didSet{
             serviceView.layer.cornerRadius = 8.0
@@ -106,23 +89,23 @@ class DashboardVC: UIViewController {
     
     @IBOutlet weak var statementText: UILabel!{
         didSet{
-            statementText.font = UIFont.SF_Regular(12.0)
+            statementText.font = UIFont.SF_Medium(12.0)
             statementText.numberOfLines = 2
-            statementText.textColor = appColor.lightGrayText
+            statementText.textColor = .black
         }
     }
     @IBOutlet weak var SpentText: UILabel!{
         didSet{
-            SpentText.font = UIFont.SF_Regular(12.0)
+            SpentText.font = UIFont.SF_Medium(12.0)
             SpentText.numberOfLines = 2
-            SpentText.textColor = appColor.lightGrayText
+            SpentText.textColor = .black
         }
     }
     @IBOutlet weak var voucherText: UILabel!{
         didSet{
-            voucherText.font = UIFont.SF_Regular(12.0)
+            voucherText.font = UIFont.SF_Medium(12.0)
             voucherText.numberOfLines = 2
-            voucherText.textColor = appColor.lightGrayText
+            voucherText.textColor = .black
         }
     }
     
@@ -179,6 +162,16 @@ class DashboardVC: UIViewController {
     @IBOutlet weak var sliderCollection: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     
+    @IBOutlet weak var blanceStackView: UIStackView!
+    
+    
+    lazy var addAndShowBalance : AddAndShowBalance? = {
+        let control = AddAndShowBalance.loadFromNib(from: .altiencoBundle)
+        control.configure { [weak self] result in
+            self?.showWallet()
+        }
+        return control
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -188,8 +181,8 @@ class DashboardVC: UIViewController {
         self.advertismentModel = AdvertismentViewModel()
         self.notificationDataViewModel = NewNotificationViewModel()
         self.navigationItem.backBarButtonItem?.tintColor = .white
-        // Do any additional setup after loading the view.
         self.refreshAdData()
+        onLanguageChange()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -201,6 +194,10 @@ class DashboardVC: UIViewController {
         }
         
     }
+    
+    func onLanguageChange() {
+        
+    }
     func updateProfilePic(){
         if (UserDefaults.getUserData?.profileImage) != nil
         {
@@ -210,13 +207,13 @@ class DashboardVC: UIViewController {
                 if UserDefaults.getAvtarImage == "1"{
                     self.profileImage.image = UIImage(named: aString)
                 }else{
-                let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
-                 
-                self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
+                    let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
+                    
+                    self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
                 }
             }
         }
-
+        
     }
     
     
@@ -238,59 +235,63 @@ class DashboardVC: UIViewController {
         let cellSize = CGSize(width: self.sliderCollection.bounds.width, height: self.sliderCollection.bounds.height)
         //get current content Offset of the Collection view
         if self.adResponse.count > 0{
-        let contentOffset = self.sliderCollection.contentOffset
-        if self.sliderCollection.contentSize.width <= self.sliderCollection.contentOffset.x + cellSize.width
-        {
-            self.sliderCollection.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
-        } else {
-            self.sliderCollection.scrollRectToVisible(CGRect(x: contentOffset.x + cellSize.width, y: contentOffset.y, width: cellSize.width, height: cellSize.height), animated: true)
-        }
+            let contentOffset = self.sliderCollection.contentOffset
+            if self.sliderCollection.contentSize.width <= self.sliderCollection.contentOffset.x + cellSize.width
+            {
+                self.sliderCollection.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
+            } else {
+                self.sliderCollection.scrollRectToVisible(CGRect(x: contentOffset.x + cellSize.width, y: contentOffset.y, width: cellSize.width, height: cellSize.height), animated: true)
+            }
         }
     }
     
     func refreshNotificationData() {
         let model = AllNotificationRequest.init(customerID: UserDefaults.getUserData?.customerID ?? 0, langCode: "en")
-            
-        notificationDataViewModel?.getNewNotification(model: model, complition: { (notificationData, status) in
+        
+        notificationDataViewModel?.getNewNotification(model: model)
+        { (notificationData, status) in
             DispatchQueue.main.async { [weak self] in
                 self?.hideGradientEffect()
-            if status == true, let data = notificationData{
-                var model = UserDefaults.getUserData
-                if let isRead = data.first?.anyNewNotification, isRead == true{
-                    UserDefaults.setNotificationRead(data: true)
-                    self?.notificationIcon.image = UIImage(named: "ic_notificationRead")
-                }
-                else{
-                    self?.notificationIcon.image = UIImage(named: "ic_notification")
-                    UserDefaults.setNotificationRead(data: false)
-                }
-                if let walletAmount = data.first?.amount{
-                model?.walletAmount = walletAmount
-                if model != nil{
-                        UserDefaults.setUserData(data: model!)
-                }
-                guard let currency = UserDefaults.getUserData?.currencySymbol else {return}
-                self?.walletBalance.text = currency + "\(walletAmount)"
+                if status == true, let data = notificationData{
+                    var model = UserDefaults.getUserData
+                    if let isRead = data.first?.anyNewNotification, isRead == true{
+                        UserDefaults.setNotificationRead(data: true)
+                        self?.notificationIcon.image = UIImage(named: "ic_notificationRead")
+                    }
+                    else{
+                        self?.notificationIcon.image = UIImage(named: "ic_notification")
+                        UserDefaults.setNotificationRead(data: false)
+                    }
+                    if let walletAmount = data.first?.amount{
+                        model?.walletAmount = walletAmount
+                        if model != nil {
+                            UserDefaults.setUserData(data: model!)
+                        }
+                        self?.addAndShowBalance?.setUpBalanaceView(walletAmount: walletAmount)
+                        
+                    }
                 }
             }
-            }})
+            
+        }
+        
     }
     
     func refreshAdData() {
         let model = AdvertismentRequestObj.init(customerID: UserDefaults.getUserData?.customerID ?? 0, screenID: "1", langCode: "en")
-            
+        
         advertismentModel?.getAdData(model: model, complition: { (adData, status) in
             DispatchQueue.main.async { [weak self] in
                 self?.hideGradientEffect()
-            if status == true{
-                self?.updateSlider()
-                self?.adCardView.isHidden = false
-                self?.adResponse = adData ?? []
-                
-            }
-            else{
-                self?.adCardView.isHidden = true
-            }
+                if status == true{
+                    self?.updateSlider()
+                    self?.adCardView.isHidden = false
+                    self?.adResponse = adData ?? []
+                    
+                }
+                else{
+                    self?.adCardView.isHidden = true
+                }
             }})
     }
     func updateSlider(){
@@ -311,10 +312,12 @@ class DashboardVC: UIViewController {
         if let firstname = UserDefaults.getUserData?.firstName{
             self.userName.text = "Hi \(firstname)"
         }
-        if let currencySymbol = UserDefaults.getUserData?.currencySymbol, let walletAmount = UserDefaults.getUserData?.walletAmount{
-        self.walletBalance.text = "\(currencySymbol)" + "\(walletAmount)"
-        }
+        addAndShowBalance?.setUpBalanaceView(walletAmount: UserDefaults.getUserData?.walletAmount ?? 0)
+        
+        
     }
+    
+    
     
     
     func initializeView()
@@ -328,8 +331,15 @@ class DashboardVC: UIViewController {
         button.tintColor = .black
         self.navigationItem.leftBarButtonItem  = UIBarButtonItem(customView: button)
         
-        DispatchQueue.main.async {
-                self.InitializeLeftView()
+        DispatchQueue.main.async { [weak self] in
+            
+            if let view = self?.addAndShowBalance {
+                self?.blanceStackView.insertArrangedSubview(view, at: 0)
+                self?.addAndShowBalance?.widthAnchor.constraint(equalToConstant: self?.blanceStackView.bounds.width ?? 0).isActive = true
+                self?.addAndShowBalance?.setUpBalanaceView(walletAmount: UserDefaults.getUserData?.walletAmount ?? 0)
+                
+            }
+            self?.InitializeLeftView()
         }
     }
     
@@ -346,58 +356,7 @@ class DashboardVC: UIViewController {
         SideMenuManager.default.leftMenuNavigationController?.settings = settings
     }
     
-    @objc func action(){
-        self.present(leftNavSlide!, animated: true, completion: nil)
-    }
     
-    @IBAction func transactionHistory(_ sender: Any) {
-        let viewController: TransactionHistoryVC = TransactionHistoryVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    @IBAction func myOrder(_ sender: Any) {
-        let viewController: HistoryVC = HistoryVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-
-    @IBAction func voucherHistory(_ sender: Any) {
-        let viewController: VoucherHistoryVC  = VoucherHistoryVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    
-    @IBAction func rechargeButton(_ sender: Any) {
-        let viewController: OperatorListVC = OperatorListVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-    @IBAction func iRechargeButton(_ sender: Any) {
-        let viewController: TopupVC = TopupVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    @IBAction func redirectProfile(_ sender: Any) {
-        let vc = ProfileVC(nibName: "ProfileVC", bundle: nil)
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-    @IBAction func transferCard(_ sender: Any) {
-        
-        let viewController: AllCallingCardVC = AllCallingCardVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-    @IBAction func createCard(_ sender: Any) {
-        let viewController: GiftCardVC = GiftCardVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    @IBAction func showWallet(_ sender: Any)
-        {
-            let viewController: WalletPaymentVC = WalletPaymentVC()
-            self.navigationController?.pushViewController(viewController, animated: true)
-        }
 }
 
 
@@ -406,23 +365,23 @@ extension DashboardVC: SideMenuNavigationControllerDelegate {
     func sideMenuWillAppear(menu: SideMenuNavigationController, animated: Bool) {
         print("SideMenu Appearing! (animated: \(animated))")
         // Do any additional setup after loading the view, typically from a nib.
-            let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-            effectView = UIVisualEffectView(effect: blurEffect)
-            effectView.alpha = 0.7
-            effectView.frame = view.bounds
-            effectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            self.view.addSubview(effectView)
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        effectView = UIVisualEffectView(effect: blurEffect)
+        effectView.alpha = 0.7
+        effectView.frame = view.bounds
+        effectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.view.addSubview(effectView)
     }
-
+    
     func sideMenuDidAppear(menu: SideMenuNavigationController, animated: Bool) {
         print("SideMenu Appeared! (animated: \(animated))")
     }
-
+    
     func sideMenuWillDisappear(menu: SideMenuNavigationController, animated: Bool) {
         print("SideMenu Disappearing! (animated: \(animated))")
         self.effectView.removeFromSuperview()
     }
-
+    
     func sideMenuDidDisappear(menu: SideMenuNavigationController, animated: Bool) {
         print("SideMenu Disappeared! (animated: \(animated))")
     }
@@ -478,23 +437,7 @@ extension DashboardVC: UICollectionViewDelegate,UICollectionViewDelegateFlowLayo
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
-//        func openSafari(urlStr: String){
-//            if let url = URL(string: urlStr) {
-//                let config = SFSafariViewController.Configuration()
-//                config.entersReaderIfAvailable = true
-//
-//                let vc = SFSafariViewController(url: url)
-//                present(vc, animated: true)
-//            }
-//        }
-//        let item = WDHomeData.shared.sliderList[indexPath.row]
-//        if item.type! == .video {
-//            playVideo(url: item.urlPath ?? "", container: nil)
-//        }
-//        if item.type! == .image {
-//            //openSafari(urlStr: item.urlPath ?? "")
-//        }
+        
     }
     
     private func scrollToNextItem() {
@@ -513,5 +456,62 @@ extension DashboardVC: UICollectionViewDelegate,UICollectionViewDelegateFlowLayo
     
     private func moveToFrame(contentOffset : CGFloat) {
         self.sliderCollection.setContentOffset(CGPoint(x: contentOffset, y: self.sliderCollection.contentOffset.y), animated: true)
+    }
+}
+
+
+//MARK: - Routing
+extension DashboardVC {
+    @objc func action(){
+        self.present(leftNavSlide!, animated: true, completion: nil)
+    }
+    
+    @IBAction func transactionHistory(_ sender: Any) {
+        let viewController: TransactionHistoryVC = TransactionHistoryVC()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @IBAction func myOrder(_ sender: Any) {
+        let viewController: HistoryVC = HistoryVC()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @IBAction func voucherHistory(_ sender: Any) {
+        let viewController: VoucherHistoryVC  = VoucherHistoryVC()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    
+    @IBAction func rechargeButton(_ sender: Any) {
+        let viewController: OperatorListVC = OperatorListVC()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    @IBAction func iRechargeButton(_ sender: Any) {
+        let viewController: TopupVC = TopupVC()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @IBAction func redirectProfile(_ sender: Any) {
+        let vc = ProfileVC(nibName: "ProfileVC", bundle: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    @IBAction func notification(_ sender: Any) {
+        let viewController: AllNotificationVC = AllNotificationVC()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    @IBAction func transferCard(_ sender: Any) {
+        
+        let viewController: AllCallingCardVC = AllCallingCardVC()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    @IBAction func createCard(_ sender: Any) {
+        let viewController: GiftCardVC = GiftCardVC()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showWallet()
+    {
+        let viewController: WalletPaymentVC = WalletPaymentVC()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }

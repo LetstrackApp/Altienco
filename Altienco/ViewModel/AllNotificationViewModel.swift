@@ -55,7 +55,8 @@ class AllNotificationViewModel {
 
 
 class NewNotificationViewModel {
-    func getNewNotification(model : AllNotificationRequest, complition : @escaping([NewNotificationResponse]?, Bool?) -> Void)->Void{
+    func getNewNotification(model : AllNotificationRequest,
+                            complition : @escaping([NewNotificationResponse]?, Bool?) -> Void)->Void {
         let data = try? JSONEncoder().encode(model)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         let strURl = subURL.checkNewNotification

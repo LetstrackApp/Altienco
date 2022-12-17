@@ -10,8 +10,10 @@ import Foundation
 
 
 enum CountryCode: String {
+    
     case IN = "+91"
     case UK = "+44"
+    
     var title : String?{
         switch self {
         case .IN:
@@ -50,6 +52,15 @@ enum CountryCode: String {
             return 10
         case .UK:
             return 10
+        }
+    }
+    
+    var minNumberDigit : Int{
+        switch self {
+        case .IN:
+            return 10
+        case .UK:
+            return 9
         }
     }
 }

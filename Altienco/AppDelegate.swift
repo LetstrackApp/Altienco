@@ -59,9 +59,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navController = UINavigationController()
         self.setupNavigationBarAppearance()
         self.handleAuthentication()
-        if UserDefaults.getToken != "" && UserDefaults.getUserData?.firstName != "" && UserDefaults.getUserData?.firstName != nil
+        
+        if UserDefaults.getToken != "" &&
+            UserDefaults.getUserData?.firstName != "" &&
+            UserDefaults.getUserData?.firstName != nil
         {
-            let model = VerifyToken.init(token: UserDefaults.getToken, mobileNo: "", mobileRegID: "", mobileMake: "", mobileModel: "", mobileOSVersion: "", mobileOSType: "")
+            let model = VerifyToken.init(token: UserDefaults.getToken,
+                                         mobileNo: "",
+                                         mobileRegID: "",
+                                         mobileMake: "",
+                                         mobileModel: "",
+                                         mobileOSVersion: "",
+                                         mobileOSType: "")
             verifyModel.checkToken(model: model) { (result) in
                 DispatchQueue.main.async { [weak self] in
                     if  result != nil{

@@ -135,7 +135,6 @@ class UserProfileVC: UIViewController {
     
     @IBOutlet weak var firstName: UITextField!{
         didSet{
-            firstName.autocapitalizationType = .words
             firstName.font = UIFont.SF_Regular(16.0)
             firstName.textColor = appColor.blackText
         }
@@ -144,7 +143,6 @@ class UserProfileVC: UIViewController {
     
     @IBOutlet weak var lastname: UITextField!{
         didSet{
-            lastname.autocapitalizationType = .allCharacters
             lastname.font = UIFont.SF_Regular(16.0)
             lastname.textColor = appColor.blackText
         }
@@ -152,7 +150,6 @@ class UserProfileVC: UIViewController {
     
     @IBOutlet weak var emailAddress: UITextField!{
         didSet{
-            emailAddress.autocapitalizationType = .sentences
             emailAddress.font = UIFont.SF_Regular(16.0)
             emailAddress.textColor = appColor.blackText
         }
@@ -348,15 +345,6 @@ extension UserProfileVC: UITextFieldDelegate, BackFieldDelegate{
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == firstName{
-            firstName.text?.capitalizeFirstLetter()
-        }
-        else if textField == lastname{
-            lastname.text?.capitalizeFirstLetter()
-        }
-        else if textField == emailAddress{
-            emailAddress.text?.lowercased()
-        }
         self.setupTextBox()
         return true
     }

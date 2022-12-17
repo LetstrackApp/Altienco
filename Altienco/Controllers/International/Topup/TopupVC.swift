@@ -12,7 +12,7 @@ import DropDown
 
 
 
-class TopupVC: UIViewController, searchDelegate, UITextFieldDelegate {
+class TopupVC: UIViewController, UITextFieldDelegate {
     
     
     var intrOperator: IntrOperatorViewModel?
@@ -53,13 +53,23 @@ class TopupVC: UIViewController, searchDelegate, UITextFieldDelegate {
         }
     }
     @IBOutlet weak var countryName: UITextField!
-    @IBOutlet weak var mobileNumber: UITextField!
+    @IBOutlet weak var mobileNumber: UITextField! {
+        didSet {
+            
+            let imageview = UIImageView.init(frame: CGRect(x: 0, y: 0, width: 40, height: 50))
+            imageview.tintColor = UIColor.blue
+            imageview.contentMode = .scaleAspectFit
+            imageview.image = UIImage(named: "ic_contact_book")?.withInset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 2))
+            imageview.addTarget(target: self, action: #selector(openContactBook(_:)))
+            mobileNumber.rightView = imageview
+            mobileNumber.rightViewMode = .always
+
+        }
+    }
     @IBOutlet weak var searchContainer: UIView!
     @IBOutlet weak var searchButton: UIButton!{
         didSet{
-            DispatchQueue.main.async {
                 self.searchButton.setupNextButton(title: "SEARCH")
-            }
         }
     }
     @IBOutlet weak var operatorContainer: UIView!{
@@ -144,7 +154,7 @@ class TopupVC: UIViewController, searchDelegate, UITextFieldDelegate {
         
         self.setupDefault()
     }
-
+    
     
     @IBAction func notification(_ sender: Any) {
         let viewController: AllNotificationVC = AllNotificationVC()
@@ -173,30 +183,51 @@ class TopupVC: UIViewController, searchDelegate, UITextFieldDelegate {
                 if UserDefaults.getAvtarImage == "1"{
                     self.profileImage.image = UIImage(named: aString)
                 }else{
-                let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
-                 
-                self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
+                    let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
+                    
+                    self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
                 }
             }
         }
-
+        
     }
     
     @IBAction func showOperator(_ sender: Any) {
+        self.view.endEditing(true)
+
         self.customizeDropDown()
     }
     
     @IBAction func fetchOperator(_ sender: Any) {
+        self.view.endEditing(true)
         if countryModel == nil{
             Helper.showToast("Please select country!")
         }
         else if mobileNumber.text?.count ?? 0 > 9{
             
             if let countryid = self.countryModel?.countryID, let mobileCode = self.countryModel?.mobileCode{
-            self.searchOperator(mobileNumber: self.mobileNumber.text ?? "", countryId: countryid, mobileCode: mobileCode)
+                self.searchOperator(mobileNumber: self.mobileNumber.text ?? "", countryId: countryid, mobileCode: mobileCode)
             }}
         else{
             Helper.showToast("Please enter valid number!")
+        }
+    }
+    
+    @IBAction func openContactBook(_ sender : Any) {
+        self.view.endEditing(true)
+        if countryModel == nil {
+            Helper.showToast(lngConst.selectCountery, delay: Helper.DELAY_LONG)
+            countryContainer.shakeView()
+            return
+        }
+        ContactPicker.shared.openConatactPiker(cotroller: self) { [weak self] (text) in
+            if let contryCode = self?.countryModel?.mobileCode?.replacingOccurrences(of: "+", with: "").replacingOccurrences(of: " ", with: "") {
+                DispatchQueue.main.async {
+                    self?.mobileNumber.text = text.deletingPrefix(contryCode)
+                }
+
+            }
+            
         }
     }
     
@@ -237,7 +268,7 @@ class TopupVC: UIViewController, searchDelegate, UITextFieldDelegate {
         if self.intrResponse?.isEmpty == false{
             let operatorList = self.intrResponse?.filter {
                 $0.isDefault == true
-                }
+            }
             if let data = operatorList{
                 self.operatorName.text = data.first?.operatorName
                 self.selectedOperator = data.first
@@ -286,44 +317,43 @@ class TopupVC: UIViewController, searchDelegate, UITextFieldDelegate {
         if let customerID = UserDefaults.getUserData?.customerID{
             let model = IntrOperatorRequestObj.init(countryID: countryId, mobileCode: mobileCode, mobileNumber: mobileNumber, customerID: customerID, langCode: "eng")
             intrOperator?.getOperator(model: model, complition: { (rechargeHistory, allOperatorList) in
-            DispatchQueue.main.async { [weak self] in
-                if allOperatorList?.isEmpty == false{
-                    self?.intrResponse = allOperatorList
-                    self?.updateOperator()
-            }
-                if rechargeHistory?.isEmpty == false{
-                    self?.planHistoryResponse = rechargeHistory
-                    self?.updateLastVoucher()
-            }
-            }
+                DispatchQueue.main.async { [weak self] in
+                    if allOperatorList?.isEmpty == false{
+                        self?.intrResponse = allOperatorList
+                        self?.updateOperator()
+                    }
+                    if rechargeHistory?.isEmpty == false{
+                        self?.planHistoryResponse = rechargeHistory
+                        self?.updateLastVoucher()
+                    }
+                }
             })
         }
     }
     
-    func updateSearchView(isUpdate: Bool, selectedCountry: SearchCountryModel?) {
-        if isUpdate == true && selectedCountry != nil{
-            countryModel = selectedCountry
-            if let name = selectedCountry?.countryName{
-                countryName.text = name
-            }
-            self.rechargeContainer.isHidden = true
-            self.operatorContainer.isHidden = true
-            self.selectPlanContainer.isHidden = true
-            self.proceedContainer.isHidden = true
-            self.searchContainer.isHidden = false
-        }
-    }
+    //countryName.setError()
+    
+
+
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-         let newLength = (mobileNumber.text ?? "").count + string.count - range.length
+        if(textField == mobileNumber) {
+        if countryModel == nil {
+            self.view.endEditing(true)
+            countryContainer.shakeView()
+            Helper.showToast(lngConst.selectCountery, delay: Helper.DELAY_LONG)
+            return false
+        }
+        }
+        let newLength = (mobileNumber.text ?? "").count + string.count - range.length
         DispatchQueue.main.async {
             self.setupDefault()
         }
         
-         if(textField == mobileNumber) {
-             return newLength <= 12
-         }
-         return true
+        if(textField == mobileNumber) {
+            return newLength <= 12
+        }
+        return true
     }
     
     @IBAction func searchCountry(_ sender: Any) {
@@ -337,7 +367,7 @@ class TopupVC: UIViewController, searchDelegate, UITextFieldDelegate {
             self.userName.text = "Hi \(firstname)"
         }
         if let currencySymbol = UserDefaults.getUserData?.currencySymbol, let walletAmount = UserDefaults.getUserData?.walletAmount{
-        self.walletBalnace.text = "\(currencySymbol)" + "\(walletAmount)"
+            self.walletBalnace.text = "\(currencySymbol)" + "\(walletAmount)"
         }
     }
     @IBAction func redirectProfile(_ sender: Any) {
@@ -371,17 +401,17 @@ class TopupVC: UIViewController, searchDelegate, UITextFieldDelegate {
         viewController.countryModel = self.countryModel
         viewController.selectedOperator = self.selectedOperator
         viewController.mobileNumber = self.mobileNumber.text!
-//        viewController.planHistoryResponse = self.planHistoryResponse
+        //        viewController.planHistoryResponse = self.planHistoryResponse
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     
     func successVoucher(walletBalance: Double, currencySymbol: String, processStatusID: Int, externalId: String){
-            var model = UserDefaults.getUserData
+        var model = UserDefaults.getUserData
         model?.walletAmount = walletBalance
-            if model != nil{
-                UserDefaults.setUserData(data: model!)
-            }
+        if model != nil{
+            UserDefaults.setUserData(data: model!)
+        }
         let viewController: IntrSuccessVC = IntrSuccessVC()
         viewController.countryModel = self.countryModel
         viewController.selectedOperator = self.selectedOperator
@@ -406,19 +436,19 @@ class TopupVC: UIViewController, searchDelegate, UITextFieldDelegate {
             self.navigationController?.present(viewController, animated: true)
         }
         
-//        {
-//        let object = ReviewIntrVC.initialization()
-//        object.showAlert(usingModel: self.mobileNumber.text ?? "", countryModel: countryModel, selectedOperator: currentOperator, planHistoryResponse: self.planHistoryResponse ?? []) { (status, val) in
-//            if status == true{
-//                self.successVoucher(walletBalance: val?.walletAmount ?? 0.0, currencySymbol: val?.currency ?? "",processStatusID: val?.processStatusID ?? 0, externalId: val?.externalID ?? "0")
-//            }
-//            else{
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-//                    if let topController = UIApplication.topViewController() {
-//                        topController.navigationController?.popViewController(animated: false)
-//                    }
-//                })
-//            }}}
+        //        {
+        //        let object = ReviewIntrVC.initialization()
+        //        object.showAlert(usingModel: self.mobileNumber.text ?? "", countryModel: countryModel, selectedOperator: currentOperator, planHistoryResponse: self.planHistoryResponse ?? []) { (status, val) in
+        //            if status == true{
+        //                self.successVoucher(walletBalance: val?.walletAmount ?? 0.0, currencySymbol: val?.currency ?? "",processStatusID: val?.processStatusID ?? 0, externalId: val?.externalID ?? "0")
+        //            }
+        //            else{
+        //                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+        //                    if let topController = UIApplication.topViewController() {
+        //                        topController.navigationController?.popViewController(animated: false)
+        //                    }
+        //                })
+        //            }}}
     }
 }
 
@@ -426,6 +456,23 @@ class TopupVC: UIViewController, searchDelegate, UITextFieldDelegate {
 extension TopupVC: BackTOGiftCardDelegate {
     func BackToPrevious(dismiss: Bool, result: ConfirmIntrResponseObj?) {
         if dismiss, let data = result{
-           self.successVoucher(walletBalance: data.walletAmount ?? 0.0, currencySymbol: data.currency ?? "",processStatusID: data.processStatusID ?? 0, externalId: data.externalID ?? "0")
+            self.successVoucher(walletBalance: data.walletAmount ?? 0.0, currencySymbol: data.currency ?? "",processStatusID: data.processStatusID ?? 0, externalId: data.externalID ?? "0")
+        }
+    }}
+
+extension TopupVC: searchDelegate  {
+    
+    func updateSearchView(isUpdate: Bool, selectedCountry: SearchCountryModel?) {
+        if isUpdate == true && selectedCountry != nil{
+            countryModel = selectedCountry
+            if let name = selectedCountry?.countryName{
+                countryName.text = name
             }
-        }}
+            self.rechargeContainer.isHidden = true
+            self.operatorContainer.isHidden = true
+            self.selectPlanContainer.isHidden = true
+            self.proceedContainer.isHidden = true
+            self.searchContainer.isHidden = false
+        }
+    }
+}

@@ -8,9 +8,14 @@
 
 import Foundation
 import Alamofire
-
+import DropDown
+import UIKit
 class GenerateOTPViewModel {
-    
+    lazy  var dropDown : DropDown = {
+        let drop = DropDown()
+        drop.direction = .any
+        return drop
+    }()
     var user : Box<GenerateOTP?>? = Box(nil)
     func generateOTP(model : GenerateOTP, complition : @escaping(Bool?) -> Void)->Void{
         let data = try? JSONEncoder().encode(model)
@@ -49,6 +54,23 @@ class GenerateOTPViewModel {
             }
             complition(nil)
         }
+    }
+    
+    
+    func showDropDown(view : UIView,
+                      stringArry:[String],
+                      completion:@escaping(Int,String)->Void) {
+        dropDown.anchorView = view
+        dropDown.topOffset = CGPoint(x: 0, y:-(dropDown.anchorView?.plainView.bounds.height)!)
+        dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
+        dropDown.dataSource = stringArry
+        dropDown.selectionAction = {   (index: Int,
+                                                   item: String) in
+            completion(index,item)
+            
+        }
+        dropDown.width = view.bounds.width
+        dropDown.show()
     }
 }
 

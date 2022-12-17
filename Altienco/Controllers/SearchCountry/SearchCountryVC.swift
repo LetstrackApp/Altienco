@@ -19,6 +19,10 @@ class SearchCountryVC: UIViewController, UITableViewDataSource,UITableViewDelega
     var filteredData: [SearchCountryModel] = []
     var delegate: searchDelegate? = nil
     
+    convenience init() {
+        self.init(nibName: "SearchCountryVC", bundle: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
