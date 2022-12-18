@@ -16,6 +16,8 @@ final class AlertViewVC: UIViewController {
     
     var alertTypes : AlertTypes<Any>?
     
+    var onCompletion: (()->())?
+    
     private var bottom :  NSLayoutConstraint?
     
     lazy private var bgbutton : UIButton = {
@@ -26,8 +28,6 @@ final class AlertViewVC: UIViewController {
     
     lazy private  var txnSucess : TransactionSuccessFull = {
         let control = TransactionSuccessFull.loadFromNib(from: .altiencoBundle)
-        
-        //        control.roundFromTop(radius: 10)
         return control
     }()
     
@@ -58,8 +58,13 @@ final class AlertViewVC: UIViewController {
         addConstraint(subView: txnSucess, height: 445)
     }
     
-    @IBAction private func viewDismiss(_ sender : UIButton){
-        dismissView()
+    @IBAction private func viewDismiss(_ sender : UIButton) {
+        switch alertTypes {
+        case .transactionSucessfull:
+            break
+        default: dismissView()
+        }
+       
     }
     
     private func dismissView(){
@@ -72,7 +77,13 @@ final class AlertViewVC: UIViewController {
             default:break
             }
         } completion: { [weak self] (result) in
-            self?.dismiss(animated: false, completion: nil)
+            self?.dismiss(animated: false) {
+                switch self?.alertTypes{
+                case .transactionSucessfull:
+                    self?.onCompletion?()
+                default: break
+                }
+            }
         }
     }
     

@@ -12,6 +12,23 @@ import UIKit
 
 extension UIView {
     
+    func addShadow(offSet:CGSize = CGSize(width: 0.0, height: 0.0)) {
+        self.layer.shadowColor = UIColor.gray.cgColor
+        self.layer.shadowOffset = offSet
+        self.layer.masksToBounds = false
+        self.layer.shadowRadius = 10.0
+        self.layer.shadowOpacity = 0.5
+    }
+    
+    
+  
+    
+    func deleteShadow() {
+        self.layer.shadowOffset = CGSize(width: 0, height: 0.0)
+        self.layer.shadowRadius = 0
+        self.layer.shadowOpacity = 0
+    }
+    
     func shakeView() {
         let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)

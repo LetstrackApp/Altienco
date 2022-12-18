@@ -19,4 +19,15 @@ public extension  UIView {
     }
     
     
+    func roundFromTop(radius: CGFloat){
+        clipsToBounds = true
+        layer.cornerRadius = radius
+        layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+    }
+    func roundFromBottom(radius: CGFloat){
+        clipsToBounds = true
+        layer.cornerRadius = radius
+        layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+    }
+    
 }

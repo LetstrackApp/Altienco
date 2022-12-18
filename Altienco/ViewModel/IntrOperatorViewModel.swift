@@ -27,30 +27,33 @@ class IntrOperatorViewModel {
             if jsondata?["Message_Code"] as? Bool == true, let resultData = jsondata?["Result"] as? NSDictionary
             {
                 if resultData["status"] as? Bool == true{
-                if let jsondata = resultData["data"] as! NSDictionary? {
+                    if let jsondata = resultData["data"] as! NSDictionary? {
                         for dict in jsondata["LastRecharge"] as? Array ?? []{
                             lastRecharge.append(LastRecharge.init(json: dict as! [String : Any]))
+                        }
+                        for dict in jsondata["operatorList"] as? Array ?? []{
+                            operatorList.append(OperatorList.init(json: dict as! [String : Any]))
+                        }
+                        complition(lastRecharge, operatorList)
+                    }else {
+                        complition(nil, nil)
                     }
-                    for dict in jsondata["operatorList"] as? Array ?? []{
-                        operatorList.append(OperatorList.init(json: dict as! [String : Any]))
-                    }
-                    complition(lastRecharge, operatorList)
-                }
-                    complition(nil, nil)
                 }
                 else
                 {
                     Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    complition(nil, nil)
                 }
                 
             }
 
                 else{
+                    complition(nil, nil)
                     Helper.showToast((jsondata?["Message"] as? String)!, delay:Helper.DELAY_LONG)
                 }
 
         }) { (Error) in
-            
+            complition(nil, nil)
             if let error = Error{
 //                Helper.showToast(error , delay:Helper.DELAY_LONG)
             }

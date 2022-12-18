@@ -19,6 +19,8 @@
 		04661361294E120700EC444B /* TransactionSuccessFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04661360294E120700EC444B /* TransactionSuccessFull.swift */; };
 		04661370294E2F9500EC444B /* alertSound.mpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0466136F294E2F9500EC444B /* alertSound.mpeg */; };
 		04661374294E398E00EC444B /* txnSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = 04661373294E398E00EC444B /* txnSuccess.json */; };
+		047F3FEC294F7EA0000377FF /* OperatorInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F3FEA294F7EA0000377FF /* OperatorInfoCell.swift */; };
+		047F3FED294F7EA0000377FF /* OperatorInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047F3FEB294F7EA0000377FF /* OperatorInfoCell.xib */; };
 		049F8754294D970400B3ED6B /* AddAndShowBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F8753294D970400B3ED6B /* AddAndShowBalance.swift */; };
 		049F8756294D971400B3ED6B /* AddAndShowBalance.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049F8755294D971400B3ED6B /* AddAndShowBalance.xib */; };
 		049F8758294D9C7C00B3ED6B /* ViewLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F8757294D9C7C00B3ED6B /* ViewLoadable.swift */; };
@@ -276,6 +278,8 @@
 		04661360294E120700EC444B /* TransactionSuccessFull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSuccessFull.swift; sourceTree = "<group>"; };
 		0466136F294E2F9500EC444B /* alertSound.mpeg */ = {isa = PBXFileReference; lastKnownFileType = video.mpeg; path = alertSound.mpeg; sourceTree = "<group>"; };
 		04661373294E398E00EC444B /* txnSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = txnSuccess.json; sourceTree = "<group>"; };
+		047F3FEA294F7EA0000377FF /* OperatorInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorInfoCell.swift; sourceTree = "<group>"; };
+		047F3FEB294F7EA0000377FF /* OperatorInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OperatorInfoCell.xib; sourceTree = "<group>"; };
 		049F8753294D970400B3ED6B /* AddAndShowBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAndShowBalance.swift; sourceTree = "<group>"; };
 		049F8755294D971400B3ED6B /* AddAndShowBalance.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAndShowBalance.xib; sourceTree = "<group>"; };
 		049F8757294D9C7C00B3ED6B /* ViewLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLoadable.swift; sourceTree = "<group>"; };
@@ -1122,6 +1126,8 @@
 			children = (
 				C68713FC28E63F85002E7254 /* DenoCell.swift */,
 				C68713FD28E63F85002E7254 /* DenoCell.xib */,
+				047F3FEA294F7EA0000377FF /* OperatorInfoCell.swift */,
+				047F3FEB294F7EA0000377FF /* OperatorInfoCell.xib */,
 			);
 			path = DenominationCell;
 			sourceTree = "<group>";
@@ -1667,6 +1673,7 @@
 				C6A8A6A828EB094F006C1BF9 /* TransactionHistoryVC.xib in Resources */,
 				C627CAA428F8DD7B00396943 /* PermissionCell.xib in Resources */,
 				C6A103ED28B35549000E50A1 /* Poppins-Bold.ttf in Resources */,
+				047F3FED294F7EA0000377FF /* OperatorInfoCell.xib in Resources */,
 				C6ACA77A28C80D6F00F0A042 /* ProfileVC.xib in Resources */,
 				C6342CF62937AB4F00814F40 /* SuccessGatwayVC.xib in Resources */,
 				C6342CF22937A46400814F40 /* FailedGatwayVC.xib in Resources */,
@@ -1882,6 +1889,7 @@
 				C687140A28E6569E002E7254 /* ConfirmIntrModel.swift in Sources */,
 				C688454E2920B1F500AB50DD /* AllDenomination.swift in Sources */,
 				C6CD5AC728D95B7F004E6F33 /* TopupVC.swift in Sources */,
+				047F3FEC294F7EA0000377FF /* OperatorInfoCell.swift in Sources */,
 				18E2873E250F2CBB00F25971 /* ConstantFiles.swift in Sources */,
 				C627CAA828F8E08200396943 /* SettingAuthCell.swift in Sources */,
 				C68226D428C1AE9D00376B4B /* RegistrationModel.swift in Sources */,

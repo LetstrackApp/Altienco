@@ -9,16 +9,7 @@
 import UIKit
 import StripePaymentSheet
 
-class WalletDenominationVC: UIViewController, GoToRootDelegate {
-    func CloseToRoot(dismiss: Bool) {
-        if dismiss{
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-                if let topController = UIApplication.topViewController() {
-                    topController.navigationController?.popToRootViewController(animated: true)
-                }
-            })
-        }
-    }
+class WalletDenominationVC: UIViewController {
     
     
     var OperatorID = 0
@@ -31,7 +22,6 @@ class WalletDenominationVC: UIViewController, GoToRootDelegate {
     var resposeData = [WalletDenominationResponse]()
     var verifyPayment : VerifyPaymentViewModel?
     var imageUrl = ""
-    
     var paymentSheet: PaymentSheet?
     
     @IBOutlet weak var notificationIcon: UIImageView!
@@ -45,9 +35,13 @@ class WalletDenominationVC: UIViewController, GoToRootDelegate {
             self.profileImage.clipsToBounds = true
         }
     }
-    @IBOutlet weak var nextButton: UIButton!{
+    @IBOutlet weak var nextButton: LoadingButton!{
         didSet{
             self.nextButton.setupNextButton(title: "GENERATE VOUCHER")
+            self.nextButton.addTarget(self, action: #selector(self.didTapCheckoutButton),
+                                      for: .touchUpInside)
+            self.nextButton.isEnabled = false
+            self.nextButton.backgroundColor = UIColor.init(0xf2f2f2)
         }
     }
     @IBOutlet weak var walletBalance: UILabel!{
@@ -57,13 +51,12 @@ class WalletDenominationVC: UIViewController, GoToRootDelegate {
         }
     }
     
-    @IBOutlet weak var headerViewContainer: UIView!{
-        didSet{
-            self.headerViewContainer.layer.cornerRadius = 5.0
-            self.headerViewContainer.backgroundColor = appColor.lightGrayBack
-            self.headerViewContainer.clipsToBounds=true
+    @IBOutlet weak var planContainer: UIView! {
+        didSet {
+            planContainer.layer.cornerRadius = 10
         }
     }
+
     
     @IBOutlet weak var userName: UILabel!
     
@@ -71,27 +64,61 @@ class WalletDenominationVC: UIViewController, GoToRootDelegate {
     @IBOutlet weak var operatorPlansCollection: UICollectionView!
     @IBOutlet weak var viewContainer: UIView!{
         didSet{
-            DispatchQueue.main.async {
-                self.viewContainer.layer.shadowPath = UIBezierPath(rect: self.viewContainer.bounds).cgPath
-                self.viewContainer.layer.shadowRadius = 5
-                self.viewContainer.layer.shadowOffset = .zero
-                self.viewContainer.layer.shadowOpacity = 1
-                self.viewContainer.layer.cornerRadius = 8.0
-                self.viewContainer.clipsToBounds=true
-            }
+            self.viewContainer.layer.shadowPath = UIBezierPath(rect: self.viewContainer.bounds).cgPath
+            self.viewContainer.layer.shadowRadius = 5
+            self.viewContainer.layer.shadowOffset = .zero
+            self.viewContainer.layer.shadowOpacity = 1
+            self.viewContainer.layer.cornerRadius = 8.0
+            self.viewContainer.clipsToBounds=true
             self.viewContainer.clipsToBounds=true
         }
     }
+    
+    
+    @IBOutlet weak var rechargeWalletTitle: PaddingLabel!{
+        didSet {
+            rechargeWalletTitle.topInset = 10
+            rechargeWalletTitle.leftInset = 15
+            rechargeWalletTitle.rightInset = 15
+            rechargeWalletTitle.font = UIFont.SFPro_Light(18)
+        }
+    }
+    
+    @IBOutlet weak var selectDemimation: UILabel!{
+        didSet {
+            selectDemimation.font = UIFont.SF_Regular(14)
+        }
+    }
+    
+    convenience init() {
+        self.init(nibName: xibName.walletDenominationVC, bundle: .altiencoBundle)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         verifyPayment = VerifyPaymentViewModel()
         onlinePaymentIntent = OnlinePaymentIntent()
         viewModel = WalletDenomination()
         self.operatorPlansCollection.register(UINib(nibName: "CollectionViewCell", bundle:nil), forCellWithReuseIdentifier: "CollectionViewCell")
-        self.nextButton.addTarget(self, action: #selector(self.didTapCheckoutButton), for: .touchUpInside)
-        self.nextButton.isEnabled = false
+        
         self.initiateModel()
+        onLanguageChange()
         // Do any additional setup after loading the view.
+    }
+    
+    func onLanguageChange(){
+        
+        
+        rechargeWalletTitle.changeColorAndFont(mainString: lngConst.rechargeWallet,
+                                                    stringToColor: lngConst.wallet,
+                                                    color: UIColor.init(0xb24a96),
+                                                    font: UIFont.SF_Medium(18))
+        
+        selectDemimation.changeColorAndFont(mainString: lngConst.pleaseSelectDenomination,
+                                                   stringToColor: lngConst.denomination,
+                                                   color: .black,
+                                                   font: UIFont.SF_Regular(16))
+        
     }
     
     func InitializeStripe(){
@@ -100,14 +127,24 @@ class WalletDenominationVC: UIViewController, GoToRootDelegate {
         configuration.merchantDisplayName = "Altienco"
         configuration.allowsDelayedPaymentMethods = true
         self.paymentSheet = PaymentSheet(paymentIntentClientSecret: self.paymentIntentRes.first?.paymentIntent ?? "", configuration: configuration)
-        
-        DispatchQueue.main.async {
-            self.nextButton.isEnabled = true
-        }
+        self.nextButton.isEnabled = true
+        self.nextButton.backgroundColor = UIColor.init(0x022a72)
     }
     
-    @objc
-    func didTapCheckoutButton() {
+    
+    func showButtonloading(){
+        self.view.isUserInteractionEnabled = false
+        self.nextButton.showLoading()
+    }
+    
+    func hideButtonLoading(){
+        self.view.isUserInteractionEnabled = true
+        self.nextButton.hideLoading()
+    }
+    
+    
+    @objc func didTapCheckoutButton() {
+        showButtonloading()
         // MARK: Start the checkout process
         paymentSheet?.present(from: self) { paymentResult in
             // MARK: Handle the payment result
@@ -118,25 +155,24 @@ class WalletDenominationVC: UIViewController, GoToRootDelegate {
             case .canceled:
                 print("Canceled!")
                 self.callFailureScreen()
+                self.hideButtonLoading()
                 //            self.verifyPaymentCode(clientSKey: self.paymentIntentRes.first?.publishableKey ?? "")
             case .failed(let error):
+                self.hideButtonLoading()
                 self.alert(message: error.localizedDescription, title: "Alert")
             }
         }
     }
     
- 
     
-    @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
+    
+  
     override func viewWillAppear(_ animated: Bool) {
-//        self.SelectedIndex = -1
-//        self.operatorPlansCollection.reloadData()
+        super.viewWillAppear(true)
         self.setupValue()
         self.updateProfilePic()
         self.showNotify()
+        self.setupLeftnavigation()
     }
     func showNotify(){
         if UserDefaults.isNotificationRead == "1"{
@@ -175,35 +211,42 @@ class WalletDenominationVC: UIViewController, GoToRootDelegate {
     }
     
     func verifyPaymentCode(clientSKey: String) {
-        let dataModel = VerifyPaymentRequest.init(customerId: UserDefaults.getUserData?.customerID ?? 0, clientSKey: clientSKey)
+        let dataModel = VerifyPaymentRequest.init(customerId: UserDefaults.getUserData?.customerID ?? 0,
+                                                  clientSKey: clientSKey)
         verifyPayment?.verifyPayment(model: dataModel) { (result, status)  in
             DispatchQueue.main.async { [weak self] in
-                if status == true, let responce = result{
+                if status == true,
+                   let responce = result {
                     self?.setupWalletBal(walletBal: responce.first?.WalletAmount ?? 0.0)
                     
                     if let amount = self?.resposeData[self?.SelectedIndex ?? 0].denominationValue {
                         let obj = AlertViewVC.init(type: .transactionSucessfull(amount: amount))
                         obj.modalPresentationStyle = .overFullScreen
                         self?.present(obj, animated: false, completion: nil)
+                        obj.onCompletion = {
+                            self?.navigationController?.popToRootViewController(animated: true)
+                        }
+                        
+                        
                     }
-//                    let viewController: SuccessGatwayVC = SuccessGatwayVC()
-//                    viewController.denominationPrice = Double(self?.resposeData[self?.SelectedIndex ?? 0].denominationValue ?? 0)
-//                    viewController.delegate = self
-//                    viewController.modalPresentationStyle = .overFullScreen
-//                    self?.navigationController?.present(viewController, animated: true)
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                        self?.hideButtonLoading()
+                    }
+                    
+                    //                    let viewController: SuccessGatwayVC = SuccessGatwayVC()
+                    //                    viewController.denominationPrice = Double(self?.resposeData[self?.SelectedIndex ?? 0].denominationValue ?? 0)
+                    //                    viewController.delegate = self
+                    //                    viewController.modalPresentationStyle = .overFullScreen
+                    //                    self?.navigationController?.present(viewController, animated: true)
                 }
                 else {
+                    self?.hideButtonLoading()
                     self?.callFailureScreen()
                 }
             }}
     }
     
-    func callFailureScreen(){
-        let viewController: FailedGatwayVC = FailedGatwayVC()
-        viewController.delegate = self
-        viewController.modalPresentationStyle = .overFullScreen
-        self.navigationController?.present(viewController, animated: true)
-    }
+   
     
     func setupWalletBal(walletBal: Double){
         var model = UserDefaults.getUserData
@@ -227,11 +270,7 @@ class WalletDenominationVC: UIViewController, GoToRootDelegate {
                 }
             }}
     }
-    @IBAction func redirectProfile(_ sender: Any) {
-        let vc = ProfileVC(nibName: "ProfileVC", bundle: nil)
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
+  
     
     func getAllKey(){
         if self.SelectedIndex < (self.resposeData.count) && self.SelectedIndex != -1{
@@ -251,7 +290,11 @@ class WalletDenominationVC: UIViewController, GoToRootDelegate {
     
     
     
-    func successVoucher(mPin: String, denominationValue : String, walletBalance: Double, msgToShare: String, voucherID: Int){
+    func successVoucher(mPin: String,
+                        denominationValue : String,
+                        walletBalance: Double,
+                        msgToShare: String,
+                        voucherID: Int){
         let viewController: SuccessRechargeVC = SuccessRechargeVC()
         viewController.denominationValue = denominationValue
         viewController.mPin = mPin
@@ -334,4 +377,38 @@ extension WalletDenominationVC: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
+}
+
+
+extension WalletDenominationVC : GoToRootDelegate {
+    func CloseToRoot(dismiss: Bool) {
+        if dismiss{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                if let topController = UIApplication.topViewController() {
+                    topController.navigationController?.popToRootViewController(animated: true)
+                }
+            })
+        }
+    }
+    
+}
+
+//MARK: - Routing
+extension WalletDenominationVC {
+    
+    @IBAction func redirectProfile(_ sender: Any) {
+        let vc = ProfileVC(nibName: "ProfileVC", bundle: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    @IBAction func notification(_ sender: Any) {
+        let viewController: AllNotificationVC = AllNotificationVC()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func callFailureScreen(){
+        let viewController: FailedGatwayVC = FailedGatwayVC()
+        viewController.delegate = self
+        viewController.modalPresentationStyle = .overFullScreen
+        self.navigationController?.present(viewController, animated: true)
+    }
 }

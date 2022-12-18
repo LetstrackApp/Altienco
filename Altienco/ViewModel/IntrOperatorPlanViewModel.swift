@@ -20,12 +20,13 @@ class IntrOperatorPlanViewModel {
             "Authorization": "Bearer \(UserDefaults.getToken)",
             "Content-Type": "application/json"
         ]
-        SVProgressHUD.show()
-        AFWrapper.requestPOSTURL(strURl, params: json, headers: header, success: { (jsondata) in
-            SVProgressHUD.dismiss()
+        AFWrapper.requestPOSTURL(strURl, params: json,
+                                 headers: header,
+                                 success: { (jsondata) in
             debugPrint("jsondata:", strURl, jsondata as Any)
             var lastRecharge = [LastRecharge]()
-            if jsondata?["Message_Code"] as? Bool == true, let resultData = jsondata?["Result"] as? NSDictionary
+            if jsondata?["Message_Code"] as? Bool == true,
+               let resultData = jsondata?["Result"] as? NSDictionary
             {
                 if resultData["status"] as? Bool == true{
                     for dict in resultData["data"] as? Array ?? []{
@@ -42,15 +43,15 @@ class IntrOperatorPlanViewModel {
             }
 
                 else{
+                    complition(nil)
                     Helper.showToast((jsondata?["Message"] as? String)!, delay:Helper.DELAY_LONG)
                 }
 
         }) { (Error) in
             SVProgressHUD.dismiss()
+            complition(nil)
 //            Helper.showToast(Error?.debugDescription ?? "", delay:Helper.DELAY_LONG)
-            if let error = Error{
-                complition(nil)
-            }
+           
         }
     }
 }

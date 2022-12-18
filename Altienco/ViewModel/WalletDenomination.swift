@@ -95,18 +95,20 @@ class OnlinePaymentIntent {
 
 
 class VerifyPaymentViewModel {
-    func verifyPayment(model : VerifyPaymentRequest, complition : @escaping([VerifyPaymentResponse]?, Bool?) -> Void)->Void{
+    
+    func verifyPayment(model : VerifyPaymentRequest,
+                       complition : @escaping([VerifyPaymentResponse]?, Bool?) -> Void)->Void{
         let data = try? JSONEncoder().encode(model)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         let strURl = subURL.verifyPayment
-        SVProgressHUD.show()
+//        SVProgressHUD.show()
         let header : HTTPHeaders = [
             "Authorization": "Bearer \(UserDefaults.getToken)",
             "Content-Type": "application/json"
         ]
         AFWrapper.requestPOSTURL(strURl, params: json, headers: header, success: { (jsondata) in
             debugPrint("jsondata:", strURl, jsondata as Any)
-            SVProgressHUD.dismiss()
+//            SVProgressHUD.dismiss()
             if jsondata?["Message_Code"] as? Bool == true, let resultData = jsondata?["Result"] as? NSDictionary
             {
                 var payment = [VerifyPaymentResponse]()

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -55,6 +55,9 @@
                                                                         <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="18"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                                        </userDefinedRuntimeAttributes>
                                                                     </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FdW-GR-Uuz">
                                                                         <rect key="frame" x="33" y="0.0" width="71" height="25"/>
@@ -64,6 +67,9 @@
                                                                                 <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="9"/>
                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                         </subviews>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -74,6 +80,9 @@
                                                                             <constraint firstAttribute="bottom" secondItem="njo-Zh-juu" secondAttribute="bottom" id="dSF-22-M40"/>
                                                                             <constraint firstItem="njo-Zh-juu" firstAttribute="top" secondItem="FdW-GR-Uuz" secondAttribute="top" id="qdA-RG-qAb"/>
                                                                         </constraints>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                                        </userDefinedRuntimeAttributes>
                                                                     </view>
                                                                 </subviews>
                                                                 <constraints>
@@ -82,6 +91,9 @@
                                                                     <constraint firstAttribute="height" constant="21" id="b8M-eN-fCW"/>
                                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FdW-GR-Uuz" secondAttribute="trailing" id="e53-4R-Ted"/>
                                                                 </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
                                                             </stackView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="£3.3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44C-cW-RRr">
                                                                 <rect key="frame" x="0.0" y="21" width="25.5" height="21"/>
@@ -91,6 +103,9 @@
                                                                 <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="12"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -103,6 +118,9 @@
                                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="44C-cW-RRr" secondAttribute="bottom" id="Vxz-vp-4v6"/>
                                                             <constraint firstAttribute="trailing" secondItem="4HK-2M-iZF" secondAttribute="trailing" id="f2W-gb-JfS"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QZm-X1-EZL">
                                                         <rect key="frame" x="109" y="0.0" width="104" height="42"/>
@@ -118,6 +136,9 @@
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                         <color key="textColor" red="0.47058823529999999" green="0.4823529412" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                                        </userDefinedRuntimeAttributes>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2GB/Day" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0w8-YB-Kof">
                                                                         <rect key="frame" x="0.0" y="21" width="104" height="21"/>
@@ -127,6 +148,9 @@
                                                                         <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="12"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                                        </userDefinedRuntimeAttributes>
                                                                     </label>
                                                                 </subviews>
                                                                 <constraints>
@@ -137,6 +161,9 @@
                                                                     <constraint firstItem="0w8-YB-Kof" firstAttribute="top" secondItem="SZv-9k-FPo" secondAttribute="bottom" id="j40-8f-ZoV"/>
                                                                     <constraint firstAttribute="trailing" secondItem="SZv-9k-FPo" secondAttribute="trailing" id="yWb-An-aN7"/>
                                                                 </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
                                                             </stackView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -146,6 +173,9 @@
                                                             <constraint firstAttribute="trailing" secondItem="6yY-CJ-zjA" secondAttribute="trailing" id="PnH-r7-msM"/>
                                                             <constraint firstItem="6yY-CJ-zjA" firstAttribute="top" secondItem="QZm-X1-EZL" secondAttribute="top" id="qNB-sg-5QV"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TA1-zH-5W9">
                                                         <rect key="frame" x="218" y="0.0" width="104" height="42"/>
@@ -158,6 +188,9 @@
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <color key="textColor" red="0.47058823529999999" green="0.4823529412" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="28 Days" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9YN-GO-Jfx">
                                                                 <rect key="frame" x="0.0" y="21" width="104" height="21"/>
@@ -167,6 +200,9 @@
                                                                 <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="12"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -179,6 +215,9 @@
                                                             <constraint firstAttribute="trailing" secondItem="CIY-Cd-pMl" secondAttribute="trailing" id="fcd-Ny-69c"/>
                                                             <constraint firstItem="9YN-GO-Jfx" firstAttribute="leading" secondItem="TA1-zH-5W9" secondAttribute="leading" id="fuL-lH-7eA"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -192,6 +231,9 @@
                                                     <constraint firstItem="TA1-zH-5W9" firstAttribute="width" secondItem="qPE-0L-ZE2" secondAttribute="width" id="t1e-4n-5Gd"/>
                                                     <constraint firstAttribute="bottom" secondItem="qPE-0L-ZE2" secondAttribute="bottom" id="vnT-dL-UkL"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WEH-yy-AR6">
                                                 <rect key="frame" x="0.0" y="49" width="322" height="55"/>
@@ -199,6 +241,9 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qm2-jh-eEf">
                                                         <rect key="frame" x="0.0" y="0.0" width="107.5" height="55"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Teq-Zz-dhl">
                                                         <rect key="frame" x="107.5" y="0.0" width="214.5" height="55"/>
@@ -208,6 +253,9 @@
                                                                 <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="12"/>
                                                                 <color key="textColor" red="0.47058823529999999" green="0.4823529412" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -217,11 +265,17 @@
                                                             <constraint firstItem="jZX-hh-XqC" firstAttribute="top" secondItem="Teq-Zz-dhl" secondAttribute="top" id="xgI-mZ-wWC"/>
                                                             <constraint firstAttribute="trailing" secondItem="jZX-hh-XqC" secondAttribute="trailing" id="yzK-95-5jY"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="Teq-Zz-dhl" firstAttribute="width" secondItem="qm2-jh-eEf" secondAttribute="width" multiplier="2" id="olP-jk-F6u"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AHR-KE-9V4">
                                                 <rect key="frame" x="60.5" y="111" width="201" height="40"/>
@@ -235,6 +289,9 @@
                                                         <state key="normal" title="SELECT PLAN">
                                                             <color key="titleColor" red="0.69019607839999997" green="0.28627450980000002" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -244,6 +301,9 @@
                                                     <constraint firstAttribute="bottom" secondItem="wRZ-LI-f7a" secondAttribute="bottom" id="RmB-Fm-Ikv"/>
                                                     <constraint firstAttribute="trailing" secondItem="wRZ-LI-f7a" secondAttribute="trailing" id="Slo-sq-004"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
                                         <constraints>
@@ -254,6 +314,9 @@
                                             <constraint firstItem="AHR-KE-9V4" firstAttribute="centerX" secondItem="Lkg-Hl-8xB" secondAttribute="centerX" id="hDI-8N-gtN"/>
                                             <constraint firstAttribute="trailing" secondItem="2jm-Q7-A1d" secondAttribute="trailing" id="iR3-9X-l1F"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -263,6 +326,9 @@
                                     <constraint firstAttribute="bottom" secondItem="Lkg-Hl-8xB" secondAttribute="bottom" id="Y4o-b8-Hk8"/>
                                     <constraint firstAttribute="trailing" secondItem="Lkg-Hl-8xB" secondAttribute="trailing" id="g7D-To-u1c"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -272,6 +338,9 @@
                             <constraint firstItem="Hfm-c8-Fo1" firstAttribute="leading" secondItem="4KM-hW-z8c" secondAttribute="leading" constant="20" id="Mff-7s-mfV"/>
                             <constraint firstAttribute="trailing" secondItem="Hfm-c8-Fo1" secondAttribute="trailing" constant="20" id="ehb-dS-JWp"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -281,9 +350,15 @@
                     <constraint firstAttribute="trailing" secondItem="4KM-hW-z8c" secondAttribute="trailing" constant="5" id="p9m-Xn-Rgh"/>
                     <constraint firstItem="4KM-hW-z8c" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="yna-Tz-EvM"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                </userDefinedRuntimeAttributes>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="data" destination="0w8-YB-Kof" id="nBH-wp-lMO"/>
                 <outlet property="destinationPrice" destination="Xje-u6-0Xq" id="8sg-ai-DFI"/>

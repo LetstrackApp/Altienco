@@ -225,9 +225,8 @@ extension TransactionHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = self.historyResponce[indexPath.row]
-        if model.transactionTypeID == 4{
+        if model.transactionTypeID == 4 {
             let viewController: SuccessGiftCardVC = SuccessGiftCardVC()
-            viewController.isFromHistory = true
             viewController.isFromHistory = true
             viewController.denominationAmount = model.amount ?? 0.0
             viewController.countryName = model.countryCode ?? ""
@@ -235,10 +234,10 @@ extension TransactionHistoryVC: UITableViewDelegate, UITableViewDataSource {
             viewController.GiftCardName = model.operatorName ?? ""
             viewController.externalId = model.externalId ?? ""
             viewController.processStatusID = model.processStatusId ?? 0
-                self.navigationController?.pushViewController(viewController, animated: true)
+            self.navigationController?.pushViewController(viewController, animated: true)
             
         }
-        else if model.transactionTypeID == 3{
+        else if model.transactionTypeID == 3 {
             let viewController: IntrSuccessVC = IntrSuccessVC()
             viewController.isFromHistory = true
             viewController.processStatusID = model.processStatusId ?? 0

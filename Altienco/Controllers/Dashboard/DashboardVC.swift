@@ -167,6 +167,7 @@ class DashboardVC: UIViewController {
     
     lazy var addAndShowBalance : AddAndShowBalance? = {
         let control = AddAndShowBalance.loadFromNib(from: .altiencoBundle)
+        control.roundFromTop(radius: 8)
         control.configure { [weak self] result in
             self?.showWallet()
         }
@@ -187,7 +188,7 @@ class DashboardVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.setupValue()
-        self.startAnimationTimer()
+       
         self.updateProfilePic()
         DispatchQueue.main.async {
             self.refreshNotificationData()
@@ -299,6 +300,7 @@ class DashboardVC: UIViewController {
             self.cardView.isHidden = false
             self.sliderCollection.reloadData()
             self.pageControl.numberOfPages = self.adResponse.count
+            self.startAnimationTimer()
         }
     }
     

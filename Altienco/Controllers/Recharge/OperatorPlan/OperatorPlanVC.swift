@@ -19,6 +19,11 @@ class OperatorPlanVC: UIViewController {
     var allOperator : [OPeratorPlansResponseObj] = []
     var imageUrl = ""
     
+    @IBOutlet weak var planContainer: UIView! {
+        didSet {
+            planContainer.layer.cornerRadius = 10
+        }
+    }
     @IBOutlet weak var notificationIcon: UIImageView!
     @IBOutlet weak var profileImage: UIImageView!{
         didSet{
@@ -33,6 +38,7 @@ class OperatorPlanVC: UIViewController {
     @IBOutlet weak var nextButton: UIButton!{
         didSet{
             self.nextButton.setupNextButton(title: "GENERATE VOUCHER")
+            
         }
     }
     @IBOutlet weak var walletBalance: UILabel!{
@@ -192,7 +198,7 @@ class OperatorPlanVC: UIViewController {
                 else{
                     self?.nextButton.isHidden = true
                     self?.planVIew.isHidden = true
-                   // self?.showAlert(withTitle: "", message: message)
+                    // self?.showAlert(withTitle: "", message: message)
                     self?.recordNotFound.isHidden = false
                     self?.recordNotFound.text = lngConst.supportMsg
                 }
@@ -231,7 +237,11 @@ class OperatorPlanVC: UIViewController {
                         let planName = self.allOperator[self.SelectedIndex].planName ?? ""
                         let currency = self.allOperator[self.SelectedIndex].currency ?? ""
                         let denomination = self.allOperator[self.SelectedIndex].denominationValue ?? 0
-                        self.callSuccessPopup(operatorTitle: operatorTitle, denomination: denomination, currency: currency, operatorID: self.OperatorID, planName: planName)
+                        self.callSuccessPopup(operatorTitle: operatorTitle,
+                                              denomination: denomination,
+                                              currency: currency,
+                                              operatorID: self.OperatorID,
+                                              planName: planName)
                     }
                 }}
         }
@@ -279,10 +289,8 @@ extension OperatorPlanVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row < self.allOperator.count {
-            DispatchQueue.main.async {
-                self.SelectedIndex = indexPath.row
-                self.operatorPlansCollection.reloadData()
-            }
+            self.SelectedIndex = indexPath.row
+            self.operatorPlansCollection.reloadData()
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
@@ -344,8 +352,11 @@ extension OperatorPlanVC {
         
     }
     
-    func callSuccessPopup(operatorTitle: String, denomination: Int, currency: String, operatorID: Int, planName: String)
-    {
+    func callSuccessPopup(operatorTitle: String,
+                          denomination: Int,
+                          currency: String,
+                          operatorID: Int,
+                          planName: String)  {
         let viewController: ReviewPopupVC = ReviewPopupVC()
         viewController.delegate = self
         viewController.denomination = denomination

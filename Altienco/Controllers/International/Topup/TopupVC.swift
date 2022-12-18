@@ -22,11 +22,20 @@ class TopupVC: UIViewController, UITextFieldDelegate {
     var planHistoryResponse: [LastRecharge]? = []
     let operatorDropDown = DropDown()
     
+    @IBOutlet weak var topUpTitle: PaddingLabel!{
+        didSet {
+            topUpTitle.bottomInset = 20
+        }
+    }
+    @IBOutlet weak var headerView: UIStackView!{
+        didSet{
+            headerView.roundFromTop(radius: 10)
+        }
+    }
     @IBOutlet weak var viewContainer: UIView!{
         didSet{
-            viewContainer.layer.cornerRadius = 8.0
-            viewContainer.clipsToBounds=true
-            viewContainer.dropShadow(shadowRadius: 2, offsetSize: CGSize(width: 0, height: 0), shadowOpacity: 0.3, shadowColor: .black)
+            viewContainer.layer.cornerRadius = 10
+            viewContainer.addShadow()
         }
     }
     @IBOutlet weak var profileImage: UIImageView!{
@@ -67,7 +76,7 @@ class TopupVC: UIViewController, UITextFieldDelegate {
         }
     }
     @IBOutlet weak var searchContainer: UIView!
-    @IBOutlet weak var searchButton: UIButton!{
+    @IBOutlet weak var searchButton: LoadingButton!{
         didSet{
                 self.searchButton.setupNextButton(title: "SEARCH")
         }
@@ -76,6 +85,12 @@ class TopupVC: UIViewController, UITextFieldDelegate {
         didSet{
             self.operatorContainer.layer.cornerRadius = 5.0
             self.operatorContainer.clipsToBounds=true
+        }
+    }
+    
+    @IBOutlet weak var scrollView: UIScrollView! {
+        didSet {
+        scrollView.delegate = self
         }
     }
     @IBOutlet weak var operatorName: UITextField!
@@ -143,6 +158,7 @@ class TopupVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var validity: UILabel!
     @IBOutlet weak var planDescription: UILabel!
     
+   
     @IBOutlet weak var notificationIcon: UIImageView!
     
     
@@ -153,6 +169,14 @@ class TopupVC: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
         
         self.setupDefault()
+        onLanguageChange()
+    }
+    
+    func onLanguageChange(){
+        self.topUpTitle.changeColorAndFont(mainString: lngConst.international_top_up,
+                                                    stringToColor: lngConst.top_up,
+                                                    color: UIColor.init(0xb24a96),
+                                                    font: UIFont.SF_Medium(18))
     }
     
     
@@ -200,10 +224,12 @@ class TopupVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func fetchOperator(_ sender: Any) {
         self.view.endEditing(true)
+        
         if countryModel == nil{
             Helper.showToast("Please select country!")
         }
-        else if mobileNumber.text?.count ?? 0 > 9{
+        
+        else if mobileNumber.text?.count ?? 0 > 9 {
             
             if let countryid = self.countryModel?.countryID, let mobileCode = self.countryModel?.mobileCode{
                 self.searchOperator(mobileNumber: self.mobileNumber.text ?? "", countryId: countryid, mobileCode: mobileCode)
@@ -316,8 +342,13 @@ class TopupVC: UIViewController, UITextFieldDelegate {
     func searchOperator(mobileNumber: String, countryId: Int, mobileCode: String){
         if let customerID = UserDefaults.getUserData?.customerID{
             let model = IntrOperatorRequestObj.init(countryID: countryId, mobileCode: mobileCode, mobileNumber: mobileNumber, customerID: customerID, langCode: "eng")
-            intrOperator?.getOperator(model: model, complition: { (rechargeHistory, allOperatorList) in
+            self.view.isUserInteractionEnabled = false
+            self.searchButton.showLoading()
+            intrOperator?.getOperator(model: model,
+                                      complition: { (rechargeHistory, allOperatorList) in
                 DispatchQueue.main.async { [weak self] in
+                    self?.view.isUserInteractionEnabled = true
+                    self?.searchButton.hideLoading()
                     if allOperatorList?.isEmpty == false{
                         self?.intrResponse = allOperatorList
                         self?.updateOperator()
@@ -406,7 +437,10 @@ class TopupVC: UIViewController, UITextFieldDelegate {
     }
     
     
-    func successVoucher(walletBalance: Double, currencySymbol: String, processStatusID: Int, externalId: String){
+    func successVoucher(walletBalance: Double,
+                        currencySymbol: String,
+                        processStatusID: Int,
+                        externalId: String){
         var model = UserDefaults.getUserData
         model?.walletAmount = walletBalance
         if model != nil{
@@ -431,7 +465,7 @@ class TopupVC: UIViewController, UITextFieldDelegate {
             viewController.countryModel = self.countryModel
             viewController.selectedOperator = currentOperator
             viewController.planHistoryResponse = self.planHistoryResponse
-            viewController.mobileNumber = self.mobileNumber.text ?? ""
+            viewController.mobileNumberValue = self.mobileNumber.text ?? ""
             viewController.modalPresentationStyle = .overFullScreen
             self.navigationController?.present(viewController, animated: true)
         }
@@ -460,7 +494,7 @@ extension TopupVC: BackTOGiftCardDelegate {
         }
     }}
 
-extension TopupVC: searchDelegate  {
+extension TopupVC: searchDelegate,UIScrollViewDelegate  {
     
     func updateSearchView(isUpdate: Bool, selectedCountry: SearchCountryModel?) {
         if isUpdate == true && selectedCountry != nil{
@@ -475,4 +509,14 @@ extension TopupVC: searchDelegate  {
             self.searchContainer.isHidden = false
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > 0 {
+            headerView.addShadow()
+        } else {
+            headerView.deleteShadow()
+        }
+    }
 }
+
+
