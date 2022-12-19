@@ -20,7 +20,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DenominationVC" customModule="Altienco" customModuleProvider="target">
             <connections>
                 <outlet property="addButton" destination="rVa-5G-sF3" id="9wp-HV-8X8"/>
-                <outlet property="denominationTable" destination="9h5-dY-vBI" id="3Iz-58-W6t"/>
+                <outlet property="denominationTable" destination="V9a-Ex-WxS" id="mVZ-ac-UOr"/>
                 <outlet property="notificationIcon" destination="egL-pB-yR0" id="pvr-Nu-1zF"/>
                 <outlet property="profileImage" destination="8h0-NH-g0x" id="HQ7-I8-x9B"/>
                 <outlet property="tableContainer" destination="Aot-M3-rez" id="QHd-pY-0aE"/>
@@ -265,24 +265,20 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aot-M3-rez">
                     <rect key="frame" x="15" y="336" width="345" height="456"/>
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9h5-dY-vBI">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="V9a-Ex-WxS">
                             <rect key="frame" x="0.0" y="0.0" width="345" height="456"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                             </userDefinedRuntimeAttributes>
-                            <connections>
-                                <outlet property="dataSource" destination="-1" id="WLL-U7-2X0"/>
-                                <outlet property="delegate" destination="-1" id="7hJ-kd-MGM"/>
-                            </connections>
                         </tableView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="9h5-dY-vBI" firstAttribute="top" secondItem="Aot-M3-rez" secondAttribute="top" id="6fK-tX-rqk"/>
-                        <constraint firstItem="9h5-dY-vBI" firstAttribute="leading" secondItem="Aot-M3-rez" secondAttribute="leading" id="Fdw-oV-d3R"/>
-                        <constraint firstAttribute="bottom" secondItem="9h5-dY-vBI" secondAttribute="bottom" id="agm-PD-mWS"/>
-                        <constraint firstAttribute="trailing" secondItem="9h5-dY-vBI" secondAttribute="trailing" id="blO-5A-0JQ"/>
+                        <constraint firstAttribute="trailing" secondItem="V9a-Ex-WxS" secondAttribute="trailing" id="0aC-ZY-TlE"/>
+                        <constraint firstAttribute="bottom" secondItem="V9a-Ex-WxS" secondAttribute="bottom" id="dxT-dQ-nyY"/>
+                        <constraint firstItem="V9a-Ex-WxS" firstAttribute="leading" secondItem="Aot-M3-rez" secondAttribute="leading" id="oHa-az-BGF"/>
+                        <constraint firstItem="V9a-Ex-WxS" firstAttribute="top" secondItem="Aot-M3-rez" secondAttribute="top" id="xrL-s5-LfP"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
@@ -310,6 +306,11 @@
             <point key="canvasLocation" x="121.73913043478262" y="-14.0625"/>
         </view>
     </objects>
+    <designables>
+        <designable name="SS4-Ju-NjY">
+            <size key="intrinsicContentSize" width="113" height="25.333333333333332"/>
+        </designable>
+    </designables>
     <resources>
         <image name="ic_headerBackView" width="375" height="227"/>
         <image name="ic_notification" width="19" height="20"/>

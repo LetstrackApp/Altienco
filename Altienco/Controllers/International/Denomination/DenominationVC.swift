@@ -46,9 +46,7 @@ class DenominationVC: UIViewController {
     @IBOutlet weak var operatorName: UILabel!
     @IBOutlet weak var addButton: UIButton!{
         didSet{
-            DispatchQueue.main.async {
-                self.addButton.setupNextButton(title: lngConst.add)
-            }
+            self.addButton.setupNextButton(title: lngConst.add)
         }
     }
     
@@ -60,7 +58,7 @@ class DenominationVC: UIViewController {
     @IBOutlet weak var topUpTitle: PaddingLabel! {
         didSet {
             topUpTitle.topInset = 10
-            topUpTitle.bottomInset = 15
+            topUpTitle.bottomInset = 2
         }
     }
     
@@ -70,36 +68,52 @@ class DenominationVC: UIViewController {
             
             self.denominationTable.register(UINib(nibName: "OperatorInfoCell", bundle: nil), forCellReuseIdentifier: "OperatorInfoCell")
             self.denominationTable.register(UINib(nibName: "DenoCell", bundle: nil), forCellReuseIdentifier: "DenoCell")
-
+            denominationTable.delegate = self
+            denominationTable.dataSource = self
             denominationTable.rowHeight = UITableView.automaticDimension
             denominationTable.sectionHeaderHeight = UITableView.automaticDimension
             denominationTable.sectionFooterHeight = UITableView.automaticDimension
             denominationTable.estimatedRowHeight = 200
             denominationTable.estimatedSectionFooterHeight = 1
-            denominationTable.estimatedSectionHeaderHeight = 1
+            denominationTable.estimatedSectionHeaderHeight = 182
             denominationTable.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+            denominationTable.tableFooterView = UIView.init(frame: .zero)
+            denominationTable.tableHeaderView = UIView.init(frame: .zero)
             denominationTable.isSkeletonable = true
+            
             
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.denominationTable.isHidden = true
+        //        self.denominationTable.isHidden = true
         viewModel = IntrOperatorPlanViewModel()
         
         self.setupDefault()
         // Do any additional setup after loading the view.
+        onLanguageChange()
     }
     
+    
+    
+    func onLanguageChange(){
+        self.topUpTitle.changeColorAndFont(mainString: lngConst.topUpPlans.capitalized,
+                                           stringToColor: lngConst.plans.capitalized,
+                                           color: UIColor.init(0xb24a96),
+                                           font: UIFont.SF_Medium(18))
+        
+    }
     
     @IBAction func notification(_ sender: Any) {
         let viewController: AllNotificationVC = AllNotificationVC()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.setupValue()
         self.updateProfilePic()
         self.showNotify()
+        self.setupLeftnavigation()
     }
     func showNotify(){
         if UserDefaults.isNotificationRead == "1"{
@@ -146,10 +160,10 @@ class DenominationVC: UIViewController {
     }
     
     func setupDefault(){
-//        self.countryName.text = countryModel?.countryName
-//        if let operatorName = selectedOperator?.operatorName{
-//            self.operatorName.text = operatorName
-//        }
+        //        self.countryName.text = countryModel?.countryName
+        //        if let operatorName = selectedOperator?.operatorName{
+        //            self.operatorName.text = operatorName
+        //        }
         if let countryCode = countryModel?.countryISOCode,
            let mobileCode = countryModel?.mobileCode,
            let operatorId = selectedOperator?.providerAPIID {
@@ -231,34 +245,39 @@ extension DenominationVC: BackTOGiftCardDelegate {
 
 extension DenominationVC: SkeletonTableViewDelegate, SkeletonTableViewDataSource {
     
-    
-    
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        if indexPath.section == 0 {
-           return "OperatorInfoCell"
-        }else {
-            return "DenoCell"
-        }
-      
+        return "DenoCell"
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView.init(frame: .zero)
+        view.backgroundColor = .white
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        let headerCell = tableView.dequeueReusableCell(withIdentifier: "OperatorInfoCell") as! OperatorInfoCell
+        headerView.addSubview(headerCell)
+        headerCell.setupCellData(mobile: mobileNumber,
+                                 country: countryModel?.countryName,
+                                 planOperator: selectedOperator?.operatorName)
+        headerCell.frame = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 182)
+        return headerView
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        }
-        else {
-            return self.operatorList.count
-        }
-        //        if self.operatorList.count == 0 {
-        //            self.denominationTable.setEmptyMessage("No operator found!")
-        //        } else {
-        //            self.denominationTable.restore()
-        //        }
-       
+        return self.operatorList.count
+//        if section == 0 {
+//            return 1
+//        }
+//        else {
+//            return self.operatorList.count
+//        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -268,35 +287,47 @@ extension DenominationVC: SkeletonTableViewDelegate, SkeletonTableViewDataSource
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
     }
+    
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.1
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "OperatorInfoCell", for: indexPath) as! OperatorInfoCell
-            return cell
-
+        if section == 0 {
+            return 182
         }
         else {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DenoCell", for: indexPath) as! DenoCell
-        let model = self.operatorList[indexPath.row]
-        cell.destinationPrice.text = "\(model.destinationAmount ?? 0.0)"
-        cell.destinationUnit.text = model.destinationUnit
-        cell.sourceAmount.text =  "  " + String(format: "%.2f", model.retailAmount ?? 0.0) +  "  \(model.retailUnit ?? "NA")  "
-        cell.selectPlan.tag = indexPath.row
-        cell.selectPlan.addTarget(self, action: #selector(callSuccessPopup(sender:)), for: .touchUpInside)
-        cell.data.text = model.data
-        if model.validityQuantity == -1{
-            cell.validity.text = "Unlimited"
+            return 0.1
         }
-        else{
-            cell.validity.text = "\(model.validityQuantity ?? 0)" + (model.validityUnit ?? "NA")
-        }
-        cell.planDescription.text = model.lastRechargeDescription
-        cell.updateConstraintsIfNeeded()
-        
-        return cell
-        }
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        if indexPath.section == 0 {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "OperatorInfoCell", for: indexPath) as! OperatorInfoCell
+//
+//
+//            cell.setupCellData(mobile: mobileNumber,
+//                               country: countryModel?.countryName,
+//                               planOperator: selectedOperator?.operatorName)
+//            return cell
+//
+//        }
+//        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DenoCell", for: indexPath) as! DenoCell
+            let model = self.operatorList[indexPath.row]
+            cell.destinationPrice.text = "\(model.destinationAmount ?? 0.0)"
+            cell.destinationUnit.text = model.destinationUnit
+            cell.sourceAmount.text =  "  " + String(format: "%.2f", model.retailAmount ?? 0.0) +  "  \(model.retailUnit ?? "NA")  "
+            cell.selectPlan.tag = indexPath.row
+            cell.selectPlan.addTarget(self, action: #selector(callSuccessPopup(sender:)), for: .touchUpInside)
+            cell.data.text = model.data
+            if model.validityQuantity == -1{
+                cell.validity.text = "Unlimited"
+            }
+            else{
+                cell.validity.text = "\(model.validityQuantity ?? 0)" + (model.validityUnit ?? "NA")
+            }
+            cell.planDescription.text = model.lastRechargeDescription
+            cell.updateConstraintsIfNeeded()
+            
+            return cell
+//        }
     }
     
     

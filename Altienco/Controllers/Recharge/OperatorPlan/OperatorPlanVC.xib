@@ -277,7 +277,7 @@
                                                                     </connections>
                                                                 </collectionView>
                                                             </subviews>
-                                                            <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstItem="3zf-e5-QBp" firstAttribute="leading" secondItem="wvz-Td-XQR" secondAttribute="leading" constant="20" id="34b-p8-96W"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Ox3-8z-9L1" secondAttribute="trailing" constant="20" id="Ebh-mu-Zdz"/>

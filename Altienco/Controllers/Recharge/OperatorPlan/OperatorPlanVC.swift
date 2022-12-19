@@ -22,6 +22,8 @@ class OperatorPlanVC: UIViewController {
     @IBOutlet weak var planContainer: UIView! {
         didSet {
             planContainer.layer.cornerRadius = 10
+            planContainer.layer.borderWidth = 1
+            planContainer.layer.borderColor = UIColor.init(0xececec).cgColor
         }
     }
     @IBOutlet weak var notificationIcon: UIImageView!
@@ -118,9 +120,8 @@ class OperatorPlanVC: UIViewController {
     
     func onLanguageChange(){
         
-        
-        self.generateCollingCard.changeColorAndFont(mainString: lngConst.generatecCllingCard,
-                                                    stringToColor: lngConst.callingCard,
+        self.generateCollingCard.changeColorAndFont(mainString: lngConst.generate_your_voucher.capitalized,
+                                                    stringToColor: lngConst.voucher.capitalized,
                                                     color: UIColor.init(0xb24a96),
                                                     font: UIFont.SF_Medium(18))
         

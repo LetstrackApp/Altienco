@@ -11,16 +11,10 @@ import UIKit
 class WalletPaymentVC: UIViewController {
     
     @IBOutlet weak var notificationIcon: UIImageView!
-    @IBOutlet weak var viewContainer: UIView!{
-        didSet{
-            DispatchQueue.main.async {
-                self.viewContainer.layer.shadowPath = UIBezierPath(rect: self.viewContainer.bounds).cgPath
-                self.viewContainer.layer.shadowRadius = 6
-                self.viewContainer.layer.shadowOffset = .zero
-                self.viewContainer.layer.shadowOpacity = 1
-                self.viewContainer.layer.cornerRadius = 8.0
-                self.viewContainer.clipsToBounds=true
-            }
+    @IBOutlet weak var viewContainer: UIView! {
+        didSet {
+            viewContainer.layer.cornerRadius = 10
+            viewContainer.addShadow()
         }
     }
     @IBOutlet weak var profileImage: UIImageView!{
@@ -109,8 +103,8 @@ class WalletPaymentVC: UIViewController {
         step2DesLBL.text = lngConst.step2Des
         whatYouGetDes.text = lngConst.whatYouGetDes
         
-        self.wallietTitle.changeColor(mainString: lngConst.addMoneyToAltiencocard,
-                                      stringToColor: lngConst.altiencoCard,
+        self.wallietTitle.changeColor(mainString: lngConst.addMoneyToAltiencocard.capitalized,
+                                      stringToColor: lngConst.altiencoCard.capitalized,
                                       color: UIColor.init(0xb24a96))
         
         step1Title.changefont(mainString: lngConst.step1,

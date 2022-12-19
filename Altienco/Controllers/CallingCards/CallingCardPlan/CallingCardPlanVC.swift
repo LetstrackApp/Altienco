@@ -51,6 +51,23 @@ class CallingCardPlanVC: UIViewController {
         }
     }
     
+    @IBOutlet weak var planContainer: UIView! {
+        didSet {
+            planContainer.layer.cornerRadius = 10
+            planContainer.layer.borderWidth = 1
+            planContainer.layer.borderColor = UIColor.init(0xececec).cgColor
+        }
+    }
+    
+    @IBOutlet weak var imageContainer: UIView!{
+        didSet {
+            imageContainer.layer.cornerRadius = 8
+            imageContainer.layer.borderWidth = 1
+            imageContainer.layer.borderColor = UIColor.init(0xececec).cgColor
+        }
+    }
+    
+    
     @IBOutlet weak var headerViewContainer: UIView!{
         didSet{
             self.headerViewContainer.layer.cornerRadius = 5.0
@@ -67,18 +84,28 @@ class CallingCardPlanVC: UIViewController {
     }
     
     @IBOutlet weak var operatorLogo: UIImageView!
-    @IBOutlet weak var operatorPlansCollection: UICollectionView!
+    @IBOutlet weak var operatorPlansCollection: UICollectionView! {
+        didSet {
+            operatorPlansCollection.delegate = self
+            operatorPlansCollection.dataSource = self
+        }
+    }
     @IBOutlet weak var viewContainer: UIView!{
-        didSet{
-            DispatchQueue.main.async {
-                self.viewContainer.layer.shadowPath = UIBezierPath(rect: self.viewContainer.bounds).cgPath
-                self.viewContainer.layer.shadowRadius = 5
-                self.viewContainer.layer.shadowOffset = .zero
-                self.viewContainer.layer.shadowOpacity = 1
-                self.viewContainer.layer.cornerRadius = 8.0
-                self.viewContainer.clipsToBounds=true
-            }
-            self.viewContainer.clipsToBounds=true
+        didSet {
+            viewContainer.layer.cornerRadius = 10
+            viewContainer.addShadow()
+        }
+
+    }
+    
+    @IBOutlet weak var generateCollingCard: UILabel!{
+        didSet {
+            generateCollingCard.font = UIFont.SFPro_Light(18)
+        }
+    }
+    @IBOutlet weak var selectDenomination: UILabel! {
+        didSet {
+            selectDenomination.font = UIFont.SF_Regular(14)
         }
     }
     override func viewDidLoad() {
@@ -86,9 +113,25 @@ class CallingCardPlanVC: UIViewController {
         viewModel = OPeratorPlansViewModel()
         self.operatorPlansCollection.register(UINib(nibName: "CollectionViewCell", bundle:nil), forCellWithReuseIdentifier: "CollectionViewCell")
         self.initiateModel()
+        onLanguageChange()
         // Do any additional setup after loading the view.
     }
     
+    
+    
+    func onLanguageChange(){
+        
+        self.generateCollingCard.changeColorAndFont(mainString: lngConst.generatecCllingCard.capitalized,
+                                                    stringToColor: lngConst.callingCard.capitalized,
+                                                    color: UIColor.init(0xb24a96),
+                                                    font: UIFont.SF_Medium(18))
+        
+        self.selectDenomination.changeColorAndFont(mainString: lngConst.pleaseSelectDenomination,
+                                                   stringToColor: lngConst.denomination,
+                                                   color: .black,
+                                                   font: UIFont.SF_Regular(16))
+        
+    }
     
     
     @IBAction func notification(_ sender: Any) {
@@ -96,9 +139,11 @@ class CallingCardPlanVC: UIViewController {
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.setupValue()
         self.updateProfilePic()
         self.showNotify()
+        self.setupLeftnavigation()
     }
     func showNotify(){
         if UserDefaults.isNotificationRead == "1"{
@@ -171,6 +216,32 @@ class CallingCardPlanVC: UIViewController {
     }
     
     @IBAction func generateVoucher(_ sender: Any) {
+        
+        
+        
+        if SelectedIndex != -1{
+            guard let selectedAmount = self.allOperator[self.SelectedIndex].denominationValue else {return}
+            guard let walletBal = UserDefaults.getUserData?.walletAmount else {return}
+            if selectedAmount > Int(walletBal){
+                let alertController = UIAlertController(title: "Insufficent Balance", message: "Please add wallet balance", preferredStyle: .alert)
+                // Create the actions
+                let okAction = UIAlertAction(title: "ADD", style: UIAlertAction.Style.default) {
+                    UIAlertAction in
+                    let viewController: WalletPaymentVC = WalletPaymentVC()
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                }
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) {
+                    UIAlertAction in
+                    NSLog("Cancel Pressed")
+                }
+                // Add the actions
+                
+                alertController.addAction(okAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+            else{
+        
         guard let selectedAmount = self.allOperator[self.SelectedIndex].denominationValue else {return}
         guard let walletBal = UserDefaults.getUserData?.walletAmount else {return}
         if selectedAmount > Int(walletBal){
@@ -198,9 +269,17 @@ class CallingCardPlanVC: UIViewController {
                     let planName = self.allOperator[self.SelectedIndex].planName ?? ""
                     let currency = self.allOperator[self.SelectedIndex].currency ?? ""
                     let denomination = self.allOperator[self.SelectedIndex].denominationValue ?? 0
-                    self.callSuccessPopup(operatorTitle: operatorTitle, denomination: denomination, currency: currency, operatorID: self.OperatorID, planName: planName)
+                    self.callSuccessPopup(operatorTitle: operatorTitle,
+                                          denomination: denomination,
+                                          currency: currency,
+                                          operatorID: self.OperatorID,
+                                          planName: planName)
                 }
             }}
+            }
+        } else{
+            self.showAlert(withTitle: "", message: "Please select denomination!")
+        }
     }
     
     func successVoucher(mPin: String, denominationValue : String, walletBalance: Double, msgToShare: String, voucherID: Int){
@@ -211,7 +290,6 @@ class CallingCardPlanVC: UIViewController {
         viewController.voucherID = voucherID
         viewController.msgToShare = msgToShare
         self.navigationController?.pushViewController(viewController, animated: true)
-        
     }
     
     

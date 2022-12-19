@@ -82,10 +82,9 @@ final class SelectLanguageVC: UIViewController {
     }
     
     
-    private func showDropDown(view : UIButton){
+    private func showDropDown(view : UIButton) {
         dropDown.anchorView = self.SelectLanguageButton
         dropDown.direction = .any
-        
         dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
         dropDown.topOffset = CGPoint(x: 0, y:-(dropDown.anchorView?.plainView.bounds.height)!)
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in

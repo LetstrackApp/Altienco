@@ -9,9 +9,6 @@
 import UIKit
 import DropDown
 
-
-
-
 class TopupVC: UIViewController, UITextFieldDelegate {
     
     
@@ -72,13 +69,13 @@ class TopupVC: UIViewController, UITextFieldDelegate {
             imageview.addTarget(target: self, action: #selector(openContactBook(_:)))
             mobileNumber.rightView = imageview
             mobileNumber.rightViewMode = .always
-
+            
         }
     }
     @IBOutlet weak var searchContainer: UIView!
     @IBOutlet weak var searchButton: LoadingButton!{
         didSet{
-                self.searchButton.setupNextButton(title: "SEARCH")
+            self.searchButton.setupNextButton(title: "SEARCH")
         }
     }
     @IBOutlet weak var operatorContainer: UIView!{
@@ -90,7 +87,7 @@ class TopupVC: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
-        scrollView.delegate = self
+            scrollView.delegate = self
         }
     }
     @IBOutlet weak var operatorName: UITextField!
@@ -158,7 +155,7 @@ class TopupVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var validity: UILabel!
     @IBOutlet weak var planDescription: UILabel!
     
-   
+    
     @IBOutlet weak var notificationIcon: UIImageView!
     
     
@@ -173,10 +170,10 @@ class TopupVC: UIViewController, UITextFieldDelegate {
     }
     
     func onLanguageChange(){
-        self.topUpTitle.changeColorAndFont(mainString: lngConst.international_top_up,
-                                                    stringToColor: lngConst.top_up,
-                                                    color: UIColor.init(0xb24a96),
-                                                    font: UIFont.SF_Medium(18))
+        self.topUpTitle.changeColorAndFont(mainString: lngConst.international_top_up.capitalized,
+                                           stringToColor: lngConst.top_up.capitalized,
+                                           color: UIColor.init(0xb24a96),
+                                           font: UIFont.SF_Medium(18))
     }
     
     
@@ -218,7 +215,7 @@ class TopupVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func showOperator(_ sender: Any) {
         self.view.endEditing(true)
-
+        
         self.customizeDropDown()
     }
     
@@ -251,7 +248,7 @@ class TopupVC: UIViewController, UITextFieldDelegate {
                 DispatchQueue.main.async {
                     self?.mobileNumber.text = text.deletingPrefix(contryCode)
                 }
-
+                
             }
             
         }
@@ -320,11 +317,11 @@ class TopupVC: UIViewController, UITextFieldDelegate {
     }
     
     func updateLastVoucher(){
-        if planHistoryResponse?.isEmpty == false{
+        if planHistoryResponse?.isEmpty == false {
             self.rechargeContainer.isHidden = false
             self.selectPlanContainer.isHidden = true
             self.proceedContainer.isHidden = false
-            if let model = planHistoryResponse?.first{
+            if let model = planHistoryResponse?.first {
                 self.destinationPrice.text = "\(model.destinationAmount ?? 0.0) " + (model.destinationUnit ?? "")
                 self.sourcePrice.text = "(  \(model.retailAmount ?? 0.0) \(model.retailUnit ?? "NA")  )"
                 self.data.text = model.data ?? "NA"
@@ -339,9 +336,15 @@ class TopupVC: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func searchOperator(mobileNumber: String, countryId: Int, mobileCode: String){
+    func searchOperator(mobileNumber: String,
+                        countryId: Int, mobileCode: String){
+        
         if let customerID = UserDefaults.getUserData?.customerID{
-            let model = IntrOperatorRequestObj.init(countryID: countryId, mobileCode: mobileCode, mobileNumber: mobileNumber, customerID: customerID, langCode: "eng")
+            let model = IntrOperatorRequestObj.init(countryID: countryId,
+                                                    mobileCode: mobileCode,
+                                                    mobileNumber: mobileNumber,
+                                                    customerID: customerID,
+                                                    langCode: "eng")
             self.view.isUserInteractionEnabled = false
             self.searchButton.showLoading()
             intrOperator?.getOperator(model: model,
@@ -364,17 +367,17 @@ class TopupVC: UIViewController, UITextFieldDelegate {
     
     //countryName.setError()
     
-
-
+    
+    
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if(textField == mobileNumber) {
-        if countryModel == nil {
-            self.view.endEditing(true)
-            countryContainer.shakeView()
-            Helper.showToast(lngConst.selectCountery, delay: Helper.DELAY_LONG)
-            return false
-        }
+            if countryModel == nil {
+                self.view.endEditing(true)
+                countryContainer.shakeView()
+                Helper.showToast(lngConst.selectCountery, delay: Helper.DELAY_LONG)
+                return false
+            }
         }
         let newLength = (mobileNumber.text ?? "").count + string.count - range.length
         DispatchQueue.main.async {
@@ -413,7 +416,9 @@ class TopupVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func selectPlan(_ sender: Any) {
         if self.selectedOperator != nil{
-            self.showPlanList()}
+            self.showPlanList()
+            
+        }
         else{
             Helper.showToast("Please Select Operator!")
         }
@@ -470,19 +475,7 @@ class TopupVC: UIViewController, UITextFieldDelegate {
             self.navigationController?.present(viewController, animated: true)
         }
         
-        //        {
-        //        let object = ReviewIntrVC.initialization()
-        //        object.showAlert(usingModel: self.mobileNumber.text ?? "", countryModel: countryModel, selectedOperator: currentOperator, planHistoryResponse: self.planHistoryResponse ?? []) { (status, val) in
-        //            if status == true{
-        //                self.successVoucher(walletBalance: val?.walletAmount ?? 0.0, currencySymbol: val?.currency ?? "",processStatusID: val?.processStatusID ?? 0, externalId: val?.externalID ?? "0")
-        //            }
-        //            else{
-        //                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-        //                    if let topController = UIApplication.topViewController() {
-        //                        topController.navigationController?.popViewController(animated: false)
-        //                    }
-        //                })
-        //            }}}
+
     }
 }
 

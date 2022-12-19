@@ -80,6 +80,8 @@ class SuccessCallinCardVC: UIViewController, UITextFieldDelegate {
         
     }
     
+
+    
     func initiateView(){
         if let currency = UserDefaults.getUserData?.currencySymbol{
         self.denominationText.text = currency + denominationValue
@@ -130,9 +132,11 @@ class SuccessCallinCardVC: UIViewController, UITextFieldDelegate {
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.setupValue()
         self.updateProfilePic()
         self.showNotify()
+        self.setupLeftnavigation()
     }
     func showNotify(){
         if UserDefaults.isNotificationRead == "1"{

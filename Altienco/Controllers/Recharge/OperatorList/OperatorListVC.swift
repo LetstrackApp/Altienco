@@ -13,10 +13,20 @@ class OperatorListVC: UIViewController {
     var voucherHistory: VoucherHistoryViewModel?
     var viewModel : OperatorListViewModel?
     var operatorList : [OperatorListResponseObj] = []
+    var filteredOperatorList : [OperatorListResponseObj] = []
     var pageNum = 1
     var pageSize = 20
     
     // voucher history view
+    @IBOutlet weak var generateVoucher: PaddingLabel! {
+        didSet {
+            generateVoucher.leftInset = 15
+            generateVoucher.rightInset = 15
+            generateVoucher.topInset = 15
+            generateVoucher.bottomInset = 0
+            
+        }
+    }
     
     @IBOutlet weak var emptyMsg: UILabel!
     @IBOutlet weak var dateTime: UILabel!
@@ -83,6 +93,14 @@ class OperatorListVC: UIViewController {
     
     @IBOutlet weak var operatorCollection: UICollectionView!
     
+    @IBOutlet weak var searchView: UISearchBar!{
+        didSet {
+            searchView.delegate = self
+            searchView.backgroundImage = UIImage()
+            searchView.searchTextField.font = UIFont.SF_Regular(16)
+
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         voucherHistory = VoucherHistoryViewModel()
@@ -90,6 +108,7 @@ class OperatorListVC: UIViewController {
         self.operatorCollection.register(UINib(nibName: "GiftCardCell", bundle:nil),
                                          forCellWithReuseIdentifier: "GiftCardCell")
         self.initiateModel()
+        onLanguageChange()
         // Do any additional setup after loading the view.
     }
     
@@ -109,6 +128,15 @@ class OperatorListVC: UIViewController {
         setupLeftnavigation()
     }
     
+    
+    
+    func onLanguageChange(){
+        
+        generateVoucher.changeColorAndFont(mainString: lngConst.generate_voucher.capitalized,
+                                                    stringToColor: lngConst.voucher.capitalized,
+                                                    color: UIColor.init(0xb24a96),
+                                                    font: UIFont.SF_Medium(18))
+    }
     
     func showNotify(){
         if UserDefaults.isNotificationRead == "1"{
@@ -158,6 +186,7 @@ class OperatorListVC: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 if status == true && msg == "", let operatorlist = operatorList{
                     self?.operatorList = operatorlist
+                    self?.filteredOperatorList = operatorlist
                 }else{
                     self?.showAlert(withTitle: "Alert", message: msg)
                 }
@@ -279,13 +308,13 @@ extension OperatorListVC: BackToUKRechargeDelegate {
 
 extension OperatorListVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.operatorList.count
+        return self.filteredOperatorList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GiftCardCell", for: indexPath) as! GiftCardCell
-        if let image = self.operatorList[indexPath.row].imageURL {
+        if let image = self.filteredOperatorList[indexPath.row].imageURL {
             var imageUrl = image
             imageUrl = imageUrl.replacingOccurrences(of: " ", with: "%20")
             cell.operatorLogo.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "ic_operatorLogo"))
@@ -293,7 +322,7 @@ extension OperatorListVC: UICollectionViewDelegate, UICollectionViewDataSource, 
         else{
             cell.operatorLogo.image = UIImage(named: "ic_operatorLogo")
         }
-        cell.operatorName.text = self.operatorList[indexPath.row].operatorName
+        cell.operatorName.text = self.filteredOperatorList[indexPath.row].operatorName
         cell.showDenomination.isHidden = true
         return cell
         
@@ -303,8 +332,8 @@ extension OperatorListVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == operatorCollection{
             DispatchQueue.main.async {
-                if indexPath.row < self.operatorList.count {
-                    let operatorValue = self.operatorList[indexPath.row]
+                if indexPath.row < self.filteredOperatorList.count {
+                    let operatorValue = self.filteredOperatorList[indexPath.row]
                     self.callOperatorPlans(operatorID: operatorValue.operatorID ?? 0,
                                            imageURL: operatorValue.imageURL ?? "",
                                            OperatorName: operatorValue.operatorName ?? "")
@@ -322,4 +351,19 @@ extension OperatorListVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     
+}
+
+
+extension OperatorListVC: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        // filterdata  = searchText.isEmpty ? data : data.filter {(item : String) -> Bool in
+        
+        self.filteredOperatorList = searchText.isEmpty ? operatorList : operatorList.filter { ($0.operatorName)?.lowercased().contains((searchText).lowercased()) == true  }
+        
+        //return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        
+        operatorCollection.reloadData()
+    }
 }

@@ -62,31 +62,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if UserDefaults.getToken != "" &&
             UserDefaults.getUserData?.firstName != "" &&
-            UserDefaults.getUserData?.firstName != nil
-        {
-            let model = VerifyToken.init(token: UserDefaults.getToken,
-                                         mobileNo: "",
-                                         mobileRegID: "",
-                                         mobileMake: "",
-                                         mobileModel: "",
-                                         mobileOSVersion: "",
-                                         mobileOSType: "")
-            verifyModel.checkToken(model: model) { (result) in
-                DispatchQueue.main.async { [weak self] in
-                    if  result != nil{
-//                        if result?.isProfileUpdated == false{
-//                            self?.initialPoint(Controller: UserProfileVC())
-//                        }
-//                        else{
-//                            self?.initialPoint(Controller: DashScreenVC())
-//                        }
-                    }
-                    else{
-                        
-                        self?.initialPoint(Controller: DashboardVC())
-                    }
-                }
-            }
+            UserDefaults.getUserData?.firstName != nil {
+            self.initialPoint(Controller: DashboardVC())
+//            let model = VerifyToken.init(token: UserDefaults.getToken,
+//                                         mobileNo: "",
+//                                         mobileRegID: "",
+//                                         mobileMake: "",
+//                                         mobileModel: "",
+//                                         mobileOSVersion: "",
+//                                         mobileOSType: "")
+//            verifyModel.checkToken(model: model) { (result) in
+//
+//                self.initialPoint(Controller: DashboardVC())
+//
+////                DispatchQueue.main.async { [weak self] in
+////                    if  result != nil{
+//////                        if result?.isProfileUpdated == false{
+//////                            self?.initialPoint(Controller: UserProfileVC())
+//////                        }
+//////                        else{
+//////                            self?.initialPoint(Controller: DashScreenVC())
+//////                        }
+////                    }
+////                    else{
+////
+////                        self?.initialPoint(Controller: DashboardVC())
+////                    }
+////                }
+//            }
         }
         else{
             self.initialPoint(Controller: CountrySelectionVC())

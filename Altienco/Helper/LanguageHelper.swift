@@ -117,10 +117,18 @@ the 16 digit pin
     let pleaseSelectDenomination = "Please select denomination"
     let rechargeWallet = "Recharge wallet"
     let wallet = "wallet"
+    let pleaseSelectAmount = "Please select Amount"
+
+    let amount = "Amount"
     let denomination = "denomination"
     let callingCard = "calling card"
     let supportMsg = "Something went wrong Please try again! If problem persists, please contact our support team"
     let addAnotherCard = "ADD ANOTHER CARD"
+    let topUpPlans = "Top-up Plans"
+    let plans = "Plans"
+    let generate_voucher = "Generate voucher"
+    let generate_your_voucher = "Generate your voucher"
+    let voucher = "voucher"
 
     func txnSucessMeg(amount:String) -> String {
         return "You've added \(amount) successfully in your altienco wallet"

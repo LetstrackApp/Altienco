@@ -514,6 +514,14 @@ extension DashboardVC {
     func showWallet()
     {
         
+//            let obj = AlertViewVC.init(type: .transactionSucessfull(amount: "11000"))
+//            obj.modalPresentationStyle = .overFullScreen
+//            self.present(obj, animated: false, completion: nil)
+//            obj.onCompletion = {
+//                //self?.navigationController?.popToRootViewController(animated: true)
+//            }
+            
+            
 
         let viewController: WalletPaymentVC = WalletPaymentVC()
         self.navigationController?.pushViewController(viewController, animated: true)

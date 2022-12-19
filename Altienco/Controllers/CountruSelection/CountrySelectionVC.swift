@@ -8,9 +8,6 @@
 
 import UIKit
 import DropDown
-
-
-
 class CountrySelectionVC: UIViewController {
     
     var viewModel: GenerateOTPViewModel?
@@ -46,13 +43,13 @@ class CountrySelectionVC: UIViewController {
     }
     @IBOutlet weak var viewContainer: UIView!{
         didSet{
-                self.viewContainer.layer.shadowPath = UIBezierPath(rect: self.viewContainer.bounds).cgPath
-                self.viewContainer.layer.shadowRadius = 5
-                self.viewContainer.layer.shadowOffset = .zero
-                self.viewContainer.layer.shadowOpacity = 1
-                self.viewContainer.layer.cornerRadius = 15.0
-                self.viewContainer.clipsToBounds=true
-            }
+            self.viewContainer.layer.shadowPath = UIBezierPath(rect: self.viewContainer.bounds).cgPath
+            self.viewContainer.layer.shadowRadius = 5
+            self.viewContainer.layer.shadowOffset = .zero
+            self.viewContainer.layer.shadowOpacity = 1
+            self.viewContainer.layer.cornerRadius = 15.0
+            self.viewContainer.clipsToBounds=true
+        }
     }
     
     @IBOutlet weak var numberViewContainer: UIView!{
@@ -120,21 +117,19 @@ class CountrySelectionVC: UIViewController {
         self.dropDown.direction = .bottom
         onLanguageChange()
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: languageSlectionView)
-        
-        // Do any additional setup aftshower loading the view.
     }
     
-    func onLanguageChange(){
+    
+    private func onLanguageChange() {
         self.view.endEditing(true)
         mobileTExt.text = lngConst.verificationHint
         countrySCTitle.text = lngConst.phoneNumber
         languageLbl.text = "EN"
         nextButton.setTitle(lngConst.proceed, for: .normal)
         countryCodeLabel.text = UserDefaults.getMobileCode
-        
     }
     
-    @IBAction func languageChangeAction(_ sender: Any){
+    @IBAction func languageChangeAction(_ sender: Any) {
         self.view.endEditing(true)
         viewModel?.showDropDown(view: languageSlectionView,
                                 stringArry: ["EN"]) {  [weak self] index, result in
@@ -161,8 +156,7 @@ class CountrySelectionVC: UIViewController {
     }
     
     
-    private func registerUser()
-    {
+    private func registerUser() {
         self.nextButton.showLoading()
         self.view.isUserInteractionEnabled = false
         UserDefaults.setCountryCode(data: CountryCode.init(rawValue: UserDefaults.getMobileCode)?.ISOcode ?? "GBR")
@@ -183,9 +177,8 @@ class CountrySelectionVC: UIViewController {
                     self?.redirectBussines(userid: 0)
                     UserDefaults.setMobileNumber(data: (self?.mobileNumber.text!)!)
                 }
-            }}
-        
-        
+            }
+        }
     }
     
     

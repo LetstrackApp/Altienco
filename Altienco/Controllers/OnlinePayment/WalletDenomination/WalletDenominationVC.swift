@@ -109,13 +109,13 @@ class WalletDenominationVC: UIViewController {
     func onLanguageChange(){
         
         
-        rechargeWalletTitle.changeColorAndFont(mainString: lngConst.rechargeWallet,
-                                                    stringToColor: lngConst.wallet,
+        rechargeWalletTitle.changeColorAndFont(mainString: lngConst.rechargeWallet.capitalized,
+                                               stringToColor: lngConst.wallet.capitalized,
                                                     color: UIColor.init(0xb24a96),
-                                                    font: UIFont.SF_Medium(18))
+                                               font: UIFont.SF_Medium(18))
         
-        selectDemimation.changeColorAndFont(mainString: lngConst.pleaseSelectDenomination,
-                                                   stringToColor: lngConst.denomination,
+        selectDemimation.changeColorAndFont(mainString: lngConst.pleaseSelectAmount,
+                                                   stringToColor: lngConst.amount,
                                                    color: .black,
                                                    font: UIFont.SF_Regular(16))
         
