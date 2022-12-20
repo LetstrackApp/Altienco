@@ -13,7 +13,7 @@ class SearchCountryViewModel {
     
     var searchCountry : Box<[SearchCountryModel]> = Box([])
     
-    func getCountryList() {
+    func getCountryList(completion:@escaping(Bool)->Void) {
         let strURL = subURL.searchCountry
         let header : HTTPHeaders = [
             "Authorization": "Bearer \(UserDefaults.getToken)",
@@ -21,7 +21,6 @@ class SearchCountryViewModel {
         ]
         AFWrapper.requestGETURL(strURL, headers: header, success: {
             (JSONResponse) -> Void in
-            debugPrint(JSONResponse)
             if let data = JSONResponse as? NSDictionary {
                 var countryList = [SearchCountryModel]()
                 if data["Message_Code"] as? Bool == true, let result = data["Result"] as? NSDictionary
@@ -29,14 +28,16 @@ class SearchCountryViewModel {
                     for dict in result["data"] as? Array ?? []{
                         countryList.append(SearchCountryModel.init(json: dict as! [String : Any]))
                     }
-                self.searchCountry.value = countryList
-                    }
+                    self.searchCountry.value = countryList
+                    completion(true)
+                }
                 else{
-//                    Helper.showToast((data["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    completion(false)
                 }
             }
         }) {
             (error) -> Void in
+            completion(true)
             debugPrint(error.localizedDescription)
         }
     }
