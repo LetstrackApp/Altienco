@@ -232,9 +232,22 @@ class circularBTN : UIButton{
 
 extension UIViewController {
     
+    func setUpCenterViewNvigation(){
+        let container = UIImageView()
+        container.contentMode = .scaleAspectFit
+        container.backgroundColor = .clear
+        container.frame = CGRect(x: 0, y: 0, width: 150, height: 45)
+        container.image = UIImage(named: "ic_white_logo")
+        container.layer.cornerRadius = 20
+        container.clipsToBounds = true
+        container.layer.cornerRadius = 20
+        self.navigationItem.titleView = container
+        
+    }
+    
     
     func setupLeftnavigation(){
-      let image =  UIImage(named: "ic_back")?.withInset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 5))
+      let image =  UIImage(named: "ic_back")?.withInset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10))
         let buttonItem = UIBarButtonItem(image: image,
                                          landscapeImagePhone: nil,
                                          style: .plain,
@@ -242,6 +255,8 @@ extension UIViewController {
                                          action: #selector(backButtonTapped(_:)))
         buttonItem.tintColor = .black
         self.navigationItem.leftBarButtonItem = buttonItem
+        
+        
         
         
     }

@@ -137,7 +137,8 @@ class OperatorPlanVC: UIViewController {
         self.setupValue()
         self.updateProfilePic()
         self.showNotify()
-        setupLeftnavigation()
+        self.setUpCenterViewNvigation()
+        self.setupLeftnavigation()
     }
     func showNotify(){
         if UserDefaults.isNotificationRead == "1"{

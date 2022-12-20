@@ -60,6 +60,8 @@ class SuccessGatwayVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.setupValue()
+        self.setUpCenterViewNvigation()
+        self.setupLeftnavigation()
     }
     
     func setupValue(){

@@ -94,9 +94,12 @@ class AllDenomination: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.showNotify()
         self.updateProfilePic()
         self.setupValue()
+        self.setUpCenterViewNvigation()
+        self.setupLeftnavigation()
     }
     func updateProfilePic(){
         if (UserDefaults.getUserData?.profileImage) != nil

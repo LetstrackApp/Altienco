@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SkeletonView
 //import CoreAudio
 
 class OperatorListVC: UIViewController {
@@ -79,7 +80,7 @@ class OperatorListVC: UIViewController {
     @IBOutlet weak var repeatContainer: UIView!
     @IBOutlet weak var addButton: UIButton!{
         didSet{
-                self.addButton.setupNextButton(title: lngConst.add)
+            self.addButton.setupNextButton(title: lngConst.add)
         }
     }
     @IBOutlet weak var lastVoucherView: UIView!{
@@ -91,22 +92,29 @@ class OperatorListVC: UIViewController {
         }
     }
     
-    @IBOutlet weak var operatorCollection: UICollectionView!
+    @IBOutlet weak var operatorCollection: UICollectionView! {
+        didSet {
+            self.operatorCollection.register(UINib(nibName: "GiftCardCell", bundle:nil),
+                                             forCellWithReuseIdentifier: "GiftCardCell")
+            
+            operatorCollection.delegate = self
+            operatorCollection.dataSource = self
+            operatorCollection.isSkeletonable = true
+            
+        }
+    }
     
     @IBOutlet weak var searchView: UISearchBar!{
         didSet {
             searchView.delegate = self
             searchView.backgroundImage = UIImage()
             searchView.searchTextField.font = UIFont.SF_Regular(16)
-
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         voucherHistory = VoucherHistoryViewModel()
         viewModel = OperatorListViewModel()
-        self.operatorCollection.register(UINib(nibName: "GiftCardCell", bundle:nil),
-                                         forCellWithReuseIdentifier: "GiftCardCell")
         self.initiateModel()
         onLanguageChange()
         // Do any additional setup after loading the view.
@@ -125,7 +133,8 @@ class OperatorListVC: UIViewController {
         self.callHistoryData()
         self.updateProfilePic()
         self.showNotify()
-        setupLeftnavigation()
+        self.setUpCenterViewNvigation()
+        self.setupLeftnavigation()
     }
     
     
@@ -133,9 +142,9 @@ class OperatorListVC: UIViewController {
     func onLanguageChange(){
         
         generateVoucher.changeColorAndFont(mainString: lngConst.generate_voucher.capitalized,
-                                                    stringToColor: lngConst.voucher.capitalized,
-                                                    color: UIColor.init(0xb24a96),
-                                                    font: UIFont.SF_Medium(18))
+                                           stringToColor: lngConst.voucher.capitalized,
+                                           color: UIColor.init(0xb24a96),
+                                           font: UIFont.SF_Medium(18))
     }
     
     func showNotify(){
@@ -182,8 +191,17 @@ class OperatorListVC: UIViewController {
     func initiateModel() {
         var countryCode = CountryCode.UK.countryID
         (UserDefaults.getUserData?.countryCode == CountryCode.UK.ISOcode) || (UserDefaults.getUserData?.countryCode == CountryCode.UK.ISOcode2) ? (countryCode = CountryCode.UK.countryID) : (countryCode = CountryCode.IN.countryID)
-        viewModel?.getOperator(countryID: countryCode ?? 102, transactionTypeId: TransactionTypeId.PhoneRecharge.rawValue, langCode: "en") { (operatorList, status, msg) in
+        
+        
+        operatorCollection.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor.lightGray.withAlphaComponent(0.3)), animation: nil, transition: .crossDissolve(0.26))
+        
+        
+        viewModel?.getOperator(countryID: countryCode ?? 102,
+                               transactionTypeId: TransactionTypeId.PhoneRecharge.rawValue,
+                               langCode: "en") { (operatorList, status, msg) in
             DispatchQueue.main.async { [weak self] in
+                self?.operatorCollection.stopSkeletonAnimation()
+                self?.operatorCollection.hideSkeleton()
                 if status == true && msg == "", let operatorlist = operatorList{
                     self?.operatorList = operatorlist
                     self?.filteredOperatorList = operatorlist
@@ -306,7 +324,15 @@ extension OperatorListVC: BackToUKRechargeDelegate {
 }
 
 
-extension OperatorListVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension OperatorListVC: SkeletonCollectionViewDataSource,
+                          SkeletonCollectionViewDelegate ,
+                          UICollectionViewDelegateFlowLayout {
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "GiftCardCell"
+    }
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.filteredOperatorList.count
     }
@@ -357,13 +383,37 @@ extension OperatorListVC: UICollectionViewDelegate, UICollectionViewDataSource, 
 extension OperatorListVC: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        searchBar.showsCancelButton = true
         // filterdata  = searchText.isEmpty ? data : data.filter {(item : String) -> Bool in
         
         self.filteredOperatorList = searchText.isEmpty ? operatorList : operatorList.filter { ($0.operatorName)?.lowercased().contains((searchText).lowercased()) == true  }
         
+        if self.filteredOperatorList .count > 0 {
+            emptyMsg.isHidden = true
+            emptyMsg.text = ""
+        }else {
+            emptyMsg.isHidden = false
+            emptyMsg.text = "Record not found!"
+
+        }
+        
         //return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         
         operatorCollection.reloadData()
+    }
+    
+     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.showsCancelButton = true
+
+        return true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        // Stop doing the search stuff
+        // and clear the text in the search bar
+        // Hide the cancel button
+        searchBar.showsCancelButton = false
+        self.view.endEditing(true)
+        // You could also change the position, frame etc of the searchBar
     }
 }

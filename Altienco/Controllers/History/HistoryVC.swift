@@ -108,8 +108,11 @@ class HistoryVC: UIViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.setupValue()
         self.showNotify()
+        self.setUpCenterViewNvigation()
+        self.setupLeftnavigation()
     }
     
     

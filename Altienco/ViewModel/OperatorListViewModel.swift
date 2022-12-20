@@ -22,10 +22,11 @@ class OperatorListViewModel {
         ]
         AFWrapper.requestGETURL(strURL, headers: header, success: {
             (JSONResponse) -> Void in
-            debugPrint(JSONResponse)
+//            debugPrint(JSONResponse)
             if let data = JSONResponse as? NSDictionary {
                 var operatorList = [OperatorListResponseObj]()
-                if data["Message_Code"] as? Bool == true, let resultData = data["Result"] as? NSDictionary
+                if data["Message_Code"] as? Bool == true,
+                   let resultData = data["Result"] as? NSDictionary
                 {
                     for dict in resultData["data"] as? Array ?? []{
                     operatorList.append(OperatorListResponseObj.init(json: dict as! [String : Any]))

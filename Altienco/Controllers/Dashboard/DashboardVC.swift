@@ -188,7 +188,7 @@ class DashboardVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.setupValue()
-       
+        setUpCenterViewNvigation()
         self.updateProfilePic()
         DispatchQueue.main.async {
             self.refreshNotificationData()

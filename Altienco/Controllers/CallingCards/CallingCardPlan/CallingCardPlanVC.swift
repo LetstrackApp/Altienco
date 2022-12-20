@@ -144,6 +144,7 @@ class CallingCardPlanVC: UIViewController {
         self.updateProfilePic()
         self.showNotify()
         self.setupLeftnavigation()
+        self.setUpCenterViewNvigation()
     }
     func showNotify(){
         if UserDefaults.isNotificationRead == "1"{

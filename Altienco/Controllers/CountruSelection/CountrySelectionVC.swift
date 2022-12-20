@@ -35,7 +35,7 @@ class CountrySelectionVC: UIViewController {
             mobileNumber.font = UIFont.SF_Regular(16.0)
             mobileNumber.textContentType = .telephoneNumber
             mobileNumber.textColor = appColor.blackText
-            mobileNumber.defaultTextAttributes.updateValue(7.0,
+            mobileNumber.defaultTextAttributes.updateValue(3.7,
                                                            forKey: NSAttributedString.Key.kern)
             mobileNumber.addTarget(self, action: #selector(handleTextFieldDidChange), for: .editingChanged)
             
@@ -168,8 +168,7 @@ class CountrySelectionVC: UIViewController {
                                          deviceOSVersion: UIDevice.current.model,
                                          buildVersion: "1.0.0")
         
-        viewModel?.generateOTP(model: dataModel ) { (result)  in
-            
+        viewModel?.generateOTP(model: dataModel) { (result)  in
             DispatchQueue.main.async { [weak self] in
                 self?.view.isUserInteractionEnabled = true
                 self?.nextButton.hideLoading()

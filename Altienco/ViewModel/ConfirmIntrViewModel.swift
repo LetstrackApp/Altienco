@@ -12,7 +12,8 @@ import SVProgressHUD
 
 class ConfirmIntrViewModel {
     
-    func confirmRecharge(model : ConfirmIntrRequestObj, complition : @escaping(ConfirmIntrResponseObj?, Bool?) -> Void)->Void{
+    func confirmRecharge(model : ConfirmIntrRequestObj,
+                         complition : @escaping(ConfirmIntrResponseObj?, Bool?) -> Void)->Void{
         let data = try? JSONEncoder().encode(model)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         let strURl = subURL.intrConfirmRecharge
@@ -21,6 +22,7 @@ class ConfirmIntrViewModel {
             "Content-Type": "application/json"
         ]
         SVProgressHUD.show()
+        debugPrint("subURL.intrConfirmRecharge",json);
         AFWrapper.requestPOSTURL(strURl, params: json, headers: header, success: { (jsondata) in
             debugPrint("jsondata:", strURl, jsondata as Any)
             SVProgressHUD.dismiss()

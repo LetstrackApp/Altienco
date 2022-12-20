@@ -46,9 +46,12 @@ class AllNotificationVC: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.setupValue()
         self.updateProfilePic()
         self.showNotify()
+        self.setUpCenterViewNvigation()
+        self.setupLeftnavigation()
     }
     func showNotify(){
         if UserDefaults.isNotificationRead == "1"{

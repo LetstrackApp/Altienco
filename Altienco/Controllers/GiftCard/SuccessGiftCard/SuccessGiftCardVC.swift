@@ -334,9 +334,12 @@ class SuccessGiftCardVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.updateDefaultVal()
         self.updateProfilePic()
         self.showNotify()
+        self.setUpCenterViewNvigation()
+        self.setupLeftnavigation()
     }
     func showNotify(){
         if UserDefaults.isNotificationRead == "1"{

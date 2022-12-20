@@ -26,6 +26,7 @@ PODS:
   - SkeletonView (1.30.4)
   - SOPullUpView (1.1.0)
   - SVProgressHUD (2.2.5)
+  - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
@@ -44,6 +45,7 @@ DEPENDENCIES:
   - SkeletonView
   - SOPullUpView
   - SVProgressHUD
+  - Toast-Swift
 
 SPEC REPOS:
   trunk:
@@ -63,6 +65,7 @@ SPEC REPOS:
     - SkeletonView
     - SOPullUpView
     - SVProgressHUD
+    - Toast-Swift
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
@@ -81,7 +84,8 @@ SPEC CHECKSUMS:
   SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
   SOPullUpView: a18cab4bdce7cc07c227e705cc4270e0a36ca2fa
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: ffbe7674933902ea66e4b553aba925c4bf6bf43e
+PODFILE CHECKSUM: 926a7b1905120da2fa14a9b0c828e7857fb84db4
 
 COCOAPODS: 1.11.2

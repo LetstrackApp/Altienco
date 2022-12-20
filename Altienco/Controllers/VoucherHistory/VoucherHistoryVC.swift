@@ -60,10 +60,13 @@ class VoucherHistoryVC: UIViewController {
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.callHistoryData()
         self.setupValue()
         self.updateProfilePic()
         self.showNotify()
+        self.setUpCenterViewNvigation()
+        self.setupLeftnavigation()
     }
     func showNotify(){
         if UserDefaults.isNotificationRead == "1"{

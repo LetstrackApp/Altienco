@@ -153,6 +153,7 @@ class WalletPaymentVC: UIViewController {
         self.setupValue()
         self.updateProfilePic()
         self.showNotify()
+        self.setUpCenterViewNvigation()
         self.setupLeftnavigation()
     }
     func showNotify(){

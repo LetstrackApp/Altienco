@@ -20,6 +20,7 @@ class IntrOperatorViewModel {
             "Authorization": "Bearer \(UserDefaults.getToken)",
             "Content-Type": "application/json"
         ]
+        debugPrint("subURL.intrOperator",json)
         AFWrapper.requestPOSTURL(strURl, params: json, headers: header, success: { (jsondata) in
             debugPrint("jsondata:", strURl, jsondata as Any)
             var operatorList = [OperatorList]()

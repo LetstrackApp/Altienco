@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SkeletonView
 class AllCallingCardVC: UIViewController {
     var voucherHistory: VoucherHistoryViewModel?
     var viewModel : OperatorListViewModel?
@@ -28,7 +28,6 @@ class AllCallingCardVC: UIViewController {
             searchView.delegate = self
             searchView.backgroundImage = UIImage()
             searchView.searchTextField.font = UIFont.SF_Regular(16)
-            
         }
     }
     @IBOutlet weak var voucherHistoryContainer: UIView!
@@ -84,7 +83,14 @@ class AllCallingCardVC: UIViewController {
         }
     }
     
-    @IBOutlet weak var operatorCollection: UICollectionView!
+    @IBOutlet weak var operatorCollection: UICollectionView! {
+        didSet {
+            operatorCollection.delegate = self
+            operatorCollection.dataSource = self
+            operatorCollection.isSkeletonable = true
+
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,10 +118,13 @@ class AllCallingCardVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.setupValue()
         //        self.callHistoryData()
         self.updateProfilePic()
         self.showNotify()
+        self.setUpCenterViewNvigation()
+        self.setupLeftnavigation()
     }
     func showNotify(){
         if UserDefaults.isNotificationRead == "1"{
@@ -161,9 +170,13 @@ class AllCallingCardVC: UIViewController {
     func initiateModel() {
         var countryCode = CountryCode.UK.countryID
         (UserDefaults.getUserData?.countryCode == CountryCode.UK.ISOcode) || (UserDefaults.getUserData?.countryCode == CountryCode.UK.ISOcode2) ? (countryCode = CountryCode.UK.countryID) : (countryCode = CountryCode.IN.countryID)
-        //        let dataModel = countryID: , transactionTypeId: , langCode: "en")
+        operatorCollection.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor.lightGray.withAlphaComponent(0.3)), animation: nil, transition: .crossDissolve(0.26))
+        
         viewModel?.getOperator(countryID: countryCode ?? 102, transactionTypeId: TransactionTypeId.CallingCard.rawValue, langCode: "en") { (operatorList, status, msg) in
             DispatchQueue.main.async { [weak self] in
+                self?.operatorCollection.stopSkeletonAnimation()
+                self?.operatorCollection.hideSkeleton()
+
                 if status == true && msg == "", let operatorlist = operatorList{
                     self?.operatorList = operatorlist
                     self?.filteredOperatorList = operatorlist
@@ -272,11 +285,15 @@ extension AllCallingCardVC: BackToUKRechargeDelegate {
     }
 }
 
-extension AllCallingCardVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension AllCallingCardVC: SkeletonCollectionViewDataSource,
+                            SkeletonCollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.filteredOperatorList.count
     }
     
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "GiftCardCell"
+    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GiftCardCell", for: indexPath) as! GiftCardCell
@@ -322,13 +339,37 @@ extension AllCallingCardVC: UICollectionViewDelegate, UICollectionViewDataSource
 extension AllCallingCardVC: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        searchBar.showsCancelButton = true
         // filterdata  = searchText.isEmpty ? data : data.filter {(item : String) -> Bool in
         
         self.filteredOperatorList = searchText.isEmpty ? operatorList : operatorList.filter { ($0.operatorName)?.lowercased().contains((searchText).lowercased()) == true  }
         
+        if self.filteredOperatorList .count > 0 {
+            emptyMsg.isHidden = true
+            emptyMsg.text = ""
+        }else {
+            emptyMsg.isHidden = false
+            emptyMsg.text = "Record not found!"
+
+        }
+        
         //return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         
         operatorCollection.reloadData()
+    }
+    
+     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.showsCancelButton = true
+
+        return true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        // Stop doing the search stuff
+        // and clear the text in the search bar
+        // Hide the cancel button
+        searchBar.showsCancelButton = false
+        self.view.endEditing(true)
+        // You could also change the position, frame etc of the searchBar
     }
 }

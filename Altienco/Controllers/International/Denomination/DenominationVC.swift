@@ -113,6 +113,7 @@ class DenominationVC: UIViewController {
         self.setupValue()
         self.updateProfilePic()
         self.showNotify()
+        self.setUpCenterViewNvigation()
         self.setupLeftnavigation()
     }
     func showNotify(){
@@ -298,36 +299,44 @@ extension DenominationVC: SkeletonTableViewDelegate, SkeletonTableViewDataSource
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if indexPath.section == 0 {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "OperatorInfoCell", for: indexPath) as! OperatorInfoCell
-//
-//
-//            cell.setupCellData(mobile: mobileNumber,
-//                               country: countryModel?.countryName,
-//                               planOperator: selectedOperator?.operatorName)
-//            return cell
-//
-//        }
-//        else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "DenoCell", for: indexPath) as! DenoCell
-            let model = self.operatorList[indexPath.row]
-            cell.destinationPrice.text = "\(model.destinationAmount ?? 0.0)"
-            cell.destinationUnit.text = model.destinationUnit
-            cell.sourceAmount.text =  "  " + String(format: "%.2f", model.retailAmount ?? 0.0) +  "  \(model.retailUnit ?? "NA")  "
-            cell.selectPlan.tag = indexPath.row
-            cell.selectPlan.addTarget(self, action: #selector(callSuccessPopup(sender:)), for: .touchUpInside)
-            cell.data.text = model.data
-            if model.validityQuantity == -1{
-                cell.validity.text = "Unlimited"
-            }
-            else{
-                cell.validity.text = "\(model.validityQuantity ?? 0)" + (model.validityUnit ?? "NA")
-            }
-            cell.planDescription.text = model.lastRechargeDescription
-            cell.updateConstraintsIfNeeded()
-            
+        //        if indexPath.section == 0 {
+        //            let cell = tableView.dequeueReusableCell(withIdentifier: "OperatorInfoCell", for: indexPath) as! OperatorInfoCell
+        //
+        //
+        //            cell.setupCellData(mobile: mobileNumber,
+        //                               country: countryModel?.countryName,
+        //                               planOperator: selectedOperator?.operatorName)
+        //            return cell
+        //
+        //        }
+        //        else {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DenoCell", for: indexPath) as! DenoCell
+        let model = self.operatorList[indexPath.row]
+        cell.destinationPrice.text = "\(model.destinationAmount ?? 0.0)"
+        cell.destinationUnit.text = model.destinationUnit
+        cell.sourceAmount.text =  "  " + String(format: "%.2f", model.retailAmount ?? 0.0) +  "  \(model.retailUnit ?? "NA")  "
+        cell.selectPlan.tag = indexPath.row
+        cell.selectPlan.addTarget(self, action: #selector(callSuccessPopup(sender:)), for: .touchUpInside)
+        cell.data.text = model.data
+        cell.planDescription.text = model.lastRechargeDescription
+        cell.updateConstraintsIfNeeded()
+
+        if model.validityQuantity == -1 {
+            cell.validity.text = "Unlimited"
             return cell
-//        }
+        }
+        else if let validityQuantity = model.validityQuantity,
+                validityQuantity > 0 {
+            cell.validity.text = "\(validityQuantity)" + (model.validityUnit ?? "NA")
+            return cell
+        }else {
+            cell.validity.text = "NA"
+            return cell
+        }
+       
+        
+       
+        //        }
     }
     
     
