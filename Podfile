@@ -27,7 +27,8 @@ target 'Altienco' do
   pod 'OTPFieldView'
   pod 'lottie-ios', '~> 3.0.5'
   pod 'Toast-Swift'
+pod 'FloatingPanel'
   
-  
+  pod 'PopupDialog'
   
 end

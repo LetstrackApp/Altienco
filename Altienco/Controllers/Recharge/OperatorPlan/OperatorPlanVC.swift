@@ -8,8 +8,8 @@
 
 import UIKit
 import StripeCore
-
-class OperatorPlanVC: UIViewController {
+import PopupDialog
+class OperatorPlanVC: FloatingPannelHelper {
     
     var OperatorID = 0
     var OperatorName = ""
@@ -74,7 +74,9 @@ class OperatorPlanVC: UIViewController {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var addButton: UIButton!{
         didSet{
-            self.addButton.setupNextButton(title: lngConst.add)
+            self.addButton.setTitle(lngConst.add_Balance, for: .normal)
+
+            self.addButton.setupNextButton(title: lngConst.add_Balance,space: 1.6)
         }
     }
     
@@ -170,7 +172,7 @@ class OperatorPlanVC: UIViewController {
         if let firstname = UserDefaults.getUserData?.firstName {
             self.userName.text = "Hi \(firstname)"
         }
-        if let currencySymbol = UserDefaults.getUserData?.currencySymbol, let walletAmount = UserDefaults.getUserData?.walletAmount{
+        if let currencySymbol = UserDefaults.getUserData?.currencySymbol, let walletAmount = UserDefaults.getUserData?.walletAmount {
             self.walletBalance.text = "\(currencySymbol)" + "\(walletAmount)"
         }
         if self.imageUrl != ""{
@@ -367,8 +369,18 @@ extension OperatorPlanVC {
         viewController.operatorID = operatorID
         viewController.isEdit = false
         viewController.planName = planName
-        viewController.modalPresentationStyle = .overFullScreen
-        self.navigationController?.present(viewController, animated: true)
+        let popup = PopupDialog(viewController: viewController,
+                                buttonAlignment: .horizontal,
+                                transitionStyle: .bounceUp,
+                                tapGestureDismissal: false,
+                                panGestureDismissal: false)
+        
+        // Create first button
+        
+        // Present dialog
+        present(popup, animated: true, completion: nil)
+//        viewController.modalPresentationStyle = .overFullScreen
+//        self.navigationController?.present(viewController, animated: true)
     }
     
     @IBAction func redirectProfile(_ sender: Any) {

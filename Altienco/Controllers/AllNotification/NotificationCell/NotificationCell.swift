@@ -12,7 +12,11 @@ class NotificationCell: UITableViewCell {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var dateTime: UILabel!
-    @IBOutlet weak var orderNumber: UILabel!
+    @IBOutlet weak var orderNumber: UILabel!{
+        didSet {
+            orderNumber.font = UIFont.SF_SemiBold(12)
+        }
+    }
     @IBOutlet weak var descText: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

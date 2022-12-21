@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Group 32.png",
+      "filename" : "ic_altiencoLogo@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Group 32-1.png",
+      "filename" : "ic_altiencoLogo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Group 32-2.png",
+      "filename" : "ic_altiencoLogo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

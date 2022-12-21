@@ -10,7 +10,7 @@ import UIKit
 import SkeletonView
 //import CoreAudio
 
-class OperatorListVC: UIViewController {
+class OperatorListVC: FloatingPannelHelper {
     var voucherHistory: VoucherHistoryViewModel?
     var viewModel : OperatorListViewModel?
     var operatorList : [OperatorListResponseObj] = []
@@ -23,8 +23,8 @@ class OperatorListVC: UIViewController {
         didSet {
             generateVoucher.leftInset = 15
             generateVoucher.rightInset = 15
-            generateVoucher.topInset = 15
-            generateVoucher.bottomInset = 0
+            generateVoucher.topInset = 12
+            generateVoucher.bottomInset = 5
             
         }
     }
@@ -80,7 +80,9 @@ class OperatorListVC: UIViewController {
     @IBOutlet weak var repeatContainer: UIView!
     @IBOutlet weak var addButton: UIButton!{
         didSet{
-            self.addButton.setupNextButton(title: lngConst.add)
+            self.addButton.setTitle(lngConst.add_Balance, for: .normal)
+
+            self.addButton.setupNextButton(title: lngConst.add_Balance,space: 1.6)
         }
     }
     @IBOutlet weak var lastVoucherView: UIView!{
@@ -219,7 +221,14 @@ class OperatorListVC: UIViewController {
     
     func callHistoryData() {
         if let customerID = UserDefaults.getUserData?.customerID{
-            let model = VoucherHistoryRequestObj.init(customerId: "\(customerID)", isRequiredAll: false, langCode: "en", operatorId: 0, pinBankUsedStatus: 0, pageNum: self.pageNum, pageSize: self.pageSize, transactionTypeId: 1)
+            let model = VoucherHistoryRequestObj.init(customerId: "\(customerID)",
+                                                      isRequiredAll: false,
+                                                      langCode: "en",
+                                                      operatorId: 0,
+                                                      pinBankUsedStatus: 0,
+                                                      pageNum: self.pageNum,
+                                                      pageSize: self.pageSize,
+                                                      transactionTypeId: 1)
             voucherHistory?.getHistory(model: model)
             voucherHistory?.historyList.bind(listener: { (data) in
                 if data.isEmpty == false{
@@ -357,6 +366,7 @@ extension OperatorListVC: SkeletonCollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == operatorCollection{
+            self.view.endEditing(true)
             DispatchQueue.main.async {
                 if indexPath.row < self.filteredOperatorList.count {
                     let operatorValue = self.filteredOperatorList[indexPath.row]

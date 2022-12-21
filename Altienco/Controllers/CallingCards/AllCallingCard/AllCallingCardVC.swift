@@ -75,13 +75,7 @@ class AllCallingCardVC: UIViewController {
     }
     @IBOutlet weak var notificationIcon: UIImageView!
     @IBOutlet weak var repeatContainer: UIView!
-    @IBOutlet weak var addButton: UIButton!{
-        didSet{
-            DispatchQueue.main.async {
-                self.addButton.setupNextButton(title: lngConst.add)
-            }
-        }
-    }
+    @IBOutlet weak var addButton: UIButton!
     
     @IBOutlet weak var operatorCollection: UICollectionView! {
         didSet {
@@ -104,7 +98,10 @@ class AllCallingCardVC: UIViewController {
     
     
     func onLanguageChange(){
-        
+        self.addButton.setupNextButton(title: lngConst.add_Balance,space: 1.6)
+        self.addButton.setTitle(lngConst.add_Balance, for: .normal)
+
+
         genetateVoucherTitle.changeColorAndFont(mainString: lngConst.generate_voucher.capitalized,
                                                 stringToColor: lngConst.voucher.capitalized,
                                                 color: UIColor.init(0xb24a96),
@@ -316,6 +313,8 @@ extension AllCallingCardVC: SkeletonCollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == operatorCollection{
+            self.view.endEditing(true)
+
             DispatchQueue.main.async {
                 if indexPath.row < self.filteredOperatorList.count {
                     let newString = self.filteredOperatorList[indexPath.row].imageURL ?? ""

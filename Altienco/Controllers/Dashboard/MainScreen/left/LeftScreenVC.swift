@@ -32,7 +32,8 @@ class LeftScreenVC: UIViewController {
         }
     }
     var viewModel: DeleteAccountViewModel?
-    var menus = ["My Profile", "My Orders", "Balance & History", "My Vouchers", "Help & Support","Refer a Friend", "Logout"]
+    var menus = ["My Profile", "My Orders", "Balance & History", "My Vouchers", "Help & Support",
+                 "Contact US","Refer a Friend", "Logout"]
     var swiftViewController: UIViewController!
     var javaViewController: UIViewController!
     var goViewController: UIViewController!
@@ -202,6 +203,13 @@ class LeftScreenVC: UIViewController {
         self.securitySettings()
     }
     
+    
+    @IBAction func contactUS(_ sender: Any) {
+        self.navigationController?.pushViewController(ContactUSVC(), animated: true)
+
+        
+    }
+    
      func securitySettings() {
         
         if AccessControl.isAuthenticationSupported() {
@@ -292,6 +300,7 @@ class LeftScreenVC: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         case .Logout:
             self.navigationController?.pushViewController(LTWebView(), animated: true)
+            
         }
     }
   

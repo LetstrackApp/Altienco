@@ -22,7 +22,7 @@ class SearchCountryVC: UIViewController,  UISearchBarDelegate {
             tableView.rowHeight = UITableView.automaticDimension
             tableView.sectionHeaderHeight = UITableView.automaticDimension
             tableView.sectionFooterHeight = UITableView.automaticDimension
-            tableView.estimatedRowHeight = 100
+            tableView.estimatedRowHeight = 50
             tableView.estimatedSectionFooterHeight = 1
             tableView.estimatedSectionHeaderHeight = 1
             tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)

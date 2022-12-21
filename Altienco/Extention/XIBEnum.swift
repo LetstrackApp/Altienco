@@ -13,5 +13,7 @@ public enum xibName {
     public static let operatorPlanVC =  "OperatorPlanVC"
     public static let walletDenominationVC = "WalletDenominationVC"
     public static let reviewPopupVC = "ReviewPopupVC"
+    public static let recentTransaction = "RecentTransaction"
+    public static let contactUSVC = "ContactUSVC"
     
 }

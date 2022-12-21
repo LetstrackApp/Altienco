@@ -237,7 +237,7 @@ extension UIViewController {
         container.contentMode = .scaleAspectFit
         container.backgroundColor = .clear
         container.frame = CGRect(x: 0, y: 0, width: 150, height: 45)
-        container.image = UIImage(named: "ic_white_logo")
+        container.image = UIImage(named: "ic_navappIcon")
         container.layer.cornerRadius = 20
         container.clipsToBounds = true
         container.layer.cornerRadius = 20
@@ -247,7 +247,7 @@ extension UIViewController {
     
     
     func setupLeftnavigation(){
-      let image =  UIImage(named: "ic_back")?.withInset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10))
+      let image =  UIImage(named: "ic_back_nav")?.withInset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10))
         let buttonItem = UIBarButtonItem(image: image,
                                          landscapeImagePhone: nil,
                                          style: .plain,

@@ -38,6 +38,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires access to the camera for uploading profile picture.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app requires access to the Contacts Book for topup.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>$(PRODUCT_NAME) requires Face ID permission to authenticate using Face recognition.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -51,7 +53,7 @@
 		<string>Poppins-Regular.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreenVC</string>
+	<string>LaunchScreennew</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -67,7 +69,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSContactsUsageDescription</key>
-	<string>This app requires access to the Contacts Book for topup.</string>
 </dict>
 </plist>

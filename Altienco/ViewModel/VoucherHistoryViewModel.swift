@@ -14,7 +14,7 @@ class VoucherHistoryViewModel {
     
     var historyList : Box<[VoucherHistoryResponseObj]> = Box([])
     func getHistory(model : VoucherHistoryRequestObj) {
-        SVProgressHUD.show()
+//        SVProgressHUD.show()
         let data = try? JSONEncoder().encode(model)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         let strURl = subURL.voucherHistory

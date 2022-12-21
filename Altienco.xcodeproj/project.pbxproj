@@ -26,6 +26,18 @@
 		049F8758294D9C7C00B3ED6B /* ViewLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F8757294D9C7C00B3ED6B /* ViewLoadable.swift */; };
 		049F875A294D9CE500B3ED6B /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F8759294D9CE500B3ED6B /* Bundle+Extension.swift */; };
 		049F875C294D9D7300B3ED6B /* XIBEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F875B294D9D7300B3ED6B /* XIBEnum.swift */; };
+		04C0DCD32952D553001592EE /* ContactUSVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0DCD12952D553001592EE /* ContactUSVC.swift */; };
+		04C0DCD42952D553001592EE /* ContactUSVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C0DCD22952D553001592EE /* ContactUSVC.xib */; };
+		04C0DCD62952FB4E001592EE /* LaunchScreennew.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04C0DCD52952FB4E001592EE /* LaunchScreennew.storyboard */; };
+		04C0DCD929531879001592EE /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0DCD829531879001592EE /* UITextView+Extension.swift */; };
+		04C0DCDC29531AC3001592EE /* ContactUSViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0DCDB29531AC3001592EE /* ContactUSViewModel.swift */; };
+		04C0DCDE29531E4F001592EE /* ReasonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0DCDD29531E4F001592EE /* ReasonModel.swift */; };
+		04EC3DB62951BEA60084EA72 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC3DB52951BEA60084EA72 /* Date+Extension.swift */; };
+		04EC3DB82951BEC10084EA72 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC3DB72951BEC10084EA72 /* String+Extension.swift */; };
+		04EC3DBB295200580084EA72 /* RecentTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC3DBA295200580084EA72 /* RecentTransaction.swift */; };
+		04EC3DBD295200650084EA72 /* RecentTransaction.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC3DBC295200650084EA72 /* RecentTransaction.xib */; };
+		04EC3DC0295205480084EA72 /* RecentTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC3DBF295205480084EA72 /* RecentTransactionViewModel.swift */; };
+		04EC3DC229520CAC0084EA72 /* FloatingPannelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC3DC129520CAC0084EA72 /* FloatingPannelHelper.swift */; };
 		04FF0ED8294B75100097BEB7 /* Stripe in Frameworks */ = {isa = PBXBuildFile; productRef = 04FF0ED7294B75100097BEB7 /* Stripe */; };
 		04FF0EDA294B75100097BEB7 /* StripeApplePay in Frameworks */ = {isa = PBXBuildFile; productRef = 04FF0ED9294B75100097BEB7 /* StripeApplePay */; };
 		04FF0EDC294B75100097BEB7 /* StripeCardScan in Frameworks */ = {isa = PBXBuildFile; productRef = 04FF0EDB294B75100097BEB7 /* StripeCardScan */; };
@@ -252,7 +264,6 @@
 		C6AF1C8D293FB1F700AF9D59 /* SuccessCallinCardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6AF1C8B293FB1F700AF9D59 /* SuccessCallinCardVC.xib */; };
 		C6B3688C294498BD0084733C /* ukImage.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B3688B294498BD0084733C /* ukImage.png */; };
 		C6B4C09A2940C82C000AC85F /* BackTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B4C0992940C82C000AC85F /* BackTextField.swift */; };
-		C6C05B282948C14400D211AF /* LaunchScreenVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6C05B272948C14400D211AF /* LaunchScreenVC.storyboard */; };
 		C6C2723B292BBEA60091CEFC /* countryCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = C6C2723A292BBEA50091CEFC /* countryCodes.json */; };
 		C6C3BCE428EFFA5A0087E715 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C3BCE328EFFA5A0087E715 /* AlertController.swift */; };
 		C6C4B2CE28EC14E600756327 /* TransactionHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C4B2CD28EC14E600756327 /* TransactionHistoryViewModel.swift */; };
@@ -285,6 +296,18 @@
 		049F8757294D9C7C00B3ED6B /* ViewLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLoadable.swift; sourceTree = "<group>"; };
 		049F8759294D9CE500B3ED6B /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		049F875B294D9D7300B3ED6B /* XIBEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XIBEnum.swift; sourceTree = "<group>"; };
+		04C0DCD12952D553001592EE /* ContactUSVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUSVC.swift; sourceTree = "<group>"; };
+		04C0DCD22952D553001592EE /* ContactUSVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactUSVC.xib; sourceTree = "<group>"; };
+		04C0DCD52952FB4E001592EE /* LaunchScreennew.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreennew.storyboard; sourceTree = "<group>"; };
+		04C0DCD829531879001592EE /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
+		04C0DCDB29531AC3001592EE /* ContactUSViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUSViewModel.swift; sourceTree = "<group>"; };
+		04C0DCDD29531E4F001592EE /* ReasonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonModel.swift; sourceTree = "<group>"; };
+		04EC3DB52951BEA60084EA72 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		04EC3DB72951BEC10084EA72 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		04EC3DBA295200580084EA72 /* RecentTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTransaction.swift; sourceTree = "<group>"; };
+		04EC3DBC295200650084EA72 /* RecentTransaction.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentTransaction.xib; sourceTree = "<group>"; };
+		04EC3DBF295205480084EA72 /* RecentTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTransactionViewModel.swift; sourceTree = "<group>"; };
+		04EC3DC129520CAC0084EA72 /* FloatingPannelHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPannelHelper.swift; sourceTree = "<group>"; };
 		04FF0EE7294B9B010097BEB7 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextField+Extension.swift"; path = "../../../UITextField+Extension.swift"; sourceTree = "<group>"; };
 		1836ED30252F1C440063A525 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		1844535F25711942006FFD5D /* SwipeButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeButtonView.swift; sourceTree = "<group>"; };
@@ -512,7 +535,6 @@
 		C6AF1C8B293FB1F700AF9D59 /* SuccessCallinCardVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuccessCallinCardVC.xib; sourceTree = "<group>"; };
 		C6B3688B294498BD0084733C /* ukImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ukImage.png; sourceTree = "<group>"; };
 		C6B4C0992940C82C000AC85F /* BackTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackTextField.swift; sourceTree = "<group>"; };
-		C6C05B272948C14400D211AF /* LaunchScreenVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreenVC.storyboard; sourceTree = "<group>"; };
 		C6C2723A292BBEA50091CEFC /* countryCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryCodes.json; sourceTree = "<group>"; };
 		C6C3BCE328EFFA5A0087E715 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		C6C4B2CD28EC14E600756327 /* TransactionHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewModel.swift; sourceTree = "<group>"; };
@@ -583,10 +605,38 @@
 			isa = PBXGroup;
 			children = (
 				0466135A294E113F00EC444B /* AlertView */,
+				04EC3DB92952000F0084EA72 /* AddAndShowBalance */,
+				04EC3DBE2952006A0084EA72 /* RecentTransaction */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		04C0DCCE2952D516001592EE /* ContactUS */ = {
+			isa = PBXGroup;
+			children = (
+				04C0DCD12952D553001592EE /* ContactUSVC.swift */,
+				04C0DCD22952D553001592EE /* ContactUSVC.xib */,
+			);
+			path = ContactUS;
+			sourceTree = "<group>";
+		};
+		04EC3DB92952000F0084EA72 /* AddAndShowBalance */ = {
+			isa = PBXGroup;
+			children = (
 				049F8753294D970400B3ED6B /* AddAndShowBalance.swift */,
 				049F8755294D971400B3ED6B /* AddAndShowBalance.xib */,
 			);
-			path = CustomView;
+			path = AddAndShowBalance;
+			sourceTree = "<group>";
+		};
+		04EC3DBE2952006A0084EA72 /* RecentTransaction */ = {
+			isa = PBXGroup;
+			children = (
+				04EC3DBA295200580084EA72 /* RecentTransaction.swift */,
+				04EC3DBC295200650084EA72 /* RecentTransaction.xib */,
+				04EC3DBF295205480084EA72 /* RecentTransactionViewModel.swift */,
+			);
+			path = RecentTransaction;
 			sourceTree = "<group>";
 		};
 		184DEAAB257655D7004406AF /* History */ = {
@@ -654,7 +704,7 @@
 				18CD75962508DF9000DE7589 /* Assets.xcassets */,
 				18CD759B2508DF9000DE7589 /* Info.plist */,
 				18FD47E725B9543200253289 /* GoogleService-Info.plist */,
-				C6C05B272948C14400D211AF /* LaunchScreenVC.storyboard */,
+				04C0DCD52952FB4E001592EE /* LaunchScreennew.storyboard */,
 			);
 			path = Altienco;
 			sourceTree = "<group>";
@@ -682,6 +732,7 @@
 				04312454294C44E200830CF2 /* TextFiled.swift */,
 				04312460294CD28B00830CF2 /* ContactPicker.swift */,
 				049F8757294D9C7C00B3ED6B /* ViewLoadable.swift */,
+				04EC3DC129520CAC0084EA72 /* FloatingPannelHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -708,6 +759,7 @@
 		18E286F7250A2EE000F25971 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				04C0DCCE2952D516001592EE /* ContactUS */,
 				C6AF1C78293F701800AF9D59 /* CallingCards */,
 				C6AF1C71293F2D2B00AF9D59 /* Refer&Earn */,
 				C6342CDB2937438200814F40 /* AllNotification */,
@@ -815,6 +867,7 @@
 				C62B029A2933DCE500209809 /* VerifyStatusModel.swift */,
 				C6342CE929374B0600814F40 /* AllNotificationModel.swift */,
 				C64AE76D29475053006C6ABC /* DeleteAccountModel.swift */,
+				04C0DCDD29531E4F001592EE /* ReasonModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -850,6 +903,7 @@
 				C62B029C2933DE7000209809 /* VerifyStatusViewModel.swift */,
 				C6342CEB29374BC100814F40 /* AllNotificationViewModel.swift */,
 				C64AE76F294750E6006C6ABC /* DeleteAccountViewModel.swift */,
+				04C0DCDB29531AC3001592EE /* ContactUSViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -883,6 +937,9 @@
 				0431245E294CD12C00830CF2 /* UIImage+Extension.swift */,
 				049F8759294D9CE500B3ED6B /* Bundle+Extension.swift */,
 				049F875B294D9D7300B3ED6B /* XIBEnum.swift */,
+				04EC3DB52951BEA60084EA72 /* Date+Extension.swift */,
+				04EC3DB72951BEC10084EA72 /* String+Extension.swift */,
+				04C0DCD829531879001592EE /* UITextView+Extension.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -1657,6 +1714,7 @@
 				C68730982921160B00C8596D /* RangeCardVC.xib in Resources */,
 				C6A94A8928E4002800FA9E9F /* SearchCountryVC.xib in Resources */,
 				C62A923B28D219D100CB1587 /* SelectAvatarVC.xib in Resources */,
+				04C0DCD62952FB4E001592EE /* LaunchScreennew.storyboard in Resources */,
 				C6A94A8E28E41AEA00FA9E9F /* searchCell.xib in Resources */,
 				C683E80128ADF20F00C07536 /* ImageHeaderView.xib in Resources */,
 				C6AF1C7D293F704100AF9D59 /* AllCallingCardVC.xib in Resources */,
@@ -1671,6 +1729,7 @@
 				C6A33C4828B6B65100F9EB36 /* AddCardVC.xib in Resources */,
 				C6AF1C88293FB0D200AF9D59 /* CallingCardReviewVC.xib in Resources */,
 				C6A8A6A828EB094F006C1BF9 /* TransactionHistoryVC.xib in Resources */,
+				04C0DCD42952D553001592EE /* ContactUSVC.xib in Resources */,
 				C627CAA428F8DD7B00396943 /* PermissionCell.xib in Resources */,
 				C6A103ED28B35549000E50A1 /* Poppins-Bold.ttf in Resources */,
 				047F3FED294F7EA0000377FF /* OperatorInfoCell.xib in Resources */,
@@ -1700,6 +1759,7 @@
 				C6AF1C8D293FB1F700AF9D59 /* SuccessCallinCardVC.xib in Resources */,
 				C6AF1C75293F2D4B00AF9D59 /* ReferAppVC.xib in Resources */,
 				C6AEC82B291DEF180029C6D2 /* googlepay.png in Resources */,
+				04EC3DBD295200650084EA72 /* RecentTransaction.xib in Resources */,
 				C68B129F292C968700856156 /* WalletDenominationVC.xib in Resources */,
 				C62A924028D21B6D00CB1587 /* AvatarCell.xib in Resources */,
 				C6896139292739FA0058D14B /* ReviewRangeCardVC.xib in Resources */,
@@ -1710,7 +1770,6 @@
 				C688F2552921070A009C1EC3 /* SuccessGiftCardVC.xib in Resources */,
 				18CB125525370BFF00DEA4E6 /* LTWebView.xib in Resources */,
 				C6A33C4228B6A5EC00F9EB36 /* walletTableCell.xib in Resources */,
-				C6C05B282948C14400D211AF /* LaunchScreenVC.storyboard in Resources */,
 				C6A8190B28CAB0460097E595 /* VoucherCell.xib in Resources */,
 				C683E80528ADF20F00C07536 /* LeftScreenVC.xib in Resources */,
 				184DEAAF25765753004406AF /* HistoryVC.xib in Resources */,
@@ -1804,6 +1863,7 @@
 				C688F24F29210104009C1EC3 /* ReviewGiftCardVC.swift in Sources */,
 				C6B4C09A2940C82C000AC85F /* BackTextField.swift in Sources */,
 				C627CA8728F8D6FA00396943 /* Extensions.swift in Sources */,
+				04EC3DC229520CAC0084EA72 /* FloatingPannelHelper.swift in Sources */,
 				C686062528E557AF00FE1C75 /* SearchCountryViewModel.swift in Sources */,
 				18E2872C250A5F5500F25971 /* UILabel+Padding.swift in Sources */,
 				18E286FA250A2F2A00F25971 /* SelectLanguageVC.swift in Sources */,
@@ -1825,6 +1885,7 @@
 				C683E80328ADF20F00C07536 /* LeftNavCell.swift in Sources */,
 				C6A818FC28CA8EDB0097E595 /* HistoryViewModel.swift in Sources */,
 				1844536025711942006FFD5D /* SwipeButtonView.swift in Sources */,
+				04C0DCDE29531E4F001592EE /* ReasonModel.swift in Sources */,
 				C6A6B6E528C54F4700BCF7E2 /* AddMoneyModel.swift in Sources */,
 				0431245D294CCF6400830CF2 /* UiView+Anchor.swift in Sources */,
 				C6ACE7CE28B9FA080004E671 /* OPeratorListCell.swift in Sources */,
@@ -1833,11 +1894,13 @@
 				C627CAA328F8DD7B00396943 /* PermissionCell.swift in Sources */,
 				184DEA8B25750BE5004406AF /* DeviceInfo.swift in Sources */,
 				C6A6B6F728C56F9E00BCF7E2 /* OPeratorPlansModel.swift in Sources */,
+				04C0DCDC29531AC3001592EE /* ContactUSViewModel.swift in Sources */,
 				C6AEC82F291DF03F0029C6D2 /* SegmentCell.swift in Sources */,
 				C6C3BCE428EFFA5A0087E715 /* AlertController.swift in Sources */,
 				C6A6B6E728C54FE100BCF7E2 /* AddMoneyViewModel.swift in Sources */,
 				04312453294C439000830CF2 /* UIColor+Hex.swift in Sources */,
 				C687FCA628B8919D00A85040 /* FailureWalletVC.swift in Sources */,
+				04C0DCD32952D553001592EE /* ContactUSVC.swift in Sources */,
 				C6A94A8828E4002800FA9E9F /* SearchCountryVC.swift in Sources */,
 				C687140C28E657B6002E7254 /* ConfirmIntrViewModel.swift in Sources */,
 				C6A6B6EF28C56A3B00BCF7E2 /* OperatorPlanVC.swift in Sources */,
@@ -1852,6 +1915,7 @@
 				C68B12A3292CDC0900856156 /* WalletDenominationModel.swift in Sources */,
 				C683E80028ADF20F00C07536 /* LeftScreenVC.swift in Sources */,
 				C687140328E64220002E7254 /* IntrOperatorPlanViewModel.swift in Sources */,
+				04EC3DB82951BEC10084EA72 /* String+Extension.swift in Sources */,
 				1845636325A82DEC00981F46 /* CancelReason.swift in Sources */,
 				C62A923F28D21B6D00CB1587 /* AvatarCell.swift in Sources */,
 				C627CA8928F8D6FA00396943 /* AccessControl.swift in Sources */,
@@ -1865,6 +1929,8 @@
 				C6AD0125291CCC0A00C5DEC9 /* GiftCardVC.swift in Sources */,
 				C6C4B2CE28EC14E600756327 /* TransactionHistoryViewModel.swift in Sources */,
 				C661E13328AB881700282C7D /* MyCell.swift in Sources */,
+				04C0DCD929531879001592EE /* UITextView+Extension.swift in Sources */,
+				04EC3DBB295200580084EA72 /* RecentTransaction.swift in Sources */,
 				C687BC982921793E0087C94E /* ConfirmFixedPlanViewModel.swift in Sources */,
 				18E287EE250F7B3800F25971 /* Loader.swift in Sources */,
 				C6A103E328B3350A000E50A1 /* generateOTP.swift in Sources */,
@@ -1876,6 +1942,7 @@
 				C686062328E5559B00FE1C75 /* SearchCountryModel.swift in Sources */,
 				18FD480A25B95D0300253289 /* StringConstant.swift in Sources */,
 				C68730972921160B00C8596D /* RangeCardVC.swift in Sources */,
+				04EC3DB62951BEA60084EA72 /* Date+Extension.swift in Sources */,
 				C6AF1C74293F2D4B00AF9D59 /* ReferAppVC.swift in Sources */,
 				C6A818FF28CAAE230097E595 /* VoucherHistoryModel.swift in Sources */,
 				C661E13A28AB8F1900282C7D /* UserModel.swift in Sources */,
@@ -1935,6 +2002,7 @@
 				18E2872D250A5F5500F25971 /* UIButton+Loading.swift in Sources */,
 				C6A953FB28C0779F003ED390 /* GenerateOTPViewMOdel.swift in Sources */,
 				1836ED31252F1C440063A525 /* Country.swift in Sources */,
+				04EC3DC0295205480084EA72 /* RecentTransactionViewModel.swift in Sources */,
 				C687BC96292178F00087C94E /* ConfirmFixedPlanModel.swift in Sources */,
 				C6342CEA29374B0600814F40 /* AllNotificationModel.swift in Sources */,
 				C6AF1C87293FB0D200AF9D59 /* CallingCardReviewVC.swift in Sources */,

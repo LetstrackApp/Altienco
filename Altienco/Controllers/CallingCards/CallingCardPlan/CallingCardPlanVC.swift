@@ -79,7 +79,9 @@ class CallingCardPlanVC: UIViewController {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var addButton: UIButton!{
         didSet{
-            self.addButton.setupNextButton(title: lngConst.add)
+            self.addButton.setupNextButton(title: lngConst.add_Balance,space: 1.6)
+            self.addButton.setTitle(lngConst.add_Balance, for: .normal)
+
         }
     }
     

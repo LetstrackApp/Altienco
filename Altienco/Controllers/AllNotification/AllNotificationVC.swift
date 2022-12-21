@@ -127,7 +127,7 @@ extension AllNotificationVC: UITableViewDelegate, UITableViewDataSource {
          let model = self.AllNotification[indexPath.row]
         
             cell.title.text = model.title
-        cell.orderNumber.text = "Order Number: \(model.notificationID ?? 0)"
+        cell.orderNumber.text = "\(lngConst.orderNo): \(model.notificationID ?? 0)"
             cell.descText.text = model.details
             
             if let time = model.notificationDate{

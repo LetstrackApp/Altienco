@@ -32,7 +32,7 @@ class VoucherCell: UITableViewCell {
     }
     @IBOutlet weak var orderNumber: UILabel!{
         didSet{
-            self.orderNumber.font = UIFont.SFPro_Light(12.0)
+            self.orderNumber.font = UIFont.SF_SemiBold(12.0)
             self.orderNumber.textColor = appColor.lightGrayText
         }
     }

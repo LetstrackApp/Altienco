@@ -83,9 +83,9 @@ struct langguageConstent{
     let signatureTitle = "signTitle".localized()
     let receiverName = "receiverName".localized()
     let selectCountery = " Please select country first "
-
-    let empytMobile = " Mobile number \n can not be empty "
-    let notValidMobile = " Please enter a valid \n mobile number "
+    
+    let empytMobile = "Mobile number \n can not be empty"
+    let notValidMobile = "Please enter a valid \n mobile number"
     let verificationHint = "We may send a verification code to this number"
     let phoneNumber =  "Phone Number"
     
@@ -102,7 +102,7 @@ Enter the 16 Digit Pin and Verify
 Scratch the altienco card to get
 the 16 digit pin
 """
- let addMoneyToAltiencocard =   "Add money from altienco card"
+    let addMoneyToAltiencocard =   "Add money from altienco card"
     
     let altiencoCard  = "altienco card"
     
@@ -118,7 +118,7 @@ the 16 digit pin
     let rechargeWallet = "Recharge wallet"
     let wallet = "wallet"
     let pleaseSelectAmount = "Please select Amount"
-
+    
     let amount = "Amount"
     let denomination = "denomination"
     let callingCard = "calling card"
@@ -129,10 +129,24 @@ the 16 digit pin
     let generate_voucher = "Generate voucher"
     let generate_your_voucher = "Generate your voucher"
     let voucher = "voucher"
-
+    let add_Balance = "ADD BALANCE"
+    let orderNo = "Order No "
+    let sendMsg = "SEND MESSAGE"
+    let reasonDescription =  "Reason Description"
+    let orderIdques =  "Do you have an order ID? "
+    let name = "Name"
+    let enterName = "Please enter name "
+    let emptyEmail = "Enter your Email ID"
+    let validEmail = "Enter your a valid Email ID"
+    let addAttachments =  "Add Attachments"
     func txnSucessMeg(amount:String) -> String {
         return "You've added \(amount) successfully in your altienco wallet"
     }
+    
+    let reason =  "Reason"
+    let reasonDes = "Please be really specific, so we can help you the best we can."
+    let reasonTitle  = "Send us a message"
+    let orderidHint = "This is the 9-digit code which can\nbe found in the subject of your\nconfirmation email"
     
 }
 

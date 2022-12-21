@@ -260,13 +260,13 @@ extension TransactionHistoryVC: UITableViewDelegate, UITableViewDataSource {
         }
         
             cell.orderStatus.text = model.transactionMessage
-            cell.orderNumber.text = "Order Number: " + (model.orderNumber ?? "")
+            cell.orderNumber.text = "\(lngConst.orderNo): " + (model.orderNumber ?? "")
             cell.rechargeType.text = model.transactionType
             if let amount = model.amount{
             cell.amount.text = (model.currency ?? "") + "\(amount)"
             }
-//            if model.transactionTypeID == 2 || model.transactionTypeID == 5 {
-        if model.transactionTypeID == 2  {
+            if model.transactionTypeID == 2 || model.transactionTypeID == 5 {
+//        if model.transactionTypeID == 2  {
 
                 cell.repeatContainer.isHidden = false
             }
@@ -298,7 +298,7 @@ extension TransactionHistoryVC: UITableViewDelegate, UITableViewDataSource {
     @objc func callSuccessPopup(sender: UIButton){
         var operatorTitle, currency, planName: String
         var denomination, operatorID: Int
-        if sender.tag >= 0{
+        if sender.tag >= 0 {
         let model = self.historyResponce[sender.tag]
             operatorTitle = model.operatorName ?? ""
             planName = model.planName ?? ""

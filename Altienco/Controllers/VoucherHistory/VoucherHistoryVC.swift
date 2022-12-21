@@ -171,7 +171,7 @@ extension VoucherHistoryVC: UITableViewDelegate, UITableViewDataSource {
             else{
                 cell.operatorImage.image = UIImage(named: "ic_operatorThumbnail")
             }
-            cell.orderNumber.text = "Order Number: " + (model.orderNumber ?? "")
+            cell.orderNumber.text = "\(lngConst.orderNo): " + (model.orderNumber ?? "")
             if let amount = model.voucherAmount{
                 cell.amount.text = (UserDefaults.getUserData?.currencySymbol ?? "") + "\(amount)"
             }

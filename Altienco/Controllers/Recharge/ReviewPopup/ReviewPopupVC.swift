@@ -68,13 +68,16 @@ class ReviewPopupVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        self.setupView()
+
+        setupView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+       
+    }
     
-    
-    
+ 
     
     @IBAction func confirmOrder(_ sender: Any) {
         self.confirmButton.isEnabled = false

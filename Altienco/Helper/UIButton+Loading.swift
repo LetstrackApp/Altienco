@@ -17,6 +17,7 @@ final class LoadingButton: UIButton {
         
         if (activityIndicator == nil) {
             activityIndicator = createActivityIndicator()
+
         }
         
         showSpinning()
@@ -32,7 +33,12 @@ final class LoadingButton: UIButton {
     private func createActivityIndicator() -> UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.color = .white
+        if self.backgroundColor == .clear ||  self.backgroundColor == .white {
+            activityIndicator.color = .gray
+        }else {
+            activityIndicator.color = .white
+
+        }
         return activityIndicator
     }
     

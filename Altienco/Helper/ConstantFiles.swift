@@ -55,6 +55,7 @@ enum subURL{
     
     static let languageList = "LanguageList/0"
     static let verifyToken = "verifyToken"
+    static let getHelpNSupportReasons = "getHelpNSupportReasons"
 }
 
 enum appColor{

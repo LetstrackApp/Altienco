@@ -107,7 +107,7 @@ class UserProfileVC: UIViewController {
     
     @IBOutlet weak var nextButton: UIButton!{
         didSet{
-                self.nextButton.setupNextButton(title: lngConst.register)
+            self.nextButton.setupNextButton(title: lngConst.register)
         }
     }
     @IBOutlet weak var textFeildConatiner: UIView!{
@@ -131,15 +131,29 @@ class UserProfileVC: UIViewController {
             textFeildConatiner3.clipsToBounds=true
         }
     }
-
     
+    
+    @IBOutlet weak var emailView: UIView! {
+        didSet{
+            emailView.layer.cornerRadius = 5
+        }
+    }
+    @IBOutlet weak var lastNameView: UIView!{
+        didSet{
+            lastNameView.layer.cornerRadius = 5
+        }
+    }
+    @IBOutlet weak var firstNameView: UIView!{
+        didSet{
+            firstNameView.layer.cornerRadius = 5
+        }
+    }
     @IBOutlet weak var firstName: UITextField!{
         didSet{
             firstName.font = UIFont.SF_Regular(16.0)
             firstName.textColor = appColor.blackText
         }
     }
-    
     
     @IBOutlet weak var lastname: UITextField!{
         didSet{
@@ -158,28 +172,31 @@ class UserProfileVC: UIViewController {
     @IBOutlet var textFields: [BackTextField]!
     func isValid(testStr:String) -> Bool {
         guard testStr.count > 2, testStr.count < 18 else { return false }
-
+        
         let predicateTest = NSPredicate(format: "SELF MATCHES %@", "^(([^ ]?)(^[a-zA-Z].*[a-zA-Z]$)([^ ]?))$")
         return predicateTest.evaluate(with: testStr)
     }
     func isValidEmail(testStr:String) -> Bool {
-                print("validate emilId: \(testStr)")
-                let emailRegEx = "^(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?(?:(?:(?:[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+(?:\\.[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+)*)|(?:\"(?:(?:(?:(?: )*(?:(?:[!#-Z^-~]|\\[|\\])|(?:\\\\(?:\\t|[ -~]))))+(?: )*)|(?: )+)\"))(?:@)(?:(?:(?:[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)(?:\\.[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)*)|(?:\\[(?:(?:(?:(?:(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))\\.){3}(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))))|(?:(?:(?: )*[!-Z^-~])*(?: )*)|(?:[Vv][0-9A-Fa-f]+\\.[-A-Za-z0-9._~!$&'()*+,;=:]+))\\])))(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?$"
-                let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-                let result = emailTest.evaluate(with: testStr)
-                return result
-            }
+        print("validate emilId: \(testStr)")
+        let emailRegEx = "^(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?(?:(?:(?:[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+(?:\\.[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+)*)|(?:\"(?:(?:(?:(?: )*(?:(?:[!#-Z^-~]|\\[|\\])|(?:\\\\(?:\\t|[ -~]))))+(?: )*)|(?: )+)\"))(?:@)(?:(?:(?:[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)(?:\\.[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)*)|(?:\\[(?:(?:(?:(?:(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))\\.){3}(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))))|(?:(?:(?: )*[!-Z^-~])*(?: )*)|(?:[Vv][0-9A-Fa-f]+\\.[-A-Za-z0-9._~!$&'()*+,;=:]+))\\])))(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?$"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        let result = emailTest.evaluate(with: testStr)
+        return result
+    }
     func setupTextBox(){
         self.FnameErrorView.isHidden=true
         self.lNameErrorView.isHidden=true
         self.emailErrorView.isHidden=true
     }
     
+
+    
+    
     @IBAction func startTracking(_ sender: Any) {
         self.setupTextBox()
         var inviteCode = ""
         for txtField in textFields {
-             if let text = txtField.text {
+            if let text = txtField.text {
                 inviteCode += text
             }
         }
@@ -217,7 +234,7 @@ class UserProfileVC: UIViewController {
                         self?.alert(message: message, title: "Alert")
                     }
                 } }
-         }
+        }
     }
     
     func redirectDashboard(){
@@ -228,7 +245,7 @@ class UserProfileVC: UIViewController {
     @IBAction func selectCamera(_ sender: Any) {
         //here I want to execute the UIActionSheet
         let actionsheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
-
+        
         
         actionsheet.addAction(UIAlertAction(title: "Choose an Avatar", style: UIAlertAction.Style.default, handler: { (action) -> Void in
             let object = SelectAvatarVC.initialization()
@@ -240,18 +257,18 @@ class UserProfileVC: UIViewController {
                     self.isAvatarImage = true
                     self.addPhoto.setImage(nil, for: .normal)
                 }
-                }
-                }))
+            }
+        }))
         actionsheet.addAction(UIAlertAction(title: "Choose a Photo", style: UIAlertAction.Style.default, handler: { (action) -> Void in
-//            self.alert(message: "Coming soon..")
+            //            self.alert(message: "Coming soon..")
             
-                self.imageUplaod()
+            self.imageUplaod()
             self.userImage.contentMode = .scaleToFill
-                }))
-
+        }))
+        
         actionsheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: { (action) -> Void in
-
-                }))
+            
+        }))
         self.present(actionsheet, animated: true, completion: nil)
     }
     
@@ -269,10 +286,8 @@ class UserProfileVC: UIViewController {
     }
     
     
-    func imageUplaod()
-    {
-
-        CameraBuffer().pickImage(self){ image in
+    func imageUplaod() {
+        CameraBuffer().pickImage(self) { image in
             DispatchQueue.main.async {
                 let data = image.jpegData(compressionQuality: 0.4)
                 let parameters: [String : Any] = ["file": data!, "id": UserDefaults.getUserData?.customerID ?? 0]
@@ -285,7 +300,7 @@ class UserProfileVC: UIViewController {
                         self.userImage.image = image
                     }})
                 self.addPhoto.setImage(nil, for: .normal)
-//                self.photoAdded.isHidden=false
+                //                self.photoAdded.isHidden=false
                 self.userImage.image = image
             }
         }
@@ -305,7 +320,7 @@ class UserProfileVC: UIViewController {
         
     }
     
-   
+    
     
     @IBAction func selectAgree(_ sender: Any) {
         
@@ -318,8 +333,8 @@ class UserProfileVC: UIViewController {
             self.acceptConditions.isSelected = true
         }
     }
-
-  
+    
+    
     override func viewDidLoad(){
         super.viewDidLoad()
         self.userModel = UserModel()
@@ -329,6 +344,8 @@ class UserProfileVC: UIViewController {
             self.setupTextBox()
             self.setTextField()
         }
+        setupLeftnavigation()
+        
         // Do any additional setup after loading the view.
     }
 }
@@ -360,7 +377,7 @@ extension UserProfileVC: UITextFieldDelegate, BackFieldDelegate{
             txtField.textAlignment = .center
             txtField.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
         }
-//        setupReferalCode()
+        //        setupReferalCode()
     }
     @objc func textFieldDidChange(textField: UITextField){
         if textField.text?.trimWhiteSpace.length ?? 0 > 0 {
@@ -372,24 +389,24 @@ extension UserProfileVC: UITextFieldDelegate, BackFieldDelegate{
         }
     }
     
-//    func setupReferalCode(){
-//        guard let referalCode = UserDefaults.getUserData?.customerCode,referalCode.length == 5 else {return}
-//        if let firstTextField = view.viewWithTag(100) as? UITextField {
-//            firstTextField.text = referalCode[0]
-//        }
-//        if let secondTextField = view.viewWithTag(101) as? UITextField {
-//            secondTextField.text = referalCode[1]
-//        }
-//        if let thirdTextField = view.viewWithTag(102) as? UITextField {
-//            thirdTextField.text = referalCode[2]
-//        }
-//        if let forthTextField = view.viewWithTag(103) as? UITextField {
-//            forthTextField.text = referalCode[3]
-//        }
-//        if let fifthTextField = view.viewWithTag(104) as? UITextField {
-//            fifthTextField.text = referalCode[4]
-//        }
-//    }
+    //    func setupReferalCode(){
+    //        guard let referalCode = UserDefaults.getUserData?.customerCode,referalCode.length == 5 else {return}
+    //        if let firstTextField = view.viewWithTag(100) as? UITextField {
+    //            firstTextField.text = referalCode[0]
+    //        }
+    //        if let secondTextField = view.viewWithTag(101) as? UITextField {
+    //            secondTextField.text = referalCode[1]
+    //        }
+    //        if let thirdTextField = view.viewWithTag(102) as? UITextField {
+    //            thirdTextField.text = referalCode[2]
+    //        }
+    //        if let forthTextField = view.viewWithTag(103) as? UITextField {
+    //            forthTextField.text = referalCode[3]
+    //        }
+    //        if let fifthTextField = view.viewWithTag(104) as? UITextField {
+    //            fifthTextField.text = referalCode[4]
+    //        }
+    //    }
 }
 
 
@@ -408,7 +425,7 @@ extension String {
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()
     }
-
+    
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
     }

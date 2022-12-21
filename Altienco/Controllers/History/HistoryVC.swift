@@ -168,7 +168,7 @@ extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
                 cell.orderStatus.textColor = appColor.buttonRedColor
             }
             cell.orderStatus.text = model.transactionMessage
-            cell.orderNumber.text = "Order Number: " + (model.orderNumber ?? "")
+            cell.orderNumber.text = "\(lngConst.orderNo): " + (model.orderNumber ?? "")
             cell.rechargeType.text = model.transactionType
             if let amount = model.amount{
             cell.amount.text = (model.currency ?? "") + "\(amount)"

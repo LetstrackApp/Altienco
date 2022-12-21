@@ -46,7 +46,8 @@ class DenominationVC: UIViewController {
     @IBOutlet weak var operatorName: UILabel!
     @IBOutlet weak var addButton: UIButton!{
         didSet{
-            self.addButton.setupNextButton(title: lngConst.add)
+            self.addButton.setupNextButton(title: lngConst.add_Balance,space: 1.6)
+            self.addButton.setTitle(lngConst.add_Balance, for: .normal)
         }
     }
     
@@ -55,10 +56,9 @@ class DenominationVC: UIViewController {
             tableContainer.roundFromBottom(radius: 10)
         }
     }
-    @IBOutlet weak var topUpTitle: PaddingLabel! {
+    @IBOutlet weak var topUpTitle: PaddingLabel!{
         didSet {
-            topUpTitle.topInset = 10
-            topUpTitle.bottomInset = 2
+            topUpTitle.bottomInset = 3
         }
     }
     
@@ -66,8 +66,8 @@ class DenominationVC: UIViewController {
     @IBOutlet weak var denominationTable: UITableView!{
         didSet{
             
-            self.denominationTable.register(UINib(nibName: "OperatorInfoCell", bundle: nil), forCellReuseIdentifier: "OperatorInfoCell")
-            self.denominationTable.register(UINib(nibName: "DenoCell", bundle: nil), forCellReuseIdentifier: "DenoCell")
+            denominationTable.register(UINib(nibName: "OperatorInfoCell", bundle: nil), forCellReuseIdentifier: "OperatorInfoCell")
+            denominationTable.register(UINib(nibName: "DenoCell", bundle: nil), forCellReuseIdentifier: "DenoCell")
             denominationTable.delegate = self
             denominationTable.dataSource = self
             denominationTable.rowHeight = UITableView.automaticDimension
@@ -80,8 +80,6 @@ class DenominationVC: UIViewController {
             denominationTable.tableFooterView = UIView.init(frame: .zero)
             denominationTable.tableHeaderView = UIView.init(frame: .zero)
             denominationTable.isSkeletonable = true
-            
-            
         }
     }
     override func viewDidLoad() {
@@ -312,30 +310,11 @@ extension DenominationVC: SkeletonTableViewDelegate, SkeletonTableViewDataSource
         //        else {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DenoCell", for: indexPath) as! DenoCell
         let model = self.operatorList[indexPath.row]
-        cell.destinationPrice.text = "\(model.destinationAmount ?? 0.0)"
-        cell.destinationUnit.text = model.destinationUnit
-        cell.sourceAmount.text =  "  " + String(format: "%.2f", model.retailAmount ?? 0.0) +  "  \(model.retailUnit ?? "NA")  "
+        cell.setupUI(model: model)
         cell.selectPlan.tag = indexPath.row
         cell.selectPlan.addTarget(self, action: #selector(callSuccessPopup(sender:)), for: .touchUpInside)
-        cell.data.text = model.data
-        cell.planDescription.text = model.lastRechargeDescription
-        cell.updateConstraintsIfNeeded()
-
-        if model.validityQuantity == -1 {
-            cell.validity.text = "Unlimited"
-            return cell
-        }
-        else if let validityQuantity = model.validityQuantity,
-                validityQuantity > 0 {
-            cell.validity.text = "\(validityQuantity)" + (model.validityUnit ?? "NA")
-            return cell
-        }else {
-            cell.validity.text = "NA"
-            return cell
-        }
-       
+        return cell
         
-       
         //        }
     }
     

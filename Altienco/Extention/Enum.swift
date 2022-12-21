@@ -10,6 +10,14 @@ import Foundation
 import UIKit
 
 
+public enum UserValidationState{
+    case Valid
+    case Invalid(String)
+    case permission(String)
+    
+}
+
+
 enum AvatarPics : CaseIterable {
     case avatar1
     case avatar2

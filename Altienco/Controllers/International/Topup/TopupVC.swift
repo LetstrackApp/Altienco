@@ -21,7 +21,8 @@ class TopupVC: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var topUpTitle: PaddingLabel!{
         didSet {
-            topUpTitle.bottomInset = 20
+            topUpTitle.topInset = 6
+            topUpTitle.bottomInset = 8
         }
     }
     @IBOutlet weak var headerView: UIStackView!{
@@ -132,7 +133,9 @@ class TopupVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var addButton: UIButton!{
         didSet{
-            self.addButton.setupNextButton(title: lngConst.add)
+            self.addButton.setTitle(lngConst.add_Balance, for: .normal)
+
+            self.addButton.setupNextButton(title: lngConst.add_Balance,space: 1.6)
         }
     }
     @IBOutlet weak var walletBalnace: UILabel!{

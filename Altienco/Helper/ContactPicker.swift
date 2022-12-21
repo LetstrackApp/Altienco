@@ -79,7 +79,7 @@ class ContactPicker : NSObject,CNContactPickerDelegate{
     
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contactProperty: CNContactProperty) {
         if let phone = contactProperty.value as? CNPhoneNumber {
-            let numberphn = phone.stringValue.stripped
+            let numberphn = phone.stringValue.stripped.deletingPrefix("0")
             pickContactCallback?(numberphn)
         } else {
             print("number.value not of type CNPhoneNumber")
