@@ -148,6 +148,7 @@ class CountrySelectionVC: UIViewController {
     
     
     @IBAction func sentOTP(_ sender: Any) {
+        Helper.hideToast()
         self.view.endEditing(true)
         if  Validator.isValidMobile(mobileNumber) == true {
             mobileNumber.setError()
@@ -238,6 +239,24 @@ extension CountrySelectionVC {
 //MARK: - UITextFieldDelegate
 extension CountrySelectionVC: UITextFieldDelegate {
     
+     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        var result = true
+        let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+      
+        
+        if textField == mobileNumber{
+            let disallowedCharacterSet = NSCharacterSet(charactersIn:textfiledchar.circleCode).inverted
+            let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
+            result = replacementStringIsLegal
+        }
+        
+        if (textField == mobileNumber) && result == true {
+            return newString.count <= 10
+        }
+       
+        return result
+    }
+    
     
     func fontChange(_ textField: UITextField){
         if textField.text?.count ?? 0 > 0 {
@@ -271,13 +290,13 @@ extension CountrySelectionVC: UITextFieldDelegate {
         return true
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        textField.setError()
-        let newLength = (mobileNumber.text ?? "").count + string.count - range.length
-        if(textField == mobileNumber) {
-            return newLength <= 13
-        }
-        
-        return true
-    }
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        textField.setError()
+//        let newLength = (mobileNumber.text ?? "").count + string.count - range.length
+//        if(textField == mobileNumber) {
+//            return newLength <= 13
+//        }
+//        
+//        return true
+//    }
 }

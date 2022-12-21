@@ -114,8 +114,8 @@ class WalletDenominationVC: UIViewController {
                                                     color: UIColor.init(0xb24a96),
                                                font: UIFont.SF_Medium(18))
         
-        selectDemimation.changeColorAndFont(mainString: lngConst.pleaseSelectAmount,
-                                                   stringToColor: lngConst.amount,
+        selectDemimation.changeColorAndFont(mainString: lngConst.pleaseSelectAmount.capitalized,
+                                            stringToColor: lngConst.amount.capitalized,
                                                    color: .black,
                                                    font: UIFont.SF_Regular(16))
         

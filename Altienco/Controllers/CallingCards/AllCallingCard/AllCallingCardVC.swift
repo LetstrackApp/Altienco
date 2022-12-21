@@ -371,4 +371,8 @@ extension AllCallingCardVC: UISearchBarDelegate {
         self.view.endEditing(true)
         // You could also change the position, frame etc of the searchBar
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+           searchBar.resignFirstResponder()
+    }
 }

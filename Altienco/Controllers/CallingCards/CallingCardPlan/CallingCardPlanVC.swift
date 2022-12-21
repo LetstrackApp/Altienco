@@ -128,8 +128,8 @@ class CallingCardPlanVC: UIViewController {
                                                     color: UIColor.init(0xb24a96),
                                                     font: UIFont.SF_Medium(18))
         
-        self.selectDenomination.changeColorAndFont(mainString: lngConst.pleaseSelectDenomination,
-                                                   stringToColor: lngConst.denomination,
+        self.selectDenomination.changeColorAndFont(mainString: lngConst.pleaseSelectDenomination.capitalized,
+                                                   stringToColor: lngConst.denomination.capitalized,
                                                    color: .black,
                                                    font: UIFont.SF_Regular(16))
         

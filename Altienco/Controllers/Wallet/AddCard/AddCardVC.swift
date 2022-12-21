@@ -150,16 +150,21 @@ class AddCardVC: UIViewController, UITextFieldDelegate, GoToRootDelegate {
     
     
     @IBAction func verifyPin(_ sender: Any) {
-        var pincode = self.cardPinText.text!
-        if self.cardPinText.text?.count != 19{
+        let pincode = self.cardPinText.text!.replacingOccurrences(of: " ", with: "").trimWhiteSpace
+        
+        
+        if pincode.count  < 8{
             let vc: FailureWalletVC = FailureWalletVC()
             vc.modalPresentationStyle = .overFullScreen
             vc.view.backgroundColor = .clear
             self.present(vc, animated: false, completion: nil)
         }
         else{
-            pincode = pincode.replacingOccurrences(of: " ", with: "")
-            let dataModel = AddMoneyModel.init(pinNumber: pincode, langCode: "en", transactionTypeID: 1, customerId: UserDefaults.getUserData?.customerID ?? 0)
+            let dataModel = AddMoneyModel.init(pinNumber: pincode,
+                                               langCode: "en",
+                                               transactionTypeID: 1,
+                                               customerId: UserDefaults.getUserData?.customerID ?? 0)
+            
             addMoneyViewModel?.addMoney(model: dataModel) { (result, status)  in
                 DispatchQueue.main.async { [weak self] in
                     if  (result != nil) && status == true{

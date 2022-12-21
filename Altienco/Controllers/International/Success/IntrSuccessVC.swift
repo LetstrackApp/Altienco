@@ -279,6 +279,13 @@ class IntrSuccessVC: UIViewController {
         let viewController: AllNotificationVC = AllNotificationVC()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
+    
+    @IBOutlet weak var downloadReceiptPDf: UIView! {
+        didSet {
+            downloadReceiptPDf.isHidden == true
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.setupValue()
@@ -323,15 +330,19 @@ class IntrSuccessVC: UIViewController {
     }
     
     func updateStatusData(){
+        
+       
         if (self.processStatusID == GiftCardProcessStatus.InProgress.rawValue) || (self.processStatusID == GiftCardProcessStatus.NotInitiated.rawValue)
         {
         self.successRechargeText.text = "Recharge for *\(confirmStatus?.rechargedMobileNumber ?? "")* is in process ..."
         }
         else if (self.processStatusID != GiftCardProcessStatus.Cancelled.rawValue)
         {
+            downloadReceiptPDf.isHidden = false
         self.successRechargeText.text = "Recharge for *\(confirmStatus?.rechargedMobileNumber ?? "")* has been done successfully!"
         }
         else{
+            downloadReceiptPDf.isHidden = false
             self.failedRechargeText.text = "Recharge for *\(confirmStatus?.rechargedMobileNumber ?? "")* has been done successfully"
         }
         

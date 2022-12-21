@@ -164,19 +164,19 @@
                                             <rect key="frame" x="27" y="295" width="242" height="82.5"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="iaT-mr-94G">
-                                                    <rect key="frame" x="0.0" y="-28" width="242" height="110.5"/>
+                                                    <rect key="frame" x="0.0" y="-31.5" width="242" height="114"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3Y-gg-lXM">
-                                                            <rect key="frame" x="0.0" y="0.0" width="242" height="110.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="242" height="114"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUC-wr-4cN">
-                                                                    <rect key="frame" x="0.0" y="3" width="242" height="16.5"/>
+                                                                    <rect key="frame" x="0.0" y="3" width="242" height="20"/>
                                                                     <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="14"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fe0-DW-0Xp">
-                                                                    <rect key="frame" x="0.0" y="25.5" width="242" height="79"/>
+                                                                    <rect key="frame" x="0.0" y="29" width="242" height="79"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PZj-lC-70d">
                                                                             <rect key="frame" x="0.0" y="0.0" width="242" height="79"/>
@@ -395,7 +395,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="I agree with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="unQ-Te-kdr">
-                                                    <rect key="frame" x="28" y="7" width="81" height="16.5"/>
+                                                    <rect key="frame" x="28" y="5" width="81" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="81" id="12I-Mb-rHo"/>
                                                     </constraints>
@@ -656,13 +656,13 @@
             <size key="intrinsicContentSize" width="13.5" height="29.5"/>
         </designable>
         <designable name="DXg-Gn-pS1">
-            <size key="intrinsicContentSize" width="146" height="21"/>
+            <size key="intrinsicContentSize" width="162" height="25.5"/>
         </designable>
         <designable name="LCl-rL-u9b">
             <size key="intrinsicContentSize" width="13.5" height="29.5"/>
         </designable>
         <designable name="WYz-mf-db9">
-            <size key="intrinsicContentSize" width="153" height="16.5"/>
+            <size key="intrinsicContentSize" width="169" height="20"/>
         </designable>
         <designable name="d2a-PD-4S8">
             <size key="intrinsicContentSize" width="13.5" height="29.5"/>

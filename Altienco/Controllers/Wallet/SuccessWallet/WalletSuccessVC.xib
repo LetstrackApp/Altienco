@@ -44,7 +44,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="280"/>
                         </imageView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_white_logo" translatesAutoresizingMaskIntoConstraints="NO" id="b1e-Hz-hNT">
-                            <rect key="frame" x="161" y="50" width="92" height="45"/>
+                            <rect key="frame" x="82" y="50" width="250" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="esp-VD-NWr"/>
                             </constraints>
@@ -186,8 +186,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGr-TQ-T9o">
                                             <rect key="frame" x="0.0" y="100.5" width="384" height="41"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add money from " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xin-Ha-0AX">
-                                                    <rect key="frame" x="15" y="0.0" width="156" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Money From " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xin-Ha-0AX">
+                                                    <rect key="frame" x="15" y="0.0" width="155.5" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="KKj-fl-5ac"/>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" id="f5g-sj-7si"/>
@@ -196,8 +196,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="altienco card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDD-bP-dfq">
-                                                    <rect key="frame" x="174" y="0.0" width="120.5" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Altienco Card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDD-bP-dfq">
+                                                    <rect key="frame" x="173.5" y="0.0" width="124" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="pc9-PL-b9d"/>
                                                     </constraints>
@@ -369,7 +369,7 @@
         <image name="ic_notification" width="19" height="20"/>
         <image name="ic_success" width="145" height="144.5"/>
         <image name="ic_user_circle" width="18" height="19"/>
-        <image name="ic_white_logo" width="92" height="40"/>
+        <image name="ic_white_logo" width="250" height="90"/>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

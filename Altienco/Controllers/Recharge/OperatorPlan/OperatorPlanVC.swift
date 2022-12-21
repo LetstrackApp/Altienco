@@ -8,7 +8,6 @@
 
 import UIKit
 import StripeCore
-import PopupDialog
 class OperatorPlanVC: FloatingPannelHelper {
     
     var OperatorID = 0
@@ -127,8 +126,8 @@ class OperatorPlanVC: FloatingPannelHelper {
                                                     color: UIColor.init(0xb24a96),
                                                     font: UIFont.SF_Medium(18))
         
-        self.selectDenomination.changeColorAndFont(mainString: lngConst.pleaseSelectDenomination,
-                                                   stringToColor: lngConst.denomination,
+        self.selectDenomination.changeColorAndFont(mainString: lngConst.pleaseSelectDenomination.capitalized,
+                                                   stringToColor: lngConst.denomination.capitalized,
                                                    color: .black,
                                                    font: UIFont.SF_Regular(16))
         
@@ -369,18 +368,18 @@ extension OperatorPlanVC {
         viewController.operatorID = operatorID
         viewController.isEdit = false
         viewController.planName = planName
-        let popup = PopupDialog(viewController: viewController,
-                                buttonAlignment: .horizontal,
-                                transitionStyle: .bounceUp,
-                                tapGestureDismissal: false,
-                                panGestureDismissal: false)
+//        let popup = PopupDialog(viewController: viewController,
+//                                buttonAlignment: .horizontal,
+//                                transitionStyle: .bounceUp,
+//                                tapGestureDismissal: false,
+//                                panGestureDismissal: false)
         
         // Create first button
         
         // Present dialog
-        present(popup, animated: true, completion: nil)
-//        viewController.modalPresentationStyle = .overFullScreen
-//        self.navigationController?.present(viewController, animated: true)
+//        present(popup, animated: true, completion: nil)
+        viewController.modalPresentationStyle = .overFullScreen
+        self.navigationController?.present(viewController, animated: true)
     }
     
     @IBAction func redirectProfile(_ sender: Any) {

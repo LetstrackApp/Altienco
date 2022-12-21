@@ -62,12 +62,16 @@ class ReferAppVC: UIViewController {
     
     @IBOutlet var textfields : [BackTextField]!
     var isFromHome = false
+    convenience init() {
+        self.init(nibName: xibName.referAppVC, bundle: nil)
+    }
     
     //MARK:- View life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
         self.setupTextfields()
+        self.setupLeftnavigation()
     }
     
     func setupView(){

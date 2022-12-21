@@ -13,7 +13,7 @@ protocol BackToUKRechargeDelegate{
 }
 
 class ReviewPopupVC: UIViewController {
-     var mobileNumber : String?
+    var mobileNumber : String?
     var operatorID = 0
     var denomination = 0
     var operatorTitle = ""
@@ -49,7 +49,7 @@ class ReviewPopupVC: UIViewController {
     @IBOutlet weak var denominationValue: UILabel!
     @IBOutlet weak var confirmButton: UIButton!{
         didSet{
-                self.confirmButton.setupNextButton(title: "CONFIRM ORDER")
+            self.confirmButton.setupNextButton(title: "CONFIRM ORDER")
         }
     }
     @IBOutlet weak var editButton: UIButton!
@@ -68,16 +68,25 @@ class ReviewPopupVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupView()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) { [weak self] in
+            self?.setupBgColor()
+        }
+    }
+    
+    func setupBgColor(){
+        UIView.animate(withDuration: 1) {
+            self.view.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-       
+        
     }
     
- 
+    
     
     @IBAction func confirmOrder(_ sender: Any) {
         self.confirmButton.isEnabled = false
@@ -93,19 +102,19 @@ class ReviewPopupVC: UIViewController {
                 self.alert(message: msg ?? "", title: "Alert")
             }
             else{
-            DispatchQueue.main.async { [weak self] in
-                self?.confirmButton.isEnabled = true
-                if result != nil, let data = result{
-                    DispatchQueue.main.async{
-                        self?.dismiss(animated: false) {
-                            self?.delegate?.BackToPrevious(status: true, result: data)
+                DispatchQueue.main.async { [weak self] in
+                    self?.confirmButton.isEnabled = true
+                    if result != nil, let data = result{
+                        DispatchQueue.main.async{
+                            self?.dismiss(animated: false) {
+                                self?.delegate?.BackToPrevious(status: true, result: data)
+                            }
                         }
                     }
                 }
             }
         }
-        }
-}
+    }
     
     @IBAction func homeBuuton(_ sender: Any) {
         DispatchQueue.main.async {
@@ -124,5 +133,5 @@ class ReviewPopupVC: UIViewController {
             mobileNumberVIew.isHidden = true
         }
     }
-
+    
 }

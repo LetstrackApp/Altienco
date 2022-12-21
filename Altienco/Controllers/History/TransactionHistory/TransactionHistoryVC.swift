@@ -265,8 +265,8 @@ extension TransactionHistoryVC: UITableViewDelegate, UITableViewDataSource {
             if let amount = model.amount{
             cell.amount.text = (model.currency ?? "") + "\(amount)"
             }
-            if model.transactionTypeID == 2 || model.transactionTypeID == 5 {
-//        if model.transactionTypeID == 2  {
+//            if model.transactionTypeID == 2 || model.transactionTypeID == 5 {
+        if model.transactionTypeID == 2  {
 
                 cell.repeatContainer.isHidden = false
             }

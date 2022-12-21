@@ -142,12 +142,21 @@ the 16 digit pin
     func txnSucessMeg(amount:String) -> String {
         return "You've added \(amount) successfully in your altienco wallet"
     }
-    
+    let reasonerror =  "Please select reason"
+
     let reason =  "Reason"
     let reasonDes = "Please be really specific, so we can help you the best we can."
     let reasonTitle  = "Send us a message"
     let orderidHint = "This is the 9-digit code which can\nbe found in the subject of your\nconfirmation email"
     
+    let shareMsgOncontactUS = """
+Thank you for getting in touch!
+    
+We appreciate you contacting us. One of our colleagues will get back in touch within 48 hours. We are open Mon to Fri 9.30 am to 5.30 pm.
+
+Have a great day!
+"""
+
 }
 
 

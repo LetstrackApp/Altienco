@@ -59,6 +59,7 @@ class AFWrapper: NSObject {
                     if responseObject.response!.statusCode == 401 {
                         SVProgressHUD.dismiss()
                         Helper.showToast(lngConst.supportMsg, delay: Helper.DELAY_SHORT)
+                        failure(lngConst.supportMsg)
                     }
                     else if responseObject.response!.statusCode == 403{
                         AlertController.alert(title: "You have been logged out",
@@ -66,6 +67,7 @@ class AFWrapper: NSObject {
                                               buttons: ["Ok"]) { (action, index) in
                             appDelegate.setupLogout()
                         }
+                        failure("You have been logged out. kindly login again")
                     }
                     else if responseObject.response!.statusCode < 401{
                         success(data)
@@ -80,7 +82,13 @@ class AFWrapper: NSObject {
                         
                         //                    Helper.showToast("Please try agian later", delay: Helper.DELAY_SHORT)
                     }
-                }}
+                }else {
+                    Helper.showToast(lngConst.supportMsg, delay: Helper.DELAY_SHORT)
+                    failure(lngConst.supportMsg)
+
+                }
+                
+            }
             if responseObject.result.isFailure {
                 //                Helper.showToast(responseObject.result.error!.localizedDescription , delay:Helper.DELAY_LONG)
                 failure(responseObject.result.error?.localizedDescription)

@@ -8,7 +8,9 @@
 
 import UIKit
 import DropDown
-import StripePaymentsUI
+
+
+
 
 class ContactUSVC: UIViewController {
     lazy  var dropDown : DropDown = {
@@ -47,6 +49,8 @@ class ContactUSVC: UIViewController {
             reasionView.layer.borderWidth = 1
         }
     }
+    
+    
     @IBOutlet weak var email: UITextField! {
         didSet {
             email.font = UIFont.SF_Regular(14)
@@ -75,9 +79,10 @@ class ContactUSVC: UIViewController {
             
         }
     }
-    @IBOutlet weak var attachmentBtn: UIButton! {
+    @IBOutlet weak var attachmentBtn: LoadingButton! {
         didSet {
             attachmentBtn.setTitle(lngConst.addAttachments, for: .normal)
+            attachmentBtn.addTarget(self, action: #selector(openImageAction(_:)), for: .touchUpInside)
         }
     }
     @IBOutlet weak var attachemtView: UIView!{
@@ -113,6 +118,7 @@ class ContactUSVC: UIViewController {
             reasionDes.layer.borderWidth = 1
             reasionDes.placeholder = lngConst.reasonDescription
             reasionDes.font = UIFont.SF_Regular(14)
+            
             reasionDes.delegate = self
             
             
@@ -195,18 +201,17 @@ class ContactUSVC: UIViewController {
                 self.resionBtm.setTitleColor(.black, for: .normal)
                 self.resionBtm.setTitle(value, for: .normal)
                 let des = self.viewModel?.reasonModel[index].description
-                self.reasionDes.text = des
-                
-                if let placeholderLabel = self.reasionDes.viewWithTag(100) as? UILabel {
-                    placeholderLabel.isHidden = !self.reasionDes.text.isEmpty
-                }
+                let id =  self.viewModel?.reasonModel[index].id ?? 0
+                self.viewModel?.reasonID = id
                 self.viewModel?.reasonDes = des
+                
                 //                self.viewModel?.reasonID = self.viewModel?.reasonModel[index].id ?? 0
             }
         }
     }
     @IBAction func getReasonValues(_ sender : UIButton){
-        
+        self.view.endEditing(true)
+        Helper.hideToast()
         if viewModel?.reasonModel.count ?? 0 > 0 {
             setReasonValue()
         }else {
@@ -228,13 +233,39 @@ class ContactUSVC: UIViewController {
     
     @IBAction func sendMessageToServer(_ sender : UIButton) {
         self.view.endEditing(true)
+        Helper.hideToast()
         switch viewModel?.validateFileds() {
         case .Invalid(let error ):
-            Helper.showToast(error)
-        default : break
+            Helper.showToast(error,position:.center)
+        default :
+            self.view.isUserInteractionEnabled = false
+            self.sendButton.showLoading()
+            viewModel?.sunbmitDataToserver { result in
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.sendButton.hideLoading()
+//                    if result == true {
+//                        self.navigationController?.popToRootViewController(animated: true)
+//                    }
+                }
+            }
         }
     }
     
+    @IBAction func openImageAction(_ sender: Any) {
+        CameraBuffer().pickImage(self){ image in
+            DispatchQueue.main.async {
+                self.view.isUserInteractionEnabled = false
+                self.attachmentBtn.showLoading()
+                self.viewModel?.imageUplaod(image: image) { result in
+                    DispatchQueue.main.async{
+                        self.view.isUserInteractionEnabled = true
+                        self.attachmentBtn.hideLoading()
+                    }
+                }
+            }
+        }
+    }
     
     @IBAction func infoIcon(_ sender: Any) {
         if viewModel?.infoSelected == true {
@@ -242,7 +273,7 @@ class ContactUSVC: UIViewController {
             orderiDText.setError()
         }else {
             viewModel?.infoSelected = true
-            orderiDText.setError(lngConst.orderidHint, show: true,constent: -11)
+            orderiDText.setError(lngConst.orderidHint, show: true,constent: -11,showImage: false)
         }
     }
 }
@@ -263,10 +294,60 @@ extension ContactUSVC : UITextFieldDelegate {
         }
     }
     
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        var result = true
+        let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        if textField == name{
+            let disallowedCharacterSet = NSCharacterSet(charactersIn:textfiledchar.ACCEPTABLE_CHARACTERS).inverted
+            let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
+            result = replacementStringIsLegal
+        }
+        
+        if textField == mobile{
+            let disallowedCharacterSet = NSCharacterSet(charactersIn:textfiledchar.circleCode).inverted
+            let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
+            result = replacementStringIsLegal
+        }
+        
+        if (textField == mobile) && result == true {
+            return newString.count <= 10
+        }
+        if (textField == name || (textField == email)) && result == true {
+            return newString.count <= 40
+        }
+        if (textField == orderiDText) && result == true {
+            return newString.count <= 25
+        }
+        return result
+    }
+    
 }
 
 extension ContactUSVC : UITextViewDelegate {
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        var result = true
+        let newString = (textView.text! as NSString).replacingCharacters(in: range, with: text)
+        
+        if textView == reasionDes  {
+            let disallowedCharacterSet = NSCharacterSet(charactersIn:textfiledchar.circleNumaricAlpha).inverted
+            let replacementStringIsLegal = text.rangeOfCharacter(from: disallowedCharacterSet) == nil
+            result = replacementStringIsLegal
+        }
+        
+        if (textView == reasionDes  && result == true) {
+            return newString.count <= 100
+        }
+        
+        
+        return result
+    }
+    
+    public func textViewDidChange(_ textView: UITextView) {
+        if let placeholderLabel = textView.viewWithTag(100) as? UILabel {
+            placeholderLabel.isHidden = !textView.text.isEmpty
+        }
+    }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView == reasionDes {

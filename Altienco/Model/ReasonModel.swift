@@ -17,3 +17,34 @@ struct ReasonModel: Decodable {
         self.reason = json["reason"] as? String
     }
 }
+
+struct ResasonSubmit: Encodable {
+    let userId: Int?
+    let requesterName: String?
+    let requesterEmail: String?
+    let requesterMobile: String?
+    let requesterReasonId: Int?
+    let requesterRemarks: String?
+    let attachmentPath: String?
+    let orderId: String?
+    init (userId: Int?,
+          requesterName: String?,
+          requesterEmail: String?,
+          requesterMobile: String?,
+          requesterReasonId: Int?,
+          requesterRemarks: String?,
+          attachmentPath: String?,
+          orderId: String?){
+        self.userId = userId
+        self.requesterName = requesterName
+        self.requesterEmail = requesterEmail
+        self.requesterMobile = requesterMobile
+        self.requesterReasonId = requesterReasonId
+        self.requesterRemarks = requesterRemarks
+        self.attachmentPath = attachmentPath
+        self.orderId = orderId
+        
+    }
+     
+}
+

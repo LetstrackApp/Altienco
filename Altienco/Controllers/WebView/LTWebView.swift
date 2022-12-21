@@ -28,6 +28,7 @@ class LTWebView: UIViewController, WKNavigationDelegate, WKUIDelegate {
         var url = ""
         override func viewDidLoad() {
             super.viewDidLoad()
+            self.setupLeftnavigation()
             DispatchQueue.main.async {
                 self.setup()
                 self.navigationController?.navigationBar.tintColor = UIColor.black

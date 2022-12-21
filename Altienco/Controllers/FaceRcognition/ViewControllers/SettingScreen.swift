@@ -13,6 +13,11 @@ class SettingScreen: UITableViewController {
     let footerView: SettingPermissionFooterView = SettingPermissionFooterView.fromNib()
     var isLocalAuthenticationEnable: Bool = UserDefaults.standard.bool(forKey: Constants.kUD_Authentication)
     var selectedAuthTime: AuthTime = AuthTime(rawValue: UserDefaults.standard.integer(forKey: Constants.kUD_Auth_Time)) ?? .immediately
+    
+    
+    convenience init() {
+        self.init(nibName: xibName.settingScreen, bundle: nil)
+    }
 
     // MARK: - ViewController life cycle
     override func viewDidLoad() {
@@ -38,6 +43,7 @@ class SettingScreen: UITableViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.tintColor = UIColor.black
         self.navigationController?.title = (AccessControl.isFaceIDSupported() == true) ? Constants.kFaceId : Constants.kTouchId
+        self.setupLeftnavigation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

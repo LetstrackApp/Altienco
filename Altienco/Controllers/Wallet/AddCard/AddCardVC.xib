@@ -171,7 +171,7 @@
                             </subviews>
                         </stackView>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wHB-X2-na1">
-                            <rect key="frame" x="0.0" y="115.5" width="382" height="574"/>
+                            <rect key="frame" x="0.0" y="95.5" width="382" height="594"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ko-wt-e81">
                                     <rect key="frame" x="0.0" y="0.0" width="382" height="561.5"/>
@@ -188,8 +188,8 @@
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rO9-1o-beD">
                                                                     <rect key="frame" x="0.0" y="0.0" width="382" height="31"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add money from " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isn-8P-Ixe">
-                                                                            <rect key="frame" x="15" y="0.0" width="156" height="21"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Money From " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isn-8P-Ixe">
+                                                                            <rect key="frame" x="15" y="0.0" width="155.5" height="21"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="21" id="T1N-vQ-oth"/>
                                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" id="wr6-pw-TEO"/>
@@ -198,8 +198,8 @@
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="altienco card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZb-p9-Z6t">
-                                                                            <rect key="frame" x="174" y="0.0" width="120.5" height="21"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Altienco Card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZb-p9-Z6t">
+                                                                            <rect key="frame" x="173.5" y="0.0" width="124" height="21"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="21" id="nNt-jS-Qq1"/>
                                                                             </constraints>
@@ -627,7 +627,7 @@
                         <constraint firstItem="0ko-wt-e81" firstAttribute="height" secondItem="zVs-jj-ejB" secondAttribute="height" priority="100" constant="100" id="NMK-wZ-tD9"/>
                         <constraint firstItem="wHB-X2-na1" firstAttribute="leading" secondItem="zVs-jj-ejB" secondAttribute="leading" id="UOT-Eq-feF"/>
                         <constraint firstItem="wHB-X2-na1" firstAttribute="trailing" secondItem="zVs-jj-ejB" secondAttribute="trailing" id="XAC-un-ebk"/>
-                        <constraint firstItem="wHB-X2-na1" firstAttribute="top" secondItem="wII-RO-Dab" secondAttribute="bottom" constant="20" id="etq-yI-POJ"/>
+                        <constraint firstItem="wHB-X2-na1" firstAttribute="top" secondItem="wII-RO-Dab" secondAttribute="bottom" id="etq-yI-POJ"/>
                         <constraint firstAttribute="bottom" secondItem="wHB-X2-na1" secondAttribute="bottom" constant="20" id="fya-yZ-evo"/>
                     </constraints>
                 </view>

@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LTWebView" customModule="LMDispatcher" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LTWebView" customModule="Altienco" customModuleProvider="target">
             <connections>
                 <outlet property="ltWebView" destination="5wL-GH-vyj" id="iwR-Dg-QXA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="viewController" destination="HQh-FK-ztF" id="naE-1x-5Fh"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -21,41 +19,24 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQh-FK-ztF">
+                <wkWebView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wL-GH-vyj">
                     <rect key="frame" x="0.0" y="44" width="414" height="852"/>
-                    <subviews>
-                        <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wL-GH-vyj">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="852"/>
-                            <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <wkWebViewConfiguration key="configuration">
-                                <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                <wkPreferences key="preferences"/>
-                            </wkWebViewConfiguration>
-                        </wkWebView>
-                    </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <constraints>
-                        <constraint firstAttribute="bottom" secondItem="5wL-GH-vyj" secondAttribute="bottom" id="F3t-27-31L"/>
-                        <constraint firstItem="5wL-GH-vyj" firstAttribute="top" secondItem="HQh-FK-ztF" secondAttribute="top" id="QTx-vz-GtK"/>
-                        <constraint firstItem="5wL-GH-vyj" firstAttribute="leading" secondItem="HQh-FK-ztF" secondAttribute="leading" id="YQD-Ra-bbr"/>
-                        <constraint firstAttribute="trailing" secondItem="5wL-GH-vyj" secondAttribute="trailing" id="hnZ-re-gDr"/>
-                    </constraints>
-                </view>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <wkWebViewConfiguration key="configuration">
+                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                        <wkPreferences key="preferences"/>
+                    </wkWebViewConfiguration>
+                </wkWebView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="E6e-hM-qi9"/>
-            <color key="backgroundColor" red="0.1529411765" green="0.23529411759999999" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="HQh-FK-ztF" firstAttribute="trailing" secondItem="E6e-hM-qi9" secondAttribute="trailing" id="6XC-fq-has"/>
-                <constraint firstAttribute="bottom" secondItem="HQh-FK-ztF" secondAttribute="bottom" id="C4P-iZ-ykA"/>
-                <constraint firstItem="HQh-FK-ztF" firstAttribute="top" secondItem="E6e-hM-qi9" secondAttribute="top" id="IwH-Tk-Uab"/>
-                <constraint firstItem="HQh-FK-ztF" firstAttribute="leading" secondItem="E6e-hM-qi9" secondAttribute="leading" id="e2K-3E-bqJ"/>
+                <constraint firstItem="5wL-GH-vyj" firstAttribute="trailing" secondItem="E6e-hM-qi9" secondAttribute="trailing" id="7bo-PX-zu3"/>
+                <constraint firstItem="5wL-GH-vyj" firstAttribute="top" secondItem="E6e-hM-qi9" secondAttribute="top" id="TPO-1X-A18"/>
+                <constraint firstAttribute="bottom" secondItem="5wL-GH-vyj" secondAttribute="bottom" id="nO0-m7-orN"/>
+                <constraint firstItem="5wL-GH-vyj" firstAttribute="leading" secondItem="E6e-hM-qi9" secondAttribute="leading" id="v4m-wY-Pra"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="88.392857142857139"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

@@ -8,6 +8,20 @@
 
 import UIKit
 
+public enum textfiledchar {
+    public static let ACCEPTABLE_CHARACTERS  = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
+    public static let chassisPlaceHolder     = "Chassis Last 4 Digit"
+    public static let NumaricAlpha           = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890 "
+    public static let AlphaNumaricwithCharecter = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890.@-_, "
+    public static let phpad = "1234567890+ "
+    public static let NUMARIC = "1234567890 "
+    public static let circleCode = "1234567890"
+    public static let circleNumaricAlpha           = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890!@#%&*()+_-{}[]~ "
+    public static let AlphaNumaricwithCharecterwithOUtSpace = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890!@#%&*()+_-{}[]~"
+}
+
+
+
 class Constants: NSObject {
 
     //application constant
