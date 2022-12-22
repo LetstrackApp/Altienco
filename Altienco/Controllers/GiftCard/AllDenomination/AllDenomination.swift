@@ -150,7 +150,7 @@ class AllDenomination: UIViewController{
         else{
             self.logoImage.image = UIImage(named: "ic_operatorLogo")
         }
-//            self.logoContainer.backgroundColor = backgroundCode
+        //            self.logoContainer.backgroundColor = backgroundCode
     }
     
     func initiateModel() {
@@ -192,19 +192,19 @@ class AllDenomination: UIViewController{
         else{
             self.viewMoreContainer.isHidden = true
         }
-            
+        
     }
     var showMoreClicked = false
     @IBAction func showMoreDesc(_ sender: Any) {
         if self.showMoreClicked == false{  self.showMoreClicked = true
             self.moreTextContainer.isHidden = false
-//            self.descActionText.text = "Hide"
+            //            self.descActionText.text = "Hide"
         }else{
             self.showMoreClicked = false
             self.moreTextContainer.isHidden = true
-//            self.descActionText.text = "View more"
+            //            self.descActionText.text = "View more"
         }
-         
+        
     }
     
     @IBAction func reviewGiftCard(_ sender: Any) {
@@ -213,28 +213,28 @@ class AllDenomination: UIViewController{
             guard let walletBal = UserDefaults.getUserData?.walletAmount else {return}
             if Int(selectedAmount) > Int(walletBal ) {
                 let alertController = UIAlertController(title: "Insufficent Balance", message: "Please add wallet balance", preferredStyle: .alert)
-                    // Create the actions
+                // Create the actions
                 let okAction = UIAlertAction(title: "ADD", style: UIAlertAction.Style.default) {
-                        UIAlertAction in
+                    UIAlertAction in
                     let viewController: WalletPaymentVC = WalletPaymentVC()
                     self.navigationController?.pushViewController(viewController, animated: true)
-                    }
+                }
                 let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) {
-                        UIAlertAction in
-                        NSLog("Cancel Pressed")
-                    }
-                    // Add the actions
+                    UIAlertAction in
+                    NSLog("Cancel Pressed")
+                }
+                // Add the actions
                 
                 alertController.addAction(okAction)
                 alertController.addAction(cancelAction)
                 self.present(alertController, animated: true, completion: nil)
             }
             else{
-        DispatchQueue.main.async {
-            if let selectedPlan = self.viewModel?.searchFixedGiftCard.value[self.SelectedIndex]{
-                self.callReviewPopup(PlanType: 2, selectedPlan: selectedPlan)
-            }
-            }
+                DispatchQueue.main.async {
+                    if let selectedPlan = self.viewModel?.searchFixedGiftCard.value[self.SelectedIndex]{
+                        self.callReviewPopup(PlanType: 2, selectedPlan: selectedPlan)
+                    }
+                }
             }
         }
     }
@@ -260,25 +260,38 @@ class AllDenomination: UIViewController{
         
     }
     func callReviewPopup(PlanType: Int, selectedPlan : FixedGiftResponseObj){
-        let vc: ReviewGiftCardVC = ReviewGiftCardVC()
-        vc.delegate = self
-        vc.planType = planType
-        vc.selectedFixedPlan = selectedPlan
-        vc.modalPresentationStyle = .overFullScreen
-        vc.view.backgroundColor = .clear
-        self.present(vc, animated: false, completion: nil)
-    }
-
-}
-extension AllDenomination: BackTOGiftCardDelegate {
-    func BackToPrevious(dismiss: Bool, result: ConfirmIntrResponseObj?) {
-        if dismiss, let data = result{
-            if let selectedPlan = self.viewModel?.searchFixedGiftCard.value[self.SelectedIndex]{
-                self.setupWalletBal(walletBal: data.walletAmount ?? 0.0)
-                self.successVoucher(denominationVal: selectedPlan.retailAmount ?? 0.0, confirmObj: data, giftCardName: selectedPlan.operatorName ?? "")
-                
+        ReviewGiftCardVC.initialization().showAlert(usingModel: selectedPlan,
+                                                    planType: planType) { result, isSuscess in
+            if isSuscess == true {
+                DispatchQueue.main.async {
+                    if isSuscess, let data = result{
+                        if let selectedPlan = self.viewModel?.searchFixedGiftCard.value[self.SelectedIndex]{
+                            self.setupWalletBal(walletBal: data.walletAmount ?? 0.0)
+                            self.successVoucher(denominationVal: selectedPlan.retailAmount ?? 0.0, confirmObj: data, giftCardName: selectedPlan.operatorName ?? "")
+                            
+                        }
+                    }
+                }
             }
-        }}}
+        }
+        //vc.delegate = self
+        //        vc.planType = planType
+        //        vc.selectedFixedPlan = selectedPlan
+        //        vc.modalPresentationStyle = .overFullScreen
+        //        vc.view.backgroundColor = .clear
+        //        self.present(vc, animated: false, completion: nil)
+    }
+    
+}
+//extension AllDenomination: BackTOGiftCardDelegate {
+//    func BackToPrevious(dismiss: Bool, result: ConfirmIntrResponseObj?) {
+//        if dismiss, let data = result{
+//            if let selectedPlan = self.viewModel?.searchFixedGiftCard.value[self.SelectedIndex]{
+//                self.setupWalletBal(walletBal: data.walletAmount ?? 0.0)
+//                self.successVoucher(denominationVal: selectedPlan.retailAmount ?? 0.0, confirmObj: data, giftCardName: selectedPlan.operatorName ?? "")
+//
+//            }
+//        }}}
 
 
 extension AllDenomination: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -296,19 +309,19 @@ extension AllDenomination: UICollectionViewDelegate, UICollectionViewDataSource,
             cell.viewContainer.backgroundColor = .white
             cell.plansValue.textColor = appColor.blackText
         }
-//        cell.isHighlighted = true
+        //        cell.isHighlighted = true
         if let planVlaue = self.viewModel?.searchFixedGiftCard.value[indexPath.row].retailAmount, let currency = self.viewModel?.searchFixedGiftCard.value[indexPath.row].currencySymbol {
             cell.plansValue.text = currency + " " + String(format: "%.2f", planVlaue)
         }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if indexPath.row < self.viewModel?.operatorPlanList.value.count ?? 0{
-//            DispatchQueue.main.async {
-                self.SelectedIndex = indexPath.row
-                self.denominationCollection.reloadData()
-//            }
-//        }
+        //        if indexPath.row < self.viewModel?.operatorPlanList.value.count ?? 0{
+        //            DispatchQueue.main.async {
+        self.SelectedIndex = indexPath.row
+        self.denominationCollection.reloadData()
+        //            }
+        //        }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
@@ -321,11 +334,11 @@ extension AllDenomination: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets.zero
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
@@ -338,7 +351,7 @@ extension AllDenomination: UICollectionViewDelegate, UICollectionViewDataSource,
             }
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         UIView.animate(withDuration: 1.0) {
             if let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell {
@@ -350,5 +363,5 @@ extension AllDenomination: UICollectionViewDelegate, UICollectionViewDataSource,
     
     
     
-
+    
 }

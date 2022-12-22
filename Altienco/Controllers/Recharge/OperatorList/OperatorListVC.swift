@@ -304,16 +304,26 @@ class OperatorListVC: FloatingPannelHelper {
             currency = model?.currency ?? ""
             denomination = model?.voucherAmount ?? 0
             operatorID = model?.operatorID ?? 0
-            let viewController: ReviewPopupVC = ReviewPopupVC()
-            viewController.delegate = self
-            viewController.denomination = denomination
-            viewController.currency = currency
-            viewController.operatorTitle = operatorTitle
-            viewController.operatorID = operatorID
-            viewController.isEdit = false
-            viewController.planName = planName
-            viewController.modalPresentationStyle = .overFullScreen
-            self.navigationController?.present(viewController, animated: true)
+//            let viewController: ReviewPopupVC = ReviewPopupVC()
+//            viewController.delegate = self
+            let reviewPopupModel = ReviewPopupModel.init(mobileNumber: nil,
+                                              operatorID: operatorID,
+                                              denomination: denomination,
+                                              operatorTitle: operatorTitle,
+                                              planName: planName,
+                                              currency: currency,
+                                              isEdit:false,
+                                                         transactionTypeId: TransactionTypeId.PhoneRecharge.rawValue)
+            ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result, status in
+                DispatchQueue.main.async {
+                    if status == true, let val = result{
+                        self.successVoucher(mPin: val.mPIN ?? "", denominationValue: "\(val.dinominationValue ?? 0)", walletBalance: val.walletAmount ?? 0.0, msgToShare: val.msgToShare ?? "", voucherID: val.voucherID ?? 0)
+                    }
+                }
+            }
+//            viewController.reviewPopupModel = reviewPopupModel
+//            viewController.modalPresentationStyle = .overFullScreen
+//            self.navigationController?.present(viewController, animated: true)
         }
     }
     func callOperatorPlans(operatorID: Int, imageURL: String, OperatorName: String){
@@ -324,13 +334,13 @@ class OperatorListVC: FloatingPannelHelper {
     }
 }
 
-extension OperatorListVC: BackToUKRechargeDelegate {
-    func BackToPrevious(status: Bool, result: GenerateVoucherResponseObj?) {
-        if status, let val = result{
-            self.successVoucher(mPin: val.mPIN ?? "", denominationValue: "\(val.dinominationValue ?? 0)", walletBalance: val.walletAmount ?? 0.0, msgToShare: val.msgToShare ?? "", voucherID: val.voucherID ?? 0)
-        }
-    }
-}
+//extension OperatorListVC: BackToUKRechargeDelegate {
+//    func BackToPrevious(status: Bool, result: GenerateVoucherResponseObj?) {
+//        if status, let val = result{
+//            self.successVoucher(mPin: val.mPIN ?? "", denominationValue: "\(val.dinominationValue ?? 0)", walletBalance: val.walletAmount ?? 0.0, msgToShare: val.msgToShare ?? "", voucherID: val.voucherID ?? 0)
+//        }
+//    }
+//}
 
 
 extension OperatorListVC: SkeletonCollectionViewDataSource,

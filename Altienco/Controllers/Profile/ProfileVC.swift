@@ -218,7 +218,6 @@ class ProfileVC: UIViewController {
     
     func initializeView()
     {
-        self.setupNav(title: "")
         
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "cancel"), for: .normal)

@@ -49,7 +49,8 @@ class ReasionViewModel {
 extension ReasionViewModel: ResionAPi {
     
     
-    func imageUplaod(image:UIImage,completion:@escaping(Bool?)->Void)  {
+    func imageUplaod(image:UIImage,
+                     completion:@escaping(Bool?)->Void)  {
         
         let data = image.jpegData(compressionQuality: 0.4)
         let parameters: [String : Any] = ["file": data!,
@@ -85,7 +86,7 @@ extension ReasionViewModel: ResionAPi {
             debugPrint("jsondata:", strURl, jsondata as Any)
             //,let data = jsondata?["data"] as? [String : Any]
             if jsondata?["Message_Code"] as? Int == 1 {
-                Helper.showToast(lngConst.shareMsgOncontactUS ?? "", delay:Helper.DELAY_LONG)
+               // Helper.showToast(lngConst.shareMsgOncontactUS, delay:Helper.DELAY_LONG)
                 completion(true)
             }
             else{

@@ -14,10 +14,7 @@ class SettingScreen: UITableViewController {
     var isLocalAuthenticationEnable: Bool = UserDefaults.standard.bool(forKey: Constants.kUD_Authentication)
     var selectedAuthTime: AuthTime = AuthTime(rawValue: UserDefaults.standard.integer(forKey: Constants.kUD_Auth_Time)) ?? .immediately
     
-    
-    convenience init() {
-        self.init(nibName: xibName.settingScreen, bundle: nil)
-    }
+  
 
     // MARK: - ViewController life cycle
     override func viewDidLoad() {

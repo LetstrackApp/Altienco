@@ -233,6 +233,10 @@ class circularBTN : UIButton{
 extension UIViewController {
     
     func setUpCenterViewNvigation(){
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+
         let container = UIImageView()
         container.contentMode = .scaleAspectFit
         container.backgroundColor = .clear
@@ -242,11 +246,16 @@ extension UIViewController {
         container.clipsToBounds = true
         container.layer.cornerRadius = 20
         self.navigationItem.titleView = container
+        container.addTarget(target: self, action: #selector(backToHomeScreen))
         
     }
     
     
     func setupLeftnavigation(){
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+
       let image =  UIImage(named: "ic_back_nav")?.withInset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10))
         let buttonItem = UIBarButtonItem(image: image,
                                          landscapeImagePhone: nil,
@@ -270,32 +279,33 @@ extension UIViewController {
         }
     }
     
-    
-    func setupNav( title : String){
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        let backButton = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 60))
-        backButton.contentHorizontalAlignment = .leading
-        backButton.setImage(UIImage(named: ""), for: .normal)
-        backButton.tintColor = .white
-        backButton.addTarget(self, action: #selector(backTab), for: .touchUpInside)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        self.navigationItem.title = title
-        let clickableBtn = UIButton(type: .custom)
-        clickableBtn.backgroundColor = .clear
-        clickableBtn.frame = CGRect(x:(self.view.frame.size.width/3), y:0, width: 100, height: 50)
-        clickableBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        navigationController?.navigationBar.addSubview(clickableBtn)
-    }
-    
-    @objc func goBack(){
+    @IBAction func backToHomeScreen () {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
-    @IBAction func backTab(){
-        self.navigationController?.popViewController(animated: true)
-    }
+    
+//    func setupNav( title : String){
+//        let backButton = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 60))
+//        backButton.contentHorizontalAlignment = .leading
+//        backButton.setImage(UIImage(named: ""), for: .normal)
+//        backButton.tintColor = .white
+//        backButton.addTarget(self, action: #selector(backTab), for: .touchUpInside)
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+//        self.navigationItem.title = title
+//        let clickableBtn = UIButton(type: .custom)
+//        clickableBtn.backgroundColor = .clear
+//        clickableBtn.frame = CGRect(x:(self.view.frame.size.width/3), y:0, width: 100, height: 50)
+//        clickableBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+//        navigationController?.navigationBar.addSubview(clickableBtn)
+//    }
+//
+//    @objc func goBack(){
+//        self.navigationController?.popToRootViewController(animated: true)
+//    }
+//
+//    @IBAction func backTab(){
+//        self.navigationController?.popViewController(animated: true)
+//    }
 }
 
 

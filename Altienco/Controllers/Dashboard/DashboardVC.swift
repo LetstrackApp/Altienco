@@ -324,7 +324,6 @@ class DashboardVC: UIViewController {
     
     func initializeView()
     {
-        self.setupNav(title: "")
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "ic_menu_black_24dp"), for: .normal)
         button.setTitle("Menu", for: .normal)
@@ -514,15 +513,16 @@ extension DashboardVC {
     func showWallet()
     {
         
-//            let obj = AlertViewVC.init(type: .transactionSucessfull(amount: "11000"))
-//            obj.modalPresentationStyle = .overFullScreen
-//            self.present(obj, animated: false, completion: nil)
-//            obj.onCompletion = {
-//                //self?.navigationController?.popToRootViewController(animated: true)
-//            }
-            
-            
-
+       
+        //            let obj = AlertViewVC.init(type: .transactionSucessfull(amount: "11000"))
+        //            obj.modalPresentationStyle = .overFullScreen
+        //            self.present(obj, animated: false, completion: nil)
+        //            obj.onCompletion = {
+        //                //self?.navigationController?.popToRootViewController(animated: true)
+        //            }
+        
+        
+        
         let viewController: WalletPaymentVC = WalletPaymentVC()
         self.navigationController?.pushViewController(viewController, animated: true)
     }

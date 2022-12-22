@@ -470,15 +470,30 @@ class TopupVC: UIViewController, UITextFieldDelegate {
     
     
     func callSuccessPopup(){
-        if let currentOperator = self.selectedOperator{
-            let viewController: ReviewIntrVC = ReviewIntrVC()
-            viewController.delegate = self
-            viewController.countryModel = self.countryModel
-            viewController.selectedOperator = currentOperator
-            viewController.planHistoryResponse = self.planHistoryResponse
-            viewController.mobileNumberValue = self.mobileNumber.text ?? ""
-            viewController.modalPresentationStyle = .overFullScreen
-            self.navigationController?.present(viewController, animated: true)
+        if let currentOperator = self.selectedOperator {
+            ReviewIntrVC.initialization().showAlert(usingModel: planHistoryResponse,
+                                                    countryModel: self.countryModel,
+                                                    selectedOperator: currentOperator,
+                                                    mobileNumberValue: self.mobileNumber.text?.trimWhiteSpace) { result, isSuccess in
+                DispatchQueue.main.async {
+                    if isSuccess, let data = result{
+                            self.successVoucher(walletBalance: data.walletAmount ?? 0.0,
+                                                currencySymbol: data.currency ?? "",
+                                                processStatusID: data.processStatusID ?? 0,
+                                                externalId: data.externalID ?? "0")
+                    }
+                }
+
+            }
+           
+//            let viewController: ReviewIntrVC = ReviewIntrVC()
+//            viewController.delegate = self
+//            viewController.countryModel = self.countryModel
+//            viewController.selectedOperator = currentOperator
+//            viewController.planHistoryResponse = self.planHistoryResponse
+//            viewController.mobileNumberValue = self.mobileNumber.text ?? ""
+//            viewController.modalPresentationStyle = .overFullScreen
+//            self.navigationController?.present(viewController, animated: true)
         }
         
 
@@ -486,12 +501,12 @@ class TopupVC: UIViewController, UITextFieldDelegate {
 }
 
 
-extension TopupVC: BackTOGiftCardDelegate {
-    func BackToPrevious(dismiss: Bool, result: ConfirmIntrResponseObj?) {
-        if dismiss, let data = result{
-            self.successVoucher(walletBalance: data.walletAmount ?? 0.0, currencySymbol: data.currency ?? "",processStatusID: data.processStatusID ?? 0, externalId: data.externalID ?? "0")
-        }
-    }}
+//extension TopupVC: BackTOGiftCardDelegate {
+//    func BackToPrevious(dismiss: Bool, result: ConfirmIntrResponseObj?) {
+//        if dismiss, let data = result{
+//            self.successVoucher(walletBalance: data.walletAmount ?? 0.0, currencySymbol: data.currency ?? "",processStatusID: data.processStatusID ?? 0, externalId: data.externalID ?? "0")
+//        }
+//    }}
 
 extension TopupVC: searchDelegate,UIScrollViewDelegate  {
     

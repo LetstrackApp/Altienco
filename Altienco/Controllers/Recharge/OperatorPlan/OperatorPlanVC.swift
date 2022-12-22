@@ -259,13 +259,13 @@ class OperatorPlanVC: FloatingPannelHelper {
     
 }
 
-extension OperatorPlanVC: BackToUKRechargeDelegate {
-    func BackToPrevious(status: Bool, result: GenerateVoucherResponseObj?) {
-        if status, let val = result{
-            self.successVoucher(mPin: val.mPIN ?? "", denominationValue: "\(val.dinominationValue ?? 0)", walletBalance: val.walletAmount ?? 0.0, msgToShare: val.msgToShare ?? "", voucherID: val.voucherID ?? 0)
-        }
-    }
-}
+//extension OperatorPlanVC: BackToUKRechargeDelegate {
+//    func BackToPrevious(status: Bool, result: GenerateVoucherResponseObj?) {
+//        if status, let val = result{
+//            self.successVoucher(mPin: val.mPIN ?? "", denominationValue: "\(val.dinominationValue ?? 0)", walletBalance: val.walletAmount ?? 0.0, msgToShare: val.msgToShare ?? "", voucherID: val.voucherID ?? 0)
+//        }
+//    }
+//}
 
 
 
@@ -360,14 +360,26 @@ extension OperatorPlanVC {
                           currency: String,
                           operatorID: Int,
                           planName: String)  {
-        let viewController: ReviewPopupVC = ReviewPopupVC()
-        viewController.delegate = self
-        viewController.denomination = denomination
-        viewController.currency = currency
-        viewController.operatorTitle = operatorTitle
-        viewController.operatorID = operatorID
-        viewController.isEdit = false
-        viewController.planName = planName
+        
+        
+//        let viewController: ReviewPopupVC = ReviewPopupVC()
+//        viewController.delegate = self
+        let reviewPopupModel = ReviewPopupModel.init(mobileNumber: nil,
+                                          operatorID: operatorID,
+                                          denomination: denomination,
+                                          operatorTitle: operatorTitle,
+                                          planName: planName,
+                                          currency: currency,
+                                          isEdit:false,
+                                                     transactionTypeId: TransactionTypeId.PhoneRecharge.rawValue)
+        ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result, status in
+            DispatchQueue.main.async {
+                if status == true, let val = result{
+                    self.successVoucher(mPin: val.mPIN ?? "", denominationValue: "\(val.dinominationValue ?? 0)", walletBalance: val.walletAmount ?? 0.0, msgToShare: val.msgToShare ?? "", voucherID: val.voucherID ?? 0)
+                }
+            }
+        }
+//        viewController.reviewPopupModel = reviewPopupModel
 //        let popup = PopupDialog(viewController: viewController,
 //                                buttonAlignment: .horizontal,
 //                                transitionStyle: .bounceUp,
@@ -378,8 +390,8 @@ extension OperatorPlanVC {
         
         // Present dialog
 //        present(popup, animated: true, completion: nil)
-        viewController.modalPresentationStyle = .overFullScreen
-        self.navigationController?.present(viewController, animated: true)
+//        viewController.modalPresentationStyle = .overFullScreen
+//        self.navigationController?.present(viewController, animated: true)
     }
     
     @IBAction func redirectProfile(_ sender: Any) {

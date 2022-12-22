@@ -17,5 +17,9 @@ public enum xibName {
     public static let contactUSVC = "ContactUSVC"
     static let referAppVC = "ReferAppVC"
     static let settingScreen = "SettingScreen"
-    
+    static let contactUSSucessAlert = "ContactUSSucessAlert"
+    static let altienoAlert = "AltienoAlert"
+    static let reviewIntrVC = "ReviewIntrVC"
+    static let reviewGiftCardVC = "ReviewGiftCardVC"
+    static let paymentSucessPopupVC = "PaymentSucessPopupVC"
 }

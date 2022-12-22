@@ -219,27 +219,39 @@ class DenominationVC: UIViewController {
         if sender.tag < self.operatorList.count{
             self.planHistoryResponse.removeAll()
             self.planHistoryResponse.append(operatorList[sender.tag])
-            if let currentOperator = self.selectedOperator{
-                let viewController: ReviewIntrVC = ReviewIntrVC()
-                viewController.delegate = self
-                viewController.mobileNumberValue = mobileNumber
-                viewController.countryModel = self.countryModel
-                viewController.selectedOperator = currentOperator
-                viewController.planHistoryResponse = self.planHistoryResponse
-                viewController.modalPresentationStyle = .overFullScreen
-                self.navigationController?.present(viewController, animated: true)
+//            if let currentOperator = self.selectedOperator{
+//                let viewController: ReviewIntrVC = ReviewIntrVC()
+//                viewController.delegate = self
+//                viewController.mobileNumberValue = mobileNumber
+//                viewController.countryModel = self.countryModel
+//                viewController.selectedOperator = currentOperator
+//                viewController.planHistoryResponse = self.planHistoryResponse
+//                viewController.modalPresentationStyle = .overFullScreen
+//                self.navigationController?.present(viewController, animated: true)
+//            }
+            
+            ReviewIntrVC.initialization().showAlert(usingModel: planHistoryResponse,
+                                                    countryModel: self.countryModel,
+                                                    selectedOperator: self.selectedOperator,
+                                                    mobileNumberValue: mobileNumber?.trimWhiteSpace) { result, isSuccess in
+                DispatchQueue.main.async {
+                    if isSuccess, let data = result{
+                        self.successVoucher(walletBalance: data.walletAmount ?? 0.0, currencySymbol: data.currency ?? "",processStatusID: data.processStatusID ?? 0, externalId: data.externalID ?? "0")
+                    }
+                }
+
             }
             
         }}
     
     
 }
-extension DenominationVC: BackTOGiftCardDelegate {
-    func BackToPrevious(dismiss: Bool, result: ConfirmIntrResponseObj?) {
-        if dismiss, let data = result{
-            self.successVoucher(walletBalance: data.walletAmount ?? 0.0, currencySymbol: data.currency ?? "",processStatusID: data.processStatusID ?? 0, externalId: data.externalID ?? "0")
-        }
-    }}
+//extension DenominationVC: BackTOGiftCardDelegate {
+//    func BackToPrevious(dismiss: Bool, result: ConfirmIntrResponseObj?) {
+//        if dismiss, let data = result{
+//            self.successVoucher(walletBalance: data.walletAmount ?? 0.0, currencySymbol: data.currency ?? "",processStatusID: data.processStatusID ?? 0, externalId: data.externalID ?? "0")
+//        }
+//    }}
 
 
 extension DenominationVC: SkeletonTableViewDelegate, SkeletonTableViewDataSource {

@@ -219,13 +219,13 @@ class WalletDenominationVC: UIViewController {
                 if status == true,
                    let responce = result {
                     self?.setupWalletBal(walletBal: responce.first?.WalletAmount ?? 0.0)
-                    
-                    if let amount = self?.resposeData[self?.SelectedIndex ?? 0].denominationValue {
-                        let obj = AlertViewVC.init(type: .transactionSucessfull(amount: amount))
-                        obj.modalPresentationStyle = .overFullScreen
-                        self?.present(obj, animated: false, completion: nil)
-                        obj.onCompletion = {
-                            self?.navigationController?.popToRootViewController(animated: true)
+                    let data = self?.resposeData[self?.SelectedIndex ?? 0]
+                    if let amount = data?.denominationValue,
+                       let currency = data?.currencySymbol {
+                        PaymentSucessPopupVC.initialization().showAlert(with:"\(currency)\(amount)") { index, result in
+                            DispatchQueue.main.async {
+                                self?.navigationController?.popToRootViewController(animated: true)
+                            }
                         }
                         
                         
@@ -233,12 +233,6 @@ class WalletDenominationVC: UIViewController {
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                         self?.hideButtonLoading()
                     }
-                    
-                    //                    let viewController: SuccessGatwayVC = SuccessGatwayVC()
-                    //                    viewController.denominationPrice = Double(self?.resposeData[self?.SelectedIndex ?? 0].denominationValue ?? 0)
-                    //                    viewController.delegate = self
-                    //                    viewController.modalPresentationStyle = .overFullScreen
-                    //                    self?.navigationController?.present(viewController, animated: true)
                 }
                 else {
                     self?.hideButtonLoading()

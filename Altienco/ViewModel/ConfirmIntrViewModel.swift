@@ -21,7 +21,7 @@ class ConfirmIntrViewModel {
             "Authorization": "Bearer \(UserDefaults.getToken)",
             "Content-Type": "application/json"
         ]
-        SVProgressHUD.show()
+//        SVProgressHUD.show()
         debugPrint("subURL.intrConfirmRecharge",json);
         AFWrapper.requestPOSTURL(strURl, params: json, headers: header, success: { (jsondata) in
             debugPrint("jsondata:", strURl, jsondata as Any)

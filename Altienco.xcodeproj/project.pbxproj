@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040EDDD9295430F100ECAE53 /* AltienoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040EDDD7295430F100ECAE53 /* AltienoAlert.swift */; };
+		040EDDDA295430F100ECAE53 /* AltienoAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040EDDD8295430F100ECAE53 /* AltienoAlert.xib */; };
 		04312453294C439000830CF2 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04312452294C439000830CF2 /* UIColor+Hex.swift */; };
 		04312455294C44E200830CF2 /* TextFiled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04312454294C44E200830CF2 /* TextFiled.swift */; };
 		04312457294C501B00830CF2 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04312456294C501B00830CF2 /* UIView+Extension.swift */; };
@@ -14,9 +16,8 @@
 		0431245D294CCF6400830CF2 /* UiView+Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431245C294CCF6400830CF2 /* UiView+Anchor.swift */; };
 		0431245F294CD12C00830CF2 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431245E294CD12C00830CF2 /* UIImage+Extension.swift */; };
 		04312461294CD28B00830CF2 /* ContactPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04312460294CD28B00830CF2 /* ContactPicker.swift */; };
-		0466135C294E116C00EC444B /* AlertViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466135B294E116C00EC444B /* AlertViewVC.swift */; };
-		0466135F294E11FB00EC444B /* TransactionSuccessFull.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0466135E294E11FB00EC444B /* TransactionSuccessFull.xib */; };
-		04661361294E120700EC444B /* TransactionSuccessFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04661360294E120700EC444B /* TransactionSuccessFull.swift */; };
+		044BB5DF29547A7900D5A666 /* PaymentSucessPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BB5DD29547A7900D5A666 /* PaymentSucessPopupVC.swift */; };
+		044BB5E029547A7900D5A666 /* PaymentSucessPopupVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044BB5DE29547A7900D5A666 /* PaymentSucessPopupVC.xib */; };
 		04661370294E2F9500EC444B /* alertSound.mpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0466136F294E2F9500EC444B /* alertSound.mpeg */; };
 		04661374294E398E00EC444B /* txnSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = 04661373294E398E00EC444B /* txnSuccess.json */; };
 		047F3FEC294F7EA0000377FF /* OperatorInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F3FEA294F7EA0000377FF /* OperatorInfoCell.swift */; };
@@ -258,8 +259,6 @@
 		C6AF1C7D293F704100AF9D59 /* AllCallingCardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6AF1C7B293F704100AF9D59 /* AllCallingCardVC.xib */; };
 		C6AF1C81293F882600AF9D59 /* CallingCardPlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1C7F293F882600AF9D59 /* CallingCardPlanVC.swift */; };
 		C6AF1C82293F882600AF9D59 /* CallingCardPlanVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6AF1C80293F882600AF9D59 /* CallingCardPlanVC.xib */; };
-		C6AF1C87293FB0D200AF9D59 /* CallingCardReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1C85293FB0D200AF9D59 /* CallingCardReviewVC.swift */; };
-		C6AF1C88293FB0D200AF9D59 /* CallingCardReviewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6AF1C86293FB0D200AF9D59 /* CallingCardReviewVC.xib */; };
 		C6AF1C8C293FB1F700AF9D59 /* SuccessCallinCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1C8A293FB1F700AF9D59 /* SuccessCallinCardVC.swift */; };
 		C6AF1C8D293FB1F700AF9D59 /* SuccessCallinCardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6AF1C8B293FB1F700AF9D59 /* SuccessCallinCardVC.xib */; };
 		C6B3688C294498BD0084733C /* ukImage.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B3688B294498BD0084733C /* ukImage.png */; };
@@ -277,6 +276,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040EDDD7295430F100ECAE53 /* AltienoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltienoAlert.swift; sourceTree = "<group>"; };
+		040EDDD8295430F100ECAE53 /* AltienoAlert.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AltienoAlert.xib; sourceTree = "<group>"; };
 		04312452294C439000830CF2 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		04312454294C44E200830CF2 /* TextFiled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFiled.swift; sourceTree = "<group>"; };
 		04312456294C501B00830CF2 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -284,9 +285,8 @@
 		0431245C294CCF6400830CF2 /* UiView+Anchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiView+Anchor.swift"; sourceTree = "<group>"; };
 		0431245E294CD12C00830CF2 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		04312460294CD28B00830CF2 /* ContactPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPicker.swift; sourceTree = "<group>"; };
-		0466135B294E116C00EC444B /* AlertViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewVC.swift; sourceTree = "<group>"; };
-		0466135E294E11FB00EC444B /* TransactionSuccessFull.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionSuccessFull.xib; sourceTree = "<group>"; };
-		04661360294E120700EC444B /* TransactionSuccessFull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSuccessFull.swift; sourceTree = "<group>"; };
+		044BB5DD29547A7900D5A666 /* PaymentSucessPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSucessPopupVC.swift; sourceTree = "<group>"; };
+		044BB5DE29547A7900D5A666 /* PaymentSucessPopupVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentSucessPopupVC.xib; sourceTree = "<group>"; };
 		0466136F294E2F9500EC444B /* alertSound.mpeg */ = {isa = PBXFileReference; lastKnownFileType = video.mpeg; path = alertSound.mpeg; sourceTree = "<group>"; };
 		04661373294E398E00EC444B /* txnSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = txnSuccess.json; sourceTree = "<group>"; };
 		047F3FEA294F7EA0000377FF /* OperatorInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorInfoCell.swift; sourceTree = "<group>"; };
@@ -529,8 +529,6 @@
 		C6AF1C7B293F704100AF9D59 /* AllCallingCardVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllCallingCardVC.xib; sourceTree = "<group>"; };
 		C6AF1C7F293F882600AF9D59 /* CallingCardPlanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingCardPlanVC.swift; sourceTree = "<group>"; };
 		C6AF1C80293F882600AF9D59 /* CallingCardPlanVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CallingCardPlanVC.xib; sourceTree = "<group>"; };
-		C6AF1C85293FB0D200AF9D59 /* CallingCardReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingCardReviewVC.swift; sourceTree = "<group>"; };
-		C6AF1C86293FB0D200AF9D59 /* CallingCardReviewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CallingCardReviewVC.xib; sourceTree = "<group>"; };
 		C6AF1C8A293FB1F700AF9D59 /* SuccessCallinCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessCallinCardVC.swift; sourceTree = "<group>"; };
 		C6AF1C8B293FB1F700AF9D59 /* SuccessCallinCardVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuccessCallinCardVC.xib; sourceTree = "<group>"; };
 		C6B3688B294498BD0084733C /* ukImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ukImage.png; sourceTree = "<group>"; };
@@ -567,22 +565,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		044BB5DB29544C5300D5A666 /* AlertWithOkBtn */ = {
+			isa = PBXGroup;
+			children = (
+				040EDDD7295430F100ECAE53 /* AltienoAlert.swift */,
+				040EDDD8295430F100ECAE53 /* AltienoAlert.xib */,
+			);
+			path = AlertWithOkBtn;
+			sourceTree = "<group>";
+		};
+		044BB5DC29547A4E00D5A666 /* PaymentSucessPopUP */ = {
+			isa = PBXGroup;
+			children = (
+				044BB5DD29547A7900D5A666 /* PaymentSucessPopupVC.swift */,
+				044BB5DE29547A7900D5A666 /* PaymentSucessPopupVC.xib */,
+			);
+			path = PaymentSucessPopUP;
+			sourceTree = "<group>";
+		};
 		0466135A294E113F00EC444B /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
-				0466135D294E11D800EC444B /* Views */,
-				0466135B294E116C00EC444B /* AlertViewVC.swift */,
+				044BB5DC29547A4E00D5A666 /* PaymentSucessPopUP */,
+				C688F24C292100E0009C1EC3 /* ReviewGiftCard */,
+				C687140428E64DFE002E7254 /* ReviewInternaltional */,
+				044BB5DB29544C5300D5A666 /* AlertWithOkBtn */,
+				C6A6B6FA28C5819700BCF7E2 /* ReviewPopup */,
 			);
 			path = AlertView;
-			sourceTree = "<group>";
-		};
-		0466135D294E11D800EC444B /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				0466135E294E11FB00EC444B /* TransactionSuccessFull.xib */,
-				04661360294E120700EC444B /* TransactionSuccessFull.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		04661362294E155800EC444B /* json */ = {
@@ -1189,13 +1199,13 @@
 			path = DenominationCell;
 			sourceTree = "<group>";
 		};
-		C687140428E64DFE002E7254 /* Review */ = {
+		C687140428E64DFE002E7254 /* ReviewInternaltional */ = {
 			isa = PBXGroup;
 			children = (
 				C687140528E64E1C002E7254 /* ReviewIntrVC.swift */,
 				C687140628E64E1C002E7254 /* ReviewIntrVC.xib */,
 			);
-			path = Review;
+			path = ReviewInternaltional;
 			sourceTree = "<group>";
 		};
 		C687140D28E65E61002E7254 /* Success */ = {
@@ -1487,7 +1497,6 @@
 			isa = PBXGroup;
 			children = (
 				C6A6B70328C59BB100BCF7E2 /* SuccessRecharge */,
-				C6A6B6FA28C5819700BCF7E2 /* ReviewPopup */,
 				C6A6B6EC28C56A1500BCF7E2 /* OperatorPlan */,
 				C6A563C828A238270084295F /* OperatorList */,
 			);
@@ -1509,7 +1518,6 @@
 				C6896135292739D50058D14B /* ReviewRangeCard */,
 				C6873094292115E600C8596D /* RangeCard */,
 				C688F251292106ED009C1EC3 /* SuccessGiftCard */,
-				C688F24C292100E0009C1EC3 /* ReviewGiftCard */,
 				C688454B2920B10B00AB50DD /* AllDenomination */,
 				C6AD0122291CCBEB00C5DEC9 /* AllGiftCards */,
 			);
@@ -1559,7 +1567,6 @@
 			isa = PBXGroup;
 			children = (
 				C6AF1C89293FB1CC00AF9D59 /* SuccessCallingCard */,
-				C6AF1C84293FB0B500AF9D59 /* CallingCardReview */,
 				C6AF1C7E293F87FF00AF9D59 /* CallingCardPlan */,
 				C6AF1C79293F702400AF9D59 /* AllCallingCard */,
 			);
@@ -1584,15 +1591,6 @@
 			path = CallingCardPlan;
 			sourceTree = "<group>";
 		};
-		C6AF1C84293FB0B500AF9D59 /* CallingCardReview */ = {
-			isa = PBXGroup;
-			children = (
-				C6AF1C85293FB0D200AF9D59 /* CallingCardReviewVC.swift */,
-				C6AF1C86293FB0D200AF9D59 /* CallingCardReviewVC.xib */,
-			);
-			path = CallingCardReview;
-			sourceTree = "<group>";
-		};
 		C6AF1C89293FB1CC00AF9D59 /* SuccessCallingCard */ = {
 			isa = PBXGroup;
 			children = (
@@ -1614,7 +1612,6 @@
 			isa = PBXGroup;
 			children = (
 				C687140D28E65E61002E7254 /* Success */,
-				C687140428E64DFE002E7254 /* Review */,
 				C6A6816128DABFC100AE9D62 /* Denomination */,
 				C6CD5AC428D95B66004E6F33 /* Topup */,
 			);
@@ -1727,7 +1724,6 @@
 				184DEAB725765783004406AF /* HistoryCell.xib in Resources */,
 				C6AD0126291CCC0A00C5DEC9 /* GiftCardVC.xib in Resources */,
 				C6A33C4828B6B65100F9EB36 /* AddCardVC.xib in Resources */,
-				C6AF1C88293FB0D200AF9D59 /* CallingCardReviewVC.xib in Resources */,
 				C6A8A6A828EB094F006C1BF9 /* TransactionHistoryVC.xib in Resources */,
 				04C0DCD42952D553001592EE /* ContactUSVC.xib in Resources */,
 				C627CAA428F8DD7B00396943 /* PermissionCell.xib in Resources */,
@@ -1781,12 +1777,13 @@
 				C6A103EC28B35549000E50A1 /* Poppins-Medium.ttf in Resources */,
 				C687FCA228B88C3D00A85040 /* WalletSuccessVC.xib in Resources */,
 				C687141128E65E7A002E7254 /* IntrSuccessVC.xib in Resources */,
+				040EDDDA295430F100ECAE53 /* AltienoAlert.xib in Resources */,
 				C688454F2920B1F500AB50DD /* AllDenomination.xib in Resources */,
 				C683E80428ADF20F00C07536 /* LeftNavCell.xib in Resources */,
 				C6C2723B292BBEA60091CEFC /* countryCodes.json in Resources */,
 				C68B129A292C80EA00856156 /* WalletPaymentVC.xib in Resources */,
 				C68713F628E62940002E7254 /* OperatorCell.xib in Resources */,
-				0466135F294E11FB00EC444B /* TransactionSuccessFull.xib in Resources */,
+				044BB5E029547A7900D5A666 /* PaymentSucessPopupVC.xib in Resources */,
 				C6AD012B291CCF1200C5DEC9 /* GiftCardCell.xib in Resources */,
 				04661374294E398E00EC444B /* txnSuccess.json in Resources */,
 				C687FCA728B8919D00A85040 /* FailureWalletVC.xib in Resources */,
@@ -1893,6 +1890,7 @@
 				049F8758294D9C7C00B3ED6B /* ViewLoadable.swift in Sources */,
 				C627CAA328F8DD7B00396943 /* PermissionCell.swift in Sources */,
 				184DEA8B25750BE5004406AF /* DeviceInfo.swift in Sources */,
+				040EDDD9295430F100ECAE53 /* AltienoAlert.swift in Sources */,
 				C6A6B6F728C56F9E00BCF7E2 /* OPeratorPlansModel.swift in Sources */,
 				04C0DCDC29531AC3001592EE /* ContactUSViewModel.swift in Sources */,
 				C6AEC82F291DF03F0029C6D2 /* SegmentCell.swift in Sources */,
@@ -1938,6 +1936,7 @@
 				C6A4CCF428D2CAC600652025 /* Enum.swift in Sources */,
 				04312455294C44E200830CF2 /* TextFiled.swift in Sources */,
 				184DEAAE25765753004406AF /* HistoryVC.swift in Sources */,
+				044BB5DF29547A7900D5A666 /* PaymentSucessPopupVC.swift in Sources */,
 				C6A8A6A728EB094F006C1BF9 /* TransactionHistoryVC.swift in Sources */,
 				C686062328E5559B00FE1C75 /* SearchCountryModel.swift in Sources */,
 				18FD480A25B95D0300253289 /* StringConstant.swift in Sources */,
@@ -1994,7 +1993,6 @@
 				C6A8190128CAAEC00097E595 /* VoucherHistoryViewModel.swift in Sources */,
 				C6A818F928CA8D610097E595 /* HistoryModel.swift in Sources */,
 				C6896138292739FA0058D14B /* ReviewRangeCardVC.swift in Sources */,
-				04661361294E120700EC444B /* TransactionSuccessFull.swift in Sources */,
 				C6A6B6E328C540DB00BCF7E2 /* VerifyPinViewModel.swift in Sources */,
 				0431245F294CD12C00830CF2 /* UIImage+Extension.swift in Sources */,
 				C68730A22921426A00C8596D /* FixedGiftCardModel.swift in Sources */,
@@ -2005,7 +2003,6 @@
 				04EC3DC0295205480084EA72 /* RecentTransactionViewModel.swift in Sources */,
 				C687BC96292178F00087C94E /* ConfirmFixedPlanModel.swift in Sources */,
 				C6342CEA29374B0600814F40 /* AllNotificationModel.swift in Sources */,
-				C6AF1C87293FB0D200AF9D59 /* CallingCardReviewVC.swift in Sources */,
 				C68730A42921505500C8596D /* RangeCardViewModel.swift in Sources */,
 				C62B029B2933DCE500209809 /* VerifyStatusModel.swift in Sources */,
 				18E28723250A435700F25971 /* VerifyOtpVC.swift in Sources */,
@@ -2031,7 +2028,6 @@
 				C6342CF52937AB4F00814F40 /* SuccessGatwayVC.swift in Sources */,
 				C627CA9A28F8D76B00396943 /* SettingPermissionFooterView.swift in Sources */,
 				C6C4B2DA28EC3FAE00756327 /* UsedMarkViewModel.swift in Sources */,
-				0466135C294E116C00EC444B /* AlertViewVC.swift in Sources */,
 				C6342CEC29374BC100814F40 /* AllNotificationViewModel.swift in Sources */,
 				C6A563D628A264D40084295F /* WalletVC.swift in Sources */,
 			);
