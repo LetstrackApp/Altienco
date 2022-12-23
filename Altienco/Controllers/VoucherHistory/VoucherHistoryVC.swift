@@ -157,7 +157,7 @@ extension VoucherHistoryVC: UITableViewDelegate, UITableViewDataSource {
 //             (model.transactionStatus?.capitalized != "Success".capitalized) ?
 //            (cell.orderStatus.textColor = appColor.buttonRedColor) : (cell.orderStatus.textColor = appColor.buttonGreenColor)
             if model.isUsed == false{
-                cell.voucherStatus.text = "AVILABLE".uppercased()
+                cell.voucherStatus.text = lngConst.available.uppercased()
                 cell.voucherStatus.textColor = appColor.buttonGreenColor
             }
             else{

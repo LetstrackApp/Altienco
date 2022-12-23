@@ -54,6 +54,34 @@ class HistoryCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    var model : HistoryResponseObj! {
+        didSet {
+            if model.processStatusId != 3{
+                self.orderStatus.textColor = appColor.buttonGreenColor
+            }
+            else {
+                self.orderStatus.textColor = appColor.buttonRedColor
+            }
+            
+            self.orderStatus.text = model.transactionMessage
+            self.orderNumber.text = "\(lngConst.orderNo): " + (model.orderNumber ?? "")
+            self.rechargeType.text = model.transactionType
+            if let amount = model.amount{
+                self.amount.text = (model.currency ?? "") + "\(amount)"
+            }
+            if model.transactionTypeID == 2 || model.transactionTypeID == 5 {
+                //        if model.transactionTypeID == 2  {
+                
+                self.repeatContainer.isHidden = false
+            }
+            else{
+                self.repeatContainer.isHidden = true
+            }
+            if let time = model.transactionDate{
+                self.date.text = time.convertToDisplayFormat()}
+        }
+    }
+    
 }
 
     

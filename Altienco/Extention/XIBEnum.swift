@@ -24,4 +24,5 @@ public enum xibName {
     static let paymentSucessPopupVC = "PaymentSucessPopupVC"
     static let successCallinCardVC = "SuccessCallinCardVC"
     static let successRechargeVC = "SuccessRechargeVC"
+    static let recentTXNVC = "RecentTXNVC"
 }

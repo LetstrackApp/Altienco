@@ -18,6 +18,7 @@ class OperatorListVC: FloatingPannelHelper {
     var pageNum = 1
     var pageSize = 20
     
+    @IBOutlet weak var last5btn: LoadingButton!
     // voucher history view
     @IBOutlet weak var generateVoucher: PaddingLabel! {
         didSet {
@@ -275,22 +276,22 @@ class OperatorListVC: FloatingPannelHelper {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func successVoucher(mPin: String,
-                        denominationValue : String,
-                        walletBalance: Double,
-                        msgToShare: String,
-                        voucherID: Int,
-                        orderNumber:String?) {
-        let viewController: SuccessRechargeVC = SuccessRechargeVC()
-        viewController.denominationValue = denominationValue
-        viewController.mPin = mPin
-        viewController.walletBal = walletBalance
-        viewController.voucherID = voucherID
-        viewController.msgToShare = msgToShare
-        viewController.orderNumber = orderNumber
-        self.navigationController?.pushViewController(viewController, animated: true)
-        
-    }
+//    func successVoucher(mPin: String,
+//                        denominationValue : String,
+//                        walletBalance: Double,
+//                        msgToShare: String,
+//                        voucherID: Int,
+//                        orderNumber:String?) {
+//        let viewController: SuccessRechargeVC = SuccessRechargeVC()
+//        viewController.denominationValue = denominationValue
+//        viewController.mPin = mPin
+//        viewController.walletBal = walletBalance
+//        viewController.voucherID = voucherID
+//        viewController.msgToShare = msgToShare
+//        viewController.orderNumber = orderNumber
+//        self.navigationController?.pushViewController(viewController, animated: true)
+//        
+//    }
     @IBAction func redirectHome(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
@@ -343,6 +344,20 @@ class OperatorListVC: FloatingPannelHelper {
                                                             imageUrl: imageURL)
         self.navigationController?.pushViewController(viewController, animated: true)
     }
+    
+    @IBAction func recentTxnHistory(_ sender: Any) {
+        
+        self.view.endEditing(true)
+        self.last5btn.showLoading()
+        self.view.isUserInteractionEnabled = false
+        self.setupRecentTxn(txnTypeId: TransactionTypeId.PhoneRecharge) { [weak self]_ in
+            DispatchQueue.main.async {
+                self?.last5btn.hideLoading()
+                self?.view.isUserInteractionEnabled = true
+            }
+        }
+    }
+    
 }
 
 //extension OperatorListVC: BackToUKRechargeDelegate {

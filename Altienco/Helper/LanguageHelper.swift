@@ -143,7 +143,7 @@ the 16 digit pin
         return "You've added \(amount) successfully in your altienco wallet"
     }
     let reasonerror =  "Please select reason"
-
+    let available = "Available"
     let reason =  "Reason"
     let reasonDes = "Please be really specific, so we can help you the best we can."
     let reasonTitle  = "Send us a message"
@@ -156,7 +156,7 @@ We appreciate you contacting us. One of our colleagues will get back in touch wi
 
 Have a great day!
 """
-
+    
 }
 
 

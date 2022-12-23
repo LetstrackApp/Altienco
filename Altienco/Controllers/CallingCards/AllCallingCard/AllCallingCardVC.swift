@@ -8,7 +8,7 @@
 
 import UIKit
 import SkeletonView
-class AllCallingCardVC: UIViewController {
+class AllCallingCardVC: FloatingPannelHelper {
     var voucherHistory: VoucherHistoryViewModel?
     var viewModel : OperatorListViewModel?
     var operatorList : [OperatorListResponseObj] = []
@@ -16,6 +16,7 @@ class AllCallingCardVC: UIViewController {
     var pageNum = 1
     var pageSize = 20
     
+    @IBOutlet weak var last5Btn: LoadingButton!
     // voucher history view
     
     @IBOutlet weak var genetateVoucherTitle: UILabel!
@@ -82,7 +83,7 @@ class AllCallingCardVC: UIViewController {
             operatorCollection.delegate = self
             operatorCollection.dataSource = self
             operatorCollection.isSkeletonable = true
-
+            
         }
     }
     
@@ -100,8 +101,8 @@ class AllCallingCardVC: UIViewController {
     func onLanguageChange(){
         self.addButton.setupNextButton(title: lngConst.add_Balance,space: 1.6)
         self.addButton.setTitle(lngConst.add_Balance, for: .normal)
-
-
+        
+        
         genetateVoucherTitle.changeColorAndFont(mainString: lngConst.generate_voucher.capitalized,
                                                 stringToColor: lngConst.voucher.capitalized,
                                                 color: UIColor.init(0xb24a96),
@@ -175,7 +176,7 @@ class AllCallingCardVC: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 self?.operatorCollection.stopSkeletonAnimation()
                 self?.operatorCollection.hideSkeleton()
-
+                
                 if status == true && msg == "", let operatorlist = operatorList{
                     self?.operatorList = operatorlist
                     self?.filteredOperatorList = operatorlist
@@ -190,22 +191,18 @@ class AllCallingCardVC: UIViewController {
         
     }
     
-    func callHistoryData() {
-        if let customerID = UserDefaults.getUserData?.customerID{
-            let model = VoucherHistoryRequestObj.init(customerId: "\(customerID)", isRequiredAll: false, langCode: "en", operatorId: 0, pinBankUsedStatus: 0, pageNum: self.pageNum, pageSize: self.pageSize, transactionTypeId: 2)
-            voucherHistory?.getHistory(model: model)
-            voucherHistory?.historyList.bind(listener: { (data) in
-                if data.isEmpty == false{
-                    DispatchQueue.main.async {
-                        self.initializeHistoryView()
-                        self.voucherHistoryContainer.isHidden = false
-                    }}
-                else{
-                    self.voucherHistoryContainer.isHidden = true
-                }
-            })
+    @IBAction func recentTXn(_ sender: Any) {
+        self.view.endEditing(true)
+        self.last5Btn.showLoading()
+        self.view.isUserInteractionEnabled = false
+        self.setupRecentTxn(txnTypeId: TransactionTypeId.CallingCard) { [weak self]_ in
+            DispatchQueue.main.async {
+                self?.last5Btn.hideLoading()
+                self?.view.isUserInteractionEnabled = true
+            }
         }
     }
+    
     
     func initializeHistoryView(){
         if voucherHistory?.historyList.value.count ?? 0 > 0, let model = voucherHistory?.historyList.value[0]{
@@ -230,22 +227,7 @@ class AllCallingCardVC: UIViewController {
         }
     }
     
-    func successVoucher(mPin: String,
-                        denominationValue : String,
-                        walletBalance: Double,
-                        msgToShare: String,
-                        voucherID: Int,
-                        orderNumber:String?){
-        let viewController: SuccessRechargeVC = SuccessRechargeVC()
-        viewController.denominationValue = denominationValue
-        viewController.mPin = mPin
-        viewController.walletBal = walletBalance
-        viewController.voucherID = voucherID
-        viewController.msgToShare = msgToShare
-        viewController.orderNumber = orderNumber
-        self.navigationController?.pushViewController(viewController, animated: true)
-        
-    }
+    
     @IBAction func redirectProfile(_ sender: Any) {
         let vc = ProfileVC(nibName: "ProfileVC", bundle: nil)
         self.navigationController?.pushViewController(vc, animated: true)
@@ -322,7 +304,6 @@ extension AllCallingCardVC: SkeletonCollectionViewDataSource,
         else{
             cell.operatorLogo.image = UIImage(named: "ic_operatorLogo")
         }
-        //            cell.cardColor.backgroundColor = self.backgroundCode[indexPath.row]
         cell.operatorName.text = self.filteredOperatorList[indexPath.row].operatorName
         cell.showDenomination.isHidden = true
         return cell
@@ -334,7 +315,7 @@ extension AllCallingCardVC: SkeletonCollectionViewDataSource,
         
         if collectionView == operatorCollection{
             self.view.endEditing(true)
-
+            
             DispatchQueue.main.async {
                 if indexPath.row < self.filteredOperatorList.count {
                     let newString = self.filteredOperatorList[indexPath.row].imageURL ?? ""
@@ -369,7 +350,7 @@ extension AllCallingCardVC: UISearchBarDelegate {
         }else {
             emptyMsg.isHidden = false
             emptyMsg.text = "Record not found!"
-
+            
         }
         
         //return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
@@ -377,9 +358,9 @@ extension AllCallingCardVC: UISearchBarDelegate {
         operatorCollection.reloadData()
     }
     
-     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.showsCancelButton = true
-
+        
         return true
     }
     
@@ -393,6 +374,7 @@ extension AllCallingCardVC: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-           searchBar.resignFirstResponder()
+        searchBar.showsCancelButton = false
+        self.view.endEditing(true)
     }
 }

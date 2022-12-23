@@ -26,7 +26,8 @@ class GiftCardVC: UIViewController, searchDelegate {
     var filteredData: [GiftCardResponce] = []
     var lastFilterData: [GiftCardResponce] = []
 //    var backgroundCode = [UIColor]()
-    var segementData = ["FEATURED", "A-Z", "OCCATIONS", "LUXURY"]
+    
+    var segementData = ["FEATURED", "A-Z","OCCASIONS", "LUXURY"]
     var selectedSegament = 1
     @IBOutlet weak var viewContainer: UIView!{
         didSet{

@@ -128,7 +128,9 @@ class TransactionHistoryVC: UIViewController {
                     self?.historyResponce = history ?? []
                     self?.historyTable.reloadData()
                 }
-            }})
+            }
+        }
+        )
     }
     
     func callHistoryData() {
@@ -253,32 +255,10 @@ extension TransactionHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as! HistoryCell
-        let model = self.historyResponce[indexPath.row]
-        if model.processStatusId != 3{
-            cell.orderStatus.textColor = appColor.buttonGreenColor
-        }
-        else {
-            cell.orderStatus.textColor = appColor.buttonRedColor
-        }
-        
-        cell.orderStatus.text = model.transactionMessage
-        cell.orderNumber.text = "\(lngConst.orderNo): " + (model.orderNumber ?? "")
-        cell.rechargeType.text = model.transactionType
-        if let amount = model.amount{
-            cell.amount.text = (model.currency ?? "") + "\(amount)"
-        }
-        if model.transactionTypeID == 2 || model.transactionTypeID == 5 {
-            //        if model.transactionTypeID == 2  {
-            
-            cell.repeatContainer.isHidden = false
-        }
-        else{
-            cell.repeatContainer.isHidden = true
-        }
+        cell.model = self.historyResponce[indexPath.row]
         cell.repeatRecharge.tag = indexPath.row
         cell.repeatRecharge.addTarget(self, action: #selector(callSuccessPopup(sender:)), for: .touchUpInside)
-        if let time = model.transactionDate{
-            cell.date.text = time.convertToDisplayFormat()}
+
         return cell
     }
     
@@ -329,12 +309,7 @@ extension TransactionHistoryVC: UITableViewDelegate, UITableViewDataSource {
                 ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result, status in
                     DispatchQueue.main.async {
                         if status == true, let val = result{
-                            self.successVoucher(mPin: val.mPIN ?? "",
-                                                denominationValue: "\(val.dinominationValue ?? 0)",
-                                                walletBalance: val.walletAmount ?? 0.0,
-                                                msgToShare: val.msgToShare ?? "",
-                                                voucherID: val.voucherID ?? 0,
-                                                orderNumber: "")
+                          
                         }
                     }
                 }

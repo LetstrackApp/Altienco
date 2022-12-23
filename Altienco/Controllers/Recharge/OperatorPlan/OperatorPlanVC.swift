@@ -344,22 +344,22 @@ extension OperatorPlanVC {
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func successVoucher(mPin: String,
-                        denominationValue : String,
-                        walletBalance: Double,
-                        msgToShare: String,
-                        voucherID: Int,
-                        orderNumber:String?){
-        let viewController: SuccessRechargeVC = SuccessRechargeVC()
-        viewController.denominationValue = denominationValue
-        viewController.mPin = mPin
-        viewController.walletBal = walletBalance
-        viewController.voucherID = voucherID
-        viewController.msgToShare = msgToShare
-        viewController.orderNumber = orderNumber
-        self.navigationController?.pushViewController(viewController, animated: true)
-        
-    }
+//    func successVoucher(mPin: String,
+//                        denominationValue : String,
+//                        walletBalance: Double,
+//                        msgToShare: String,
+//                        voucherID: Int,
+//                        orderNumber:String?){
+//        let viewController: SuccessRechargeVC = SuccessRechargeVC()
+//        viewController.denominationValue = denominationValue
+//        viewController.mPin = mPin
+//        viewController.walletBal = walletBalance
+//        viewController.voucherID = voucherID
+//        viewController.msgToShare = msgToShare
+//        viewController.orderNumber = orderNumber
+//        self.navigationController?.pushViewController(viewController, animated: true)
+//        
+//    }
     
     func callSuccessPopup(operatorTitle: String,
                           denomination: Int,

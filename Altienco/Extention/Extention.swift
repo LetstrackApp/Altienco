@@ -241,7 +241,7 @@ extension UIViewController {
         container.contentMode = .scaleAspectFit
         container.backgroundColor = .clear
         container.frame = CGRect(x: 0, y: 0, width: 150, height: 45)
-        container.image = UIImage(named: "ic_navappIcon")
+        container.image = UIImage(named: "ic_white_logo")?.withInset(UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0))
         container.layer.cornerRadius = 20
         container.clipsToBounds = true
         container.layer.cornerRadius = 20

@@ -7,79 +7,144 @@
 //
 
 import UIKit
-
+import SkeletonView
 import FloatingPanel
 
 class FloatingPannelHelper: UIViewController,FloatingPanelControllerDelegate {
     
-    private var reviewPopup: FloatingPanelController!
-
+    private var recentTxn: FloatingPanelController!
+    var viewControler : RecentTXNVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    func setupReviewPopup(){
-        if reviewPopup == nil {
-            reviewPopup = FloatingPanelController()
-            reviewPopup.surfaceView.backgroundColor = .clear
-            reviewPopup.behavior = FloatingPanelStocksBehavior()
-            reviewPopup.surfaceView.grabberHandle.isHidden = true
+    
+    func setupRecentTxn(txnTypeId: TransactionTypeId?,completion:@escaping(Bool)-> Void) {
+        if recentTxn == nil {
+            recentTxn = FloatingPanelController()
+            recentTxn?.backdropView.dismissalTapGestureRecognizer.isEnabled = true
+            recentTxn?.surfaceView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+            recentTxn?.behavior = FloatingPanelStocksBehavior()
+            recentTxn?.surfaceView.grabberHandle.isHidden = false
             // Initialize FloatingPanelController and add the view
-            reviewPopup.surfaceView.backgroundColor = UIColor(displayP3Red: 30.0/255.0,
-                                                              green: 30.0/255.0,
-                                                              blue: 30.0/255.0,
-                                                              alpha: 1.0)
-            reviewPopup.surfaceView.appearance.cornerRadius = 8
+            recentTxn?.surfaceView.backgroundColor = UIColor(displayP3Red: 30.0/255.0, green: 30.0/255.0, blue: 30.0/255.0, alpha: 1.0)
+            recentTxn?.surfaceView.appearance.cornerRadius = 8
             let shadow = SurfaceAppearance.Shadow()
             shadow.color = UIColor.black
             shadow.offset = CGSize(width: 0, height: 0)
             shadow.radius = 8
             shadow.spread = 2
-            reviewPopup.surfaceView.appearance.shadows = [shadow]
-            reviewPopup.surfaceView.appearance.borderWidth = 1.0 / traitCollection.displayScale
-            reviewPopup.surfaceView.appearance.borderColor = UIColor.black.withAlphaComponent(0.2)
-            reviewPopup?.surfaceView.containerMargins = .init(top: 30.0, left: 20, bottom: -100, right: 20)
-            let viewControler = ReviewPopupVC()
-            reviewPopup.set(contentViewController: viewControler)
-            reviewPopup.contentMode = .fitToBounds
-            reviewPopup.isRemovalInteractionEnabled = false
-            reviewPopup.delegate = self
+            recentTxn?.surfaceView.appearance.shadows = [shadow]
+            recentTxn?.surfaceView.appearance.borderWidth = 1.0 / traitCollection.displayScale
+            recentTxn?.surfaceView.appearance.borderColor = UIColor.black
+            recentTxn?.surfaceView.containerMargins = .init(top: 0, left: 10, bottom: 0, right: 10)
+            viewControler = RecentTXNVC(txnType: txnTypeId)
+            viewControler?.didSelectDone = { result in
+                DispatchQueue.main.async {
+                    self.successVoucher(mPin: result.mPIN ?? "",
+                                        denominationValue: "\(result.dinominationValue ?? 0)",
+                                        walletBalance: result.walletAmount ?? 0.0,
+                                        msgToShare: result.msgToShare ?? "",
+                                        voucherID: result.voucherID ?? 0,
+                                        orderNumber: "")
+                }
+            }
+            recentTxn?.set(contentViewController: viewControler)
+            
+            if let sc = viewControler?.tableview {
+                recentTxn?.track(scrollView: sc)
+            }
+            recentTxn?.contentMode = .fitToBounds
+            recentTxn?.isRemovalInteractionEnabled = true
+            recentTxn?.delegate = self
+            
         }
-        present(reviewPopup, animated: true, completion: nil)
+        if  let fcb = recentTxn {
+            recentTxn.view.isSkeletonable = true
+            recentTxn.contentViewController?.view.isSkeletonable = true
+            
+            recentTxn.contentViewController?.view.subviews.forEach({ view in
+                view.isSkeletonable = true
+            })
+            
+            viewControler?.getRecentFiveTxn { result in
+                completion(result)
+                DispatchQueue.main.async {
+                    if result == true {
+                        self.present(fcb, animated: true, completion: nil)
+                        
+                    }else {
+                        Helper.showToast("Record not found!")
+                    }
+                }
+            }
+        }
         
         
     }
     
     
+    func successVoucher(mPin: String,
+                        denominationValue : String,
+                        walletBalance: Double,
+                        msgToShare: String,
+                        voucherID: Int,
+                        orderNumber:String){
+        
+        self.recentTxn.dismiss(animated: true) {
+            DispatchQueue.main.async {
+                let viewController: SuccessRechargeVC = SuccessRechargeVC()
+                viewController.denominationValue = denominationValue
+                viewController.mPin = mPin
+                viewController.walletBal = walletBalance
+                viewController.voucherID = voucherID
+                viewController.msgToShare = msgToShare
+                viewController.orderNumber = orderNumber
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+        }
+        
+        
+        
+    }
+    
+    
+    
+    
     func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout {
-        if vc.contentViewController?.isKind(of: ReviewPopupVC.self) == true{
+        if vc.contentViewController?.isKind(of: RecentTXNVC.self) == true{
             return TopPositionedPanelLayout()
         }
         return TopPositionedPanelLayout()
     }
     
     func floatingPanelDidChangeState(_ fpc: FloatingPanelController){
-
+        
     }
     
 }
 
 class FloatingPanelStocksBehavior: FloatingPanelBehavior {
     let springDecelerationRate: CGFloat = UIScrollView.DecelerationRate.fast.rawValue
-    let springResponseTime: CGFloat = 0.25
+    let springResponseTime: CGFloat = 0.2
 }
-
 
 class TopPositionedPanelLayout: FloatingPanelLayout {
     let position: FloatingPanelPosition = .bottom
-    let initialState: FloatingPanelState = .full
+    let initialState: FloatingPanelState = .half
     
-    var anchors: [FloatingPanelState : FloatingPanelLayoutAnchoring] {
+    
+    var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
         return [
             .full: FloatingPanelLayoutAnchor(fractionalInset: 1, edge: .bottom, referenceGuide: .safeArea),
-            .half: FloatingPanelLayoutAnchor(fractionalInset: 1, edge: .bottom, referenceGuide: .safeArea),
-            .tip: FloatingPanelLayoutAnchor(fractionalInset: 1, edge: .bottom, referenceGuide: .safeArea)
+            .half: FloatingPanelLayoutAnchor(fractionalInset: 400/UIScreen.main.bounds.size.height, edge: .bottom, referenceGuide: .safeArea),
+            .tip: FloatingPanelLayoutAnchor(absoluteInset: 200, edge: .bottom, referenceGuide: .safeArea)
         ]
     }
+    
+    func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
+        return 0.6
+    }
 }
+

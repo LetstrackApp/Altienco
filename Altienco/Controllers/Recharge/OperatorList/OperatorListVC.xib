@@ -26,6 +26,7 @@
                 <outlet property="dateTime" destination="4qF-9Y-4No" id="UR1-qR-gRe"/>
                 <outlet property="emptyMsg" destination="Vig-So-EV7" id="pUY-Q2-ArF"/>
                 <outlet property="generateVoucher" destination="iSG-MM-pr6" id="v4K-7Q-Iw2"/>
+                <outlet property="last5btn" destination="HOk-5k-Ifi" id="jfL-69-R0f"/>
                 <outlet property="lastVoucherView" destination="YTn-kG-QeU" id="2YH-Op-Uah"/>
                 <outlet property="notificationIcon" destination="Sw4-b9-Y41" id="JMF-2k-a8k"/>
                 <outlet property="operatorCollection" destination="W8q-oY-NJL" id="gWM-PV-jeZ"/>
@@ -214,7 +215,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOk-5k-Ifi">
+                                                <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOk-5k-Ifi" customClass="LoadingButton" customModule="Altienco" customModuleProvider="target">
                                                     <rect key="frame" x="252" y="12.666666666666657" width="78" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="qAj-cS-Jml"/>
@@ -226,6 +227,9 @@
                                                     <state key="normal" title="Last 5" image="arrowtriangle.down.fill" catalog="system">
                                                         <color key="titleColor" red="0.69019607839999997" green="0.28627450980000002" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="recentTxnHistory:" destination="-1" eventType="touchUpInside" id="PHn-3y-C9d"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -343,7 +347,7 @@
                                                                                     <rect key="frame" x="0.0" y="0.0" width="91.666666666666671" height="60"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REPEAT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1Q-Kg-Mfo">
-                                                                                            <rect key="frame" x="0.0" y="21.333333333333314" width="63.666666666666664" height="17"/>
+                                                                                            <rect key="frame" x="0.0" y="23" width="63.666666666666664" height="14"/>
                                                                                             <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                             <color key="textColor" red="0.69019607839999997" green="0.28627450980000002" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                             <nil key="highlightedColor"/>
@@ -529,7 +533,7 @@
     </objects>
     <designables>
         <designable name="iSG-MM-pr6">
-            <size key="intrinsicContentSize" width="84.333333333333329" height="25.333333333333332"/>
+            <size key="intrinsicContentSize" width="74" height="21"/>
         </designable>
     </designables>
     <resources>

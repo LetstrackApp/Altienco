@@ -324,9 +324,9 @@ class DashboardVC: UIViewController {
     
     func initializeView()
     {
-        let button = UIButton(type: .system)
+        let button = UIButton.init(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         button.setImage(UIImage(named: "ic_menu_black_24dp"), for: .normal)
-        button.setTitle("Menu", for: .normal)
+       // button.setTitle("Menu", for: .normal)
         button.addTarget(self, action: #selector(self.action), for: .touchUpInside)
         button.sizeToFit()
         button.tintColor = .black

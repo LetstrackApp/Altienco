@@ -12,8 +12,10 @@ import SVProgressHUD
 
 class TransactionHistoryViewModel {
     
-//    var historyList : Box<[HistoryResponseObj]> = Box([])
-    func getTransactionHistory(model : HistoryRequestObj, complition : @escaping([HistoryResponseObj]?, Bool) -> Void)->Void{
+    var historyList : Box<[HistoryResponseObj]> = Box([])
+    func getTransactionHistory(model : HistoryRequestObj,
+                               complition : @escaping([HistoryResponseObj]?,
+                                                      Bool) -> Void)->Void{
         SVProgressHUD.show()
         let data = try? JSONEncoder().encode(model)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
@@ -26,21 +28,26 @@ class TransactionHistoryViewModel {
             SVProgressHUD.dismiss()
             debugPrint("jsondata:", strURl, jsondata as Any)
             var historyData = [HistoryResponseObj]()
-            if jsondata?["Message_Code"] as? Bool == true, let resultData = jsondata?["Result"] as? NSDictionary
+            if jsondata?["Message_Code"] as? Bool == true,
+                let resultData = jsondata?["Result"] as? NSDictionary
             {
                 if resultData["status"] as? Bool == true{
                     for dict in resultData["data"] as? Array ?? []{
                         historyData.append(HistoryResponseObj.init(json: dict as! [String : Any]))
                         }
-                    
+                    self.historyList.value = historyData
                     complition(historyData, true)
                     
                 }
                 else
                 {
                     complition(nil, false)
-                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((resultData["message"] as? String) ?? lngConst.supportMsg, delay:Helper.DELAY_LONG)
                 }
+            }else {
+                Helper.showToast(lngConst.supportMsg, delay:Helper.DELAY_LONG)
+
+                complition(nil, false)
             }
 
 //                else{
@@ -52,6 +59,7 @@ class TransactionHistoryViewModel {
             if let error = Error{
                 Helper.showToast(error , delay:Helper.DELAY_LONG)
             }
+            complition(nil, false)
         }
     }
 }
