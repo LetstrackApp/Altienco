@@ -34,6 +34,7 @@ struct VerifyStatusResponce: Codable {
     var retailAmount: Double?
     var retailUnit, statusMessage, validityUnit: String?
     var wholesaleAmount, wholesaleUnit, firstStep_ActivityDate, secondStep_ActivityDate, finalStep_ActivityDate, usageInfo: String?
+    var orderId: String?
 
     enum CodingKeys: String, CodingKey {
         case apiID = "apiId"
@@ -51,6 +52,7 @@ struct VerifyStatusResponce: Codable {
     }
 
     init(json: [String: Any]) {
+        self.orderId = json["orderId"] as? String
         self.externalID = json["externalId"] as? String
         self.apiID = json["apiId"] as? Int
         self.processStatusID = json["processStatusId"] as? Int

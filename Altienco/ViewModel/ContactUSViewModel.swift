@@ -55,8 +55,10 @@ extension ReasionViewModel: ResionAPi {
         let data = image.jpegData(compressionQuality: 0.4)
         let parameters: [String : Any] = ["file": data!,
                                           "id": UserDefaults.getUserData?.customerID ?? 0]
-        let url = baseURL.baseURl + subURL.uploadImage
-        requestWith(url: url, imageData: data!, parameters: parameters) { result, url in
+        let url = baseURL.baseURl + subURL.uploadAttachment
+        requestWith(url: url,
+                    imageData: data!,
+                    parameters: parameters) { result, url in
             if result == true {
                 self.attachmentURL = url
                 

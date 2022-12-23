@@ -8,8 +8,10 @@
 import Foundation
 import UIKit
 
-class SuccessRechargeVC: UIViewController, UITextFieldDelegate {
 
+class SuccessRechargeVC: UIViewController, UITextFieldDelegate {
+    var receiptDownload: DownloadRecieptApi?
+    
     var denominationValue = ""
     var mPin = ""
     var isHideVoucherButton = false
@@ -18,6 +20,7 @@ class SuccessRechargeVC: UIViewController, UITextFieldDelegate {
     var walletBal = 0.0
     var voucherID = 0
     var markUsed : UsedMarkViewModel?
+    var orderNumber : String?
     
     @IBOutlet weak var viewContainer: UIView!{
         didSet{
@@ -56,14 +59,21 @@ class SuccessRechargeVC: UIViewController, UITextFieldDelegate {
         }
     }
     
+    
+    convenience init() {
+        self.init(nibName: xibName.successRechargeVC, bundle: .altiencoBundle)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        receiptDownload = DownloadRecieptApi()
+        
         markUsed = UsedMarkViewModel()
         if self.walletBal != 0.0{
-        DispatchQueue.main.async {
-            self.setupDefaultValue()
-        }}
+            DispatchQueue.main.async {
+                self.setupDefaultValue()
+            }}
         self.initiateView()
+        
     }
     func setupDefaultValue(){
         var model = UserDefaults.getUserData
@@ -79,7 +89,7 @@ class SuccessRechargeVC: UIViewController, UITextFieldDelegate {
     
     func initiateView(){
         if let currency = UserDefaults.getUserData?.currencySymbol{
-        self.denominationText.text = currency + denominationValue
+            self.denominationText.text = currency + denominationValue
             var str4 = mPin
             str4.insert(separator: " ", every: 4)
             print(str4)   // "1123:1245:1\n"
@@ -116,7 +126,7 @@ class SuccessRechargeVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func setStatus(_ sender: Any) {
-            self.markToUsed()
+        self.markToUsed()
     }
     
     
@@ -150,56 +160,64 @@ class SuccessRechargeVC: UIViewController, UITextFieldDelegate {
                 if UserDefaults.getAvtarImage == "1"{
                     self.profileImage.image = UIImage(named: aString)
                 }else{
-                let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
-                 
-                self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
+                    let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
+                    
+                    self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
                 }
             }
         }
-
+        
     }
     
     @IBAction func copyTextButton(_ sender: Any) {
-        UIPasteboard.general.string = mPinText!.text 
+        UIPasteboard.general.string = mPinText!.text
         Helper.showToast("Voucher Code Copied Successfully")
-
+        
     }
     
     @IBAction func rechargeButton(_ sender: Any) {
         self.mPin != "" ?
-            self.present(alertEmailAddEditView, animated: true, completion: nil) : Helper.showToast("Please try after Sometime!")
-        }
+        self.present(alertEmailAddEditView, animated: true, completion: nil) : Helper.showToast("Please try after Sometime!")
+    }
     //Create Alert Controller Dial Object here
     lazy var alertEmailAddEditView:UIAlertController = {
-
+        
         let alert = UIAlertController(title:"Recharge Voucher", message: "Customize Voucher Code Before Dial", preferredStyle:UIAlertController.Style.alert)
-
+        
         //ADD TEXT FIELD (YOU CAN ADD MULTIPLE TEXTFILED AS WELL)
         alert.addTextField { (textField : UITextField!) in
             textField.text = self.mPin
             textField.keyboardType = .phonePad
             textField.delegate = self
         }
-
+        
         //SAVE BUTTON
         let save = UIAlertAction(title: "Dial", style: UIAlertAction.Style.default, handler: { saveAction -> Void in
             let textField = alert.textFields![0] as UITextField
             if let url = URL(string: "telprompt://\(textField.text!)"),
-                    UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+               UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         })
         //CANCEL BUTTON
         let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {
             (action : UIAlertAction!) -> Void in })
-
-
+        
+        
         alert.addAction(save)
         alert.addAction(cancel)
-
+        
         return alert
     }()
-
+    @IBAction func downloadReceiptAction(_ sender: Any) {
+        receiptDownload?.receiptDownload(userId: UserDefaults.getUserID,
+                                         orderId: orderNumber,
+                                         voicherId: voucherID,
+                                         serviceTypeId:  TransactionTypeId.PhoneRecharge.rawValue) { result in
+            // to do
+        }
+    }
+    
     //MARK:- UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -209,20 +227,20 @@ class SuccessRechargeVC: UIViewController, UITextFieldDelegate {
     @IBAction func shareButton(_ sender: Any) {
         // text to share
         if let currency = UserDefaults.getUserData?.currencySymbol{
-        self.denominationText.text = currency + denominationValue
+            self.denominationText.text = currency + denominationValue
             var str4 = mPin
             str4.insert(separator: " ", every: 4)
             print(str4)   // "1123:1245:1\n"
             
             let text = msgToShare
-                // set up activity view controller
-                let textToShare = [ text ]
-                let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-                activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-                // exclude some activity types from the list (optional)
-                activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
-                // present the view controller
-                self.present(activityViewController, animated: true, completion: nil)
+            // set up activity view controller
+            let textToShare = [ text ]
+            let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+            // exclude some activity types from the list (optional)
+            activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
+            // present the view controller
+            self.present(activityViewController, animated: true, completion: nil)
         }
     }
     
@@ -231,7 +249,7 @@ class SuccessRechargeVC: UIViewController, UITextFieldDelegate {
             self.userName.text = "Hi \(firstname)"
         }
         if let currencySymbol = UserDefaults.getUserData?.currencySymbol, let walletAmount = UserDefaults.getUserData?.walletAmount{
-        self.walletBalance.text = "\(currencySymbol)" + "\(walletAmount)"
+            self.walletBalance.text = "\(currencySymbol)" + "\(walletAmount)"
         }
     }
     

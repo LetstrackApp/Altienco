@@ -81,7 +81,7 @@ class CallingCardPlanVC: UIViewController {
         didSet{
             self.addButton.setupNextButton(title: lngConst.add_Balance,space: 1.6)
             self.addButton.setTitle(lngConst.add_Balance, for: .normal)
-
+            
         }
     }
     
@@ -97,7 +97,7 @@ class CallingCardPlanVC: UIViewController {
             viewContainer.layer.cornerRadius = 10
             viewContainer.addShadow()
         }
-
+        
     }
     
     @IBOutlet weak var generateCollingCard: UILabel!{
@@ -202,10 +202,10 @@ class CallingCardPlanVC: UIViewController {
     func initiateModel() {
         viewModel?.getOperatorPlans(OperatorID: self.OperatorID, transactionTypeId: TransactionTypeId.CallingCard.rawValue, langCode: "en") { (operatorList, status, message) in
             if status == true && message == ""{
-            self.allOperator = operatorList ?? []
-            DispatchQueue.main.async {
-                self.operatorPlansCollection.reloadData()
-            }}
+                self.allOperator = operatorList ?? []
+                DispatchQueue.main.async {
+                    self.operatorPlansCollection.reloadData()
+                }}
             else{
                 self.showAlert(withTitle: "", message: message)
             }
@@ -244,59 +244,71 @@ class CallingCardPlanVC: UIViewController {
                 self.present(alertController, animated: true, completion: nil)
             }
             else{
-        
-        guard let selectedAmount = self.allOperator[self.SelectedIndex].denominationValue else {return}
-        guard let walletBal = UserDefaults.getUserData?.walletAmount else {return}
-        if selectedAmount > Int(walletBal){
-            let alertController = UIAlertController(title: "Insufficent Balance", message: "Please add wallet balance", preferredStyle: .alert)
-                // Create the actions
-            let okAction = UIAlertAction(title: "ADD", style: UIAlertAction.Style.default) {
-                    UIAlertAction in
-                let viewController: WalletPaymentVC = WalletPaymentVC()
-                self.navigationController?.pushViewController(viewController, animated: true)
+                
+                guard let selectedAmount = self.allOperator[self.SelectedIndex].denominationValue else {return}
+                guard let walletBal = UserDefaults.getUserData?.walletAmount else {return}
+                if selectedAmount > Int(walletBal) {
+                    let alertController = UIAlertController(title: "Insufficent Balance",
+                                                            message: "Please add wallet balance",
+                                                            preferredStyle: .alert)
+                    // Create the actions
+                    let okAction = UIAlertAction(title: "ADD", style: UIAlertAction.Style.default) {
+                        UIAlertAction in
+                        let viewController: WalletPaymentVC = WalletPaymentVC()
+                        self.navigationController?.pushViewController(viewController, animated: true)
+                    }
+                    let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) {
+                        UIAlertAction in
+                        NSLog("Cancel Pressed")
+                    }
+                    // Add the actions
+                    
+                    alertController.addAction(okAction)
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
                 }
-            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) {
-                    UIAlertAction in
-                    NSLog("Cancel Pressed")
-                }
-                // Add the actions
-            
-            alertController.addAction(okAction)
-            alertController.addAction(cancelAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
-        else{
-            if self.SelectedIndex < (self.allOperator.count ?? 0) && self.SelectedIndex != -1{
-                DispatchQueue.main.async {
-                    let operatorTitle = self.OperatorName
-                    let planName = self.allOperator[self.SelectedIndex].planName ?? ""
-                    let currency = self.allOperator[self.SelectedIndex].currency ?? ""
-                    let denomination = self.allOperator[self.SelectedIndex].denominationValue ?? 0
-                    self.callSuccessPopup(operatorTitle: operatorTitle,
-                                          denomination: denomination,
-                                          currency: currency,
-                                          operatorID: self.OperatorID,
-                                          planName: planName)
-                }
-            }}
+                else{
+                    if self.SelectedIndex < (self.allOperator.count) && self.SelectedIndex != -1{
+                        DispatchQueue.main.async {
+                            let operatorTitle = self.OperatorName
+                            let planName = self.allOperator[self.SelectedIndex].planName ?? ""
+                            let currency = self.allOperator[self.SelectedIndex].currency ?? ""
+                            let denomination = self.allOperator[self.SelectedIndex].denominationValue ?? 0
+                            self.callSuccessPopup(operatorTitle: operatorTitle,
+                                                  denomination: denomination,
+                                                  currency: currency,
+                                                  operatorID: self.OperatorID,
+                                                  planName: planName)
+                        }
+                    }}
             }
         } else{
             self.showAlert(withTitle: "", message: "Please select denomination!")
         }
     }
     
-    func successVoucher(mPin: String, denominationValue : String, walletBalance: Double, msgToShare: String, voucherID: Int){
+    func successVoucher(mPin: String,
+                        denominationValue : String,
+                        walletBalance: Double,
+                        msgToShare: String,
+                        voucherID: Int,
+                        orderNumber:String?) {
         let viewController: SuccessCallinCardVC = SuccessCallinCardVC()
         viewController.denominationValue = denominationValue
         viewController.mPin = mPin
         viewController.walletBal = walletBalance
         viewController.voucherID = voucherID
         viewController.msgToShare = msgToShare
+        viewController.orderNumber = orderNumber
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     
-    func callSuccessPopup(operatorTitle: String, denomination: Int, currency: String, operatorID: Int, planName: String){
+    func callSuccessPopup(operatorTitle: String,
+                          denomination: Int,
+                          currency: String,
+                          operatorID: Int,
+                          planName: String){
         
         let reviewPopupModel = ReviewPopupModel.init(mobileNumber: nil,
                                                      operatorID: operatorID,
@@ -310,21 +322,26 @@ class CallingCardPlanVC: UIViewController {
         ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result, status in
             DispatchQueue.main.async {
                 if status == true, let val = result{
-                    self.successVoucher(mPin: val.mPIN ?? "", denominationValue: "\(val.dinominationValue ?? 0)", walletBalance: val.walletAmount ?? 0.0, msgToShare: val.msgToShare ?? "", voucherID: val.voucherID ?? 0)
+                    self.successVoucher(mPin: val.mPIN ?? "",
+                                        denominationValue: "\(val.dinominationValue ?? 0)",
+                                        walletBalance: val.walletAmount ?? 0.0,
+                                        msgToShare: val.msgToShare ?? "",
+                                        voucherID: val.voucherID ?? 0,
+                                        orderNumber: "")
                 }
             }
         }
         
-//        let viewController: CallingCardReviewVC = CallingCardReviewVC()
-//        viewController.delegate = self
-//        viewController.denomination = denomination
-//        viewController.currency = currency
-//        viewController.operatorTitle = operatorTitle
-//        viewController.operatorID = operatorID
-//        viewController.isEdit = false
-//        viewController.planName = planName
-//        viewController.modalPresentationStyle = .overFullScreen
-//        self.navigationController?.present(viewController, animated: true)
+        //        let viewController: CallingCardReviewVC = CallingCardReviewVC()
+        //        viewController.delegate = self
+        //        viewController.denomination = denomination
+        //        viewController.currency = currency
+        //        viewController.operatorTitle = operatorTitle
+        //        viewController.operatorID = operatorID
+        //        viewController.isEdit = false
+        //        viewController.planName = planName
+        //        viewController.modalPresentationStyle = .overFullScreen
+        //        self.navigationController?.present(viewController, animated: true)
     }
     
 }

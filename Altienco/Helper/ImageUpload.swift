@@ -9,7 +9,11 @@
 import Foundation
 import Alamofire
 
-    func requestWith(url: String, imageData: Data?, parameters: [String : Any], onCompletion: ((Bool?, String?) -> Void)? = nil, onError: ((Error?) -> Void)? = nil){
+    func requestWith(url: String,
+                     imageData: Data?,
+                     parameters: [String : Any],
+                     onCompletion: ((Bool?, String?) -> Void)? = nil,
+                     onError: ((Error?) -> Void)? = nil){
         debugPrint(parameters)
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(UserDefaults.getToken)",
@@ -18,10 +22,8 @@ import Alamofire
 
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             for (key, value) in parameters {
-                
-                
                 if key == "file" || key == "PodFile" || key == "SignatureFile"{
-                    if let data = imageData{
+                    if let data = imageData {
                         multipartFormData.append(data, withName: key, fileName: "image.png", mimeType: "image/png")
                     }
                 }
@@ -37,7 +39,8 @@ import Alamofire
                 upload.responseJSON { response in
                     debugPrint(response.result.value as Any)
                     let json : [String : Any]? = response.result.value as? Dictionary
-                    if json?["Message_Code"] as? Bool == true, let resultData = json?["Result"] as? NSDictionary
+                    if json?["Message_Code"] as? Bool == true,
+                       let resultData = json?["Result"] as? NSDictionary
                     {
                         var url = ""
                         if resultData["status"] as? Bool == true{
@@ -45,17 +48,29 @@ import Alamofire
                                 url = data["image_Url"] as? String ?? ""
                             }
                             onCompletion?(true, url)
+                            return
                     }
                     else
                     {
                         Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
                         onCompletion?(false, "")
+                        return
                     }
-                    if let err = response.error{
+                    if let err = response.error {
                         onError?(err.localizedDescription as? Error)
                         onCompletion?(false, "")
                         return
-                    }}}
+                    }
+                        
+                    }else {
+                        Helper.showToast(lngConst.supportMsg, delay:Helper.DELAY_LONG)
+
+                        onCompletion?(false, "")
+                        return
+                    }
+                    
+                    
+                }
             case .failure(let error):
                 debugPrint("Error in upload: \(error.localizedDescription)")
                 onError?(error)

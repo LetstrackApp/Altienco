@@ -141,9 +141,13 @@ class ReviewPopupVC: UIViewController {
             UIView.animate(withDuration: 1, delay: 0, options: []) {
                 self?.scrollView.alpha = 0.0
                 self?.view.alpha = 0
+               
             } completion: { result in
+                completion(true)
                 self?.view.removeFromSuperview()
                 self?.removeFromParent()
+               
+               
             }
             
             
@@ -167,7 +171,6 @@ class ReviewPopupVC: UIViewController {
     }
     
     @IBAction func confirmOrder(_ sender: Any) {
-        self.confirmButton.isEnabled = false
         //        self.operatorTitle = reviewPopupModel?.operatorTitle.replacingOccurrences(of: " ", with: "").trimWhite.shoSpace
         self.confirmButton.showLoading()
         self.view.isUserInteractionEnabled = false
@@ -185,15 +188,11 @@ class ReviewPopupVC: UIViewController {
                     self?.alert(message: msg ?? "", title: "Alert")
                 }
                 else{
-                    
-                    self?.confirmButton.isEnabled = true
-                    if result != nil, let data = result{
-                        DispatchQueue.main.async{
-                            self?.hide {_ in
-                                self?.block??(data,true)
-                            }
-                            
+                    if let data = result {
+                        self?.hide {_ in
+                            self?.block??(data,true)
                         }
+                        
                     }
                 }
             }

@@ -28,6 +28,7 @@ struct GenerateVoucherResponseObj: Codable {
     var planName, currency, msgToShare: String?
     var dinominationValue: Int?
     var mPIN: String?
+    var orderId:String?
 
     enum CodingKeys: String, CodingKey {
         case voucherID = "voucherId"
@@ -39,6 +40,7 @@ struct GenerateVoucherResponseObj: Codable {
     }
     
     init(json: [String:Any]){
+        self.orderId = json["orderId"] as? String
         self.voucherID = json["voucherId"] as? Int
         self.walletAmount = json["walletAmount"] as? Double
         self.planName = json["planName"] as? String

@@ -12,7 +12,8 @@ import SVProgressHUD
 
 
 class VerifyStatusViewModel {
-    func verifyProcessStatus(model : VerifyStatusRequest, complition : @escaping(VerifyStatusResponce?, Bool?) -> Void)->Void{
+    func verifyProcessStatus(model : VerifyStatusRequest,
+                             complition : @escaping(VerifyStatusResponce?, Bool?) -> Void)->Void{
         SVProgressHUD.show()
         let data = try? JSONEncoder().encode(model)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]

@@ -18,6 +18,7 @@
 		04312461294CD28B00830CF2 /* ContactPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04312460294CD28B00830CF2 /* ContactPicker.swift */; };
 		044BB5DF29547A7900D5A666 /* PaymentSucessPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BB5DD29547A7900D5A666 /* PaymentSucessPopupVC.swift */; };
 		044BB5E029547A7900D5A666 /* PaymentSucessPopupVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044BB5DE29547A7900D5A666 /* PaymentSucessPopupVC.xib */; };
+		044BB5E22954A7D500D5A666 /* DownloadRecieptApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BB5E12954A7D400D5A666 /* DownloadRecieptApi.swift */; };
 		04661370294E2F9500EC444B /* alertSound.mpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0466136F294E2F9500EC444B /* alertSound.mpeg */; };
 		04661374294E398E00EC444B /* txnSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = 04661373294E398E00EC444B /* txnSuccess.json */; };
 		047F3FEC294F7EA0000377FF /* OperatorInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F3FEA294F7EA0000377FF /* OperatorInfoCell.swift */; };
@@ -287,6 +288,7 @@
 		04312460294CD28B00830CF2 /* ContactPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPicker.swift; sourceTree = "<group>"; };
 		044BB5DD29547A7900D5A666 /* PaymentSucessPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSucessPopupVC.swift; sourceTree = "<group>"; };
 		044BB5DE29547A7900D5A666 /* PaymentSucessPopupVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentSucessPopupVC.xib; sourceTree = "<group>"; };
+		044BB5E12954A7D400D5A666 /* DownloadRecieptApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadRecieptApi.swift; sourceTree = "<group>"; };
 		0466136F294E2F9500EC444B /* alertSound.mpeg */ = {isa = PBXFileReference; lastKnownFileType = video.mpeg; path = alertSound.mpeg; sourceTree = "<group>"; };
 		04661373294E398E00EC444B /* txnSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = txnSuccess.json; sourceTree = "<group>"; };
 		047F3FEA294F7EA0000377FF /* OperatorInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorInfoCell.swift; sourceTree = "<group>"; };
@@ -914,6 +916,7 @@
 				C6342CEB29374BC100814F40 /* AllNotificationViewModel.swift */,
 				C64AE76F294750E6006C6ABC /* DeleteAccountViewModel.swift */,
 				04C0DCDB29531AC3001592EE /* ContactUSViewModel.swift */,
+				044BB5E12954A7D400D5A666 /* DownloadRecieptApi.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1960,6 +1963,7 @@
 				C627CAA828F8E08200396943 /* SettingAuthCell.swift in Sources */,
 				C68226D428C1AE9D00376B4B /* RegistrationModel.swift in Sources */,
 				C6A3589D289C89E20079ED3F /* DashboardVC.swift in Sources */,
+				044BB5E22954A7D500D5A666 /* DownloadRecieptApi.swift in Sources */,
 				C6A9BB4E28ED7D710077A9A1 /* SliderCell.swift in Sources */,
 				C6A8190A28CAB0460097E595 /* VoucherCell.swift in Sources */,
 				04312461294CD28B00830CF2 /* ContactPicker.swift in Sources */,
@@ -2174,7 +2178,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Altienco/Altienco.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = Z8W4WTERGN;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Altienco/Info.plist";
@@ -2200,7 +2204,7 @@
 				CODE_SIGN_ENTITLEMENTS = Altienco/Altienco.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = Z8W4WTERGN;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Altienco/Info.plist";

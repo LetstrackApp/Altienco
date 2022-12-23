@@ -11,12 +11,12 @@ import UIKit
 
 
 enum baseURL {
-    static let baseURl = "https://testnode.altienco.com/api/"
-//    static let baseURl = "https://node.altienco.com/api/"
+//        static let baseURl = "https://testnode.altienco.com/api/"
+    static let baseURl = "https://node.altienco.com/api/"
     static let imageBaseURl = "http://testnode.eu-west-2.elasticbeanstalk.com/"
     static let termsCondition = "https://www.altienco.com/TermsAndConditions.html"
     static let helpAndSupport =  "https://www.altienco.com/help.html"
-//"https://www.altienco.com/TermsAndConditions.html"
+    //"https://www.altienco.com/TermsAndConditions.html"
     static let imageURL = "http://dadmin.altienco.com/Profile/Image"
 }
 
@@ -59,6 +59,8 @@ enum subURL{
     static let verifyToken = "verifyToken"
     static let getHelpNSupportReasons = "getHelpNSupportReasons"
     static let submitHelpNSupportRequest = "submitHelpNSupportRequest"
+    static let uploadAttachment = "uploadAttachment"
+    static let downloadInvoice = "downloadInvoice"
 }
 
 enum appColor{

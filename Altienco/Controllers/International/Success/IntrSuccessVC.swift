@@ -10,7 +10,8 @@ import UIKit
 import SVProgressHUD
 
 class IntrSuccessVC: UIViewController {
-
+    var receiptDownload: DownloadRecieptApi?
+    
     var isFromHistory = false
     var processStatusID = 0
     var externalId = ""
@@ -24,6 +25,7 @@ class IntrSuccessVC: UIViewController {
     
     var rechargeTimer: Timer?
     var timerCount = 18
+    var orderNumber : String?
     
     @IBOutlet weak var statusCount: UILabel!
     @IBOutlet weak var firstStatusView: UIStackView!
@@ -125,11 +127,13 @@ class IntrSuccessVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        receiptDownload = DownloadRecieptApi()
+        
         SVProgressHUD.show()
         self.showView.isHidden = true
         (isFromHistory == false) ? (self.rechargeRepeat.isHidden = false) : (self.rechargeRepeat.isHidden = true)
         processStatus = VerifyStatusViewModel()
-//        self.setupData()
+        //        self.setupData()
         self.successImageView.rotate(duration: 0.5)
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             self.successImageView.stopRotating()
@@ -137,7 +141,7 @@ class IntrSuccessVC: UIViewController {
         DispatchQueue.main.async {
             self.checkStatus()
             self.rechargeTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.checkStatus), userInfo: nil, repeats: true)
-            }
+        }
     }
     
     @objc func checkStatus(){
@@ -146,7 +150,7 @@ class IntrSuccessVC: UIViewController {
         }
         else{
             self.timerCount = self.timerCount - 1
-                self.verifyCardStatus(externalID: self.externalId, processStatusID: self.processStatusID)
+            self.verifyCardStatus(externalID: self.externalId, processStatusID: self.processStatusID)
         }
         
     }
@@ -158,6 +162,7 @@ class IntrSuccessVC: UIViewController {
                 SVProgressHUD.dismiss()
                 if status == true, let data = result{
                     self.confirmStatus = data
+                    self.orderNumber = self.confirmStatus?.orderId
                     self.processStatusID = data.processStatusID ?? 0
                     DispatchQueue.main.async {
                         if (self.processStatusID == GiftCardProcessStatus.Cancelled.rawValue) ||  (self.processStatusID == GiftCardProcessStatus.Completed.rawValue){
@@ -171,18 +176,18 @@ class IntrSuccessVC: UIViewController {
     }
     
     func setupFirstStatus(){
-//        UIView.animate(withDuration: 0.0) {
-            self.firstStatusView.isHidden = false
-//          }
+        //        UIView.animate(withDuration: 0.0) {
+        self.firstStatusView.isHidden = false
+        //          }
         self.statusCount.text = "1/3"
         self.firstStatusDay.text = confirmStatus?.firstStep_ActivityDate?.dateFormat()
         self.firstStatusDate.text = confirmStatus?.firstStep_ActivityDate?.dayFormat()
         self.firstStatusTime.text = confirmStatus?.firstStep_ActivityDate?.timeFormat()
     }
     func setupSecondStatus(){
-//        UIView.animate(withDuration: 0.0) {
-            self.secondStatusView.isHidden = false
-//          }
+        //        UIView.animate(withDuration: 0.0) {
+        self.secondStatusView.isHidden = false
+        //          }
         self.statusCount.text = "2/3"
         self.seconfStatusDay.text = confirmStatus?.firstStep_ActivityDate?.dateFormat()
         self.secondStatusDate.text = confirmStatus?.firstStep_ActivityDate?.dayFormat()
@@ -191,7 +196,7 @@ class IntrSuccessVC: UIViewController {
     func setupFinalStatus(){
         UIView.animate(withDuration: 0.0) {
             self.thirdStatusView.isHidden = false
-          }
+        }
         self.statusCount.text = "3/3"
         self.thirdStatusDay.text = confirmStatus?.firstStep_ActivityDate?.dateFormat()
         self.thirdStatusDate.text = confirmStatus?.firstStep_ActivityDate?.dayFormat()
@@ -206,75 +211,75 @@ class IntrSuccessVC: UIViewController {
         }
     }
     
-  func updateData(){
-      self.finalStatusConatiner.isHidden = true
-      self.showView.isHidden = false
-      self.failureView.isHidden = true
-      self.instructionView.isHidden = true
-      self.howToUseView.isHidden = true
-      self.successView.isHidden = true
-      self.firstStatusView.isHidden = true
-      self.secondStatusView.isHidden = true
-      self.thirdStatusView.isHidden = true
-      self.statusContainer.isHidden = false
-      if processStatusID == GiftCardProcessStatus.NotInitiated.rawValue{
-          self.setupFirstStatus()
-      }
-      else if processStatusID == GiftCardProcessStatus.InProgress.rawValue{
-          self.setupFirstStatus()
-          self.setupSecondStatus()
-      }
-      else if processStatusID == GiftCardProcessStatus.Completed.rawValue{
-          self.successView.isHidden = false
-          self.successImageView.rotate(duration: 0.5)
-          DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-              self.successImageView.stopRotating()
-          }
-          
-          self.finalStatusMessage.text = "Transaction Successful"
-          self.thirdStatusIndicator.backgroundColor = appColor.buttonGreenColor
-          self.finalStatusConatiner.isHidden = false
-          self.setupFirstStatus()
-          self.setupSecondStatus()
-          self.setupFinalStatus()
-      }
-      else if processStatusID == GiftCardProcessStatus.Cancelled.rawValue{
-          self.successView.isHidden = true
-          self.failureView.isHidden = false
-          self.failImageView.rotate(duration: 0.5)
-          DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-              self.failImageView.stopRotating()
-          }
-          self.finalStatusMessage.text = "Transaction Failed"
-          self.thirdStatusIndicator.backgroundColor = appColor.lightGrayBack
-          self.finalStatusConatiner.isHidden = false
-          self.setupFirstStatus()
-          self.setupSecondStatus()
-          self.setupFinalStatus()
-      }
-      if let referenceID = confirmStatus?.referenceID, referenceID != ""{
-          self.referenceID.isHidden = false
-          self.referenceID.text = "Txn ID: \(referenceID)"
-      }
-      else{
-          self.referenceID.isHidden = true
-      }
-      self.destinationAmount.text = "\(self.confirmStatus?.destinationAmount ?? 0)"
-      self.destinationUnit.text = self.confirmStatus?.destinationUnit
-      self.country.text = self.confirmStatus?.countryName
-      self.operatorName.text = self.confirmStatus?.operatorName
-      self.data.text = self.confirmStatus?.data
-      if self.confirmStatus?.validityQuantity == -1{
-          self.validity.text = "*Unlimited*"
-      }
-      else{
-          self.validity.text = "\(self.confirmStatus?.validityQuantity ?? 0)" + (self.confirmStatus?.validityUnit ?? "NA")
-      }
-      self.planDesc.text = self.confirmStatus?.cartItemResponseObjDescription
-      self.sourceAmountMsg.text = "You have paid *\(String(format: "%.2f", self.confirmStatus?.retailAmount ?? 0.0)) \(self.confirmStatus?.retailUnit ?? "")* for this recharge"
-      self.updateStatusData()
+    func updateData(){
+        self.finalStatusConatiner.isHidden = true
+        self.showView.isHidden = false
+        self.failureView.isHidden = true
+        self.instructionView.isHidden = true
+        self.howToUseView.isHidden = true
+        self.successView.isHidden = true
+        self.firstStatusView.isHidden = true
+        self.secondStatusView.isHidden = true
+        self.thirdStatusView.isHidden = true
+        self.statusContainer.isHidden = false
+        if processStatusID == GiftCardProcessStatus.NotInitiated.rawValue{
+            self.setupFirstStatus()
+        }
+        else if processStatusID == GiftCardProcessStatus.InProgress.rawValue{
+            self.setupFirstStatus()
+            self.setupSecondStatus()
+        }
+        else if processStatusID == GiftCardProcessStatus.Completed.rawValue{
+            self.successView.isHidden = false
+            self.successImageView.rotate(duration: 0.5)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                self.successImageView.stopRotating()
+            }
+            
+            self.finalStatusMessage.text = "Transaction Successful"
+            self.thirdStatusIndicator.backgroundColor = appColor.buttonGreenColor
+            self.finalStatusConatiner.isHidden = false
+            self.setupFirstStatus()
+            self.setupSecondStatus()
+            self.setupFinalStatus()
+        }
+        else if processStatusID == GiftCardProcessStatus.Cancelled.rawValue{
+            self.successView.isHidden = true
+            self.failureView.isHidden = false
+            self.failImageView.rotate(duration: 0.5)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                self.failImageView.stopRotating()
+            }
+            self.finalStatusMessage.text = "Transaction Failed"
+            self.thirdStatusIndicator.backgroundColor = appColor.lightGrayBack
+            self.finalStatusConatiner.isHidden = false
+            self.setupFirstStatus()
+            self.setupSecondStatus()
+            self.setupFinalStatus()
+        }
+        if let referenceID = confirmStatus?.referenceID, referenceID != ""{
+            self.referenceID.isHidden = false
+            self.referenceID.text = "Txn ID: \(referenceID)"
+        }
+        else{
+            self.referenceID.isHidden = true
+        }
+        self.destinationAmount.text = "\(self.confirmStatus?.destinationAmount ?? 0)"
+        self.destinationUnit.text = self.confirmStatus?.destinationUnit
+        self.country.text = self.confirmStatus?.countryName
+        self.operatorName.text = self.confirmStatus?.operatorName
+        self.data.text = self.confirmStatus?.data
+        if self.confirmStatus?.validityQuantity == -1{
+            self.validity.text = "*Unlimited*"
+        }
+        else{
+            self.validity.text = "\(self.confirmStatus?.validityQuantity ?? 0)" + (self.confirmStatus?.validityUnit ?? "NA")
+        }
+        self.planDesc.text = self.confirmStatus?.cartItemResponseObjDescription
+        self.sourceAmountMsg.text = "You have paid *\(String(format: "%.2f", self.confirmStatus?.retailAmount ?? 0.0)) \(self.confirmStatus?.retailUnit ?? "")* for this recharge"
+        self.updateStatusData()
     }
-        
+    
     @IBAction func notification(_ sender: Any) {
         let viewController: AllNotificationVC = AllNotificationVC()
         self.navigationController?.pushViewController(viewController, animated: true)
@@ -311,13 +316,13 @@ class IntrSuccessVC: UIViewController {
                 if UserDefaults.getAvtarImage == "1"{
                     self.profileImage.image = UIImage(named: aString)
                 }else{
-                let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
-                 
-                self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
+                    let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
+                    
+                    self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
                 }
             }
         }
-
+        
     }
     
     func setupValue(){
@@ -325,21 +330,21 @@ class IntrSuccessVC: UIViewController {
             self.userName.text = "Hi \(firstname)"
         }
         if let currencySymbol = UserDefaults.getUserData?.currencySymbol, let walletAmount = UserDefaults.getUserData?.walletAmount{
-        self.walletBalnace.text = "\(currencySymbol)" + "\(walletAmount)"
+            self.walletBalnace.text = "\(currencySymbol)" + "\(walletAmount)"
         }
     }
     
     func updateStatusData(){
         
-       
+        
         if (self.processStatusID == GiftCardProcessStatus.InProgress.rawValue) || (self.processStatusID == GiftCardProcessStatus.NotInitiated.rawValue)
         {
-        self.successRechargeText.text = "Recharge for *\(confirmStatus?.rechargedMobileNumber ?? "")* is in process ..."
+            self.successRechargeText.text = "Recharge for *\(confirmStatus?.rechargedMobileNumber ?? "")* is in process ..."
         }
         else if (self.processStatusID != GiftCardProcessStatus.Cancelled.rawValue)
         {
             downloadReceiptPDf.isHidden = false
-        self.successRechargeText.text = "Recharge for *\(confirmStatus?.rechargedMobileNumber ?? "")* has been done successfully!"
+            self.successRechargeText.text = "Recharge for *\(confirmStatus?.rechargedMobileNumber ?? "")* has been done successfully!"
         }
         else{
             downloadReceiptPDf.isHidden = false
@@ -355,11 +360,19 @@ class IntrSuccessVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func downloadReceiptAction(_ sender: Any) {
+        receiptDownload?.receiptDownload(userId: UserDefaults.getUserID,
+                                         orderId: orderNumber,
+                                         voicherId: 0,
+                                         serviceTypeId:  TransactionTypeId.ITopup.rawValue) { result in
+            // to do
+        }
+    }
     
     @IBAction func editRecharge(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
         
     }
     
-
+    
 }

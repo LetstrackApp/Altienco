@@ -10,7 +10,7 @@ import UIKit
 import FlagKit
 
 class SuccessGiftCardVC: UIViewController {
-  
+    
     var denominationAmount = 0.0
     var countryCode = ""
     var countryName = ""
@@ -28,7 +28,8 @@ class SuccessGiftCardVC: UIViewController {
     var isFromHistory = false
     var showInstruction = false
     
-    
+    var receiptDownload: DownloadRecieptApi?
+    var orderNumber: String?
     
     @IBOutlet weak var statusCount: UILabel!
     @IBOutlet weak var firstStatusView: UIStackView!
@@ -128,13 +129,15 @@ class SuccessGiftCardVC: UIViewController {
     @IBOutlet weak var buyButtonConatiner: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        receiptDownload = DownloadRecieptApi()
+        
         processStatus = VerifyStatusViewModel()
         self.checkStatus()
         self.showStatusMsg(processStatusID: self.processStatusID)
         DispatchQueue.main.async {
             self.updateDefaultVal()
             self.giftCardTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.checkStatus), userInfo: nil, repeats: true)
-            }
+        }
     }
     
     func setupFlag(countryCode: String){
@@ -145,13 +148,13 @@ class SuccessGiftCardVC: UIViewController {
     
     
     func reVerifyCard(){
-            guard let currency = UserDefaults.getUserData?.currencySymbol else {return}
+        guard let currency = UserDefaults.getUserData?.currencySymbol else {return}
         self.denominationText.text = currency +
         String(format: "%.2f", self.denominationAmount)
-            self.showStatusMsg(processStatusID: self.processStatusID)
-            self.giftCardName.text = GiftCardName
-            self.giftCardCountry.text = self.countryName
-//            self.setupFlag(countryCode: self.countryCode)
+        self.showStatusMsg(processStatusID: self.processStatusID)
+        self.giftCardName.text = GiftCardName
+        self.giftCardCountry.text = self.countryName
+        //            self.setupFlag(countryCode: self.countryCode)
     }
     
     @objc func checkStatus(){
@@ -160,14 +163,14 @@ class SuccessGiftCardVC: UIViewController {
         }
         else{
             self.timerCount = self.timerCount - 1
-                self.verifyCardStatus(externalID: self.externalId, processStatusID: self.processStatusID)
+            self.verifyCardStatus(externalID: self.externalId, processStatusID: self.processStatusID)
         }
         
     }
     
     func updateLocalData(){
         if let model = self.confirmStatus{
-//            self.countryCode = model.countryName
+            //            self.countryCode = model.countryName
             self.countryName = model.countryName ?? ""
             self.processStatusID = model.processStatusID ?? 0
             self.GiftCardName = model.operatorName ?? ""
@@ -183,7 +186,9 @@ class SuccessGiftCardVC: UIViewController {
                     if data.processStatusID == GiftCardProcessStatus.Cancelled.rawValue ||  data.processStatusID == GiftCardProcessStatus.Completed.rawValue{
                         self?.giftCardTimer?.invalidate()
                     }
+                    
                     self?.confirmStatus = data
+                    self?.orderNumber = data.orderId 
                     self?.updateLocalData()
                     self?.updateFinalView()
                     
@@ -208,23 +213,23 @@ class SuccessGiftCardVC: UIViewController {
         }
         (self.isFromHistory == true) ?
         (self.buyButtonConatiner.isHidden = true) : (self.buyButtonConatiner.isHidden = false)
-            self.showStatusMsg(processStatusID : self.processStatusID)
+        self.showStatusMsg(processStatusID : self.processStatusID)
         self.reVerifyCard()
     }
     
     func setupFirstStatus(){
-//        UIView.animate(withDuration: 0.0) {
-            self.firstStatusView.isHidden = false
-//          }
+        //        UIView.animate(withDuration: 0.0) {
+        self.firstStatusView.isHidden = false
+        //          }
         self.statusCount.text = "1/3"
         self.firstStatusDay.text = confirmStatus?.firstStep_ActivityDate?.dateFormat()
         self.firstStatusDate.text = confirmStatus?.firstStep_ActivityDate?.dayFormat()
         self.firstStatusTime.text = confirmStatus?.firstStep_ActivityDate?.timeFormat()
     }
     func setupSecondStatus(){
-//        UIView.animate(withDuration: 0.0) {
-            self.secondStatusView.isHidden = false
-//          }
+        //        UIView.animate(withDuration: 0.0) {
+        self.secondStatusView.isHidden = false
+        //          }
         self.statusCount.text = "2/3"
         self.seconfStatusDay.text = confirmStatus?.firstStep_ActivityDate?.dateFormat()
         self.secondStatusDate.text = confirmStatus?.firstStep_ActivityDate?.dayFormat()
@@ -233,7 +238,7 @@ class SuccessGiftCardVC: UIViewController {
     func setupFinalStatus(){
         UIView.animate(withDuration: 0.0) {
             self.thirdStatusView.isHidden = false
-          }
+        }
         self.statusCount.text = "3/3"
         self.thirdStatusDay.text = confirmStatus?.firstStep_ActivityDate?.dateFormat()
         self.thirdStatusDate.text = confirmStatus?.firstStep_ActivityDate?.dayFormat()
@@ -247,7 +252,7 @@ class SuccessGiftCardVC: UIViewController {
             self.generateButton.setupNextButton(title: "TRY AGAIN")
         }
     }
-   
+    
     
     func showStatusMsg(processStatusID : Int){
         self.falureView.isHidden = true
@@ -306,26 +311,26 @@ class SuccessGiftCardVC: UIViewController {
     
     @IBAction func copyTextButton(_ sender: Any) {
         if !(claimCode.text?.isEmpty ?? true){
-        UIPasteboard.general.string = claimCode!.text
-        Helper.showToast("Claim Code Copied Successfully")
+            UIPasteboard.general.string = claimCode!.text
+            Helper.showToast("Claim Code Copied Successfully")
         }
     }
-
+    
     @IBAction func clickInstruction(_ sender: Any) {
         if self.showInstruction == false {
-                self.showInstruction = true
-                UIView.animate(withDuration: 0.6,
-                               animations: { [weak self] in
-                    self?.instructionView.isHidden = false
-                })
-            } else {
-                UIView.animate(withDuration: 0.6,
-                               animations: { [weak self] in
-                    self?.instructionView.isHidden = true
-                }) { [weak self] _ in
-                    self?.showInstruction = false
-                }
+            self.showInstruction = true
+            UIView.animate(withDuration: 0.6,
+                           animations: { [weak self] in
+                self?.instructionView.isHidden = false
+            })
+        } else {
+            UIView.animate(withDuration: 0.6,
+                           animations: { [weak self] in
+                self?.instructionView.isHidden = true
+            }) { [weak self] _ in
+                self?.showInstruction = false
             }
+        }
     }
     
     @IBAction func notification(_ sender: Any) {
@@ -358,20 +363,20 @@ class SuccessGiftCardVC: UIViewController {
                 if UserDefaults.getAvtarImage == "1"{
                     self.profileImage.image = UIImage(named: aString)
                 }else{
-                let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
-                 
-                self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
+                    let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
+                    
+                    self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
                 }
             }
         }
-
+        
     }
     func updateDefaultVal(){
         if let firstname = UserDefaults.getUserData?.firstName{
             self.userName.text = "Hi \(firstname)"
         }
         if let currencySymbol = UserDefaults.getUserData?.currencySymbol, let walletAmount = UserDefaults.getUserData?.walletAmount{
-        self.walletBalance.text = "\(currencySymbol)" + "\(walletAmount)"
+            self.walletBalance.text = "\(currencySymbol)" + "\(walletAmount)"
         }
     }
     @IBAction func redirectProfile(_ sender: Any) {
@@ -380,19 +385,27 @@ class SuccessGiftCardVC: UIViewController {
     }
     
     
+    @IBAction func downloadReceiptAction(_ sender: Any) {
+        receiptDownload?.receiptDownload(userId: UserDefaults.getUserID,
+                                         orderId: orderNumber,
+                                         voicherId: 0,
+                                         serviceTypeId:  TransactionTypeId.Giftcard.rawValue) { result in
+            // to do
+        }
+    }
     
     @IBAction func shareButton(_ sender: Any) {
         // text to share
         if let currency = UserDefaults.getUserData?.currencySymbol{
             self.denominationText.text = currency + String(format: "%.2f", self.denominationAmount)
             let text = self.confirmStatus?.msgToShare
-                let textToShare = [ text ]
-                let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-                activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-                // exclude some activity types from the list (optional)
-                activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
-                // present the view controller
-                self.present(activityViewController, animated: true, completion: nil)
+            let textToShare = [ text ]
+            let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+            // exclude some activity types from the list (optional)
+            activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
+            // present the view controller
+            self.present(activityViewController, animated: true, completion: nil)
         }
     }
     

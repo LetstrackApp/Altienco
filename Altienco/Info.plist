@@ -37,11 +37,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to the camera for uploading profile picture.</string>
+	<string>Altienco requires access to the camera for uploading profile picture.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>This app requires access to the Contacts Book for topup.</string>
+	<string>Altienco requires access to the Contacts Book for topup.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>$(PRODUCT_NAME) requires Face ID permission to authenticate using Face recognition.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Altienco requires access to the location for payment info.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires access to the photo library for uploading profile picture.</string>
 	<key>UIAppFonts</key>

@@ -169,7 +169,9 @@ class AllCallingCardVC: UIViewController {
         (UserDefaults.getUserData?.countryCode == CountryCode.UK.ISOcode) || (UserDefaults.getUserData?.countryCode == CountryCode.UK.ISOcode2) ? (countryCode = CountryCode.UK.countryID) : (countryCode = CountryCode.IN.countryID)
         operatorCollection.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor.lightGray.withAlphaComponent(0.3)), animation: nil, transition: .crossDissolve(0.26))
         
-        viewModel?.getOperator(countryID: countryCode ?? 102, transactionTypeId: TransactionTypeId.CallingCard.rawValue, langCode: "en") { (operatorList, status, msg) in
+        viewModel?.getOperator(countryID: countryCode ?? 102,
+                               transactionTypeId: TransactionTypeId.CallingCard.rawValue,
+                               langCode: "en") { (operatorList, status, msg) in
             DispatchQueue.main.async { [weak self] in
                 self?.operatorCollection.stopSkeletonAnimation()
                 self?.operatorCollection.hideSkeleton()
@@ -228,13 +230,19 @@ class AllCallingCardVC: UIViewController {
         }
     }
     
-    func successVoucher(mPin: String, denominationValue : String, walletBalance: Double, msgToShare: String, voucherID: Int){
+    func successVoucher(mPin: String,
+                        denominationValue : String,
+                        walletBalance: Double,
+                        msgToShare: String,
+                        voucherID: Int,
+                        orderNumber:String?){
         let viewController: SuccessRechargeVC = SuccessRechargeVC()
         viewController.denominationValue = denominationValue
         viewController.mPin = mPin
         viewController.walletBal = walletBalance
         viewController.voucherID = voucherID
         viewController.msgToShare = msgToShare
+        viewController.orderNumber = orderNumber
         self.navigationController?.pushViewController(viewController, animated: true)
         
     }
@@ -266,7 +274,12 @@ class AllCallingCardVC: UIViewController {
             ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result, status in
                 DispatchQueue.main.async {
                     if status == true, let val = result{
-                        self.successVoucher(mPin: val.mPIN ?? "", denominationValue: "\(val.dinominationValue ?? 0)", walletBalance: val.walletAmount ?? 0.0, msgToShare: val.msgToShare ?? "", voucherID: val.voucherID ?? 0)
+                        self.successVoucher(mPin: val.mPIN ?? "",
+                                            denominationValue: "\(val.dinominationValue ?? 0)",
+                                            walletBalance: val.walletAmount ?? 0.0,
+                                            msgToShare: val.msgToShare ?? "",
+                                            voucherID: val.voucherID ?? 0,
+                                            orderNumber: "")
                     }
                 }
             }

@@ -22,4 +22,6 @@ public enum xibName {
     static let reviewIntrVC = "ReviewIntrVC"
     static let reviewGiftCardVC = "ReviewGiftCardVC"
     static let paymentSucessPopupVC = "PaymentSucessPopupVC"
+    static let successCallinCardVC = "SuccessCallinCardVC"
+    static let successRechargeVC = "SuccessRechargeVC"
 }

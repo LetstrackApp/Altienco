@@ -91,9 +91,28 @@ class ReviewGiftCardVC: UIViewController {
     @IBAction func confirmOrder(_ sender: Any) {
         self.confirmButton.isEnabled = false
         if selectedFixedPlan != nil{
-            
             let dataModel =
-            ConfirmFixedPlanRequest.init(customerID: UserDefaults.getUserData?.customerID ?? 0, mobileCode: UserDefaults.getMobileCode, mobileNumber: UserDefaults.getMobileNumber, planID: selectedFixedPlan?.planID, planName: selectedFixedPlan?.planName, planTypeID: 1, operatorID: selectedFixedPlan?.operatorID, operatorName: selectedFixedPlan?.operatorName, destinationAmount: selectedFixedPlan?.destinationAmount, destinationMaxAmount: 0, destinationMinAmount: 0, destinationUnit: selectedFixedPlan?.destinationUnit, sourceUnit: selectedFixedPlan?.sourceUnit, retailAmount: Int(selectedFixedPlan?.retailAmount ?? 0.0), retailUnit: selectedFixedPlan?.retailUnit, wholesaleAmount: selectedFixedPlan?.wholesaleAmount, wholesaleUnit: selectedFixedPlan?.wholesaleUnit, validityQuantity: "\(selectedFixedPlan?.validityQuantity ?? 0)", validityUnit: selectedFixedPlan?.validityUnit, cartItemResponseObjDescription: selectedFixedPlan?.objDescription, langCode: "en" )
+            ConfirmFixedPlanRequest.init(customerID: UserDefaults.getUserData?.customerID ?? 0,
+                                         mobileCode: UserDefaults.getMobileCode,
+                                         mobileNumber: UserDefaults.getMobileNumber,
+                                         planID: selectedFixedPlan?.planID,
+                                         planName: selectedFixedPlan?.planName,
+                                         planTypeID: 1,
+                                         operatorID: selectedFixedPlan?.operatorID,
+                                         operatorName: selectedFixedPlan?.operatorName,
+                                         destinationAmount: selectedFixedPlan?.destinationAmount,
+                                         destinationMaxAmount: 0,
+                                         destinationMinAmount: 0,
+                                         destinationUnit: selectedFixedPlan?.destinationUnit,
+                                         sourceUnit: selectedFixedPlan?.sourceUnit,
+                                         retailAmount: Int(selectedFixedPlan?.retailAmount ?? 0.0),
+                                         retailUnit: selectedFixedPlan?.retailUnit,
+                                         wholesaleAmount: selectedFixedPlan?.wholesaleAmount,
+                                         wholesaleUnit: selectedFixedPlan?.wholesaleUnit,
+                                         validityQuantity: "\(selectedFixedPlan?.validityQuantity ?? 0)",
+                                         validityUnit: selectedFixedPlan?.validityUnit,
+                                         cartItemResponseObjDescription: selectedFixedPlan?.objDescription,
+                                         langCode: "en" )
             
             self.confirmButton.showLoading()
             self.view.isUserInteractionEnabled = false
@@ -107,12 +126,10 @@ class ReviewGiftCardVC: UIViewController {
                             self?.hide{_ in
                                 self?.block??(data,true)
                             }
-                            //                    self?.dismiss(animated: false) {
-                            //                    self?.delegate?.BackToPrevious(dismiss: true, result: data)
-                            //                    }
                         }
                     }
-                }}
+                }
+            }
         }
     }
     

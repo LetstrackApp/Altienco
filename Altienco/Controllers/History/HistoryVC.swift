@@ -36,9 +36,9 @@ class HistoryVC: UIViewController {
                         if UserDefaults.getAvtarImage == "1"{
                             self.profileImage.image = UIImage(named: aString)
                         }else{
-                        let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
-                         
-                        self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
+                            let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
+                            
+                            self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
                         }
                     }
                 }
@@ -84,14 +84,14 @@ class HistoryVC: UIViewController {
     
     
     func loadMoreData() {
-            if !self.isLoading {
-                self.isLoading = true
-                DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(1)) { // Remove the 1-second delay if you want to load the data without waiting
-                    // Download more data here
-                    self.callHistoryData()
-                }
+        if !self.isLoading {
+            self.isLoading = true
+            DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(1)) { // Remove the 1-second delay if you want to load the data without waiting
+                // Download more data here
+                self.callHistoryData()
             }
         }
+    }
     
     
     
@@ -101,9 +101,9 @@ class HistoryVC: UIViewController {
         viewModel?.historyList.bind(listener: { (data) in
             self.isLoading = data.isEmpty
             if data.isEmpty == false{
-            DispatchQueue.main.async {
-                self.historyTable.reloadData()
-            }}
+                DispatchQueue.main.async {
+                    self.historyTable.reloadData()
+                }}
         })
         
     }
@@ -137,18 +137,18 @@ class HistoryVC: UIViewController {
     }
     
 }
-    
+
 
 extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.viewModel?.historyList.value.count == 0 {
-                self.historyTable.setEmptyMessage("No records found!")
-            } else {
-                self.historyTable.restore()
-            }
+            self.historyTable.setEmptyMessage("No records found!")
+        } else {
+            self.historyTable.restore()
+        }
         return self.viewModel?.historyList.value.count ?? 0
     }
-
+    
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastData = (self.viewModel?.historyList.value.count ?? 0)
@@ -157,7 +157,7 @@ extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
             self.callHistoryData()
         }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as! HistoryCell
         if let model = self.viewModel?.historyList.value[indexPath.row]{
@@ -171,7 +171,7 @@ extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
             cell.orderNumber.text = "\(lngConst.orderNo): " + (model.orderNumber ?? "")
             cell.rechargeType.text = model.transactionType
             if let amount = model.amount{
-            cell.amount.text = (model.currency ?? "") + "\(amount)"
+                cell.amount.text = (model.currency ?? "") + "\(amount)"
             }
             if model.transactionTypeID == 2{
                 cell.repeatContainer.isHidden = false
@@ -185,37 +185,45 @@ extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
                 cell.date.text = time.convertToDisplayFormat()}
         }
         return cell
-        }
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let model = self.viewModel?.historyList.value[indexPath.row]{
-        if model.transactionTypeID == 4{
-            let viewController: SuccessGiftCardVC = SuccessGiftCardVC()
-            viewController.isFromHistory = true
-            viewController.denominationAmount = model.amount ?? 0.0
-            viewController.countryName = model.countryCode ?? ""
-            viewController.countryCode = model.countryCode ?? ""
-            viewController.GiftCardName = model.operatorName ?? ""
-            viewController.externalId = model.externalId ?? ""
-            viewController.processStatusID = model.processStatusId ?? 0
+            if model.transactionTypeID == 4{
+                let viewController: SuccessGiftCardVC = SuccessGiftCardVC()
+                viewController.isFromHistory = true
+                viewController.denominationAmount = model.amount ?? 0.0
+                viewController.countryName = model.countryCode ?? ""
+                viewController.countryCode = model.countryCode ?? ""
+                viewController.GiftCardName = model.operatorName ?? ""
+                viewController.externalId = model.externalId ?? ""
+                viewController.processStatusID = model.processStatusId ?? 0
+                viewController.orderNumber = model.orderNumber
                 self.navigationController?.pushViewController(viewController, animated: true)
-            
-        }else if model.transactionTypeID == 3{
-            let viewController: IntrSuccessVC = IntrSuccessVC()
-            viewController.isFromHistory = true
-            viewController.processStatusID = model.processStatusId ?? 0
-            viewController.externalId = model.externalId ?? "0"
-            self.navigationController?.pushViewController(viewController, animated: true)
-        }
+                
+            }else if model.transactionTypeID == 3{
+                let viewController: IntrSuccessVC = IntrSuccessVC()
+                viewController.isFromHistory = true
+                viewController.processStatusID = model.processStatusId ?? 0
+                viewController.externalId = model.externalId ?? "0"
+                viewController.orderNumber = model.orderNumber
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
         }
     }
     
-    func successVoucher(mPin: String, denominationValue : String, walletBalance: Double, msgToShare: String, voucherID: Int){
+    func successVoucher(mPin: String,
+                        denominationValue : String,
+                        walletBalance: Double,
+                        msgToShare: String,
+                        voucherID: Int,
+                        orderNumber:String){
         let viewController: SuccessRechargeVC = SuccessRechargeVC()
         viewController.denominationValue = denominationValue
         viewController.mPin = mPin
         viewController.walletBal = walletBalance
         viewController.voucherID = voucherID
         viewController.msgToShare = msgToShare
+        viewController.orderNumber = orderNumber
         self.navigationController?.pushViewController(viewController, animated: true)
         
     }
@@ -245,7 +253,12 @@ extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
                 ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result, status in
                     DispatchQueue.main.async {
                         if status == true, let val = result{
-                            self.successVoucher(mPin: val.mPIN ?? "", denominationValue: "\(val.dinominationValue ?? 0)", walletBalance: val.walletAmount ?? 0.0, msgToShare: val.msgToShare ?? "", voucherID: val.voucherID ?? 0)
+                            self.successVoucher(mPin: val.mPIN ?? "",
+                                                denominationValue: "\(val.dinominationValue ?? 0)",
+                                                walletBalance: val.walletAmount ?? 0.0,
+                                                msgToShare: val.msgToShare ?? "",
+                                                voucherID: val.voucherID ?? 0,
+                                                orderNumber: "")
                         }
                     }
                 }
@@ -269,7 +282,7 @@ extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
 
 
 extension UITableView {
-
+    
     func setEmptyMessage(_ message: String) {
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
         messageLabel.text = message
@@ -278,11 +291,11 @@ extension UITableView {
         messageLabel.textAlignment = .center
         messageLabel.font = UIFont.SF_Regular(16.0)
         messageLabel.sizeToFit()
-
+        
         self.backgroundView = messageLabel
         self.separatorStyle = .none
     }
-
+    
     func restore() {
         self.backgroundView = nil
         self.separatorStyle = .singleLine
