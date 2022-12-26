@@ -169,6 +169,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.navController?.interactivePopGestureRecognizer?.isEnabled = false    
     }
     func setupLogout(){
+        
+        deleteData()
+        DispatchQueue.main.async {
+        self.navController?.popToRootViewController(animated: false)
+        self.initialPoint(Controller: CountrySelectionVC())
+        DispatchQueue.main.async {
+            AltienoAlert.initialization().showAlert(with: .logout) { (index, title) in
+                
+            }
+        }
+        }
+    }
+    
+    func deleteData(){
         UserDefaults.setUserData(data: UserModel())
         UserDefaults.setUserID(data: 0)
         UserDefaults.setMobileCode(data: "")
@@ -177,11 +191,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.setToken(data: "")
         UserDefaults.standard.synchronize()
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-        
-        DispatchQueue.main.async {
-            self.navController?.popToRootViewController(animated: false)
-            self.initialPoint(Controller: CountrySelectionVC())
-        }
     }
     
     

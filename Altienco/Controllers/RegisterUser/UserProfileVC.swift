@@ -224,7 +224,15 @@ class UserProfileVC: UIViewController {
             self.alert(message: "Please confirm the terms & conditions")
         }
         else{
-            let dataModel = RegistrationModel.init(mobileCode: UserDefaults.getMobileCode, mobileNumber: UserDefaults.getMobileNumber, profileImage: self.profileImage, countryCode: UserDefaults.getCountryCode, firstName: firstName.text, lastName: lastname.text, emailID: emailAddress.text, referredCode: inviteCode, langCode: "en", isAvatarImage: self.isAvatarImage)
+            let dataModel = RegistrationModel.init(mobileCode: UserDefaults.getMobileCode, mobileNumber: UserDefaults.getMobileNumber, profileImage:
+                                                    self.profileImage,
+                                                   countryCode: UserDefaults.getCountryCode,
+                                                   firstName: firstName.text,
+                                                   lastName: lastname.text,
+                                                   emailID: emailAddress.text,
+                                                   referredCode: inviteCode,
+                                                   langCode: "en",
+                                                   isAvatarImage: self.isAvatarImage)
             self.registerUser?.registerUser(model: dataModel) { (result, status, message)  in
                 DispatchQueue.main.async { [weak self] in
                     if status == true, (result != nil){

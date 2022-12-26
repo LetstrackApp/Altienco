@@ -17,7 +17,7 @@ enum LeftMenu: Int {
     case Logout
 }
 
-protocol LeftMenuProtocol : class {
+protocol LeftMenuProtocol : AnyObject {
     func changeViewController(_ menu: LeftMenu)
 }
 
@@ -32,8 +32,14 @@ class LeftScreenVC: UIViewController {
         }
     }
     var viewModel: DeleteAccountViewModel?
-    var menus = ["My Profile", "My Orders", "Balance & History", "My Vouchers", "Help & Support",
-                 "Contact US","Refer a Friend", "Logout"]
+    var menus = ["My Profile",
+                 "My Orders",
+                 "Balance & History",
+                 "My Vouchers",
+                 "Help & Support",
+                 "Contact US",
+                 "Refer a Friend",
+                 "Logout"]
     var swiftViewController: UIViewController!
     var javaViewController: UIViewController!
     var goViewController: UIViewController!
@@ -266,12 +272,16 @@ class LeftScreenVC: UIViewController {
     }
     
     @IBAction func logoutUser(_ sender: Any) {
+
+        
+       
         
         let alertController = UIAlertController(title: "", message: "Security Reset. Please log in again", preferredStyle: .alert)
             // Create the actions
         let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) {
                 UIAlertAction in
-                appDelegate.setupLogout()
+            appDelegate.setupLogout()
+            
             }
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) {
                 UIAlertAction in

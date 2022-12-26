@@ -50,7 +50,7 @@ class IntrOperatorViewModel {
 
                 else{
                     complition(nil, nil)
-                    Helper.showToast((jsondata?["Message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((jsondata?["Message"] as? String),isAlertView: true)
                 }
 
         }) { (Error) in

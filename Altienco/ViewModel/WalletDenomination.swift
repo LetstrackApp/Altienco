@@ -75,7 +75,7 @@ class OnlinePaymentIntent {
                 }
                 else
                 {
-                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((resultData["message"] as? String),isAlertView: true)
                     complition(nil, false)
                 }
             }
@@ -86,7 +86,7 @@ class OnlinePaymentIntent {
         }) { (Error) in
             SVProgressHUD.dismiss()
             if let error = Error{
-                Helper.showToast(error , delay:Helper.DELAY_LONG)
+                Helper.showToast(error , isAlertView: true)
             }
             complition(nil, false)
         }
@@ -120,7 +120,7 @@ class VerifyPaymentViewModel {
                 }
                 else
                 {
-                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((resultData["message"] as? String),isAlertView: true)
                     complition(nil, false)
                 }
             }
@@ -130,7 +130,7 @@ class VerifyPaymentViewModel {
 //                }
         }) { (Error) in
             if let error = Error{
-                Helper.showToast(error , delay:Helper.DELAY_LONG)
+                Helper.showToast(error , isAlertView: true)
             }
             SVProgressHUD.dismiss()
             complition(nil, false)

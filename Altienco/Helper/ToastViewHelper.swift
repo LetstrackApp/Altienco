@@ -14,19 +14,36 @@ class Helper {
     
     static func hideToast(){
         
-            UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.hideAllToasts()
+        UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.hideAllToasts()
     }
     
     static func showToast(_ text: String?,
                           delay: TimeInterval = DELAY_LONG,
-                          position:ToastPosition = .bottom) {
+                          position:ToastPosition = .bottom,
+                          isAlertView:Bool = false) {
+        
         DispatchQueue.main.async {
             if let text = text,
                text.trimWhiteSpace != "" {
                 Helper.hideToast()
+                if isAlertView == true {
+                    Helper.showAlertView(message: text)
+                    return
+                }else {
+                
                 UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.makeToast(text, duration: 6, position: position) { (result) in
                 }
+                }
             }
+        }
+    }
+    
+    static func showAlertView(message: String){
+        if message.trimWhiteSpace.isEmpty == true {
+            return
+        }
+        AltienoAlert.initialization().showAlert(with: .other(message)) { (index, title) in
+            
         }
     }
 }

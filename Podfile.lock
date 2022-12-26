@@ -6,6 +6,7 @@ PODS:
   - DynamicBlurView (4.1.0)
   - FlagKit (2.2)
   - FloatingPanel (2.5.5)
+  - FSPagerView (0.8.3)
   - GoogleMaps (7.2.0):
     - GoogleMaps/Maps (= 7.2.0)
   - GoogleMaps/Base (7.2.0)
@@ -39,6 +40,7 @@ DEPENDENCIES:
   - DropDown
   - FlagKit
   - FloatingPanel
+  - FSPagerView
   - GoogleMaps
   - IQKeyboardManagerSwift
   - Localize-Swift
@@ -62,6 +64,7 @@ SPEC REPOS:
     - DynamicBlurView
     - FlagKit
     - FloatingPanel
+    - FSPagerView
     - GoogleMaps
     - IQKeyboardManagerSwift
     - Localize-Swift
@@ -84,6 +87,7 @@ SPEC CHECKSUMS:
   DynamicBlurView: 58e18fae80bb614e34681a4486870e7d257b62e8
   FlagKit: eca7dc89064b0c986302ba9acefad1bf80a435b1
   FloatingPanel: a27e7827e0f710fa6236fe2596dd1b5484cb4fc1
+  FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   GoogleMaps: 65ce5426e2398bb81433c8076f2ab6419c2c5537
   IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
   Localize-Swift: 6f4475136bdb0d7b2882ea3d4ea919d70142b232
@@ -98,6 +102,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 2ba18a25a9d7f0d9ccbb4d14b622093e7acaee3e
+PODFILE CHECKSUM: fe8bb3d549e4e808a1ab4098df4080fbce50a6d9
 
 COCOAPODS: 1.11.2

@@ -53,7 +53,7 @@ class GenerateVoucherViewModel {
             
         }) { (Error) in
             SVProgressHUD.dismiss()
-            Helper.showToast(Error?.debugDescription ?? "", delay:Helper.DELAY_LONG)
+            Helper.showToast(Error?.debugDescription ,isAlertView: true)
             complition(nil, false, Error?.description)
         }
     }

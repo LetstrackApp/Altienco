@@ -39,6 +39,9 @@
 		04EC3DB62951BEA60084EA72 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC3DB52951BEA60084EA72 /* Date+Extension.swift */; };
 		04EC3DB82951BEC10084EA72 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC3DB72951BEC10084EA72 /* String+Extension.swift */; };
 		04EC3DC229520CAC0084EA72 /* FloatingPannelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC3DC129520CAC0084EA72 /* FloatingPannelHelper.swift */; };
+		04F5FDB729599C0E005C0E7A /* alert.json in Resources */ = {isa = PBXBuildFile; fileRef = 04F5FDB429599C0E005C0E7A /* alert.json */; };
+		04F5FDB829599C0E005C0E7A /* circle_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 04F5FDB529599C0E005C0E7A /* circle_animation.json */; };
+		04F5FDB929599C0E005C0E7A /* thumbs_up.json in Resources */ = {isa = PBXBuildFile; fileRef = 04F5FDB629599C0E005C0E7A /* thumbs_up.json */; };
 		04FF0ED8294B75100097BEB7 /* Stripe in Frameworks */ = {isa = PBXBuildFile; productRef = 04FF0ED7294B75100097BEB7 /* Stripe */; };
 		04FF0EDA294B75100097BEB7 /* StripeApplePay in Frameworks */ = {isa = PBXBuildFile; productRef = 04FF0ED9294B75100097BEB7 /* StripeApplePay */; };
 		04FF0EDC294B75100097BEB7 /* StripeCardScan in Frameworks */ = {isa = PBXBuildFile; productRef = 04FF0EDB294B75100097BEB7 /* StripeCardScan */; };
@@ -90,7 +93,7 @@
 		18E28800251094E500F25971 /* VerifyOTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E287FF251094E500F25971 /* VerifyOTP.swift */; };
 		18E288022510968A00F25971 /* VerifyOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E288012510968A00F25971 /* VerifyOTPViewModel.swift */; };
 		18E2882E2514E62400F25971 /* CameraBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2882D2514E62400F25971 /* CameraBuffer.swift */; };
-		18E288E52518CA5800F25971 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E288E42518CA5800F25971 /* ToastView.swift */; };
+		18E288E52518CA5800F25971 /* ToastViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E288E42518CA5800F25971 /* ToastViewHelper.swift */; };
 		18FD47E825B9543200253289 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18FD47E725B9543200253289 /* GoogleService-Info.plist */; };
 		18FD480A25B95D0300253289 /* StringConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FD480925B95D0300253289 /* StringConstant.swift */; };
 		A7C28D36260232BE009E8838 /* Arial Unicode.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7C28D03260232B9009E8838 /* Arial Unicode.ttf */; };
@@ -308,6 +311,9 @@
 		04EC3DB52951BEA60084EA72 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		04EC3DB72951BEC10084EA72 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		04EC3DC129520CAC0084EA72 /* FloatingPannelHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPannelHelper.swift; sourceTree = "<group>"; };
+		04F5FDB429599C0E005C0E7A /* alert.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = alert.json; sourceTree = "<group>"; };
+		04F5FDB529599C0E005C0E7A /* circle_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = circle_animation.json; sourceTree = "<group>"; };
+		04F5FDB629599C0E005C0E7A /* thumbs_up.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thumbs_up.json; sourceTree = "<group>"; };
 		04FF0EE7294B9B010097BEB7 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextField+Extension.swift"; path = "../../../UITextField+Extension.swift"; sourceTree = "<group>"; };
 		1836ED30252F1C440063A525 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		1844535F25711942006FFD5D /* SwipeButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeButtonView.swift; sourceTree = "<group>"; };
@@ -355,7 +361,7 @@
 		18E287FF251094E500F25971 /* VerifyOTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyOTP.swift; sourceTree = "<group>"; };
 		18E288012510968A00F25971 /* VerifyOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyOTPViewModel.swift; sourceTree = "<group>"; };
 		18E2882D2514E62400F25971 /* CameraBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraBuffer.swift; sourceTree = "<group>"; };
-		18E288E42518CA5800F25971 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		18E288E42518CA5800F25971 /* ToastViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewHelper.swift; sourceTree = "<group>"; };
 		18FD47E725B9543200253289 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		18FD480925B95D0300253289 /* StringConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstant.swift; sourceTree = "<group>"; };
 		18FD481125B95FB100253289 /* Altienco.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Altienco.entitlements; sourceTree = "<group>"; };
@@ -599,6 +605,9 @@
 		04661362294E155800EC444B /* json */ = {
 			isa = PBXGroup;
 			children = (
+				04F5FDB429599C0E005C0E7A /* alert.json */,
+				04F5FDB529599C0E005C0E7A /* circle_animation.json */,
+				04F5FDB629599C0E005C0E7A /* thumbs_up.json */,
 				04661373294E398E00EC444B /* txnSuccess.json */,
 			);
 			path = json;
@@ -723,7 +732,7 @@
 				18E2873D250F2CBB00F25971 /* ConstantFiles.swift */,
 				18E287E2250F5B5D00F25971 /* FontExtention.swift */,
 				18E287FD25107FE500F25971 /* UserDefault.swift */,
-				18E288E42518CA5800F25971 /* ToastView.swift */,
+				18E288E42518CA5800F25971 /* ToastViewHelper.swift */,
 				185C09632525F5BB005560A8 /* ImageUpload.swift */,
 				1836ED30252F1C440063A525 /* Country.swift */,
 				18FD480925B95D0300253289 /* StringConstant.swift */,
@@ -1702,10 +1711,12 @@
 				C68713FF28E63F85002E7254 /* DenoCell.xib in Resources */,
 				C68730982921160B00C8596D /* RangeCardVC.xib in Resources */,
 				C6A94A8928E4002800FA9E9F /* SearchCountryVC.xib in Resources */,
+				04F5FDB929599C0E005C0E7A /* thumbs_up.json in Resources */,
 				C62A923B28D219D100CB1587 /* SelectAvatarVC.xib in Resources */,
 				04C0DCD62952FB4E001592EE /* LaunchScreennew.storyboard in Resources */,
 				C6A94A8E28E41AEA00FA9E9F /* searchCell.xib in Resources */,
 				C683E80128ADF20F00C07536 /* ImageHeaderView.xib in Resources */,
+				04F5FDB729599C0E005C0E7A /* alert.json in Resources */,
 				C6AF1C7D293F704100AF9D59 /* AllCallingCardVC.xib in Resources */,
 				C6CD5AC828D95B7F004E6F33 /* TopupVC.xib in Resources */,
 				C6A9BB4F28ED7D710077A9A1 /* SliderCell.xib in Resources */,
@@ -1779,6 +1790,7 @@
 				C6AD012B291CCF1200C5DEC9 /* GiftCardCell.xib in Resources */,
 				04661374294E398E00EC444B /* txnSuccess.json in Resources */,
 				C687FCA728B8919D00A85040 /* FailureWalletVC.xib in Resources */,
+				04F5FDB829599C0E005C0E7A /* circle_animation.json in Resources */,
 				18E286FB250A2F2A00F25971 /* SelectLanguageVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1968,7 +1980,7 @@
 				C68B12A1292CC6D300856156 /* WalletDenomination.swift in Sources */,
 				185C09642525F5BB005560A8 /* ImageUpload.swift in Sources */,
 				C6AF1C7C293F704100AF9D59 /* AllCallingCardVC.swift in Sources */,
-				18E288E52518CA5800F25971 /* ToastView.swift in Sources */,
+				18E288E52518CA5800F25971 /* ToastViewHelper.swift in Sources */,
 				18E287E3250F5B5D00F25971 /* FontExtention.swift in Sources */,
 				C6A563CB28A238420084295F /* OperatorListVC.swift in Sources */,
 				18E287FC250FA00900F25971 /* Extention.swift in Sources */,

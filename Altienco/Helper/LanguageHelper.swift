@@ -84,8 +84,8 @@ struct langguageConstent{
     let receiverName = "receiverName".localized()
     let selectCountery = " Please select country first "
     
-    let empytMobile = "Mobile number \n can not be empty"
-    let notValidMobile = "Please enter a valid \n mobile number"
+    let empytMobile = "Mobile number\ncan not be empty"
+    let notValidMobile = "Please enter a valid\nmobile number"
     let verificationHint = "We may send a verification code to this number"
     let phoneNumber =  "Phone Number"
     
@@ -142,13 +142,14 @@ the 16 digit pin
     func txnSucessMeg(amount:String) -> String {
         return "You've added \(amount) successfully in your altienco wallet"
     }
+    let try_Again =  "Try Again"
     let reasonerror =  "Please select reason"
     let available = "Available"
     let reason =  "Reason"
     let reasonDes = "Please be really specific, so we can help you the best we can."
     let reasonTitle  = "Send us a message"
     let orderidHint = "This is the 9-digit code which can\nbe found in the subject of your\nconfirmation email"
-    
+    let  logoutSuccessfully  = "Logout Successfully"
     let shareMsgOncontactUS = """
 Thank you for getting in touch!
     
@@ -156,6 +157,7 @@ We appreciate you contacting us. One of our colleagues will get back in touch wi
 
 Have a great day!
 """
+    let profileUpdate =  "Great. Profile now updated."
     
 }
 

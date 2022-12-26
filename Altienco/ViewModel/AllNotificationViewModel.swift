@@ -35,7 +35,7 @@ class AllNotificationViewModel {
                 }
                 else
                 {
-                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((resultData["message"] as? String),isAlertView: true)
                     complition(nil, false)
                 }
             }
@@ -77,7 +77,7 @@ class NewNotificationViewModel {
                 }
                 else
                 {
-                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((resultData["message"] as? String),isAlertView: true)
                     complition(nil, false)
                 }
             }
@@ -87,7 +87,7 @@ class NewNotificationViewModel {
 //                }
         }) { (Error) in
             if let error = Error{
-                Helper.showToast(error , delay:Helper.DELAY_LONG)
+                Helper.showToast(error, isAlertView: true)
             }
             complition(nil, false)
         }

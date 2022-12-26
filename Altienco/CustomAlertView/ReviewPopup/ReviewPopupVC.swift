@@ -8,7 +8,7 @@
 
 import UIKit
 //TransactionTypeId.PhoneRecharge.rawValue
-
+import Lottie
 struct ReviewPopupModel {
     var mobileNumber : String?
     var operatorID :Int = 0
@@ -44,6 +44,16 @@ class ReviewPopupVC: UIViewController {
     
     var reviewPopupModel : ReviewPopupModel?
     var generateVoucher : GenerateVoucherViewModel?
+    
+    var fixedPlan : ConfirmFixedPlanViewModel?
+    
+    @IBOutlet weak var imageView: UIImageView! {
+        didSet {
+            imageView.isHidden = true
+        }
+        
+    }
+    @IBOutlet weak var animationView: AnimationView!
     
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var mobileNumberVIew: UIView!{
@@ -121,6 +131,7 @@ class ReviewPopupVC: UIViewController {
             self.setupView()
             self.bottomConstraint.constant = -getBottomConstant()
             self.view.backgroundColor = UIColor.clear
+            self.animateView()
             DispatchQueue.main.asyncAfter(deadline: Dispatch.DispatchTime.now() + 0.1) { [weak self] in
                 self?.bottomConstraint?.constant = 0
                 UIView.animate(withDuration: 0.6) {
@@ -161,6 +172,43 @@ class ReviewPopupVC: UIViewController {
     }
     
     
+    
+    func animateView() {
+        let animation = Animation.named("circle_animation")
+        animationView.animation = animation
+        animationView.contentMode = .scaleAspectFit
+        animationView.backgroundBehavior = .pauseAndRestore
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self?.opupInAniamtion()
+            }
+            
+            self?.animationView.play(fromProgress: 0,
+                                    toProgress: 1,
+                                    loopMode: LottieLoopMode.playOnce,
+                                    completion: { (finished) in
+                if finished {
+                   
+                    print("Animation Complete")
+                } else {
+                    print("Animation cancelled")
+                }
+            })
+        }
+        //        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+        //            self?.animatorView.pause()
+        //        }
+    }
+    
+    func opupInAniamtion(){
+        imageView.isHidden = false
+        self.imageView.transform = CGAffineTransform(scaleX: 0, y: 0)
+
+        UIView.animate(withDuration: 0.9, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [],  animations: {
+            self.imageView.transform = CGAffineTransform(scaleX: 1, y: 1)
+         })
+    }
     
     func getBottomConstant ()->CGFloat{
         let alertViewHeight = scrollView.bounds.size.height

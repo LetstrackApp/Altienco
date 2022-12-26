@@ -32,22 +32,22 @@ class AddMoneyViewModel {
                     }
                     else{
                         complition(model, false)
-                        Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                        Helper.showToast((resultData["message"] as? String),isAlertView: true)
                     }
                 }
                 else
                 {
                     complition(nil, false)
-                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((resultData["message"] as? String),isAlertView: true)
                 }
             }
                 else{
-                    Helper.showToast((jsondata?["Message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((jsondata?["Message"] as? String),isAlertView: true)
                     complition(nil, false)
                 }
         }) { (Error) in
             if let error = Error{
-                Helper.showToast(error , delay:Helper.DELAY_LONG)
+                Helper.showToast(error ,isAlertView: true)
             }
             complition(nil, false)
         }

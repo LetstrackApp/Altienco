@@ -7,10 +7,62 @@
 //
 
 import UIKit
+import Lottie
+
+enum KindOF {
+    case contactus
+    case logout
+    case retry
+    case fail
+    case profile
+    case other(String)
+    
+    var btnTitle : String {
+        switch self {
+        case .retry,.fail : return lngConst.try_Again.uppercased()
+        default: return lngConst.ok.uppercased()
+        }
+    }
+    
+    var title : String? {
+        switch self {
+        case .contactus : return lngConst.shareMsgOncontactUS
+        case .logout : return lngConst.logoutSuccessfully
+        case .profile: return lngConst.profileUpdate
+        case .other(let error):
+            return error
+        default: return ""
+        }
+    }
+    
+    var imageName: String? {
+        switch self {
+        case .contactus : return "ic_other"
+        case .logout : return "ic_logoutnew"
+        case .retry,.fail,.profile : return nil
+            
+        default: return "ic_other"
+        }
+    }
+}
 
 class AltienoAlert: UIViewController {
+    
+    @IBOutlet weak var imageView: UIImageView! {
+        didSet {
+            imageView.isHidden = false
+        }
+    }
+    @IBOutlet weak var animator2: AnimationView! {
+        didSet {
+            animator2.isHidden = false
+        }
+    }
+    @IBOutlet weak var animator: AnimationView!
+    @IBOutlet weak var imageSection: UIView!
+    
     // MARK:- Private Properties
-    private var alertTitle : String?
+    private var kind : KindOF?
     
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     // MARK:- Public Properties
@@ -53,25 +105,97 @@ class AltienoAlert: UIViewController {
     // MARK:- LTCustomAlertVC Private Functions
     /// Initial View Setup
     private func setupLTCustomAlertVC(){
-//        viewAlert.translatesAutoresizingMaskIntoConstraints = false
+        //        viewAlert.translatesAutoresizingMaskIntoConstraints = false
         viewAlert.layer.shadowColor = UIColor.black.cgColor
         viewAlert.layer.shadowRadius = 5
         viewAlert.layer.shadowOpacity = 0.4
         viewAlert.layer.shadowOffset = CGSize(width: 0, height: 0)
         viewAlert.layer.cornerRadius = 4
-        lblAlertText?.text = alertTitle
+        lblAlertText?.text = kind?.title
         lblAlertText?.textAlignment = .center
         btnOK.setTitle(lngConst.ok.uppercased(), for: .normal)
         btnOK.setTitleColor(.white, for: .normal)
+        
+        if let image  = kind?.imageName {
+            imageView.image = UIImage(named: image)
+        }
+        
     }
     
+    
+    func animateView() {
+        let animation = Animation.named("circle_animation")
+        animator.animation = animation
+        animator.contentMode = .scaleAspectFit
+        animator.backgroundBehavior = .pauseAndRestore
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                if  self?.kind?.imageName  != nil{
+                    self?.opupInAniamtion()
+                }else {
+                    self?.showAnimateSecond()
+                }
+            }
+            
+            self?.animator.play(fromProgress: 0,
+                                toProgress: 1,
+                                loopMode: LottieLoopMode.playOnce,
+                                completion: { (finished) in
+                if finished {
+                    
+                    print("Animation Complete")
+                } else {
+                    print("Animation cancelled")
+                }
+            })
+        }
+        //        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+        //            self?.animatorView.pause()
+        //        }
+    }
+    
+    func showAnimateSecond() {
+        animator2.isHidden = false
+        var animation: Animation?
+        switch kind {
+        case .profile:
+            animation = Animation.named("thumbs_up")
+        default:
+            animation = Animation.named("alert")
+        }
+        
+        animator2.animation = animation
+        animator2.contentMode = .scaleAspectFit
+        animator2.backgroundBehavior = .pauseAndRestore
+        
+        animator2.play(fromProgress: 0,
+                       toProgress: 1,
+                       loopMode: LottieLoopMode.loop,
+                       completion: { (finished) in
+            if finished {
+                
+                print("Animation Complete")
+            } else {
+                print("Animation cancelled")
+            }
+        })
+        
+    }
+    
+    func opupInAniamtion(){
+        self.animator2.isHidden = true
+        imageView.isHidden = false
+        self.imageView.transform = CGAffineTransform(scaleX: 0, y: 0)
+        
+        UIView.animate(withDuration: 0.9, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [],  animations: {
+            self.imageView.transform = CGAffineTransform(scaleX: 1, y: 1)
+        })
+    }
     /// Setup different widths for iPad and iPhone
     
     
-    /// Create and Configure Alert Controller
-    private func configure(title : String?) {
-        self.alertTitle = title
-    }
+    
     
     /// Show Alert Controller
     private func show(){
@@ -89,6 +213,7 @@ class AltienoAlert: UIViewController {
             view.frame = topViewController.view.bounds
             self.bottomConstraint.constant = -getBottomConstant()
             self.view.backgroundColor = UIColor.clear
+            self.animateView()
             DispatchQueue.main.asyncAfter(deadline: Dispatch.DispatchTime.now() + 0.1) { [weak self] in
                 self?.bottomConstraint?.constant = 0
                 UIView.animate(withDuration: 0.6) {
@@ -123,8 +248,6 @@ class AltienoAlert: UIViewController {
                 self?.removeFromParent()
             }
             
-            
-            
             UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, options: [], animations: { [weak self] in
                 self?.view.layoutIfNeeded()
             })
@@ -133,27 +256,27 @@ class AltienoAlert: UIViewController {
     
     // MARK:- UIButton Clicks
     @IBAction func btnOkTapped(_ sender: UIButton) {
-       
+        
         hide { _ in
             self.block??(0,(sender.titleLabel?.text ?? ""))
         }
     }
-
-//
-//
-//
-//    /// Hide Alert Controller on background tap
-//    @objc func backgroundViewTapped(sender:AnyObject){
-//        hide()
-//    }
+    
+    //
+    //
+    //
+    //    /// Hide Alert Controller on background tap
+    //    @objc func backgroundViewTapped(sender:AnyObject){
+    //        hide()
+    //    }
     
     /// Display Alert
     /// - Parameters:
     ///   - model: model to setup View
     ///   - completion: retuen the index or title of the button
-    public func showAlert(with title : String?,
-                          completion : alertCompletionBlock){
-        configure(title: title)
+    public func showAlert(with kind : KindOF?,
+                          completion : alertCompletionBlock) {
+        self.kind = kind
         show()
         block = completion
     }

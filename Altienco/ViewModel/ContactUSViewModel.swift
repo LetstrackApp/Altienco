@@ -92,13 +92,13 @@ extension ReasionViewModel: ResionAPi {
                 completion(true)
             }
             else{
-                Helper.showToast((jsondata?["Message"] as? String) ?? "", delay:Helper.DELAY_LONG)
+                Helper.showToast((jsondata?["Message"] as? String) , isAlertView: true)
                 completion(false)
             }
             
         }) { (Error) in
             if let error = Error{
-                Helper.showToast(error.debugDescription , delay:Helper.DELAY_LONG)
+                Helper.showToast(error.debugDescription , isAlertView: true)
             }
             completion((false))
         }
@@ -164,18 +164,18 @@ extension ReasionViewModel: ResionAPi {
                 }
                 else{
                     if let message = data["message"] as? String{
-                        Helper.showToast(message, delay:Helper.DELAY_LONG)
+                        Helper.showToast(message ,isAlertView: true)
                         
                     }
                     completion(false)
                     
                 }
             }else{
-                Helper.showToast(lngConst.supportMsg, delay:Helper.DELAY_LONG)
+                Helper.showToast(lngConst.supportMsg, isAlertView: true)
                 completion(false)
             }
         } failure: { error in
-            Helper.showToast(error.localizedDescription, delay:Helper.DELAY_LONG)
+            Helper.showToast(error.localizedDescription, isAlertView: true)
             completion(false)
         }
     }

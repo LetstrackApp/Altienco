@@ -42,10 +42,10 @@ class TransactionHistoryViewModel {
                 else
                 {
                     complition(nil, false)
-                    Helper.showToast((resultData["message"] as? String) ?? lngConst.supportMsg, delay:Helper.DELAY_LONG)
+                    Helper.showToast((resultData["message"] as? String) ?? lngConst.supportMsg, isAlertView: true)
                 }
             }else {
-                Helper.showToast(lngConst.supportMsg, delay:Helper.DELAY_LONG)
+                Helper.showToast(lngConst.supportMsg, isAlertView: true)
 
                 complition(nil, false)
             }
@@ -57,7 +57,7 @@ class TransactionHistoryViewModel {
         }) { (Error) in
             SVProgressHUD.dismiss()
             if let error = Error{
-                Helper.showToast(error , delay:Helper.DELAY_LONG)
+                Helper.showToast(error , isAlertView: true)
             }
             complition(nil, false)
         }

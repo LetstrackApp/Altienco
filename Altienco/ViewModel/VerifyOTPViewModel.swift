@@ -19,9 +19,6 @@ class VerifyOTPViewModel {
         let header : HTTPHeaders = ["Content-Type":"application/json"]
         AFWrapper.requestPOSTURL(strURl, params: json, headers: header, success: { (jsondata) in
             
-            
-            //            if let jsondata = JSONResponse as NSDictionary? {
-            debugPrint("otp responce:", jsondata)
             if jsondata?["Message_Code"] as? Bool == true, let resultData = jsondata?["Result"] as? NSDictionary
             {  if resultData["status"] as? Bool == true{
                 if let result = resultData["data"] as? [String: Any]{
@@ -40,16 +37,16 @@ class VerifyOTPViewModel {
                 else
                 {
                     complition(false)
-                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((resultData["message"] as? String),isAlertView: true)
                 }
             }
             else
             {
                 complition(false)
-                Helper.showToast((jsondata?["Message"] as? String)!, delay:Helper.DELAY_LONG)
+                Helper.showToast((jsondata?["Message"] as? String),isAlertView: true)
             }
-        }) { (Error) in
-            debugPrint(Error)
+        }) { (error) in
+            Helper.showToast(error,isAlertView: true)
         }
     }
     

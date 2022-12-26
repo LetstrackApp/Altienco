@@ -59,7 +59,7 @@ class DownloadRecieptApi {
                 
             }
             else{
-                Helper.showToast((jsondata?["Message"] as? String) ?? lngConst.supportMsg, delay:Helper.DELAY_LONG)
+                Helper.showToast((jsondata?["Message"] as? String) ?? lngConst.supportMsg,isAlertView: true)
                 completion(nil)
                 SVProgressHUD.dismiss()
             }
@@ -67,7 +67,7 @@ class DownloadRecieptApi {
         }) { (Error) in
             SVProgressHUD.dismiss()
             if let error = Error{
-                Helper.showToast(error.debugDescription , delay:Helper.DELAY_LONG)
+                Helper.showToast(error.debugDescription  ,isAlertView: true)
             }
             completion(nil)
         }

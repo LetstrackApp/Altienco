@@ -22,7 +22,7 @@ class AFWrapper: NSObject {
             if responseObject.result.isSuccess {
                 if responseObject.response!.statusCode == 401 {
                     SVProgressHUD.dismiss()
-                    Helper.showToast("Oops, something went wrong. Please try again later. ", delay: Helper.DELAY_SHORT)
+                    Helper.showToast("Oops, something went wrong. Please try again later. ",isAlertView: true)
                     //
                 }
                 else if responseObject.response!.statusCode == 403{
@@ -38,6 +38,8 @@ class AFWrapper: NSObject {
             if responseObject.result.isFailure {
                 SVProgressHUD.dismiss()
                 let error : Error = responseObject.result.error!
+                Helper.showToast(error.localizedDescription ,isAlertView: true)
+
                 //                Helper.showToast(error.localizedDescription, delay: Helper.DELAY_SHORT)
                 failure(error)
             }
@@ -58,7 +60,7 @@ class AFWrapper: NSObject {
                 if let data = responseObject.result.value as? [String:Any]{
                     if responseObject.response!.statusCode == 401 {
                         SVProgressHUD.dismiss()
-                        Helper.showToast(lngConst.supportMsg, delay: Helper.DELAY_SHORT)
+                        Helper.showToast(lngConst.supportMsg, delay: Helper.DELAY_SHORT,isAlertView: true)
                         failure(lngConst.supportMsg)
                     }
                     else if responseObject.response!.statusCode == 403{
@@ -83,7 +85,7 @@ class AFWrapper: NSObject {
                         //                    Helper.showToast("Please try agian later", delay: Helper.DELAY_SHORT)
                     }
                 }else {
-                    Helper.showToast(lngConst.supportMsg, delay: Helper.DELAY_SHORT)
+                    Helper.showToast(lngConst.supportMsg,isAlertView: true)
                     failure(lngConst.supportMsg)
 
                 }
@@ -91,6 +93,8 @@ class AFWrapper: NSObject {
             }
             if responseObject.result.isFailure {
                 //                Helper.showToast(responseObject.result.error!.localizedDescription , delay:Helper.DELAY_LONG)
+                Helper.showToast(responseObject.result.error?.localizedDescription,isAlertView: true)
+
                 failure(responseObject.result.error?.localizedDescription)
             }
         }

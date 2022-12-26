@@ -39,14 +39,14 @@ class GenerateOTPViewModel {
                 }
                 else {
                     complition(nil)
-                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((resultData["message"] as? String),isAlertView: true)
                 }
             }else {
                 complition(nil)
             }
             
         }) { (Error) in
-            Helper.showToast(Error, delay:Helper.DELAY_LONG,position: .center)
+            Helper.showToast(Error,isAlertView: true)
             complition(nil)
         }
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 import FlagKit
-
+import Lottie
 
 protocol BackTOGiftCardDelegate{
     func BackToPrevious(dismiss: Bool, result: ConfirmIntrResponseObj?)
@@ -18,9 +18,15 @@ class ReviewGiftCardVC: UIViewController {
     //    var delegate: BackTOGiftCardDelegate? = nil
     private var planType = 1
     private var selectedFixedPlan : FixedGiftResponseObj?
-    private
     var fixedPlan : ConfirmFixedPlanViewModel?
     
+    @IBOutlet weak var imageView: UIImageView! {
+        didSet {
+            imageView.isHidden = true
+        }
+        
+    }
+    @IBOutlet weak var animationView: AnimationView!
     
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView! {
@@ -57,6 +63,7 @@ class ReviewGiftCardVC: UIViewController {
         viewModel =  GenerateVoucherViewModel()
         fixedPlan =  ConfirmFixedPlanViewModel()
         self.setupView()
+       
         
     }
     
@@ -167,6 +174,7 @@ class ReviewGiftCardVC: UIViewController {
             //            self.setupView()
             self.bottomConstraint.constant = -getBottomConstant()
             self.view.backgroundColor = UIColor.clear
+            self.animateView()
             DispatchQueue.main.asyncAfter(deadline: Dispatch.DispatchTime.now() + 0.1) { [weak self] in
                 self?.bottomConstraint?.constant = 0
                 UIView.animate(withDuration: 0.6) {
@@ -177,6 +185,43 @@ class ReviewGiftCardVC: UIViewController {
                 })
             }
         }
+    }
+    
+    func animateView() {
+        let animation = Animation.named("circle_animation")
+        animationView.animation = animation
+        animationView.contentMode = .scaleAspectFit
+        animationView.backgroundBehavior = .pauseAndRestore
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self?.opupInAniamtion()
+            }
+            
+            self?.animationView.play(fromProgress: 0,
+                                    toProgress: 1,
+                                    loopMode: LottieLoopMode.playOnce,
+                                    completion: { (finished) in
+                if finished {
+                   
+                    print("Animation Complete")
+                } else {
+                    print("Animation cancelled")
+                }
+            })
+        }
+        //        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+        //            self?.animatorView.pause()
+        //        }
+    }
+    
+    func opupInAniamtion(){
+        imageView.isHidden = false
+        self.imageView.transform = CGAffineTransform(scaleX: 0, y: 0)
+
+        UIView.animate(withDuration: 0.9, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [],  animations: {
+            self.imageView.transform = CGAffineTransform(scaleX: 1, y: 1)
+         })
     }
     
     /// Hide Alert Controller

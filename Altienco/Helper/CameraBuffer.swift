@@ -56,7 +56,7 @@ class CameraBuffer: NSObject, UIImagePickerControllerDelegate, UINavigationContr
                 picker.sourceType = .camera
                 self.viewController!.present(picker, animated: true, completion: nil)
             } else {
-                Helper.showToast("You don't have camera1", delay: Helper.DELAY_LONG)
+                Helper.showToast("You don't have camera1", isAlertView: true)
             }
         }
         func openGallery(){

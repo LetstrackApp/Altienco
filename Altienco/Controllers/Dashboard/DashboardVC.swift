@@ -9,7 +9,7 @@
 import UIKit
 import SideMenu
 import SkeletonView
-
+import FSPagerView
 class DashboardVC: UIViewController {
     
     var adResponse = [AdvertismentResponseObj]()
@@ -22,7 +22,13 @@ class DashboardVC: UIViewController {
     @IBOutlet weak var userName: UILabel!
     
     @IBOutlet weak var viewContainer: UIView!
-    @IBOutlet weak var adCardView: UIView!
+    @IBOutlet weak var adCardView: UIView!{
+        didSet {
+            adCardView.dropShadow()
+            adCardView.layer.cornerRadius = 8
+
+        }
+    }
     @IBOutlet weak var profileImage: UIImageView!{
         didSet{
             self.profileImage.layer.cornerRadius = self.profileImage.frame.size.height / 2
@@ -33,11 +39,17 @@ class DashboardVC: UIViewController {
             self.profileImage.clipsToBounds = true
         }
     }
-    @IBOutlet weak var advertismentView: UIView!{
+    @IBOutlet weak var advertismentView: FSPagerView!{
         didSet{
             advertismentView.layer.cornerRadius = 8.0
             advertismentView.clipsToBounds=true
-            advertismentView.dropShadow(shadowRadius: 2, offsetSize: CGSize(width: 0, height: 0), shadowOpacity: 0.3, shadowColor: .black)
+            advertismentView.dataSource = self
+            advertismentView.delegate = self
+            advertismentView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
+            advertismentView.automaticSlidingInterval = 2
+            advertismentView.isInfinite = true
+            advertismentView.decelerationDistance = 2
+            
         }
     }
     
@@ -159,9 +171,19 @@ class DashboardVC: UIViewController {
         }
     }
     @IBOutlet weak var notificationIcon: UIImageView!
-    @IBOutlet weak var sliderCollection: UICollectionView!
-    @IBOutlet weak var pageControl: UIPageControl!
+    //    @IBOutlet weak var sliderCollection: UICollectionView!
     
+    @IBOutlet weak var fspageControl: FSPageControl! {
+        didSet {
+            fspageControl.hidesForSinglePage = true
+            fspageControl.contentHorizontalAlignment = .center
+            fspageControl.setFillColor(.gray, for: .normal)
+            fspageControl.setFillColor(.white, for: .selected)
+            fspageControl.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+            fspageControl.roundFromBottom(radius: 8)
+            fspageControl.currentPage = 1
+        }
+    }
     @IBOutlet weak var blanceStackView: UIStackView!
     
     
@@ -177,8 +199,6 @@ class DashboardVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initializeView()
-        let nib = UINib(nibName: "SliderCell", bundle: nil)
-        sliderCollection.register(nib, forCellWithReuseIdentifier: "SliderCell")
         self.advertismentModel = AdvertismentViewModel()
         self.notificationDataViewModel = NewNotificationViewModel()
         self.navigationItem.backBarButtonItem?.tintColor = .white
@@ -220,31 +240,10 @@ class DashboardVC: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.timer?.invalidate()
+        //        self.timer?.invalidate()
     }
     
     
-    func startAnimationTimer() {
-        if let timer = self.timer {
-            timer.invalidate()
-        }
-        self.timer =  Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(self.scrollToNextCell), userInfo: nil, repeats: true)
-    }
-    
-    @objc func scrollToNextCell(){
-        //get cell size
-        let cellSize = CGSize(width: self.sliderCollection.bounds.width, height: self.sliderCollection.bounds.height)
-        //get current content Offset of the Collection view
-        if self.adResponse.count > 0{
-            let contentOffset = self.sliderCollection.contentOffset
-            if self.sliderCollection.contentSize.width <= self.sliderCollection.contentOffset.x + cellSize.width
-            {
-                self.sliderCollection.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
-            } else {
-                self.sliderCollection.scrollRectToVisible(CGRect(x: contentOffset.x + cellSize.width, y: contentOffset.y, width: cellSize.width, height: cellSize.height), animated: true)
-            }
-        }
-    }
     
     func refreshNotificationData() {
         let model = AllNotificationRequest.init(customerID: UserDefaults.getUserData?.customerID ?? 0, langCode: "en")
@@ -252,7 +251,7 @@ class DashboardVC: UIViewController {
         notificationDataViewModel?.getNewNotification(model: model)
         { (notificationData, status) in
             DispatchQueue.main.async { [weak self] in
-                self?.hideGradientEffect()
+//                self?.hideGradientEffect()
                 if status == true, let data = notificationData{
                     var model = UserDefaults.getUserData
                     if let isRead = data.first?.anyNewNotification, isRead == true{
@@ -283,7 +282,7 @@ class DashboardVC: UIViewController {
         
         advertismentModel?.getAdData(model: model, complition: { (adData, status) in
             DispatchQueue.main.async { [weak self] in
-                self?.hideGradientEffect()
+//                self?.hideGradientEffect()
                 if status == true{
                     self?.updateSlider()
                     self?.adCardView.isHidden = false
@@ -298,17 +297,11 @@ class DashboardVC: UIViewController {
     func updateSlider(){
         DispatchQueue.main.async {
             self.cardView.isHidden = false
-            self.sliderCollection.reloadData()
-            self.pageControl.numberOfPages = self.adResponse.count
-            self.startAnimationTimer()
+            self.advertismentView.reloadData()
+                        self.fspageControl.numberOfPages = self.adResponse.count
         }
     }
-    
-    func hideGradientEffect(){
-        DispatchQueue.main.async {
-            self.sliderCollection.hideSkeleton()
-        }
-    }
+ 
     
     func setupValue(){
         if let firstname = UserDefaults.getUserData?.firstName{
@@ -326,7 +319,7 @@ class DashboardVC: UIViewController {
     {
         let button = UIButton.init(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         button.setImage(UIImage(named: "ic_menu_black_24dp"), for: .normal)
-       // button.setTitle("Menu", for: .normal)
+        // button.setTitle("Menu", for: .normal)
         button.addTarget(self, action: #selector(self.action), for: .touchUpInside)
         button.sizeToFit()
         button.tintColor = .black
@@ -390,75 +383,7 @@ extension DashboardVC: SideMenuNavigationControllerDelegate {
 
 
 
-extension DashboardVC {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let pageWidth: CGFloat = scrollView.frame.width
-        let fractionalPage: CGFloat = scrollView.contentOffset.x / pageWidth
-        let page = lround(Double(fractionalPage))
-        pageControl.currentPage = page
-    }
-}
 
-extension DashboardVC: UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, SkeletonCollectionViewDataSource {
-    
-    func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return "SliderCell"
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.adResponse.count
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SliderCell", for: indexPath) as! SliderCell
-        let data = self.adResponse[indexPath.row]
-        cell.contentView.layer.cornerRadius = 6.0
-        cell.contentView.clipsToBounds=true
-        cell.setCellData(data: data)
-        cell.hideSkeleton()
-        return cell
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    }
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        for cell in self.sliderCollection.visibleCells {
-            if let indexPath = self.sliderCollection.indexPath(for: cell){
-                pageControl.currentPage = indexPath.row
-            }
-        }
-    }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
-    
-    private func scrollToNextItem() {
-        if pageControl.currentPage == self.adResponse.count{
-            return
-        }
-        let contentOffset = CGFloat(floor(self.sliderCollection.contentOffset.x + self.sliderCollection.bounds.size.width))
-        self.moveToFrame(contentOffset: contentOffset)
-        pageControl.currentPage = pageControl.currentPage + 1
-    }
-    
-    private func scrollToPreviousItem() {
-        let contentOffset = CGFloat(floor(self.sliderCollection.contentOffset.x - self.sliderCollection.bounds.size.width))
-        self.moveToFrame(contentOffset: contentOffset)
-    }
-    
-    private func moveToFrame(contentOffset : CGFloat) {
-        self.sliderCollection.setContentOffset(CGPoint(x: contentOffset, y: self.sliderCollection.contentOffset.y), animated: true)
-    }
-}
 
 
 //MARK: - Routing
@@ -513,7 +438,7 @@ extension DashboardVC {
     func showWallet()
     {
         
-       
+        
         //            let obj = AlertViewVC.init(type: .transactionSucessfull(amount: "11000"))
         //            obj.modalPresentationStyle = .overFullScreen
         //            self.present(obj, animated: false, completion: nil)
@@ -526,4 +451,28 @@ extension DashboardVC {
         let viewController: WalletPaymentVC = WalletPaymentVC()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
+}
+
+
+extension DashboardVC :FSPagerViewDataSource,FSPagerViewDelegate {
+    
+    func numberOfItems(in pagerView: FSPagerView) -> Int {
+        return self.adResponse.count
+    }
+    
+    func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
+        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
+        
+        let data = self.adResponse[index]
+        cell.imageView?.sd_setImage(with: URL(string: data.thumbnail ?? ""), placeholderImage: nil, options: [], context: nil)
+        self.fspageControl.currentPage = index+1
+        return cell
+    }
+    
+    
+    func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
+        self.fspageControl.currentPage = targetIndex
+    }
+    
+    
 }

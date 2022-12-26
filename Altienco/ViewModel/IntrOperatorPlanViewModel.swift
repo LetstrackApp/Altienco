@@ -37,14 +37,14 @@ class IntrOperatorPlanViewModel {
                 else
                 {
                     complition(nil)
-                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((resultData["message"] as? String),isAlertView: true)
                 }
                 
             }
 
                 else{
                     complition(nil)
-                    Helper.showToast((jsondata?["Message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((jsondata?["Message"] as? String),isAlertView: true)
                 }
 
         }) { (Error) in

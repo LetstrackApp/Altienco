@@ -38,7 +38,7 @@ class VerifyStatusViewModel {
                 }
                 else
                 {
-                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((resultData["message"] as? String), isAlertView: true)
                     complition(nil, false)
                 }
             }
@@ -49,7 +49,7 @@ class VerifyStatusViewModel {
         }) { (Error) in
             SVProgressHUD.dismiss()
             if let error = Error{
-                Helper.showToast(error , delay:Helper.DELAY_LONG)
+                Helper.showToast(error , isAlertView: true)
             }
             complition(nil, false)
         }

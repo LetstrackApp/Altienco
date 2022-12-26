@@ -52,7 +52,7 @@ import Alamofire
                     }
                     else
                     {
-                        Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                        Helper.showToast((resultData["message"] as? String),isAlertView: true)
                         onCompletion?(false, "")
                         return
                     }
@@ -63,7 +63,7 @@ import Alamofire
                     }
                         
                     }else {
-                        Helper.showToast(lngConst.supportMsg, delay:Helper.DELAY_LONG)
+                        Helper.showToast(lngConst.supportMsg,isAlertView: true)
 
                         onCompletion?(false, "")
                         return

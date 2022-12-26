@@ -245,7 +245,7 @@ class ContactUSVC: UIViewController {
                     self.view.isUserInteractionEnabled = true
                     self.sendButton.hideLoading()
                     if result == true {
-                        AltienoAlert.initialization().showAlert(with: lngConst.shareMsgOncontactUS) { (index, title) in
+                        AltienoAlert.initialization().showAlert(with: .contactus) { (index, title) in
                             DispatchQueue.main.async {
                                 self.navigationController?.popToRootViewController(animated: true)
                             }

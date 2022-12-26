@@ -14,6 +14,8 @@ class ProfileVC: UIViewController {
     var isAvatarImage = false
     var isTextEditing = false
     var registerUser : RegistrationViewModel?
+    
+    
     @IBOutlet weak var userImage: UIImageView!{
         didSet{
             self.userImage.autoresizingMask = [.flexibleWidth, .flexibleHeight, .flexibleBottomMargin, .flexibleRightMargin, .flexibleLeftMargin, .flexibleTopMargin]
@@ -131,16 +133,34 @@ class ProfileVC: UIViewController {
     
     func updateProfilePic(){
         
-        if self.profileImage != ""{
-            let dataModel = RegistrationModel.init(mobileCode: UserDefaults.getMobileCode, mobileNumber: UserDefaults.getMobileNumber, profileImage: self.profileImage, countryCode: UserDefaults.getCountryCode, firstName: firstName.text, lastName: lastName.text, emailID: emailID.text, referredCode: "", langCode: "en", isAvatarImage: self.isAvatarImage)
+        if self.profileImage != "" {
+            let dataModel = RegistrationModel.init(mobileCode: UserDefaults.getMobileCode,
+                                                   mobileNumber: UserDefaults.getMobileNumber,
+                                                   profileImage: self.profileImage,
+                                                   countryCode: UserDefaults.getCountryCode,
+                                                   firstName: firstName.text,
+                                                   lastName: lastName.text,
+                                                   emailID: emailID.text,
+                                                   referredCode: "",
+                                                   langCode: "en", isAvatarImage: self.isAvatarImage)
+            
             self.registerUser?.registerUser(model: dataModel) { (result, status, message)  in
                 DispatchQueue.main.async { [weak self] in
                     if status == true, (result != nil){
                         self?.isTextEditing = false
-                        Helper.showToast("Great. Profile now updated.", delay: Helper.DELAY_SHORT)
+                        DispatchQueue.main.async {
+                           
+                            AltienoAlert.initialization().showAlert(with: .profile) { index, _ in
+                                DispatchQueue.main.async {
+                                    self?.navigationController?.popToRootViewController(animated: true)
+                                }
+                            }
+                        }
+
+//                        Helper.showToast("Great. Profile now updated.", delay: Helper.DELAY_SHORT)
                     }
                     else{
-                        self?.alert(message: message, title: "Alert")
+                        Helper.showToast(message,isAlertView: true)
                     }
                 }
 
@@ -153,8 +173,7 @@ class ProfileVC: UIViewController {
     }
     
     
-    func imageUplaod()
-    {
+    func imageUplaod() {
         
         CameraBuffer().pickImage(self){ image in
             DispatchQueue.main.async {

@@ -28,7 +28,7 @@ target 'Altienco' do
   pod 'lottie-ios', '~> 3.0.5'
   pod 'Toast-Swift'
 pod 'FloatingPanel'
-  
+   pod 'FSPagerView'
   pod 'PopupDialog'
   
 end

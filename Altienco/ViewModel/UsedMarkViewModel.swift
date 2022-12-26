@@ -28,7 +28,7 @@ class UsedMarkViewModel {
                 }
                 else
                 {
-                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((resultData["message"] as? String),isAlertView: true)
                     complition(false)
                 }
             }
@@ -39,7 +39,7 @@ class UsedMarkViewModel {
 
         }) { (Error) in
             if let error = Error{
-                Helper.showToast(error , delay:Helper.DELAY_LONG)
+                Helper.showToast(error , isAlertView: true)
             }
         }
     }

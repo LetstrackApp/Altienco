@@ -38,19 +38,19 @@ class ConfirmIntrViewModel {
                 else
                 {
                     complition(nil, false)
-                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG,isAlertView:true)
                 }
                 complition(nil, false)
             }
 
                 else{
                     complition(nil, false)
-                    Helper.showToast((jsondata?["Message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((jsondata?["Message"] as? String)!, delay:Helper.DELAY_LONG,isAlertView:true)
                 }
 
         }) { (Error) in
             SVProgressHUD.dismiss()
-            Helper.showToast(Error?.debugDescription ?? "", delay:Helper.DELAY_LONG)
+            Helper.showToast(Error?.debugDescription ?? "", delay:Helper.DELAY_LONG,isAlertView:true)
             if let error = Error{
                 complition(nil, false)
 //                Helper.showToast(error.lowercased(), delay:Helper.DELAY_LONG)

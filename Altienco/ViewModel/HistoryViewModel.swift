@@ -36,7 +36,7 @@ class HistoryViewModel {
                 }
                 else
                 {
-                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((resultData["message"] as? String), isAlertView: true)
                 }
             }
 
@@ -47,7 +47,7 @@ class HistoryViewModel {
         }) { (Error) in
             if let error = Error{
                 SVProgressHUD.dismiss()
-                Helper.showToast(error , delay:Helper.DELAY_LONG)
+                Helper.showToast(error , isAlertView: true)
             }
         }
     }
