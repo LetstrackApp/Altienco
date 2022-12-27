@@ -31,7 +31,7 @@ class PaymentSucessPopupVC: UIViewController {
     
     @IBOutlet weak var addAnother: UIButton! {
         didSet {
-            addAnother.setupNextButton(title: lngConst.proceed,cornerRadius: 10)
+            addAnother.setupNextButton(title: lngConst.proceed)
             addAnother.titleLabel?.font = UIFont.SF_Regular(15)
             addAnother.addTarget(self, action: #selector(addAnotherCardAction(_:)), for: .touchUpInside)
         }

@@ -71,7 +71,7 @@ class CountrySelectionVC: UIViewController {
     }
     @IBOutlet weak var nextButton: LoadingButton!{
         didSet{
-            self.nextButton.setupNextButton(title: lngConst.proceed,cornerRadius: 25)
+            self.nextButton.setupNextButton(title: lngConst.proceed)
         }
     }
     @IBOutlet weak var countryCodeLabel: UILabel!{

@@ -28,16 +28,17 @@ class WalletPaymentVC: UIViewController {
         }
     }
     @IBOutlet weak var userName: UILabel!
+    
     @IBOutlet weak var walletBalance: UILabel!{
         didSet{
             walletBalance.font = UIFont.SF_Bold(30.0)
             walletBalance.textColor = appColor.blackText
         }
     }
+    
     @IBOutlet weak var confirmCard: UIButton!{
         didSet{
-            self.confirmCard.setupNextButton(title: "CONTINUE WITH CARD",
-                                             cornerRadius:23)
+            self.confirmCard.setupNextButton(title: lngConst.continue_withCard)
         }
     }
     
@@ -48,26 +49,31 @@ class WalletPaymentVC: UIViewController {
             
         }
     }
+    
     @IBOutlet weak var step2DesLBL: UILabel!{
         didSet {
             step2DesLBL.font = UIFont.SFPro_Light(12)
         }
     }
+    
     @IBOutlet weak var step1DesLBL: UILabel! {
         didSet {
             step1DesLBL.font = UIFont.SFPro_Light(12)
         }
     }
+    
     @IBOutlet weak var whatYouGetLbl: UILabel!{
         didSet {
             whatYouGetLbl.font = UIFont.SF_Regular(12)
         }
     }
+    
     @IBOutlet weak var step2Title: PaddingLabel!{
         didSet {
             step2Title.font = UIFont.SF_Regular(12)
         }
     }
+    
     @IBOutlet weak var step1Title: PaddingLabel!{
         didSet {
             step1Title.font = UIFont.SF_Regular(12)
@@ -165,27 +171,28 @@ class WalletPaymentVC: UIViewController {
         }
     }
     func updateProfilePic(){
-        if (UserDefaults.getUserData?.profileImage) != nil
-        {
-            
-            if let aString = UserDefaults.getUserData?.profileImage
-            {
-                if UserDefaults.getAvtarImage == "1"{
-                    self.profileImage.image = UIImage(named: aString)
-                }else{
-                    let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
-                    
-                    self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
-                }
+        
+        if let aString = UserDefaults.getUserData?.profileImage {
+            if UserDefaults.getAvtarImage == "1"{
+                self.profileImage.image = UIImage(named: aString)
+            }else{
+                let newString = aString.replacingOccurrences(of: baseURL.imageURL,
+                                                             with: baseURL.imageBaseURl,
+                                                             options: .literal,
+                                                             range: nil)
+                
+                self.profileImage.sd_setImage(with: URL(string: newString),
+                                              placeholderImage: UIImage(named: "defaultUser"))
             }
         }
         
     }
-    func setupValue(){
-        if let firstname = UserDefaults.getUserData?.firstName{
+    func setupValue() {
+        if let firstname = UserDefaults.getUserData?.firstName {
             self.userName.text = "Hi \(firstname)"
         }
-        if let currencySymbol = UserDefaults.getUserData?.currencySymbol, let walletAmount = UserDefaults.getUserData?.walletAmount{
+        if let currencySymbol = UserDefaults.getUserData?.currencySymbol,
+           let walletAmount = UserDefaults.getUserData?.walletAmount {
             self.walletBalance.text = "\(currencySymbol)" + "\(walletAmount)"
         }
         

@@ -8,10 +8,11 @@
 
 import UIKit
 import StripePaymentSheet
-
+import SkeletonView
 class WalletDenominationVC: UIViewController {
     
     
+    @IBOutlet weak var collectiviewHeight: NSLayoutConstraint!
     var OperatorID = 0
     var OperatorName = ""
     var OperatorPlanID = 0
@@ -56,7 +57,7 @@ class WalletDenominationVC: UIViewController {
             planContainer.layer.cornerRadius = 10
         }
     }
-
+    
     
     @IBOutlet weak var userName: UILabel!
     
@@ -111,13 +112,13 @@ class WalletDenominationVC: UIViewController {
         
         rechargeWalletTitle.changeColorAndFont(mainString: lngConst.rechargeWallet.capitalized,
                                                stringToColor: lngConst.wallet.capitalized,
-                                                    color: UIColor.init(0xb24a96),
+                                               color: UIColor.init(0xb24a96),
                                                font: UIFont.SF_Medium(18))
         
         selectDemimation.changeColorAndFont(mainString: lngConst.pleaseSelectAmount.capitalized,
                                             stringToColor: lngConst.amount.capitalized,
-                                                   color: .black,
-                                                   font: UIFont.SF_Regular(16))
+                                            color: .black,
+                                            font: UIFont.SF_Regular(16))
         
     }
     
@@ -166,7 +167,7 @@ class WalletDenominationVC: UIViewController {
     
     
     
-  
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.setupValue()
@@ -238,10 +239,12 @@ class WalletDenominationVC: UIViewController {
                     self?.hideButtonLoading()
                     self?.callFailureScreen()
                 }
-            }}
+            }
+            
+        }
     }
     
-   
+    
     
     func setupWalletBal(walletBal: Double){
         var model = UserDefaults.getUserData
@@ -256,16 +259,29 @@ class WalletDenominationVC: UIViewController {
     }
     
     func initiateModel() {
+        
+        operatorPlansCollection.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor.lightGray.withAlphaComponent(0.3)), animation: nil, transition: .crossDissolve(0.26))
+        
         let dataModel = WalletDenominationRequest.init(currencyCodes: "gbp")
         viewModel?.getDenomination(model: dataModel) { (result, status)  in
             DispatchQueue.main.async { [weak self] in
                 if status == true, let data = result {
                     self?.resposeData = data
-                    self?.operatorPlansCollection.reloadData()
                 }
-            }}
+                self?.operatorPlansCollection.stopSkeletonAnimation()
+                self?.operatorPlansCollection.hideSkeleton()
+                self?.operatorPlansCollection.reloadData()
+                if self?.resposeData.count ?? 0 > 0 {
+                    let height = self?.operatorPlansCollection.collectionViewLayout.collectionViewContentSize.height
+                    self?.collectiviewHeight.constant = height ?? 0
+                }else {
+                    self?.collectiviewHeight.constant = 100
+                }
+                self?.view.layoutIfNeeded()
+            }
+        }
     }
-  
+    
     
     func getAllKey(){
         if self.SelectedIndex < (self.resposeData.count) && self.SelectedIndex != -1{
@@ -308,7 +324,14 @@ class WalletDenominationVC: UIViewController {
 }
 
 
-extension WalletDenominationVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension WalletDenominationVC: SkeletonCollectionViewDataSource,
+                                SkeletonCollectionViewDelegate ,
+                                UICollectionViewDelegateFlowLayout {
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "CollectionViewCell"
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.resposeData.count
     }

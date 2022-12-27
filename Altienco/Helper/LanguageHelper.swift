@@ -158,6 +158,7 @@ We appreciate you contacting us. One of our colleagues will get back in touch wi
 Have a great day!
 """
     let profileUpdate =  "Great. Profile now updated."
+    let continue_withCard = "CONTINUE WITH CARD"
     
 }
 

@@ -138,7 +138,7 @@ class ContactUSVC: UIViewController {
             sendButton.layer.cornerRadius = 8
             //            sendButton.layer.borderColor = UIColor.init(0xf2f2f2).cgColor
             sendButton.layer.borderWidth = 1
-            sendButton.setupNextButton(title: lngConst.sendMsg,cornerRadius: 8)
+            sendButton.setupNextButton(title: lngConst.sendMsg)
             sendButton.titleLabel?.font = UIFont.SF_Regular(14)
             sendButton.addTarget(self, action: #selector(sendMessageToServer(_:)), for: .touchUpInside)
             

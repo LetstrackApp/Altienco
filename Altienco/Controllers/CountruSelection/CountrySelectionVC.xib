@@ -250,7 +250,7 @@
     <resources>
         <image name="arrowtriangle.down.fill" catalog="system" width="128" height="124"/>
         <image name="globe" catalog="system" width="128" height="121"/>
-        <image name="ic_white_logo" width="250" height="90"/>
+        <image name="ic_white_logo" width="139" height="60"/>
         <image name="pencil.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

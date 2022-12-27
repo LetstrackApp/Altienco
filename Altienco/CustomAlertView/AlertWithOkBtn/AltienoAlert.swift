@@ -74,7 +74,7 @@ class AltienoAlert: UIViewController {
     }
     @IBOutlet private var btnOK: UIButton!{
         didSet{
-            btnOK.setupNextButton(title: lngConst.ok.uppercased(),cornerRadius: 10)
+            btnOK.setupNextButton(title: lngConst.ok.uppercased())
             btnOK.titleLabel?.font = UIFont.SF_Regular(15)
             btnOK.addTarget(self, action: #selector(btnOkTapped(_:)), for: .touchUpInside)
             

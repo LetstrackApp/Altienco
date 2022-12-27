@@ -12,7 +12,8 @@ import SVProgressHUD
 
 class WalletDenomination {
     
-    func getDenomination(model : WalletDenominationRequest, complition : @escaping([WalletDenominationResponse]?, Bool?) -> Void)->Void{
+    func getDenomination(model : WalletDenominationRequest,
+                         complition : @escaping([WalletDenominationResponse]?, Bool?) -> Void)->Void{
         let data = try? JSONEncoder().encode(model)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         let strURl = subURL.getDenomination
@@ -21,30 +22,30 @@ class WalletDenomination {
             "Content-Type": "application/json"
         ]
         AFWrapper.requestPOSTURL(strURl, params: json, headers: header, success: { (jsondata) in
-            debugPrint("jsondata:", strURl, jsondata as Any)
-            if jsondata?["Message_Code"] as? Bool == true, let resultData = jsondata?["Result"] as? NSDictionary
-            {
+            if jsondata?["Message_Code"] as? Bool == true,
+               let resultData = jsondata?["Result"] as? NSDictionary {
                 var denominationData = [WalletDenominationResponse]()
                 if resultData["status"] as? Bool == true{
                     for dict in resultData["data"] as? Array ?? []{
                         denominationData.append(WalletDenominationResponse.init(json: dict as! [String : Any]))
-                        }
+                    }
                     complition(denominationData, true)
                 }
                 else
                 {
-                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((resultData["message"] as? String),isAlertView: true)
                     complition(nil, false)
                 }
+            }else {
+                Helper.showToast(lngConst.supportMsg,isAlertView: true)
+                
+                complition(nil, false)
             }
-
-//                else{
-//                    Helper.showToast((jsondata?["Message_Code"] as? String)!, delay:Helper.DELAY_LONG)
-//                }
+            
         }) { (Error) in
             SVProgressHUD.dismiss()
             if let error = Error{
-                Helper.showToast(error , delay:Helper.DELAY_LONG)
+                Helper.showToast(error ,isAlertView: true)
             }
             complition(nil, false)
         }
@@ -52,7 +53,9 @@ class WalletDenomination {
 }
 
 class OnlinePaymentIntent {
-    func getPaymentIntent(model : PaymentIntentRequest, complition : @escaping([PaymentIntentResponse]?, Bool?) -> Void)->Void{
+    
+    func getPaymentIntent(model : PaymentIntentRequest,
+                          complition : @escaping([PaymentIntentResponse]?, Bool?) -> Void)->Void{
         let data = try? JSONEncoder().encode(model)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         let strURl = subURL.getPaymentIntent
@@ -62,7 +65,6 @@ class OnlinePaymentIntent {
             "Content-Type": "application/json"
         ]
         AFWrapper.requestPOSTURL(strURl, params: json, headers: header, success: { (jsondata) in
-            debugPrint("jsondata:", strURl, jsondata as Any)
             SVProgressHUD.dismiss()
             if jsondata?["Message_Code"] as? Bool == true, let resultData = jsondata?["Result"] as? NSDictionary
             {
@@ -70,7 +72,7 @@ class OnlinePaymentIntent {
                 if resultData["status"] as? Bool == true{
                     for dict in resultData["data"] as? Array ?? []{
                         paymentIntent.append(PaymentIntentResponse.init(json: dict as! [String : Any]))
-                        }
+                    }
                     complition(paymentIntent, true)
                 }
                 else
@@ -78,12 +80,13 @@ class OnlinePaymentIntent {
                     Helper.showToast((resultData["message"] as? String),isAlertView: true)
                     complition(nil, false)
                 }
+            }else {
+                Helper.showToast(lngConst.supportMsg,isAlertView: true)
+                
+                complition(nil, false)
             }
-
-//                else{
-//                    Helper.showToast((jsondata?["Message_Code"] as? String)!, delay:Helper.DELAY_LONG)
-//                }
-        }) { (Error) in
+        }
+        ) { (Error) in
             SVProgressHUD.dismiss()
             if let error = Error{
                 Helper.showToast(error , isAlertView: true)
@@ -101,35 +104,36 @@ class VerifyPaymentViewModel {
         let data = try? JSONEncoder().encode(model)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         let strURl = subURL.verifyPayment
-//        SVProgressHUD.show()
+        //        SVProgressHUD.show()
         let header : HTTPHeaders = [
             "Authorization": "Bearer \(UserDefaults.getToken)",
             "Content-Type": "application/json"
         ]
-        AFWrapper.requestPOSTURL(strURl, params: json, headers: header, success: { (jsondata) in
-            debugPrint("jsondata:", strURl, jsondata as Any)
-//            SVProgressHUD.dismiss()
-            if jsondata?["Message_Code"] as? Bool == true, let resultData = jsondata?["Result"] as? NSDictionary
-            {
+        AFWrapper.requestPOSTURL(strURl, params: json,
+                                 headers: header, success: { (jsondata) in
+            //            SVProgressHUD.dismiss()
+            if jsondata?["Message_Code"] as? Bool == true,
+               let resultData = jsondata?["Result"] as? NSDictionary {
                 var payment = [VerifyPaymentResponse]()
                 if resultData["status"] as? Bool == true{
                     for dict in resultData["data"] as? Array ?? []{
                         payment.append(VerifyPaymentResponse.init(json: dict as! [String : Any]))
-                        }
+                    }
                     complition(payment, true)
                 }
-                else
-                {
+                else {
                     Helper.showToast((resultData["message"] as? String),isAlertView: true)
                     complition(nil, false)
                 }
             }
-
-//                else{
-//                    Helper.showToast((jsondata?["Message_Code"] as? String)!, delay:Helper.DELAY_LONG)
-//                }
+            else {
+                Helper.showToast(lngConst.supportMsg,isAlertView: true)
+                
+                complition(nil, false)
+            }
+            
         }) { (Error) in
-            if let error = Error{
+            if let error = Error {
                 Helper.showToast(error , isAlertView: true)
             }
             SVProgressHUD.dismiss()
