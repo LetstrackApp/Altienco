@@ -9,9 +9,6 @@
 import UIKit
 import DropDown
 
-
-
-
 class ContactUSVC: UIViewController {
     lazy  var dropDown : DropDown = {
         let drop = DropDown()
@@ -70,14 +67,11 @@ class ContactUSVC: UIViewController {
             mobile.textContentType = .telephoneNumber
             mobile.keyboardType = .numbersAndPunctuation
             mobile.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
-
-
-            
-            
         }
     }
+    @IBOutlet weak var reseionText: UITextField!
     
-    //[mobile,email,name]
+    //
     
     @IBOutlet weak var resion: UIView!
     
@@ -167,6 +161,7 @@ class ContactUSVC: UIViewController {
     var viewModel:  ResionAPi?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         viewModel?.getReasonList { result in
             
         }
@@ -190,6 +185,7 @@ class ContactUSVC: UIViewController {
     func showDropDown(view : UIView,
                       stringArry:[String],
                       completion:@escaping(Int,String)->Void) {
+        reseionText.setError()
         dropDown.anchorView = view
         dropDown.topOffset = CGPoint(x: 0, y:-(dropDown.anchorView?.plainView.bounds.height)!)
         dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
@@ -197,6 +193,7 @@ class ContactUSVC: UIViewController {
         dropDown.selectionAction = {   (index: Int,
                                         item: String) in
             completion(index,item)
+            
             
         }
         dropDown.width = view.bounds.width
@@ -245,9 +242,9 @@ class ContactUSVC: UIViewController {
     @IBAction func sendMessageToServer(_ sender : UIButton) {
         self.view.endEditing(true)
         Helper.hideToast()
-        switch viewModel?.validateFileds() {
-        case .Invalid(let error ):
-            Helper.showToast(error,position:.center)
+        switch viewModel?.validateFileds(textfiled: [name,email,mobile,reseionText]) {
+        case .Invalid:break
+           // Helper.showToast(error,position:.center)
         default :
             self.view.isUserInteractionEnabled = false
             self.sendButton.showLoading()
@@ -321,6 +318,7 @@ extension ContactUSVC : UITextFieldDelegate {
     }
     
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        textField.setError()
         var result = true
         let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         if textField == name{

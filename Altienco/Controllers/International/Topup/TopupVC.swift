@@ -264,7 +264,7 @@ class TopupVC: FloatingPannelHelper, UITextFieldDelegate {
         for name in self.intrResponse ?? [] {
             operatorName.append(name.operatorName ?? "")
         }
-        self.operatorDropDown.dataSource = operatorName ?? []
+        self.operatorDropDown.dataSource = operatorName
         self.operatorDropDown.direction = .top
         self.operatorDropDown.width = self.operatorContainer.frame.size.width
         self.operatorDropDown.anchorView = self.operatorContainer

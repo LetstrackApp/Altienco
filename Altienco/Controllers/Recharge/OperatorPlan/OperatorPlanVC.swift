@@ -221,7 +221,16 @@ class OperatorPlanVC: FloatingPannelHelper {
         }
         
     }
-    
+    func insuffiCentBlanceAlert(){
+        AltienoAlert.initialization().showAlertWithBtn(with: .addBalance("Please add wallet balance"), title: "Insufficent Balance", cancelBtn: "Cancel", okBtn: "ADD") { index, title in
+            DispatchQueue.main.async {
+                if index == 0 {
+                let viewController: WalletPaymentVC = WalletPaymentVC()
+                self.navigationController?.pushViewController(viewController, animated: true)
+                }
+            }
+        }
+    }
     
     @IBAction func generateVoucher(_ sender: Any) {
         if SelectedIndex != -1{
@@ -229,23 +238,7 @@ class OperatorPlanVC: FloatingPannelHelper {
             guard let walletBal = UserDefaults.getUserData?.walletAmount else {return}
             if selectedAmount > Int(walletBal){
                 
-                
-                let alertController = UIAlertController(title: "Insufficent Balance", message: "Please add wallet balance", preferredStyle: .alert)
-                // Create the actions
-                let okAction = UIAlertAction(title: "ADD", style: UIAlertAction.Style.default) {
-                    UIAlertAction in
-                    let viewController: WalletPaymentVC = WalletPaymentVC()
-                    self.navigationController?.pushViewController(viewController, animated: true)
-                }
-                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) {
-                    UIAlertAction in
-                    NSLog("Cancel Pressed")
-                }
-                // Add the actions
-                
-                alertController.addAction(okAction)
-                alertController.addAction(cancelAction)
-                self.present(alertController, animated: true, completion: nil)
+                insuffiCentBlanceAlert()
             }
             else{
                 if self.SelectedIndex < (self.allOperator.count ) && self.SelectedIndex != -1{
@@ -392,16 +385,11 @@ extension OperatorPlanVC {
                                           currency: currency,
                                           isEdit:false,
                                                      transactionTypeId: TransactionTypeId.PhoneRecharge.rawValue)
-        ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result, status in
+        ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result,resultThirdParty, status in
           
             DispatchQueue.main.async {
-                if status == true, let val = result{
-                    self.successVoucher(mPin: val.mPIN ?? "",
-                                        denominationValue: "\(val.dinominationValue ?? 0)",
-                                        walletBalance: val.walletAmount ?? 0.0,
-                                        msgToShare: val.msgToShare ?? "",
-                                        voucherID: val.voucherID ?? 0,
-                                        orderNumber: "")
+                if status == true {
+                    self.successVoucher(thirdPartyVoucher: resultThirdParty, altinecoVoucher: result)
                 }
             }
         }

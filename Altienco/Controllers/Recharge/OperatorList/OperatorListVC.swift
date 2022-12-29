@@ -325,15 +325,11 @@ class OperatorListVC: FloatingPannelHelper {
                                                          currency: currency,
                                                          isEdit:false,
                                                          transactionTypeId: TransactionTypeId.PhoneRecharge.rawValue)
-            ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result, status in
+            ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result, resultThirdParty,status in
                 DispatchQueue.main.async {
                     if status == true, let val = result{
-                        self.successVoucher(mPin: val.mPIN ?? "",
-                                            denominationValue: "\(val.dinominationValue ?? 0)",
-                                            walletBalance: val.walletAmount ?? 0.0,
-                                            msgToShare: val.msgToShare ?? "",
-                                            voucherID: val.voucherID ?? 0,
-                                            orderNumber: "")
+                        self.successVoucher(thirdPartyVoucher: resultThirdParty, altinecoVoucher: result)
+
                     }
                 }
             }

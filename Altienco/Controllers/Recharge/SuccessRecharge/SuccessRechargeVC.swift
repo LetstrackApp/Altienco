@@ -12,16 +12,44 @@ import UIKit
 class SuccessRechargeVC: FloatingPannelHelper, UITextFieldDelegate {
     var receiptDownload: DownloadRecieptApi?
     
-    var denominationValue = ""
-    var mPin = ""
+    var timer : Timer?
     var isHideVoucherButton = false
     var isUsed = false
+    var denominationValue = ""
+    var mPin = ""
     var msgToShare = ""
     var walletBal = 0.0
     var voucherID = 0
-    var markUsed : UsedMarkViewModel?
     var orderNumber : String?
+    var viewmodel : VerifyStatusViewModel?
     
+    var markUsed : UsedMarkViewModel?
+    private var altinecoVoucher :GenerateVoucherResponseObj?
+    private var thirdPartyVoucher: ConfirmingIntrPINBankVoucherModel?
+    @IBOutlet weak var animatedLbl: UILabel! {
+        didSet {
+            animatedLbl.text = lngConst.voucher_Generating
+            animatedLbl.font = UIFont.SF_SemiBold(16)
+
+        }
+    }
+
+    @IBOutlet weak var rechargeView: UIView! {
+        didSet {
+            rechargeView.isHidden = true
+
+        }
+    }
+    @IBOutlet weak var animationView: UIView! {
+        didSet {
+            animationView.isHidden = true
+        }
+    }
+    @IBOutlet weak var sucessVIew: UIView!{
+        didSet {
+            sucessVIew.isHidden = true
+        }
+    }
     @IBOutlet weak var viewContainer: UIView!{
         didSet{
             DispatchQueue.main.async {
@@ -60,8 +88,67 @@ class SuccessRechargeVC: FloatingPannelHelper, UITextFieldDelegate {
     }
     
     
-    convenience init() {
+    convenience init(altinecoVoucher :GenerateVoucherResponseObj?,thirdPartyVoucher: ConfirmingIntrPINBankVoucherModel?) {
         self.init(nibName: xibName.successRechargeVC, bundle: .altiencoBundle)
+        self.altinecoVoucher = altinecoVoucher
+        self.thirdPartyVoucher = thirdPartyVoucher
+        self.viewmodel = VerifyStatusViewModel()
+        setupdata ()
+    }
+    
+    func setupdata (){
+        self.denominationValue = "\(self.altinecoVoucher?.dinominationValue ?? 0)"
+        self.mPin = self.altinecoVoucher?.mPIN ?? ""
+        self.msgToShare =  self.altinecoVoucher?.msgToShare ?? ""
+        self.walletBal = self.altinecoVoucher?.walletAmount ?? 0
+        self.voucherID = self.altinecoVoucher?.voucherID ?? 0
+        self.orderNumber = self.altinecoVoucher?.orderId
+        if thirdPartyVoucher != nil {
+            timer?.invalidate()
+            timer = nil
+            timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+            timer?.fire()
+        }
+       
+
+
+        
+    }
+    
+    @objc func timerAction() {
+        
+        
+        let dataModel = VerifyStatusRequest.init(externalID: thirdPartyVoucher?.externalId ?? "",
+                                                 apiID: thirdPartyVoucher?.apiId ?? "",
+                                                 confirmationExpiryDate: "",
+                                                 processStatusID: thirdPartyVoucher?.processStatusId)
+        self.viewmodel?.verifyProcessStatus(model: dataModel) { (result, status)  in
+            DispatchQueue.main.async { [weak self] in
+                if status == true, let data = result{
+                    self?.denominationValue = "\(data.dinominationValue ?? 0)"
+                    self?.mPin = data.mPIN ?? ""
+                    self?.msgToShare = data.msgToShare ?? ""
+                    self?.walletBal = data.walletAmount ?? 0
+                    self?.voucherID = data.voucherId ?? 0
+                    self?.orderNumber = data.orderId
+                    
+                    if data.processStatusID == GiftCardProcessStatus.Cancelled.rawValue ||  data.processStatusID == GiftCardProcessStatus.Completed.rawValue{
+                        self?.timer?.invalidate()
+                        self?.timer = nil
+                        self?.animationView.isHidden = true
+                        self?.sucessVIew.isHidden = false
+                        self?.rechargeView.isHidden = false
+
+                    }
+                    
+                    if  self?.walletBal != 0.0{
+                        DispatchQueue.main.async {
+                            self?.setupDefaultValue()
+                        }}
+                    self?.initiateView()
+                }
+            }
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +160,18 @@ class SuccessRechargeVC: FloatingPannelHelper, UITextFieldDelegate {
                 self.setupDefaultValue()
             }}
         self.initiateView()
+        DispatchQueue.main.async {
+            if self.thirdPartyVoucher != nil {
+                self.animationView.isHidden = false
+                Helper.shared.showAnimatingDotsInImageView(view: self.animatedLbl)
+                self.rechargeView.isHidden = true
+
+            }else {
+                self.sucessVIew.isHidden = true
+                self.rechargeView.isHidden = false
+
+            }
+        }
         
     }
     func setupDefaultValue(){
@@ -101,6 +200,7 @@ class SuccessRechargeVC: FloatingPannelHelper, UITextFieldDelegate {
             self.setStatusMark()
             self.isHideVoucherButton == true ? (self.otherVoucherView.isHidden = true) : (self.otherVoucherView.isHidden = false)
         }
+
     }
     
     func setStatusMark(){
@@ -171,7 +271,7 @@ class SuccessRechargeVC: FloatingPannelHelper, UITextFieldDelegate {
     @IBAction func copyTextButton(_ sender: Any) {
         UIPasteboard.general.string = mPinText!.text
         AltienoAlert.initialization().showAlert(with: .profile(lngConst.voucher_Code_Copied)) { index, _ in
-
+            
         }
     }
     
@@ -265,5 +365,11 @@ class SuccessRechargeVC: FloatingPannelHelper, UITextFieldDelegate {
     
     @IBAction func homeButton(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        timer?.invalidate()
+        timer = nil
     }
 }

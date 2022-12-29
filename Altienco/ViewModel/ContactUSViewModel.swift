@@ -21,7 +21,7 @@ protocol ResionAPi {
     var reasonModel: [ReasonModel] {get set }
     
     func getReasonList(completion:@escaping(Bool)->Void)
-    func validateFileds()->UserValidationState
+    func validateFileds(textfiled:[UITextField])->UserValidationState
     func sunbmitDataToserver(completion:@escaping(Bool)->Void)
     func imageUplaod(image:UIImage,completion:@escaping(Bool?)->Void)
     
@@ -117,27 +117,40 @@ extension ReasionViewModel: ResionAPi {
      "attachmentPath":"string"
      }*/
     
-    func validateFileds()-> UserValidationState {
+    func validateFileds(textfiled:[UITextField])-> UserValidationState {
          if name == nil || name?.isEmpty == true {
+             textfiled.first?.setError(lngConst.enterName, show: true, constent: -20, showImage: true)
+             
             return .Invalid(lngConst.enterName)
         }
         if email == nil || email?.isEmpty == true {
+            textfiled[1].setError(lngConst.emptyEmail, show: true, constent: -20, showImage: true)
+
             return .Invalid(lngConst.emptyEmail)
         }
         if Validator.isValidEmail(email ?? "") == false {
+            textfiled[1].setError(lngConst.validEmail, show: true, constent: -20, showImage: true)
             return .Invalid(lngConst.validEmail)
         }
         if mobile == nil || mobile?.isEmpty == true {
+            textfiled[2].setError(lngConst.empytMobile, show: true, constent: -20, showImage: true)
+
             return .Invalid(lngConst.empytMobile)
         }
         if mobile?.count ?? 0 < 10 {
+            textfiled[2].setError(lngConst.notValidMobile, show: true, constent: -11, showImage: true)
+
             return .Invalid(lngConst.notValidMobile)
         }
         
         if mobile?.count ?? 0 < 10 {
+            textfiled[2].setError(lngConst.notValidMobile, show: true, constent: -11, showImage: true)
+
             return .Invalid(lngConst.notValidMobile)
         }
         if reasonID == 0 {
+            textfiled[3].setError(lngConst.reasonerror, show: true, constent: -11, showImage: false)
+
             return .Invalid(lngConst.reasonerror)
         }
         return .Valid

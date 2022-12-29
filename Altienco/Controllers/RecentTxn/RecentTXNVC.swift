@@ -13,8 +13,7 @@ class RecentTXNVC: UIViewController {
     private var viewModel : TransactionHistoryViewModel?
     private var txnType : TransactionTypeId?
     
-    var didSelectDone: ((GenerateVoucherResponseObj)->())?
-
+    var didSelectDone: ((GenerateVoucherResponseObj?,ConfirmingIntrPINBankVoucherModel?)->())?
     @IBOutlet weak var tableview: UITableView! {
         didSet {
             tableview.tableFooterView = UIView()
@@ -134,10 +133,10 @@ extension RecentTXNVC: SkeletonTableViewDelegate, SkeletonTableViewDataSource {
                                                                  currency: currency,
                                                                  isEdit:false,
                                                                  transactionTypeId: txnid.rawValue)
-                    ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result, status in
+                    ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result,resultThirdParty, status in
                         DispatchQueue.main.async {
                             if status == true, let val = result{
-                                self.didSelectDone?(val)
+                                self.didSelectDone?(val,resultThirdParty)
                             }
                         }
                     }

@@ -44,15 +44,10 @@ class FloatingPannelHelper: UIViewController,FloatingPanelControllerDelegate {
             recentTxn?.surfaceView.appearance.borderColor = UIColor.black
             recentTxn?.surfaceView.containerMargins = .init(top: 0, left: 10, bottom: 0, right: 10)
             viewControler = RecentTXNVC(txnType: txnTypeId)
-            viewControler?.didSelectDone = { [weak self] result in
+            viewControler?.didSelectDone = { [weak self] result,resultThirdParty in
                 self?.recentTxn?.dismiss(animated: true, completion: {
                     DispatchQueue.main.async {
-                        self?.successVoucher(mPin: result.mPIN ?? "",
-                                            denominationValue: "\(result.dinominationValue ?? 0)",
-                                            walletBalance: result.walletAmount ?? 0.0,
-                                            msgToShare: result.msgToShare ?? "",
-                                            voucherID: result.voucherID ?? 0,
-                                            orderNumber: "")
+                        self?.successVoucher(thirdPartyVoucher: resultThirdParty, altinecoVoucher: result)
                     }
                 })
 
@@ -142,28 +137,34 @@ class FloatingPannelHelper: UIViewController,FloatingPanelControllerDelegate {
         
     }
     
-    
-    
-    func successVoucher(mPin: String,
-                        denominationValue : String,
-                        walletBalance: Double,
-                        msgToShare: String,
-                        voucherID: Int,
-                        orderNumber:String){
-      
-            let viewController: SuccessRechargeVC = SuccessRechargeVC()
-            viewController.denominationValue = denominationValue
-            viewController.mPin = mPin
-            viewController.walletBal = walletBalance
-            viewController.voucherID = voucherID
-            viewController.msgToShare = msgToShare
-            viewController.orderNumber = orderNumber
-            self.navigationController?.pushViewController(viewController, animated: true)
+    func successVoucher(thirdPartyVoucher: ConfirmingIntrPINBankVoucherModel?,
+                                 altinecoVoucher :GenerateVoucherResponseObj?) {
         
-        
-        
+        let viewController = SuccessRechargeVC.init(altinecoVoucher: altinecoVoucher, thirdPartyVoucher: thirdPartyVoucher)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
+    
+//    func successVoucher(mPin: String,
+//                        denominationValue : String,
+//                        walletBalance: Double,
+//                        msgToShare: String,
+//                        voucherID: Int,
+//                        orderNumber:String){
+//      
+//            let viewController: SuccessRechargeVC = SuccessRechargeVC()
+//            viewController.denominationValue = denominationValue
+//            viewController.mPin = mPin
+//            viewController.walletBal = walletBalance
+//            viewController.voucherID = voucherID
+//            viewController.msgToShare = msgToShare
+//            viewController.orderNumber = orderNumber
+//            self.navigationController?.pushViewController(viewController, animated: true)
+//        
+//        
+//        
+//    }
+//    
 
     
     

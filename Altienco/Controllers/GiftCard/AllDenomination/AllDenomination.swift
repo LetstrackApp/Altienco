@@ -223,28 +223,23 @@ class AllDenomination: FloatingPannelHelper{
         }
         
     }
+    func insuffiCentBlanceAlert(){
+        AltienoAlert.initialization().showAlertWithBtn(with: .addBalance("Please add wallet balance"), title: "Insufficent Balance", cancelBtn: "Cancel", okBtn: "ADD") { index, title in
+            DispatchQueue.main.async {
+                if index == 0 {
+                let viewController: WalletPaymentVC = WalletPaymentVC()
+                self.navigationController?.pushViewController(viewController, animated: true)
+                }
+            }
+        }
+    }
     
     @IBAction func reviewGiftCard(_ sender: Any) {
         if self.SelectedIndex != -1{
             guard let selectedAmount = self.viewModel?.searchFixedGiftCard.value[self.SelectedIndex].retailAmount else {return}
             guard let walletBal = UserDefaults.getUserData?.walletAmount else {return}
             if Int(selectedAmount) > Int(walletBal ) {
-                let alertController = UIAlertController(title: "Insufficent Balance", message: "Please add wallet balance", preferredStyle: .alert)
-                // Create the actions
-                let okAction = UIAlertAction(title: "ADD", style: UIAlertAction.Style.default) {
-                    UIAlertAction in
-                    let viewController: WalletPaymentVC = WalletPaymentVC()
-                    self.navigationController?.pushViewController(viewController, animated: true)
-                }
-                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) {
-                    UIAlertAction in
-                    NSLog("Cancel Pressed")
-                }
-                // Add the actions
-                
-                alertController.addAction(okAction)
-                alertController.addAction(cancelAction)
-                self.present(alertController, animated: true, completion: nil)
+                insuffiCentBlanceAlert()
             }
             else{
                 DispatchQueue.main.async {

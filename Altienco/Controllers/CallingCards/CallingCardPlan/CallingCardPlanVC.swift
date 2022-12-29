@@ -230,6 +230,17 @@ class CallingCardPlanVC: FloatingPannelHelper {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func insuffiCentBlanceAlert(){
+        AltienoAlert.initialization().showAlertWithBtn(with: .addBalance("Please add wallet balance"), title: "Insufficent Balance", cancelBtn: "Cancel", okBtn: "ADD") { index, title in
+            DispatchQueue.main.async {
+                if index == 0 {
+                let viewController: WalletPaymentVC = WalletPaymentVC()
+                self.navigationController?.pushViewController(viewController, animated: true)
+                }
+            }
+        }
+    }
+    
     @IBAction func generateVoucher(_ sender: Any) {
         
         
@@ -238,46 +249,16 @@ class CallingCardPlanVC: FloatingPannelHelper {
             guard let selectedAmount = self.allOperator[self.SelectedIndex].denominationValue else {return}
             guard let walletBal = UserDefaults.getUserData?.walletAmount else {return}
             if selectedAmount > Int(walletBal){
-                let alertController = UIAlertController(title: "Insufficent Balance", message: "Please add wallet balance", preferredStyle: .alert)
-                // Create the actions
-                let okAction = UIAlertAction(title: "ADD", style: UIAlertAction.Style.default) {
-                    UIAlertAction in
-                    let viewController: WalletPaymentVC = WalletPaymentVC()
-                    self.navigationController?.pushViewController(viewController, animated: true)
-                }
-                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) {
-                    UIAlertAction in
-                    NSLog("Cancel Pressed")
-                }
-                // Add the actions
-                
-                alertController.addAction(okAction)
-                alertController.addAction(cancelAction)
-                self.present(alertController, animated: true, completion: nil)
+               
+                insuffiCentBlanceAlert()
+               
             }
             else{
                 
                 guard let selectedAmount = self.allOperator[self.SelectedIndex].denominationValue else {return}
                 guard let walletBal = UserDefaults.getUserData?.walletAmount else {return}
                 if selectedAmount > Int(walletBal) {
-                    let alertController = UIAlertController(title: "Insufficent Balance",
-                                                            message: "Please add wallet balance",
-                                                            preferredStyle: .alert)
-                    // Create the actions
-                    let okAction = UIAlertAction(title: "ADD", style: UIAlertAction.Style.default) {
-                        UIAlertAction in
-                        let viewController: WalletPaymentVC = WalletPaymentVC()
-                        self.navigationController?.pushViewController(viewController, animated: true)
-                    }
-                    let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) {
-                        UIAlertAction in
-                        NSLog("Cancel Pressed")
-                    }
-                    // Add the actions
-                    
-                    alertController.addAction(okAction)
-                    alertController.addAction(cancelAction)
-                    self.present(alertController, animated: true, completion: nil)
+                    insuffiCentBlanceAlert()
                 }
                 else{
                     if self.SelectedIndex < (self.allOperator.count) && self.SelectedIndex != -1{
@@ -300,19 +281,10 @@ class CallingCardPlanVC: FloatingPannelHelper {
         }
     }
     
-    override func successVoucher(mPin: String,
-                        denominationValue : String,
-                        walletBalance: Double,
-                        msgToShare: String,
-                        voucherID: Int,
-                        orderNumber:String?) {
-        let viewController: SuccessCallinCardVC = SuccessCallinCardVC()
-        viewController.denominationValue = denominationValue
-        viewController.mPin = mPin
-        viewController.walletBal = walletBalance
-        viewController.voucherID = voucherID
-        viewController.msgToShare = msgToShare
-        viewController.orderNumber = orderNumber
+    override func successVoucher(thirdPartyVoucher: ConfirmingIntrPINBankVoucherModel?,
+                                 altinecoVoucher :GenerateVoucherResponseObj?) {
+        
+        let viewController = SuccessCallinCardVC.init(thirdPartyVoucher: thirdPartyVoucher, altinecoVoucher: altinecoVoucher)
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -332,15 +304,10 @@ class CallingCardPlanVC: FloatingPannelHelper {
                                                      isEdit:false,
                                                      transactionTypeId: TransactionTypeId.CallingCard.rawValue)
         
-        ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result, status in
+        ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result,resultThirdParty, status in
             DispatchQueue.main.async {
                 if status == true, let val = result{
-                    self.successVoucher(mPin: val.mPIN ?? "",
-                                        denominationValue: "\(val.dinominationValue ?? 0)",
-                                        walletBalance: val.walletAmount ?? 0.0,
-                                        msgToShare: val.msgToShare ?? "",
-                                        voucherID: val.voucherID ?? 0,
-                                        orderNumber: "")
+                    self.successVoucher(thirdPartyVoucher: resultThirdParty, altinecoVoucher: result)
                 }
             }
         }

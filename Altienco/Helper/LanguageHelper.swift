@@ -171,6 +171,7 @@ Have a great day!
     let tryAfterSomeTime = "Please try after Sometime!"
     let allNotification = "All Notification"
     let notification = "Notification"
+    let voucher_Generating = "Generating Voucher" 
 
 
 }

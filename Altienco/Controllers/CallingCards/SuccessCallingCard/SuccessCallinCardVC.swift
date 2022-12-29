@@ -10,17 +10,47 @@ import Foundation
 import UIKit
 
 class SuccessCallinCardVC: FloatingPannelHelper, UITextFieldDelegate {
-    
+    var timer : Timer?
     var denominationValue = ""
     var mPin = ""
-    var isHideVoucherButton = false
-    var isUsed = false
     var msgToShare = ""
     var walletBal = 0.0
     var voucherID = 0
+    var orderNumber: String?
+    
+    @IBOutlet weak var animatedLbl: UILabel!{
+        didSet {
+            animatedLbl.font = UIFont.SF_SemiBold(16)
+            animatedLbl.text = lngConst.voucher_Generating
+        }
+    }
+    @IBOutlet weak var animationView: UIView!{
+        didSet {
+            animationView.isHidden = true
+
+        }
+    }
+    @IBOutlet weak var sucessVIew: UIView! {
+        didSet {
+            sucessVIew.isHidden = true
+
+        }
+    }
+    var isHideVoucherButton = false
+    var isUsed = false
+    
+    @IBOutlet weak var dotedlbl: UILabel!
+    @IBOutlet weak var rechargeView: UIView! {
+        didSet {
+            rechargeView.isHidden = true
+
+        }
+    }
     var markUsed : UsedMarkViewModel?
     var receiptDownload: DownloadRecieptApi?
-    var orderNumber: String?
+    private var thirdPartyVoucher: ConfirmingIntrPINBankVoucherModel?
+    private var altinecoVoucher :GenerateVoucherResponseObj?
+    var viewmodel : VerifyStatusViewModel?
     @IBOutlet weak var showView: UIStackView!
     @IBOutlet weak var viewContainer: UIView!{
         didSet{
@@ -59,9 +89,68 @@ class SuccessCallinCardVC: FloatingPannelHelper, UITextFieldDelegate {
         }
     }
     
-    convenience init() {
+    convenience init(thirdPartyVoucher: ConfirmingIntrPINBankVoucherModel?,
+                     altinecoVoucher :GenerateVoucherResponseObj?) {
         self.init(nibName: xibName.successCallinCardVC, bundle: .altiencoBundle)
+        self.thirdPartyVoucher = thirdPartyVoucher
+        self.altinecoVoucher = altinecoVoucher
+        self.viewmodel = VerifyStatusViewModel()
+        setupdata ()
     }
+    
+    func setupdata (){
+        self.denominationValue = "\(self.altinecoVoucher?.dinominationValue ?? 0)"
+        self.mPin = self.altinecoVoucher?.mPIN ?? ""
+        self.msgToShare =  self.altinecoVoucher?.msgToShare ?? ""
+        self.walletBal = self.altinecoVoucher?.walletAmount ?? 0
+        self.voucherID = self.altinecoVoucher?.voucherID ?? 0
+        self.orderNumber = self.altinecoVoucher?.orderId
+        
+        if thirdPartyVoucher != nil {
+
+            timer?.invalidate()
+            timer = nil
+            timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+            timer?.fire()
+        }
+        
+        
+    }
+    
+    @objc func timerAction() {
+        let dataModel = VerifyStatusRequest.init(externalID: thirdPartyVoucher?.externalId ?? "",
+                                                 apiID: thirdPartyVoucher?.apiId ?? "",
+                                                 confirmationExpiryDate: "",
+                                                 processStatusID: thirdPartyVoucher?.processStatusId)
+        self.viewmodel?.verifyProcessStatus(model: dataModel) { (result, status)  in
+            DispatchQueue.main.async { [weak self] in
+                if status == true, let data = result{
+                    
+                    self?.denominationValue = "\(data.dinominationValue ?? 0)"
+                    self?.mPin = data.mPIN ?? ""
+                    self?.msgToShare = data.msgToShare ?? ""
+                    self?.walletBal = data.walletAmount ?? 0
+                    self?.voucherID = data.voucherId ?? 0
+                    self?.orderNumber = data.orderId
+                    self?.orderNumber = data.orderId
+                    if data.processStatusID == GiftCardProcessStatus.Cancelled.rawValue ||  data.processStatusID == GiftCardProcessStatus.Completed.rawValue{
+                        self?.timer?.invalidate()
+                        self?.timer = nil
+                        self?.animationView.isHidden = true
+                        self?.sucessVIew.isHidden = false
+                        self?.rechargeView.isHidden = false
+
+                    }
+                    self?.initiateView()
+                    
+                }else {
+                    
+                }
+            }
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         receiptDownload = DownloadRecieptApi()
@@ -70,8 +159,21 @@ class SuccessCallinCardVC: FloatingPannelHelper, UITextFieldDelegate {
         if self.walletBal != 0.0{
             DispatchQueue.main.async {
                 self.setupDefaultValue()
-            }}
+            }
+        }
         self.initiateView()
+        
+        DispatchQueue.main.async {
+            if self.thirdPartyVoucher != nil {
+                self.rechargeView.isHidden = true
+
+                self.animationView.isHidden = false
+                Helper.shared.showAnimatingDotsInImageView(view: self.animatedLbl)
+            }else {
+                self.rechargeView.isHidden = false
+                self.sucessVIew.isHidden = true
+            }
+        }
     }
     func setupDefaultValue(){
         var model = UserDefaults.getUserData
@@ -102,6 +204,7 @@ class SuccessCallinCardVC: FloatingPannelHelper, UITextFieldDelegate {
             self.setStatusMark()
             self.isHideVoucherButton == true ? (self.otherVoucherView.isHidden = true) : (self.otherVoucherView.isHidden = false)
         }
+
     }
     
     func setStatusMark(){
@@ -142,7 +245,7 @@ class SuccessCallinCardVC: FloatingPannelHelper, UITextFieldDelegate {
     }
     
     @IBAction func notification(_ sender: Any) {
-       setupAllNoti()
+        setupAllNoti()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -182,7 +285,7 @@ class SuccessCallinCardVC: FloatingPannelHelper, UITextFieldDelegate {
         if !(mPinText.text?.isEmpty ?? true){
             UIPasteboard.general.string = mPinText!.text
             AltienoAlert.initialization().showAlert(with: .profile(lngConst.voucher_Code_Copied)) { index, _ in
-
+                
             }
             
         }
@@ -271,4 +374,11 @@ class SuccessCallinCardVC: FloatingPannelHelper, UITextFieldDelegate {
     @IBAction func homeButton(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        timer?.invalidate()
+        timer = nil
+    }
+    
 }

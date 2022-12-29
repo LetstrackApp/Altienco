@@ -194,7 +194,8 @@ class SuccessGiftCardVC: FloatingPannelHelper {
                     self?.updateFinalView()
                     
                 }
-            }}
+            }
+        }
     }
     
     func updateFinalView(){

@@ -343,7 +343,7 @@ extension TransactionHistoryVC: SkeletonTableViewDelegate, SkeletonTableViewData
                                                              currency: currency,
                                                              isEdit:false,
                                                              transactionTypeId: txnid.rawValue)
-                ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result, status in
+                ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result, resultThirdParty, status  in
                     DispatchQueue.main.async {
                         if status == true, let val = result{
                             

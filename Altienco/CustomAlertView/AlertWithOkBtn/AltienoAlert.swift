@@ -16,6 +16,7 @@ enum KindOF {
     case fail
     case profile(String)
     case other(String)
+    case addBalance(String)
     
     var btnTitle : String {
         switch self {
@@ -48,6 +49,17 @@ enum KindOF {
 
 class AltienoAlert: UIViewController {
     
+    private var okbtnTitle:String?
+    private var cancelbtnTitle:String?
+    private var alertTitle:String?
+
+    
+    @IBOutlet weak var titleLbl: PaddingLabel! {
+        didSet {
+            titleLbl?.font = UIFont.SF_SemiBold(15)
+            titleLbl.isHidden = true
+        }
+    }
     @IBOutlet weak var imageView: UIImageView! {
         didSet {
             imageView.isHidden = false
@@ -70,6 +82,16 @@ class AltienoAlert: UIViewController {
     @IBOutlet  var lblAlertText: PaddingLabel?{
         didSet{
             lblAlertText?.font = UIFont.SF_Regular(15)
+        }
+    }
+    @IBOutlet weak var viewok: UIView!
+    @IBOutlet weak var cancelView: UIView!
+    @IBOutlet weak var btnCancel: UIButton!{
+        didSet{
+            btnCancel.setupNextButton(title: lngConst.ok.uppercased())
+            btnCancel.titleLabel?.font = UIFont.SF_Regular(15)
+            btnCancel.addTarget(self, action: #selector(btnCancelTapped(_:)), for: .touchUpInside)
+            
         }
     }
     @IBOutlet private var btnOK: UIButton!{
@@ -119,6 +141,15 @@ class AltienoAlert: UIViewController {
         if let image  = kind?.imageName {
             imageView.image = UIImage(named: image)
         }
+        
+        switch kind {
+        case .addBalance :
+            cancelView.isHidden = false
+            titleLbl.isHidden = false
+        default:break
+        }
+
+        
         
     }
     
@@ -216,6 +247,21 @@ class AltienoAlert: UIViewController {
             self.bottomConstraint.constant = -getBottomConstant()
             self.view.backgroundColor = UIColor.clear
             self.animateView()
+            if let okbtnTitle = okbtnTitle {
+                self.btnOK.setTitle(okbtnTitle, for: .normal)
+            }
+            if let cancelbtnTitle = cancelbtnTitle {
+                self.btnCancel.setTitle(cancelbtnTitle, for: .normal)
+            }
+            if let alertTitle = alertTitle {
+                self.titleLbl.text = alertTitle
+            }
+            switch kind {
+            case .addBalance :
+                self.cancelView.isHidden = false
+                self.titleLbl.isHidden = false
+            default:break
+            }
             DispatchQueue.main.asyncAfter(deadline: Dispatch.DispatchTime.now() + 0.1) { [weak self] in
                 self?.bottomConstraint?.constant = 0
                 UIView.animate(withDuration: 0.6) {
@@ -265,6 +311,13 @@ class AltienoAlert: UIViewController {
         }
     }
     
+    @IBAction func btnCancelTapped(_ sender: UIButton) {
+        
+        hide { _ in
+            self.block??(1,(sender.titleLabel?.text ?? ""))
+        }
+    }
+    
     //
     //
     //
@@ -279,6 +332,20 @@ class AltienoAlert: UIViewController {
     ///   - completion: retuen the index or title of the button
     public func showAlert(with kind : KindOF?,
                           completion : alertCompletionBlock) {
+        Helper.shared.isAlertShown = true
+        self.kind = kind
+        show()
+        block = completion
+    }
+    
+    public func showAlertWithBtn(with kind : KindOF?,
+                                 title:String?,
+                                 cancelBtn:String?,
+                                 okBtn:String?,
+                          completion : alertCompletionBlock) {
+        self.alertTitle = title
+        self.cancelbtnTitle = cancelBtn
+        self.okbtnTitle = okBtn
         Helper.shared.isAlertShown = true
         self.kind = kind
         show()

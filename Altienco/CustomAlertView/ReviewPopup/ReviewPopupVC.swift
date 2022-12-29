@@ -95,7 +95,7 @@ class ReviewPopupVC: UIViewController {
     @IBOutlet weak var mobileNumValue: UILabel!
     
     /// AlertController Completion handler
-    typealias alertCompletionBlock = ((GenerateVoucherResponseObj?,Bool) -> Void)?
+    typealias alertCompletionBlock = ((GenerateVoucherResponseObj?,ConfirmingIntrPINBankVoucherModel?,Bool) -> Void)?
     private var block : alertCompletionBlock?
     
     override func viewDidLoad() {
@@ -182,7 +182,7 @@ class ReviewPopupVC: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
             Helper.shared.playSound()
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-               
+                
                 self?.opupInAniamtion()
             }
             
@@ -234,22 +234,50 @@ class ReviewPopupVC: UIViewController {
         
         self.generateVoucher?.generateVoucher(model: dataModel) { (result,status,msg)   in
             DispatchQueue.main.async { [weak self] in
-                self?.confirmButton.hideLoading()
-                self?.view.isUserInteractionEnabled = true
                 if status == false {
                     Helper.showToast(msg, isAlertView: true)
-                }
-                else{
-                    if let data = result {
-                        self?.hide {_ in
-                            self?.block??(data,true)
+                    self?.confirmButton.hideLoading()
+                    self?.view.isUserInteractionEnabled = true
+                }else {
+                    if result?.isOriginAltienco == 0 {
+                        self?.confirmButton.hideLoading()
+                        self?.view.isUserInteractionEnabled = true
+                        if let data = result {
+                            self?.hide {_ in
+                                self?.block??(data,nil,true)
+                            }
+                            
                         }
                         
+                    }else {
+                        
+                        self?.generateVoucher?.confirmingIntrPINBankVoucher(model: dataModel) { resultconfirm, statusconfirm, msgconfirm in
+                            DispatchQueue.main.async { [weak self] in
+                                self?.confirmButton.hideLoading()
+                                self?.view.isUserInteractionEnabled = true
+                                
+                                if status == false {
+                                    Helper.showToast(msgconfirm, isAlertView: true)
+                                }else {
+                                    self?.hide {_ in
+                                        self?.block??(result,resultconfirm ,true)
+                                    }
+                                }
+                            }
+                            // call new Api
+                        }
                     }
+                    
                 }
+                
             }
+            
+            
         }
     }
+    
+    
+    
     
     @IBAction func homeBuuton(_ sender: Any) {
         hide{_ in        }

@@ -35,8 +35,13 @@ struct VerifyStatusResponce: Codable {
     var retailUnit, statusMessage, validityUnit: String?
     var wholesaleAmount, wholesaleUnit, firstStep_ActivityDate, secondStep_ActivityDate, finalStep_ActivityDate, usageInfo: String?
     var orderId: String?
-
+    var mPIN:String?
+    var voucherId:Int?
+    var walletAmount : Double?
+    var dinominationValue : Int?
     enum CodingKeys: String, CodingKey {
+        
+        case voucherId,mPIN,dinominationValue
         case apiID = "apiId"
         case claimCode, countryName, data
         case cartItemResponseObjDescription = "description"
@@ -48,10 +53,14 @@ struct VerifyStatusResponce: Codable {
         case rechargedMobileNumber
         case referenceID = "referenceId"
         case refundTxnID = "refundTxnId"
-        case retailAmount, retailUnit, statusMessage, validityQuantity, validityUnit, wholesaleAmount, wholesaleUnit, firstStep_ActivityDate, secondStep_ActivityDate, usageInfo
+        case retailAmount, retailUnit, statusMessage, validityQuantity, validityUnit, wholesaleAmount, wholesaleUnit, firstStep_ActivityDate, secondStep_ActivityDate, usageInfo,orderId,walletAmount
     }
 
     init(json: [String: Any]) {
+        self.dinominationValue = json["dinominationValue"] as? Int
+        self.walletAmount = json["walletAmount"] as? Double
+        self.mPIN = json["mPIN"] as? String
+        self.voucherId = json["voucherId"] as? Int
         self.orderId = json["orderId"] as? String
         self.externalID = json["externalId"] as? String
         self.apiID = json["apiId"] as? Int

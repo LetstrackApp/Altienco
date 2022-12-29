@@ -133,7 +133,7 @@ class WalletDenominationVC: FloatingPannelHelper {
         configuration.merchantDisplayName = "Altienco"
         configuration.allowsDelayedPaymentMethods = true
         self.paymentSheet = PaymentSheet(paymentIntentClientSecret: self.paymentIntentRes.first?.paymentIntent ?? "", configuration: configuration)
-
+        
     }
     
     
@@ -306,25 +306,7 @@ class WalletDenominationVC: FloatingPannelHelper {
     
     
     
-    override func successVoucher(mPin: String,
-                        denominationValue : String,
-                        walletBalance: Double,
-                        msgToShare: String,
-                        voucherID: Int,
-                        orderNumber:String?){
-        let viewController: SuccessRechargeVC = SuccessRechargeVC()
-        viewController.denominationValue = denominationValue
-        viewController.mPin = mPin
-        viewController.walletBal = walletBalance
-        viewController.voucherID = voucherID
-        viewController.msgToShare = msgToShare
-        viewController.orderNumber = orderNumber
-        if let topController = UIApplication.topViewController() {
-            topController.navigationController?.popViewController(animated: false)
-            self.navigationController?.pushViewController(viewController, animated: true)
-        }
-        
-    }
+    
     
 }
 

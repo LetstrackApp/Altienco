@@ -22,9 +22,12 @@ class VerifyStatusViewModel {
             "Authorization": "Bearer \(UserDefaults.getToken)",
             "Content-Type": "application/json"
         ]
-        AFWrapper.requestPOSTURL(strURl, params: json, headers: header, success: { (jsondata) in
+        AFWrapper.requestPOSTURL(strURl, params: json,
+                                 headers: header,
+                                 success: { (jsondata) in
             debugPrint("jsondata:", strURl, jsondata as Any)
-            if jsondata?["Message_Code"] as? Bool == true, let resultData = jsondata?["Result"] as? NSDictionary
+            if jsondata?["Message_Code"] as? Bool == true,
+                let resultData = jsondata?["Result"] as? NSDictionary
             {
                 SVProgressHUD.dismiss()
                 if resultData["status"] as? Bool == true {
