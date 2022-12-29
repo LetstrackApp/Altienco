@@ -9,7 +9,7 @@
 import UIKit
 import SVProgressHUD
 
-class IntrSuccessVC: UIViewController {
+class IntrSuccessVC: FloatingPannelHelper {
     var receiptDownload: DownloadRecieptApi?
     
     var isFromHistory = false
@@ -281,8 +281,7 @@ class IntrSuccessVC: UIViewController {
     }
     
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     
     @IBOutlet weak var downloadReceiptPDf: UIView! {

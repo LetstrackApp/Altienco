@@ -29,18 +29,18 @@ class VerifyTokenViewModel {
                     
                 }
             else if  let message = jsondata?["message"] as? String {
-                Helper.showAlertView(message: message)
+                Helper.shared.showAlertView(message: message)
                 complition(nil)
             }
             else {
-                Helper.showAlertView(message: lngConst.supportMsg)
+                Helper.shared.showAlertView(message: lngConst.supportMsg)
                 complition(nil)
             }
 
 
         }) { (Error) in
             if let error = Error{
-                Helper.showAlertView(message: error.debugDescription)
+                Helper.shared.showAlertView(message: error.debugDescription)
             }
             complition(nil)
         }

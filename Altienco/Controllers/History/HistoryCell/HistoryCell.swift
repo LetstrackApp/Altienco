@@ -11,7 +11,13 @@ import UIKit
 class HistoryCell: UITableViewCell {
     
     @IBOutlet weak var repeatContainer: UIView!
-    @IBOutlet weak var repeatRecharge: UIButton!
+    @IBOutlet weak var repeatRecharge: UIButton! {
+        didSet {
+            repeatRecharge.layer.cornerRadius = 8
+            repeatRecharge.titleLabel?.font = UIFont.SF_Regular(14)
+            repeatRecharge.setTitle(lngConst.reOrder, for: .normal)
+        }
+    }
     @IBOutlet weak var rechargeType: UILabel!{
         didSet{
             self.rechargeType.font = UIFont.SF_Medium(14.0)

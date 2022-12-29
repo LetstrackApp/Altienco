@@ -356,10 +356,10 @@ History</string>
                             <rect key="frame" x="0.0" y="143.33333333333331" width="396" height="559.66666666666674"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xM-0n-roO">
-                                    <rect key="frame" x="0.0" y="2" width="396" height="486.66666666666669"/>
+                                    <rect key="frame" x="0.0" y="2" width="396" height="468"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="F2X-dS-V7T">
-                                            <rect key="frame" x="0.0" y="0.0" width="396" height="486.66666666666669"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="396" height="468"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdf-rs-Bcr">
                                                     <rect key="frame" x="0.0" y="0.0" width="396" height="235"/>
@@ -657,19 +657,14 @@ History</string>
                                                     </constraints>
                                                 </view>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3GC-Wz-FQk">
-                                                    <rect key="frame" x="0.0" y="255.00000000000006" width="396" height="231.66666666666669"/>
+                                                    <rect key="frame" x="0.0" y="255.00000000000006" width="396" height="213"/>
                                                     <subviews>
                                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eax-sR-kwF" customClass="FSPagerView" customModule="FSPagerView">
-                                                            <rect key="frame" x="0.0" y="0.0" width="396" height="231.66666666666666"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="396" height="213"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nVB-eH-0Oy" customClass="FSPageControl" customModule="FSPagerView">
-                                                            <rect key="frame" x="0.0" y="201.66666666666663" width="396" height="30"/>
+                                                            <rect key="frame" x="0.0" y="183" width="396" height="30"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="PAB-qU-ZWd"/>
@@ -727,7 +722,7 @@ History</string>
             <color key="tintColor" red="0.0" green="0.64705882349999999" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Mal-Rr-SQX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="bottom" multiplier="100/480" id="64M-W1-Vub"/>
-                <constraint firstItem="3GC-Wz-FQk" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.25" id="6Gb-qX-058"/>
+                <constraint firstItem="3GC-Wz-FQk" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.23" id="6Gb-qX-058"/>
                 <constraint firstAttribute="trailing" secondItem="lNS-E6-ahl" secondAttribute="trailing" id="MBX-WL-0qS"/>
                 <constraint firstItem="Mal-Rr-SQX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="dBT-Tc-vhH"/>
                 <constraint firstItem="lNS-E6-ahl" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.3" id="lQM-Rs-SZ2"/>

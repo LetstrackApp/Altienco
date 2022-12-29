@@ -19,6 +19,7 @@
 		044BB5DF29547A7900D5A666 /* PaymentSucessPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BB5DD29547A7900D5A666 /* PaymentSucessPopupVC.swift */; };
 		044BB5E029547A7900D5A666 /* PaymentSucessPopupVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044BB5DE29547A7900D5A666 /* PaymentSucessPopupVC.xib */; };
 		044BB5E22954A7D500D5A666 /* DownloadRecieptApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BB5E12954A7D400D5A666 /* DownloadRecieptApi.swift */; };
+		0464E40B295D69BE00323ECA /* errorbuzz.mpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0464E40A295D69BE00323ECA /* errorbuzz.mpeg */; };
 		04661370294E2F9500EC444B /* alertSound.mpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0466136F294E2F9500EC444B /* alertSound.mpeg */; };
 		04661374294E398E00EC444B /* txnSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = 04661373294E398E00EC444B /* txnSuccess.json */; };
 		047F3FEC294F7EA0000377FF /* OperatorInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F3FEA294F7EA0000377FF /* OperatorInfoCell.swift */; };
@@ -291,6 +292,7 @@
 		044BB5DD29547A7900D5A666 /* PaymentSucessPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSucessPopupVC.swift; sourceTree = "<group>"; };
 		044BB5DE29547A7900D5A666 /* PaymentSucessPopupVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentSucessPopupVC.xib; sourceTree = "<group>"; };
 		044BB5E12954A7D400D5A666 /* DownloadRecieptApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadRecieptApi.swift; sourceTree = "<group>"; };
+		0464E40A295D69BE00323ECA /* errorbuzz.mpeg */ = {isa = PBXFileReference; lastKnownFileType = video.mpeg; path = errorbuzz.mpeg; sourceTree = "<group>"; };
 		0466136F294E2F9500EC444B /* alertSound.mpeg */ = {isa = PBXFileReference; lastKnownFileType = video.mpeg; path = alertSound.mpeg; sourceTree = "<group>"; };
 		04661373294E398E00EC444B /* txnSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = txnSuccess.json; sourceTree = "<group>"; };
 		047F3FEA294F7EA0000377FF /* OperatorInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorInfoCell.swift; sourceTree = "<group>"; };
@@ -616,6 +618,7 @@
 		0466136E294E2F6E00EC444B /* sound */ = {
 			isa = PBXGroup;
 			children = (
+				0464E40A295D69BE00323ECA /* errorbuzz.mpeg */,
 				0466136F294E2F9500EC444B /* alertSound.mpeg */,
 			);
 			path = sound;
@@ -1755,6 +1758,7 @@
 				C6A6B6FE28C581CD00BCF7E2 /* ReviewPopupVC.xib in Resources */,
 				04C638722955A8370066FB8E /* RecentTXNVC.xib in Resources */,
 				049F8756294D971400B3ED6B /* AddAndShowBalance.xib in Resources */,
+				0464E40B295D69BE00323ECA /* errorbuzz.mpeg in Resources */,
 				C6A103EE28B35549000E50A1 /* Poppins-Regular.ttf in Resources */,
 				C6AF1C8D293FB1F700AF9D59 /* SuccessCallinCardVC.xib in Resources */,
 				C6AF1C75293F2D4B00AF9D59 /* ReferAppVC.xib in Resources */,

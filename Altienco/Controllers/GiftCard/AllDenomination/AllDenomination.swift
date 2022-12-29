@@ -7,8 +7,8 @@
 //
 
 import UIKit
-
-class AllDenomination: UIViewController{
+import SkeletonView
+class AllDenomination: FloatingPannelHelper{
     var SelectedIndex = -1
     var countryModel : SearchCountryModel? = nil
     var language = "EN"
@@ -60,7 +60,6 @@ class AllDenomination: UIViewController{
             self.viewContainer.clipsToBounds=true
         }
     }
-    @IBOutlet weak var collectionHeight: NSLayoutConstraint!
     @IBOutlet weak var logoImage: UIImageView!{
         didSet{
             logoImage.layer.cornerRadius = 5.0
@@ -69,6 +68,9 @@ class AllDenomination: UIViewController{
             logoImage.clipsToBounds=true
         }
     }
+    
+    
+    @IBOutlet weak var collectionviewHeight: NSLayoutConstraint!
     @IBOutlet weak var denominationCollection: UICollectionView!
     @IBOutlet weak var detailContainer: UIView!
     @IBOutlet weak var detailLabel: UILabel!
@@ -81,6 +83,7 @@ class AllDenomination: UIViewController{
     @IBOutlet weak var generateGiftCard: UIButton!{
         didSet{
             self.generateGiftCard.setupNextButton(title: "GENERATE GIFT CARD")
+            self.generateGiftCard.titleLabel?.font = UIFont.SF_Regular(15)
         }
     }
     @IBAction func redirectProfile(_ sender: Any) {
@@ -89,8 +92,7 @@ class AllDenomination: UIViewController{
     }
     
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,11 +135,11 @@ class AllDenomination: UIViewController{
     }
     
     
+    @IBOutlet weak var textView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = FixedCardViewModel()
         self.denominationCollection.register(UINib(nibName: "CollectionViewCell", bundle:nil), forCellWithReuseIdentifier: "CollectionViewCell")
-        self.collectionHeight.constant = 0.0
         self.initiateModel()
         self.setupView()
         // Do any additional setup after loading the view.
@@ -158,22 +160,36 @@ class AllDenomination: UIViewController{
         if let details = self.countryModel?.countryISOCode {
             countryCode = details
         }
-        viewModel?.getFixedGiftCards(countryCode: countryCode ?? "", language: "EN", planType: self.planType, operatorID: self.operatorID)
-        viewModel?.searchFixedGiftCard.bind(listener: { (val) in
-            self.filteredData = val
-            let screenWidth = self.screen.size.width
-            let height = (screenWidth/4)
-            if val.isEmpty == false{
-                if (val.count % 2) == 0{
-                    self.collectionHeight.constant = CGFloat(Int(height) * ( (val.count / 2)))
-                }else{
-                    self.collectionHeight.constant = CGFloat(Int(height) *  ((val.count / 2) + 1))
-                }
-                
-                self.SelectedIndex = 0
-                self.showDescription()
+        denominationCollection.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor.lightGray.withAlphaComponent(0.3)),
+                                                            animation: nil,
+                                                            transition: .crossDissolve(0.26))
+
+        viewModel?.getFixedGiftCards(countryCode: countryCode,
+                                     language: "EN",
+                                     planType: self.planType,
+                                     operatorID: self.operatorID) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.denominationCollection.stopSkeletonAnimation()
+                self?.denominationCollection.hideSkeleton()
+                self?.denominationCollection.reloadData()
+                self?.view.layoutIfNeeded()
             }
-            self.denominationCollection.reloadData()
+        }
+        
+
+        viewModel?.searchFixedGiftCard.bind(listener: { [weak self] (val) in
+            self?.filteredData = val
+            self?.denominationCollection.reloadData()
+            if self?.filteredData.count ?? 0 > 0 {
+                self?.SelectedIndex = 0
+                self?.showDescription()
+                let height = self?.denominationCollection.collectionViewLayout.collectionViewContentSize.height
+                self?.collectionviewHeight.constant = height ?? 0
+            }else {
+                self?.collectionviewHeight.constant = 100
+            }
+            self?.denominationCollection.reloadData()
+            self?.view.layoutIfNeeded()
         })
     }
     
@@ -187,6 +203,7 @@ class AllDenomination: UIViewController{
                 info = info + "\n\(usageInfo[i])"
             }
             self.moreText.text = info
+            self.textView.text = info
             self.viewMoreContainer.isHidden = false
         }
         else{
@@ -239,7 +256,9 @@ class AllDenomination: UIViewController{
         }
     }
     
-    func successVoucher(denominationVal: Double, confirmObj: ConfirmIntrResponseObj, giftCardName: String){
+    func successVoucher(denominationVal: Double,
+                        confirmObj: ConfirmIntrResponseObj,
+                        giftCardName: String){
         let viewController: SuccessGiftCardVC = SuccessGiftCardVC()
         viewController.denominationAmount = denominationVal
         viewController.countryName = self.countryModel?.countryName ?? ""
@@ -259,7 +278,8 @@ class AllDenomination: UIViewController{
         }
         
     }
-    func callReviewPopup(PlanType: Int, selectedPlan : FixedGiftResponseObj){
+    func callReviewPopup(PlanType: Int,
+                         selectedPlan : FixedGiftResponseObj){
         ReviewGiftCardVC.initialization().showAlert(usingModel: selectedPlan,
                                                     planType: planType) { result, isSuscess in
             if isSuscess == true {
@@ -294,7 +314,13 @@ class AllDenomination: UIViewController{
 //        }}}
 
 
-extension AllDenomination: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension AllDenomination: SkeletonCollectionViewDataSource,
+                           SkeletonCollectionViewDelegate ,
+                           UICollectionViewDelegateFlowLayout {
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "CollectionViewCell"
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.filteredData.count
     }

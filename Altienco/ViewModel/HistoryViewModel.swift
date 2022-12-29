@@ -13,8 +13,8 @@ import SVProgressHUD
 class HistoryViewModel {
     
     var historyList : Box<[HistoryResponseObj]> = Box([])
-    func getHistory(model : HistoryRequestObj) {
-        SVProgressHUD.show()
+    func getHistory(model : HistoryRequestObj,
+                    completion:@escaping(Bool)->Void) {
         let data = try? JSONEncoder().encode(model)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         let strURl = subURL.history
@@ -24,7 +24,7 @@ class HistoryViewModel {
         ]
         AFWrapper.requestPOSTURL(strURl, params: json, headers: header, success: { (jsondata) in
             SVProgressHUD.dismiss()
-            debugPrint("jsondata:", strURl, jsondata as Any)
+//            debugPrint("jsondata:", strURl, jsondata as Any)
             var historyData = [HistoryResponseObj]()
             if jsondata?["Message_Code"] as? Bool == true, let resultData = jsondata?["Result"] as? NSDictionary
             {
@@ -39,6 +39,7 @@ class HistoryViewModel {
                     Helper.showToast((resultData["message"] as? String), isAlertView: true)
                 }
             }
+            completion(true)
 
 //                else{
 //                    Helper.showToast((jsondata?["Message_Code"] as? String)!, delay:Helper.DELAY_LONG)
@@ -49,6 +50,8 @@ class HistoryViewModel {
                 SVProgressHUD.dismiss()
                 Helper.showToast(error , isAlertView: true)
             }
+            completion(false)
+
         }
     }
 }

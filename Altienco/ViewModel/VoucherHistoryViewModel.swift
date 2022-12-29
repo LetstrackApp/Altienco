@@ -13,7 +13,7 @@ import SVProgressHUD
 class VoucherHistoryViewModel {
     
     var historyList : Box<[VoucherHistoryResponseObj]> = Box([])
-    func getHistory(model : VoucherHistoryRequestObj) {
+    func getHistory(model : VoucherHistoryRequestObj,completion:@escaping(Bool)->Void) {
 //        SVProgressHUD.show()
         let data = try? JSONEncoder().encode(model)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
@@ -40,13 +40,13 @@ class VoucherHistoryViewModel {
                 }
                 
             }
+            completion(true)
 
-                else{
-//                    Helper.showToast((jsondata?["message"] as? String)!, delay:Helper.DELAY_LONG)
-                }
 
         }) { (Error) in
             SVProgressHUD.dismiss()
+            completion(false)
+
             if let error = Error{
 //                Helper.showToast(error , delay:Helper.DELAY_LONG)
             }

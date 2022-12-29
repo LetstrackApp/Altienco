@@ -231,6 +231,9 @@
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <outlet property="dataSource" destination="-1" id="waX-dg-9Yf"/>
                                                         <outlet property="delegate" destination="-1" id="kAu-AW-27m"/>
@@ -255,6 +258,9 @@
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
                                 </stackView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -264,6 +270,9 @@
                                 <constraint firstItem="Z9A-Jt-OyA" firstAttribute="leading" secondItem="UvY-VA-luY" secondAttribute="leading" id="mIi-h6-1Pq"/>
                                 <constraint firstAttribute="trailing" secondItem="Z9A-Jt-OyA" secondAttribute="trailing" id="rv3-j8-uTg"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -273,6 +282,9 @@
                         <constraint firstAttribute="trailing" secondItem="UvY-VA-luY" secondAttribute="trailing" constant="15" id="ZBF-CR-r3U"/>
                         <constraint firstAttribute="bottom" secondItem="UvY-VA-luY" secondAttribute="bottom" id="tvR-id-96D"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="SeC-mt-FUY"/>
@@ -289,6 +301,9 @@
                 <constraint firstItem="fcV-W0-GPB" firstAttribute="top" secondItem="OIm-bm-m8S" secondAttribute="bottom" multiplier="100/480" id="wDd-nv-cJ5"/>
                 <constraint firstItem="fcV-W0-GPB" firstAttribute="leading" secondItem="OIm-bm-m8S" secondAttribute="leading" id="xDb-jk-E78"/>
             </constraints>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="121.73913043478262" y="-14.0625"/>
         </view>
     </objects>

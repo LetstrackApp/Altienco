@@ -82,7 +82,7 @@ class OperatorListVC: FloatingPannelHelper {
     @IBOutlet weak var addButton: UIButton!{
         didSet{
             self.addButton.setTitle(lngConst.add_Balance, for: .normal)
-
+            
             self.addButton.setupNextButton(title: lngConst.add_Balance,space: 1.6)
         }
     }
@@ -126,8 +126,7 @@ class OperatorListVC: FloatingPannelHelper {
     
     
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -230,7 +229,12 @@ class OperatorListVC: FloatingPannelHelper {
                                                       pageNum: self.pageNum,
                                                       pageSize: self.pageSize,
                                                       transactionTypeId: 1)
-            voucherHistory?.getHistory(model: model)
+            
+            voucherHistory?.getHistory(model: model) { _ in
+                
+            }
+            
+            
             voucherHistory?.historyList.bind(listener: { (data) in
                 if data.isEmpty == false{
                     DispatchQueue.main.async {
@@ -276,22 +280,22 @@ class OperatorListVC: FloatingPannelHelper {
         self.navigationController?.popViewController(animated: true)
     }
     
-//    func successVoucher(mPin: String,
-//                        denominationValue : String,
-//                        walletBalance: Double,
-//                        msgToShare: String,
-//                        voucherID: Int,
-//                        orderNumber:String?) {
-//        let viewController: SuccessRechargeVC = SuccessRechargeVC()
-//        viewController.denominationValue = denominationValue
-//        viewController.mPin = mPin
-//        viewController.walletBal = walletBalance
-//        viewController.voucherID = voucherID
-//        viewController.msgToShare = msgToShare
-//        viewController.orderNumber = orderNumber
-//        self.navigationController?.pushViewController(viewController, animated: true)
-//        
-//    }
+    //    func successVoucher(mPin: String,
+    //                        denominationValue : String,
+    //                        walletBalance: Double,
+    //                        msgToShare: String,
+    //                        voucherID: Int,
+    //                        orderNumber:String?) {
+    //        let viewController: SuccessRechargeVC = SuccessRechargeVC()
+    //        viewController.denominationValue = denominationValue
+    //        viewController.mPin = mPin
+    //        viewController.walletBal = walletBalance
+    //        viewController.voucherID = voucherID
+    //        viewController.msgToShare = msgToShare
+    //        viewController.orderNumber = orderNumber
+    //        self.navigationController?.pushViewController(viewController, animated: true)
+    //
+    //    }
     @IBAction func redirectHome(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
@@ -311,15 +315,15 @@ class OperatorListVC: FloatingPannelHelper {
             currency = model?.currency ?? ""
             denomination = model?.voucherAmount ?? 0
             operatorID = model?.operatorID ?? 0
-//            let viewController: ReviewPopupVC = ReviewPopupVC()
-//            viewController.delegate = self
+            //            let viewController: ReviewPopupVC = ReviewPopupVC()
+            //            viewController.delegate = self
             let reviewPopupModel = ReviewPopupModel.init(mobileNumber: nil,
-                                              operatorID: operatorID,
-                                              denomination: denomination,
-                                              operatorTitle: operatorTitle,
-                                              planName: planName,
-                                              currency: currency,
-                                              isEdit:false,
+                                                         operatorID: operatorID,
+                                                         denomination: denomination,
+                                                         operatorTitle: operatorTitle,
+                                                         planName: planName,
+                                                         currency: currency,
+                                                         isEdit:false,
                                                          transactionTypeId: TransactionTypeId.PhoneRecharge.rawValue)
             ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result, status in
                 DispatchQueue.main.async {
@@ -333,9 +337,9 @@ class OperatorListVC: FloatingPannelHelper {
                     }
                 }
             }
-//            viewController.reviewPopupModel = reviewPopupModel
-//            viewController.modalPresentationStyle = .overFullScreen
-//            self.navigationController?.present(viewController, animated: true)
+            //            viewController.reviewPopupModel = reviewPopupModel
+            //            viewController.modalPresentationStyle = .overFullScreen
+            //            self.navigationController?.present(viewController, animated: true)
         }
     }
     func callOperatorPlans(operatorID: Int, imageURL: String, OperatorName: String){
@@ -440,7 +444,7 @@ extension OperatorListVC: UISearchBarDelegate {
         }else {
             emptyMsg.isHidden = false
             emptyMsg.text = "Record not found!"
-
+            
         }
         
         //return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
@@ -448,9 +452,9 @@ extension OperatorListVC: UISearchBarDelegate {
         operatorCollection.reloadData()
     }
     
-     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.showsCancelButton = true
-
+        
         return true
     }
     

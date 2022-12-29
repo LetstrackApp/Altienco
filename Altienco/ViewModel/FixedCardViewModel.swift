@@ -14,17 +14,18 @@ class FixedCardViewModel {
     
     var searchFixedGiftCard : Box<[FixedGiftResponseObj]> = Box([])
     
-    func getFixedGiftCards(countryCode: String, language: String, planType: Int, operatorID: Int) {
+    func getFixedGiftCards(countryCode: String, language: String, planType: Int, operatorID: Int,completion:@escaping(Bool)->Void) {
         let strURL = subURL.searchCardPlans + "/\(countryCode)/\(operatorID)/\(planType)/\(language)"
-        SVProgressHUD.show()
+//        SVProgressHUD.show()
         let header : HTTPHeaders = [
             "Authorization": "Bearer \(UserDefaults.getToken)",
             "Content-Type": "application/json"
         ]
         AFWrapper.requestGETURL(strURL, headers: header, success: {
             (JSONResponse) -> Void in
-            debugPrint(JSONResponse)
+//            debugPrint(JSONResponse)
             SVProgressHUD.dismiss()
+            completion(true)
             if let data = JSONResponse as? NSDictionary {
                 var giftCardList = [FixedGiftResponseObj]()
                 if data["Message_Code"] as? Bool == true, let result = data["Result"] as? NSDictionary
@@ -40,6 +41,7 @@ class FixedCardViewModel {
             }
         }) {
             (error) -> Void in
+            completion(false)
             debugPrint(error.localizedDescription)
         }
     }

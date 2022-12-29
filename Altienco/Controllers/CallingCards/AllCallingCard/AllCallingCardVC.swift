@@ -111,8 +111,7 @@ class AllCallingCardVC: FloatingPannelHelper {
     
     
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     
     override func viewWillAppear(_ animated: Bool) {

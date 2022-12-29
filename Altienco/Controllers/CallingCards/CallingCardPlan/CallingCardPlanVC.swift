@@ -9,8 +9,9 @@
 import UIKit
 import StripeCore
 
-class CallingCardPlanVC: UIViewController {
+class CallingCardPlanVC: FloatingPannelHelper {
     
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     var OperatorID = 0
     var OperatorName = ""
     var OperatorPlanID = 0
@@ -137,8 +138,7 @@ class CallingCardPlanVC: UIViewController {
     
     
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -205,9 +205,21 @@ class CallingCardPlanVC: UIViewController {
                 self.allOperator = operatorList ?? []
                 DispatchQueue.main.async {
                     self.operatorPlansCollection.reloadData()
-                }}
+                    if self.allOperator.count > 0 {
+                        let height = self.operatorPlansCollection.collectionViewLayout.collectionViewContentSize.height
+                        self.collectionViewHeight.constant = height 
+                    }else {
+                        self.collectionViewHeight.constant = 100
+                    }
+                    self.operatorPlansCollection.reloadData()
+                }
+                
+            }
             else{
-                self.showAlert(withTitle: "", message: message)
+                self.nextButton.isHidden = true
+                self.collectionViewHeight.constant = 100
+                Helper.showToast(message,isAlertView: true)
+              //  self.showAlert(withTitle: "", message: message)
             }
             self.allOperator.count > 0 ? (self.noDataLabelText.isHidden = true) : (self.noDataLabelText.isHidden = false)
         }
@@ -283,11 +295,12 @@ class CallingCardPlanVC: UIViewController {
                     }}
             }
         } else{
-            self.showAlert(withTitle: "", message: "Please select denomination!")
+            Helper.shared.showAlertView(message: "Please select denomination!")
+
         }
     }
     
-    func successVoucher(mPin: String,
+    override func successVoucher(mPin: String,
                         denominationValue : String,
                         walletBalance: Double,
                         msgToShare: String,
@@ -357,7 +370,7 @@ class CallingCardPlanVC: UIViewController {
 
 extension CallingCardPlanVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.allOperator.count ?? 0
+        return self.allOperator.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -377,7 +390,7 @@ extension CallingCardPlanVC: UICollectionViewDelegate, UICollectionViewDataSourc
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row < self.allOperator.count ?? 0{
+        if indexPath.row < self.allOperator.count {
             DispatchQueue.main.async {
                 self.SelectedIndex = indexPath.row
                 self.operatorPlansCollection.reloadData()

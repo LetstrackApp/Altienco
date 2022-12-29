@@ -141,28 +141,12 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thc-23-0Em">
                                                         <rect key="frame" x="184.5" y="0.0" width="92.5" height="40"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BUY AGAIN" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3Q-10-B68">
-                                                                <rect key="frame" x="0.0" y="11.5" width="74.5" height="17"/>
-                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
-                                                                <color key="textColor" red="0.69019607839999997" green="0.28627450980000002" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </label>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_detail_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="UEm-4X-YAp">
-                                                                <rect key="frame" x="77.5" y="12.5" width="15" height="15"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="15" id="D8w-aE-PFh"/>
-                                                                    <constraint firstAttribute="height" constant="15" id="zMP-en-b8E"/>
-                                                                </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </imageView>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sHk-Gb-7Fg">
-                                                                <rect key="frame" x="0.0" y="0.0" width="92.5" height="40"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sHk-Gb-7Fg">
+                                                                <rect key="frame" x="20" y="5" width="72.5" height="30"/>
+                                                                <color key="backgroundColor" red="0.0078431372550000003" green="0.1647058824" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="Re-Order"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
@@ -170,15 +154,10 @@
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstItem="l3Q-10-B68" firstAttribute="centerY" secondItem="thc-23-0Em" secondAttribute="centerY" id="EQl-y4-Ljy"/>
-                                                            <constraint firstAttribute="trailing" secondItem="UEm-4X-YAp" secondAttribute="trailing" id="KdT-M7-uon"/>
-                                                            <constraint firstAttribute="trailing" secondItem="sHk-Gb-7Fg" secondAttribute="trailing" id="Xtr-x4-wsz"/>
-                                                            <constraint firstAttribute="bottom" secondItem="sHk-Gb-7Fg" secondAttribute="bottom" id="ay3-8e-CoE"/>
-                                                            <constraint firstItem="sHk-Gb-7Fg" firstAttribute="leading" secondItem="thc-23-0Em" secondAttribute="leading" id="fFJ-tH-d2f"/>
-                                                            <constraint firstItem="UEm-4X-YAp" firstAttribute="leading" secondItem="l3Q-10-B68" secondAttribute="trailing" constant="3" id="mT1-9U-BII"/>
-                                                            <constraint firstItem="UEm-4X-YAp" firstAttribute="centerY" secondItem="thc-23-0Em" secondAttribute="centerY" id="q3B-ec-aRA"/>
-                                                            <constraint firstItem="l3Q-10-B68" firstAttribute="leading" secondItem="thc-23-0Em" secondAttribute="leading" id="s6R-n1-0wa"/>
-                                                            <constraint firstItem="sHk-Gb-7Fg" firstAttribute="top" secondItem="thc-23-0Em" secondAttribute="top" id="wAj-yK-xRX"/>
+                                                            <constraint firstItem="sHk-Gb-7Fg" firstAttribute="top" secondItem="thc-23-0Em" secondAttribute="top" constant="5" id="9PN-bp-jlf"/>
+                                                            <constraint firstItem="sHk-Gb-7Fg" firstAttribute="leading" secondItem="thc-23-0Em" secondAttribute="leading" constant="20" id="LO2-tZ-e2B"/>
+                                                            <constraint firstAttribute="trailing" secondItem="sHk-Gb-7Fg" secondAttribute="trailing" id="Si4-Vp-eV2"/>
+                                                            <constraint firstAttribute="bottom" secondItem="sHk-Gb-7Fg" secondAttribute="bottom" constant="5" id="y39-og-Tt2"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
@@ -251,7 +230,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ic_detail_arrow" width="21" height="16.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

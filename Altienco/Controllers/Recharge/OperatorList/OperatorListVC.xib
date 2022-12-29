@@ -347,7 +347,7 @@
                                                                                     <rect key="frame" x="0.0" y="0.0" width="91.666666666666671" height="60"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REPEAT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1Q-Kg-Mfo">
-                                                                                            <rect key="frame" x="0.0" y="23" width="63.666666666666664" height="14"/>
+                                                                                            <rect key="frame" x="0.0" y="21.333333333333314" width="63.666666666666664" height="17"/>
                                                                                             <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                             <color key="textColor" red="0.69019607839999997" green="0.28627450980000002" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                             <nil key="highlightedColor"/>
@@ -532,8 +532,11 @@
         </view>
     </objects>
     <designables>
+        <designable name="HOk-5k-Ifi">
+            <size key="intrinsicContentSize" width="69.666666666666671" height="26"/>
+        </designable>
         <designable name="iSG-MM-pr6">
-            <size key="intrinsicContentSize" width="74" height="21"/>
+            <size key="intrinsicContentSize" width="84.333333333333329" height="25.333333333333332"/>
         </designable>
     </designables>
     <resources>

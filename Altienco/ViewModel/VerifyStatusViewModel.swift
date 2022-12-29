@@ -27,12 +27,13 @@ class VerifyStatusViewModel {
             if jsondata?["Message_Code"] as? Bool == true, let resultData = jsondata?["Result"] as? NSDictionary
             {
                 SVProgressHUD.dismiss()
-                if resultData["status"] as? Bool == true{
+                if resultData["status"] as? Bool == true {
                     if let data = resultData["data"] as! NSDictionary? {
                         let resultData = VerifyStatusResponce.init(json: data as! [String : Any])
                         complition(resultData, true)
                     }
                     else{
+                        Helper.showToast((resultData["message"] as? String), isAlertView: true)
                         complition(nil, false)
                     }
                 }

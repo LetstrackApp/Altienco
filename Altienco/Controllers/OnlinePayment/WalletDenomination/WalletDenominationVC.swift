@@ -9,7 +9,7 @@
 import UIKit
 import StripePaymentSheet
 import SkeletonView
-class WalletDenominationVC: UIViewController {
+class WalletDenominationVC: FloatingPannelHelper {
     
     
     @IBOutlet weak var collectiviewHeight: NSLayoutConstraint!
@@ -123,13 +123,17 @@ class WalletDenominationVC: UIViewController {
     }
     
     func InitializeStripe(){
+        self.nextButton.isEnabled = true
+        self.nextButton.backgroundColor = UIColor.init(0x022a72)
+    }
+    
+    func enablePaymentSheet() {
         STPAPIClient.shared.publishableKey = self.paymentIntentRes.first?.publishableKey
         var configuration = PaymentSheet.Configuration()
         configuration.merchantDisplayName = "Altienco"
         configuration.allowsDelayedPaymentMethods = true
         self.paymentSheet = PaymentSheet(paymentIntentClientSecret: self.paymentIntentRes.first?.paymentIntent ?? "", configuration: configuration)
-        self.nextButton.isEnabled = true
-        self.nextButton.backgroundColor = UIColor.init(0x022a72)
+
     }
     
     
@@ -146,6 +150,7 @@ class WalletDenominationVC: UIViewController {
     
     @objc func didTapCheckoutButton() {
         showButtonloading()
+        enablePaymentSheet()
         // MARK: Start the checkout process
         paymentSheet?.present(from: self) { paymentResult in
             // MARK: Handle the payment result
@@ -301,7 +306,7 @@ class WalletDenominationVC: UIViewController {
     
     
     
-    func successVoucher(mPin: String,
+    override func successVoucher(mPin: String,
                         denominationValue : String,
                         walletBalance: Double,
                         msgToShare: String,
@@ -421,8 +426,7 @@ extension WalletDenominationVC {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     
     func callFailureScreen(){

@@ -16,7 +16,6 @@ class TransactionHistoryViewModel {
     func getTransactionHistory(model : HistoryRequestObj,
                                complition : @escaping([HistoryResponseObj]?,
                                                       Bool) -> Void)->Void{
-        SVProgressHUD.show()
         let data = try? JSONEncoder().encode(model)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         let strURl = subURL.transactionHistory

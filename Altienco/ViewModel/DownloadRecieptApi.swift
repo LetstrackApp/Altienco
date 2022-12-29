@@ -36,19 +36,20 @@ class DownloadRecieptApi {
         let header : HTTPHeaders = [
             "Authorization": "Bearer \(UserDefaults.getToken)",
             "Content-Type":"application/json"]
-        AFWrapper.requestPOSTURL(strURl, params: dict,
+        AFWrapper.requestPOSTURL(strURl, isDownloadInvoice: true,
+                                 params: dict,
                                  headers: header,
                                  success: { (jsondata) in
             debugPrint("jsondata:", strURl, jsondata as Any)
             
-            if jsondata?["Message_Code"] as? Int == 1,
-               let result = jsondata?["Result"] as? [String : Any],
+            if jsondata?["message_Code"] as? Int == 1,
+               let result = jsondata?["result"] as? [String : Any],
                let data = (result["data"] as? NSArray)?.firstObject as? [String : Any],
                let invoiceLink = data["invoiceLink"]  as? String{
                 SVProgressHUD.show(withStatus: "Preparing...")
 
                 self.invoiceLink = invoiceLink
-                self.orderId = data["OrderId"]  as? String
+                self.orderId = orderId
                 if let _ = URL(string: invoiceLink) {
                     self.btnTapped()
                     completion(invoiceLink)
@@ -59,7 +60,7 @@ class DownloadRecieptApi {
                 
             }
             else{
-                Helper.showToast((jsondata?["Message"] as? String) ?? lngConst.supportMsg,isAlertView: true)
+                Helper.showToast((jsondata?["message"] as? String) ?? lngConst.supportMsg,isAlertView: true)
                 completion(nil)
                 SVProgressHUD.dismiss()
             }
@@ -128,22 +129,33 @@ class DownloadRecieptApi {
                     }
                 }
             } else {
-                print("document was not found")
-                showAlert()
+                
+                
+                AltienoAlert.initialization().showAlert(with: .other("document was not found")) { index, _ in
+
+                }
+                
             }
         }
     }
     
-    func showAlert() {
-        if let controller = UIApplication.topViewController() {
-            let alertController = UIAlertController(title: "Error", message: "Document was not found!", preferredStyle: .alert)
-            let defaultAction = UIAlertAction.init(title: "ok", style: UIAlertAction.Style.default, handler: nil)
-            alertController.addAction(defaultAction)
-            controller.present(alertController, animated: true, completion: nil)
-        }
-        
-    }
+
 }
 
 
 
+
+
+/*
+ 
+ New api Url: https://testnode.altienco.com/api/confirmingIntrPINBankVoucher
+
+ Request: {"langCode":"en","currency":"£","dinominationValue":"15","customerId":"2","operatorId":"3","planName":"P2122", "transactionTypeId" : 2 }
+ 
+ https://testnode.altienco.com/api/verifyCallbackStatus
+
+ Request:
+ {
+     "externalId": "733552889139388500",
+     "apiId": "2237656746",
+     "con*/

@@ -8,8 +8,8 @@
 
 import UIKit
 
-class RangeCardVC: UIViewController {
-
+class RangeCardVC: FloatingPannelHelper {
+    
     var countryModel : SearchCountryModel? = nil
     var language = "EN"
     var planType = 2
@@ -135,8 +135,7 @@ class RangeCardVC: UIViewController {
     }
     
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -186,7 +185,7 @@ class RangeCardVC: UIViewController {
             self.logoImage.image = UIImage(named: "ic_operatorLogo")
         }
         
-    
+        
     }
     
     func showDescription(){
@@ -207,13 +206,13 @@ class RangeCardVC: UIViewController {
     @IBAction func showMoreDesc(_ sender: Any) {
         if self.showMoreClicked == false{  self.showMoreClicked = true
             self.moreTextContainer.isHidden = false
-//            self.descActionText.text = "Hide"
+            //            self.descActionText.text = "Hide"
         }else{
             self.showMoreClicked = false
             self.moreTextContainer.isHidden = true
-//            self.descActionText.text = "View more"
+            //            self.descActionText.text = "View more"
         }
-         
+        
     }
     
     func initiateModel() {
@@ -267,11 +266,11 @@ class RangeCardVC: UIViewController {
     @IBAction func reviewRangePlan(_ sender: Any) {
         
         if self.currentValue <= (filteredData.first?.retailAmount?.max ?? 0) && self.currentValue >= (filteredData.first?.retailAmount?.min ?? 0){
-        DispatchQueue.main.async {
-            if let selectedCountry = self.countryModel{
-            if let selectedPlan = self.viewModel?.searchRangeGiftCard.value.first{
-                self.callSuccessPopup(planTypeID: 2, selectedRangePlan: selectedPlan, selectedCountry: selectedCountry)
-            }}
+            DispatchQueue.main.async {
+                if let selectedCountry = self.countryModel{
+                    if let selectedPlan = self.viewModel?.searchRangeGiftCard.value.first{
+                        self.callSuccessPopup(planTypeID: 2, selectedRangePlan: selectedPlan, selectedCountry: selectedCountry)
+                    }}
             }
         }else{
             self.showAlert(withTitle: "Alert", message: "Please Enter Valid Amount!")
@@ -286,32 +285,20 @@ class RangeCardVC: UIViewController {
         }
     }
     
-    func callSuccessPopup(planTypeID: Int, selectedRangePlan : RangeGiftCardResponse, selectedCountry: SearchCountryModel){
-    let viewController: ReviewRangeCardVC = ReviewRangeCardVC()
-    viewController.delegate = self
-    viewController.planType = planTypeID
-    viewController.selectedRangePlan = selectedRangePlan
-    viewController.retailAmount = self.currentValue
-    viewController.selectedRangePlan = selectedRangePlan
-    viewController.countryModel = selectedCountry
-    viewController.modalPresentationStyle = .overFullScreen
-    self.navigationController?.present(viewController, animated: true)
+    func callSuccessPopup(planTypeID: Int,
+                          selectedRangePlan : RangeGiftCardResponse,
+                          selectedCountry: SearchCountryModel) {
+        let viewController: ReviewRangeCardVC = ReviewRangeCardVC()
+        viewController.delegate = self
+        viewController.planType = planTypeID
+        viewController.selectedRangePlan = selectedRangePlan
+        viewController.retailAmount = self.currentValue
+        viewController.selectedRangePlan = selectedRangePlan
+        viewController.countryModel = selectedCountry
+        viewController.modalPresentationStyle = .overFullScreen
+        self.navigationController?.present(viewController, animated: true)
     }
-//    {
-//        let object = ReviewRangeCardVC.initialization()
-//        object.showAlert(usingModel: planTypeID, selectedRangePlan: selectedRangePlan, currentAmount: self.currentValue, selectedCountry: selectedCountry) { (status, val) in
-//            if status == true, let data = val{
-//                self.setupWalletBal(walletBal: val?.walletAmount ?? 0.0)
-//                self.successVoucher(denominationVal: self.currentValue, confirmObj: data, giftCardName: selectedRangePlan.operatorName ?? "")
-//            }
-//            else{
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-//                    if let topController = UIApplication.topViewController() {
-//                        topController.navigationController?.popViewController(animated: false)
-//                    }
-//                })
-//            }}
-//    }
+    
     
     
     func successVoucher(denominationVal: Double, confirmObj: ConfirmIntrResponseObj, giftCardName: String){
@@ -333,7 +320,7 @@ extension RangeCardVC: BackTOGiftCardDelegate {
         if dismiss, let data = result{
             self.setupWalletBal(walletBal: data.walletAmount ?? 0.0)
             if let selectedPlan = self.viewModel?.searchRangeGiftCard.value.first{
-            self.successVoucher(denominationVal: self.currentValue, confirmObj: data, giftCardName: selectedPlan.operatorName ?? "")
+                self.successVoucher(denominationVal: self.currentValue, confirmObj: data, giftCardName: selectedPlan.operatorName ?? "")
             }}
     }}
 
@@ -345,11 +332,11 @@ extension RangeCardVC: UITextFieldDelegate {
                    replacementString string: String) -> Bool {
         if let text = textField.text,
            let textRange = Range(range, in: text) {
-           let updatedText = text.replacingCharacters(in: textRange,
+            let updatedText = text.replacingCharacters(in: textRange,
                                                        with: string)
             if updatedText.count > 0 && updatedText.count < 7
             {
-            let countdots = (textField.text?.components(separatedBy: ".").count ?? 0) - 1
+                let countdots = (textField.text?.components(separatedBy: ".").count ?? 0) - 1
                 if countdots > 0 && string == "."
                 {
                     return false

@@ -44,16 +44,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQQ-PN-Dfs">
-                    <rect key="frame" x="20.5" y="308" width="373" height="476"/>
+                    <rect key="frame" x="20.5" y="377.5" width="373" height="481"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rmz-nV-S2N">
-                            <rect key="frame" x="0.0" y="0.0" width="373" height="476"/>
+                            <rect key="frame" x="0.0" y="0.0" width="373" height="481"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K3u-OJ-unG">
                                     <rect key="frame" x="0.0" y="0.0" width="373" height="150"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wp1-5D-4oq" customClass="AnimationView" customModule="Lottie">
-                                            <rect key="frame" x="138.5" y="27" width="96" height="96"/>
+                                            <rect key="frame" x="138.5" y="30" width="96" height="96"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_giftCard" translatesAutoresizingMaskIntoConstraints="NO" id="Fsd-ae-dEw">
                                                     <rect key="frame" x="25" y="33" width="46" height="30"/>
@@ -63,20 +63,22 @@
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="wp1-5D-4oq" secondAttribute="height" multiplier="1:1" id="SBs-eK-6Mc"/>
-                                                <constraint firstItem="Fsd-ae-dEw" firstAttribute="centerY" secondItem="wp1-5D-4oq" secondAttribute="centerY" id="lw3-jB-2Gt"/>
-                                                <constraint firstAttribute="height" constant="96" id="pub-La-HJ7"/>
-                                                <constraint firstItem="Fsd-ae-dEw" firstAttribute="centerX" secondItem="wp1-5D-4oq" secondAttribute="centerX" id="ukT-wa-b2R"/>
+                                                <constraint firstAttribute="trailing" secondItem="Fsd-ae-dEw" secondAttribute="trailing" constant="25" id="0t0-4e-akt"/>
+                                                <constraint firstItem="Fsd-ae-dEw" firstAttribute="top" secondItem="wp1-5D-4oq" secondAttribute="top" constant="33" id="XPF-ev-CpS"/>
+                                                <constraint firstAttribute="width" constant="96" id="YQ1-AO-DFs"/>
+                                                <constraint firstAttribute="bottom" secondItem="Fsd-ae-dEw" secondAttribute="bottom" constant="33" id="fHW-ce-suU"/>
+                                                <constraint firstAttribute="height" constant="96" id="jbv-74-a0Q"/>
+                                                <constraint firstItem="Fsd-ae-dEw" firstAttribute="leading" secondItem="wp1-5D-4oq" secondAttribute="leading" constant="25" id="rpR-Sn-XNJ"/>
                                             </constraints>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="wp1-5D-4oq" firstAttribute="centerX" secondItem="K3u-OJ-unG" secondAttribute="centerX" id="85U-cP-c1r"/>
+                                        <constraint firstItem="wp1-5D-4oq" firstAttribute="top" secondItem="K3u-OJ-unG" secondAttribute="top" constant="30" id="3L3-jc-Qe6"/>
                                         <constraint firstAttribute="height" constant="150" id="JGh-7x-eXG"/>
-                                        <constraint firstItem="wp1-5D-4oq" firstAttribute="centerY" secondItem="K3u-OJ-unG" secondAttribute="centerY" id="fEL-i0-xE5"/>
+                                        <constraint firstItem="wp1-5D-4oq" firstAttribute="centerX" secondItem="K3u-OJ-unG" secondAttribute="centerX" id="LC4-Z0-EQw"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review your order" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="3YM-po-Gcj">
@@ -86,7 +88,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="A6E-ag-di1">
-                                    <rect key="frame" x="15" y="194" width="343" height="263"/>
+                                    <rect key="frame" x="15" y="199" width="343" height="263"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eF8-vw-3XF">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="40"/>
@@ -276,7 +278,7 @@
                                                     <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <inset key="imageEdgeInsets" minX="13" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="EDIT ORDER" image="ic_detail_arrow">
+                                                    <state key="normal" title="EDIT ORDER">
                                                         <color key="titleColor" red="0.69019607839999997" green="0.28627450980000002" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
@@ -316,7 +318,7 @@
                                 <constraint firstAttribute="trailing" secondItem="A6E-ag-di1" secondAttribute="trailing" constant="15" id="Zah-dG-4NZ"/>
                                 <constraint firstAttribute="bottom" secondItem="A6E-ag-di1" secondAttribute="bottom" constant="19" id="cVn-sP-xuW"/>
                                 <constraint firstItem="3YM-po-Gcj" firstAttribute="leading" secondItem="Rmz-nV-S2N" secondAttribute="leading" constant="40" id="eDa-CJ-h0K"/>
-                                <constraint firstItem="A6E-ag-di1" firstAttribute="top" secondItem="3YM-po-Gcj" secondAttribute="bottom" constant="20" id="j0U-QW-3vx"/>
+                                <constraint firstItem="A6E-ag-di1" firstAttribute="top" secondItem="3YM-po-Gcj" secondAttribute="bottom" constant="25" id="j0U-QW-3vx"/>
                                 <constraint firstAttribute="trailing" secondItem="K3u-OJ-unG" secondAttribute="trailing" id="nu8-eS-qoU"/>
                                 <constraint firstItem="3YM-po-Gcj" firstAttribute="top" secondItem="K3u-OJ-unG" secondAttribute="bottom" id="rBZ-nH-PoS"/>
                                 <constraint firstItem="K3u-OJ-unG" firstAttribute="top" secondItem="Rmz-nV-S2N" secondAttribute="top" id="uUx-t8-5o6"/>
@@ -337,7 +339,7 @@
             <viewLayoutGuide key="safeArea" id="niA-5i-nA0"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="oQQ-PN-Dfs" secondAttribute="bottom" multiplier="480/420" id="901-SM-ZCd"/>
+                <constraint firstAttribute="bottom" secondItem="oQQ-PN-Dfs" secondAttribute="bottom" multiplier="480/460" id="901-SM-ZCd"/>
                 <constraint firstItem="oQQ-PN-Dfs" firstAttribute="centerX" secondItem="VEM-VR-l0J" secondAttribute="centerX" id="Tz4-cT-3IJ"/>
                 <constraint firstItem="oQQ-PN-Dfs" firstAttribute="width" secondItem="VEM-VR-l0J" secondAttribute="width" multiplier="0.9" id="dhU-G5-ur8"/>
                 <constraint firstItem="oQQ-PN-Dfs" firstAttribute="height" relation="lessThanOrEqual" secondItem="VEM-VR-l0J" secondAttribute="height" multiplier="0.76" id="ghb-Ti-xKk"/>
@@ -352,7 +354,6 @@
     </designables>
     <resources>
         <image name="ic_country" width="30" height="46"/>
-        <image name="ic_detail_arrow" width="21" height="16.5"/>
         <image name="ic_giftCard" width="46" height="30"/>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

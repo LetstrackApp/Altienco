@@ -46,8 +46,13 @@ class AFWrapper: NSObject {
         }
     }
     
-    class func requestPOSTURL(_ strURL : String, params : [String : Any]?, headers : [String : String]?, success:@escaping ([String:Any]?) -> Void, failure:@escaping (String?) -> Void){
-        let url = baseURL.baseURl + strURL
+    class func requestPOSTURL(_ strURL : String,
+                              isDownloadInvoice:Bool = false,
+                              params : [String : Any]?,
+                              headers : [String : String]?,
+                              success:@escaping ([String:Any]?) -> Void,
+                              failure:@escaping (String?) -> Void) {
+        let url =  isDownloadInvoice == true ? baseURL.baseURldownload + strURL : baseURL.baseURl + strURL
         let manager = Alamofire.SessionManager.default
         manager.session.configuration.timeoutIntervalForRequest = 40
         manager.request(url,

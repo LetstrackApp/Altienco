@@ -8,13 +8,13 @@
 
 import UIKit
 import DropDown
-class HistoryVC: UIViewController {
+import SkeletonView
+import SVProgressHUD
+class HistoryVC: FloatingPannelHelper {
     
     var viewModel: HistoryViewModel?
-    var header1 = "My"
-    var header2 = "Order"
     var pageNum = 1
-    var pageSize = 20
+    var pageSize = 201
     var transactionTypeId = 0
     var isLoading = false
     
@@ -58,7 +58,18 @@ class HistoryVC: UIViewController {
             self.viewContainer.clipsToBounds=true
         }
     }
-    @IBOutlet weak var historyTable: UITableView!
+    @IBOutlet weak var historyTable: UITableView! {
+        didSet {
+            historyTable.rowHeight = UITableView.automaticDimension
+            historyTable.sectionHeaderHeight = UITableView.automaticDimension
+            historyTable.sectionFooterHeight = UITableView.automaticDimension
+            historyTable.estimatedRowHeight = 113
+            historyTable.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+            historyTable.tableFooterView = UIView.init(frame: .zero)
+            historyTable.tableHeaderView = UIView.init(frame: .zero)
+            historyTable.isSkeletonable = true
+        }
+    }
     
     @IBOutlet weak var notificationIcon: UIImageView!
     @IBOutlet weak var firstHeader: UILabel!
@@ -67,20 +78,27 @@ class HistoryVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.isLoading = true
-        if self.header1 != "" && self.header2 != ""{
-            self.firstHeader.text = header1
-            self.lastHeader.text = header2
-        }
+
         viewModel = HistoryViewModel()
         historyTable.tableFooterView = UIView()
         self.historyTable.register(UINib(nibName: "HistoryCell", bundle: nil), forCellReuseIdentifier: "HistoryCell")
         self.callHistoryData()
+        onLanguageChange()
+        
     }
     
     @IBAction func redirectProfile(_ sender: Any) {
         let vc = ProfileVC(nibName: "ProfileVC", bundle: nil)
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    func onLanguageChange(){
+        
+        firstHeader.changeColorAndFont(mainString: lngConst.my_Order.capitalized,
+                                           stringToColor: lngConst.order.capitalized,
+                                           color: UIColor.init(0xb24a96),
+                                           font: UIFont.SF_Medium(18))
+    }
+    
     
     
     func loadMoreData() {
@@ -96,8 +114,28 @@ class HistoryVC: UIViewController {
     
     
     func callHistoryData() {
-        let model = HistoryRequestObj.init(customerId: UserDefaults.getUserData?.customerID, pageNum: self.pageNum, pageSize: self.pageSize, langCode: "en", transactionTypeId: self.transactionTypeId)
-        viewModel?.getHistory(model: model)
+        
+        if viewModel?.historyList.value.count == 0 {
+            historyTable.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor.lightGray.withAlphaComponent(0.3)), animation: nil, transition: .crossDissolve(0.26))
+
+        }else {
+            SVProgressHUD.show()
+
+        }
+      
+        let model = HistoryRequestObj.init(customerId: UserDefaults.getUserData?.customerID,
+                                           pageNum: self.pageNum,
+                                           pageSize: self.pageSize,
+                                           langCode: "en",
+                                           transactionTypeId: self.transactionTypeId)
+        viewModel?.getHistory(model: model) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.historyTable.stopSkeletonAnimation()
+                self?.historyTable.hideSkeleton()
+
+            }
+        }
+        
         viewModel?.historyList.bind(listener: { (data) in
             self.isLoading = data.isEmpty
             if data.isEmpty == false{
@@ -117,8 +155,7 @@ class HistoryVC: UIViewController {
     
     
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     
     func showNotify(){
@@ -139,7 +176,12 @@ class HistoryVC: UIViewController {
 }
 
 
-extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
+extension HistoryVC: SkeletonTableViewDelegate, SkeletonTableViewDataSource {
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "HistoryCell"
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.viewModel?.historyList.value.count == 0 {
             self.historyTable.setEmptyMessage("No records found!")
@@ -211,22 +253,22 @@ extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func successVoucher(mPin: String,
-                        denominationValue : String,
-                        walletBalance: Double,
-                        msgToShare: String,
-                        voucherID: Int,
-                        orderNumber:String){
-        let viewController: SuccessRechargeVC = SuccessRechargeVC()
-        viewController.denominationValue = denominationValue
-        viewController.mPin = mPin
-        viewController.walletBal = walletBalance
-        viewController.voucherID = voucherID
-        viewController.msgToShare = msgToShare
-        viewController.orderNumber = orderNumber
-        self.navigationController?.pushViewController(viewController, animated: true)
-        
-    }
+//    func successVoucher(mPin: String,
+//                        denominationValue : String,
+//                        walletBalance: Double,
+//                        msgToShare: String,
+//                        voucherID: Int,
+//                        orderNumber:String){
+//        let viewController: SuccessRechargeVC = SuccessRechargeVC()
+//        viewController.denominationValue = denominationValue
+//        viewController.mPin = mPin
+//        viewController.walletBal = walletBalance
+//        viewController.voucherID = voucherID
+//        viewController.msgToShare = msgToShare
+//        viewController.orderNumber = orderNumber
+//        self.navigationController?.pushViewController(viewController, animated: true)
+//        
+//    }
     
     
     

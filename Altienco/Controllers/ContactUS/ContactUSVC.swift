@@ -56,6 +56,8 @@ class ContactUSVC: UIViewController {
             email.font = UIFont.SF_Regular(14)
             email.delegate = self
             email.placeholder = lngConst.email
+            email.textContentType = .emailAddress
+            email.keyboardType = .emailAddress
             
         }
     }
@@ -64,10 +66,19 @@ class ContactUSVC: UIViewController {
             mobile.font = UIFont.SF_Regular(14)
             mobile.placeholder = lngConst.mobile
             mobile.delegate = self
+            mobile.autocorrectionType = .yes
+            mobile.textContentType = .telephoneNumber
+            mobile.keyboardType = .numbersAndPunctuation
+            mobile.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
+
+
             
             
         }
     }
+    
+    //[mobile,email,name]
+    
     @IBOutlet weak var resion: UIView!
     
     @IBOutlet weak var infoBtn: UIButton!
@@ -285,7 +296,18 @@ class ContactUSVC: UIViewController {
 
 extension ContactUSVC : UITextFieldDelegate {
     
+    func formateTextNumber(){
+//        if self.lblCountryCode.text?.count ?? 0 > 0{
+//            txtPhoneNumber.text = txtPhoneNumber.text?.replacingOccurrences(of: self.lblCountryCode.text!, with: "")
+//        }
+        mobile.text = mobile.text?.replacingOccurrences(of: " ", with: "")
+    }
     
+    @objc func textFieldDidChange(textField: UITextField){
+//        if textField.text?.contains("+") == true{
+            formateTextNumber()
+//        }
+    }
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == name {
             viewModel?.name = textField.text
@@ -308,13 +330,13 @@ extension ContactUSVC : UITextFieldDelegate {
         }
         
         if textField == mobile{
-            let disallowedCharacterSet = NSCharacterSet(charactersIn:textfiledchar.circleCode).inverted
+            let disallowedCharacterSet = NSCharacterSet(charactersIn:textfiledchar.phpad).inverted
             let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
             result = replacementStringIsLegal
         }
         
         if (textField == mobile) && result == true {
-            return newString.count <= 10
+            return newString.count <= 13
         }
         if (textField == name || (textField == email)) && result == true {
             return newString.count <= 40

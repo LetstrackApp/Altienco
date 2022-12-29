@@ -8,8 +8,8 @@
 
 import UIKit
 import FlagKit
-
-class GiftCardVC: UIViewController, searchDelegate {
+import SkeletonView
+class GiftCardVC: FloatingPannelHelper, searchDelegate {
     func updateSearchView(isUpdate: Bool, selectedCountry: SearchCountryModel?) {
         if isUpdate == true && selectedCountry != nil{
             countryModel = selectedCountry
@@ -135,7 +135,22 @@ class GiftCardVC: UIViewController, searchDelegate {
         }
     }
     func initiateModel(countryCode: String) {
-        viewModel?.getGiftCards(countryCode: countryCode, language: "EN", pageNum: 1, pageSize: 100)
+        giftCardCollection.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor.lightGray.withAlphaComponent(0.3)),
+                                                            animation: nil,
+                                                            transition: .crossDissolve(0.26))
+
+        viewModel?.getGiftCards(countryCode: countryCode,
+                                language: "EN",
+                                pageNum: 1, pageSize: 100) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.giftCardCollection.stopSkeletonAnimation()
+                self?.giftCardCollection.hideSkeleton()
+                self?.giftCardCollection.reloadData()
+                self?.view.layoutIfNeeded()
+            }
+            
+        }
+        
         viewModel?.searchGiftCard.bind(listener: { (val) in
             self.filteredData.removeAll()
             self.filteredData = val
@@ -145,8 +160,7 @@ class GiftCardVC: UIViewController, searchDelegate {
         })
     }
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     
     @IBAction func searchCountry(_ sender: Any) {
@@ -176,7 +190,13 @@ class GiftCardVC: UIViewController, searchDelegate {
 }
 
 
-extension GiftCardVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension GiftCardVC: SkeletonCollectionViewDataSource,
+                      SkeletonCollectionViewDelegate ,
+                      UICollectionViewDelegateFlowLayout {
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "GiftCardCell"
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == segmentCollection{
@@ -184,7 +204,7 @@ extension GiftCardVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         }
         else{
             self.lastFilterData.isEmpty == true ?
-                (self.collectionAlert.isHidden = false) : (self.collectionAlert.isHidden = true)
+            (self.collectionAlert.isHidden = false) : (self.collectionAlert.isHidden = true)
             return self.lastFilterData.count
         }
     }
@@ -214,7 +234,7 @@ extension GiftCardVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
             else{
                 cell.operatorLogo.image = UIImage(named: "ic_operatorLogo")
             }
-//            cell.cardColor.backgroundColor = self.backgroundCode[indexPath.row]
+            //            cell.cardColor.backgroundColor = self.backgroundCode[indexPath.row]
             cell.operatorName.text = self.lastFilterData[indexPath.row].operatorName
             cell.showDenomination.tag = indexPath.row
             cell.showDenomination.addTarget(self, action: #selector(callOperatorPlans(sender:)), for: .touchUpInside)
@@ -257,7 +277,7 @@ extension GiftCardVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
                 if let image = self.lastFilterData[sender.tag].operatorImageURL {
                     viewController.giftCardLogo = image
                 }
-//                viewController.backgroundCode = self.backgroundCode[sender.tag]
+                //                viewController.backgroundCode = self.backgroundCode[sender.tag]
                 viewController.countryModel = self.countryModel
                 viewController.operatorID = self.lastFilterData[sender.tag].operatorID ?? 0
                 viewController.planType = self.lastFilterData[sender.tag].planTypeID ?? 0
@@ -269,7 +289,7 @@ extension GiftCardVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
                 if let image = self.lastFilterData[sender.tag].operatorImageURL {
                     viewController.giftCardLogo = image
                 }
-//                viewController.backgroundCode = self.backgroundCode[sender.tag]
+                //                viewController.backgroundCode = self.backgroundCode[sender.tag]
                 viewController.countryModel = self.countryModel
                 viewController.language = "EN"
                 viewController.planType = self.lastFilterData[sender.tag].planTypeID ?? 0

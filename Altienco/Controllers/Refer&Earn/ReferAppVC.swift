@@ -62,6 +62,7 @@ class ReferAppVC: UIViewController {
     
     @IBOutlet var textfields : [BackTextField]!
     var isFromHome = false
+    
     convenience init() {
         self.init(nibName: xibName.referAppVC, bundle: nil)
     }

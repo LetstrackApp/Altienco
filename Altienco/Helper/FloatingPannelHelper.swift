@@ -9,11 +9,15 @@
 import UIKit
 import SkeletonView
 import FloatingPanel
-
+//AllNotificationVC
 class FloatingPannelHelper: UIViewController,FloatingPanelControllerDelegate {
     
-    private var recentTxn: FloatingPanelController!
+    private var recentTxn: FloatingPanelController?
+    
+    private var allNotiFPC : FloatingPanelController?
     var viewControler : RecentTXNVC?
+    var notiViewControler : AllNotificationVC?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,15 +44,18 @@ class FloatingPannelHelper: UIViewController,FloatingPanelControllerDelegate {
             recentTxn?.surfaceView.appearance.borderColor = UIColor.black
             recentTxn?.surfaceView.containerMargins = .init(top: 0, left: 10, bottom: 0, right: 10)
             viewControler = RecentTXNVC(txnType: txnTypeId)
-            viewControler?.didSelectDone = { result in
-                DispatchQueue.main.async {
-                    self.successVoucher(mPin: result.mPIN ?? "",
-                                        denominationValue: "\(result.dinominationValue ?? 0)",
-                                        walletBalance: result.walletAmount ?? 0.0,
-                                        msgToShare: result.msgToShare ?? "",
-                                        voucherID: result.voucherID ?? 0,
-                                        orderNumber: "")
-                }
+            viewControler?.didSelectDone = { [weak self] result in
+                self?.recentTxn?.dismiss(animated: true, completion: {
+                    DispatchQueue.main.async {
+                        self?.successVoucher(mPin: result.mPIN ?? "",
+                                            denominationValue: "\(result.dinominationValue ?? 0)",
+                                            walletBalance: result.walletAmount ?? 0.0,
+                                            msgToShare: result.msgToShare ?? "",
+                                            voucherID: result.voucherID ?? 0,
+                                            orderNumber: "")
+                    }
+                })
+
             }
             recentTxn?.set(contentViewController: viewControler)
             
@@ -61,10 +68,10 @@ class FloatingPannelHelper: UIViewController,FloatingPanelControllerDelegate {
             
         }
         if  let fcb = recentTxn {
-            recentTxn.view.isSkeletonable = true
-            recentTxn.contentViewController?.view.isSkeletonable = true
+            recentTxn?.view.isSkeletonable = true
+            recentTxn?.contentViewController?.view.isSkeletonable = true
             
-            recentTxn.contentViewController?.view.subviews.forEach({ view in
+            recentTxn?.contentViewController?.view.subviews.forEach({ view in
                 view.isSkeletonable = true
             })
             
@@ -85,35 +92,85 @@ class FloatingPannelHelper: UIViewController,FloatingPanelControllerDelegate {
     }
     
     
-    func successVoucher(mPin: String,
-                        denominationValue : String,
-                        walletBalance: Double,
-                        msgToShare: String,
-                        voucherID: Int,
-                        orderNumber:String){
-        
-        self.recentTxn.dismiss(animated: true) {
-            DispatchQueue.main.async {
-                let viewController: SuccessRechargeVC = SuccessRechargeVC()
-                viewController.denominationValue = denominationValue
-                viewController.mPin = mPin
-                viewController.walletBal = walletBalance
-                viewController.voucherID = voucherID
-                viewController.msgToShare = msgToShare
-                viewController.orderNumber = orderNumber
-                self.navigationController?.pushViewController(viewController, animated: true)
+    
+    
+    
+    
+    func setupAllNoti() {
+        if allNotiFPC == nil {
+            allNotiFPC = FloatingPanelController()
+            allNotiFPC?.backdropView.dismissalTapGestureRecognizer.isEnabled = true
+            allNotiFPC?.surfaceView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+            allNotiFPC?.behavior = FloatingPanelStocksBehavior()
+            allNotiFPC?.surfaceView.grabberHandle.isHidden = false
+            // Initialize FloatingPanelController and add the view
+            allNotiFPC?.surfaceView.backgroundColor = UIColor(displayP3Red: 30.0/255.0, green: 30.0/255.0, blue: 30.0/255.0, alpha: 1.0)
+            allNotiFPC?.surfaceView.appearance.cornerRadius = 8
+            let shadow = SurfaceAppearance.Shadow()
+            shadow.color = UIColor.black
+            shadow.offset = CGSize(width: 0, height: 0)
+            shadow.radius = 8
+            shadow.spread = 2
+            allNotiFPC?.surfaceView.appearance.shadows = [shadow]
+            allNotiFPC?.surfaceView.appearance.borderWidth = 1.0 / traitCollection.displayScale
+            allNotiFPC?.surfaceView.appearance.borderColor = UIColor.black
+            allNotiFPC?.surfaceView.containerMargins = .init(top: 0, left: 10, bottom: 0, right: 10)
+            notiViewControler = AllNotificationVC()
+
+            allNotiFPC?.set(contentViewController: notiViewControler)
+            
+            if let sc = notiViewControler?.notificationTable {
+                allNotiFPC?.track(scrollView: sc)
             }
+            allNotiFPC?.contentMode = .fitToBounds
+            allNotiFPC?.isRemovalInteractionEnabled = true
+            allNotiFPC?.delegate = self
+            
         }
-        
+        if  let fcb = allNotiFPC {
+            fcb.view.isSkeletonable = true
+            fcb.contentViewController?.view.isSkeletonable = true
+            
+            fcb.contentViewController?.view.subviews.forEach({ view in
+                view.isSkeletonable = true
+            })
+            
+            self.present(fcb, animated: true, completion: nil)
+            notiViewControler?.getAllNotification()
+        }
         
         
     }
     
     
     
+    func successVoucher(mPin: String,
+                        denominationValue : String,
+                        walletBalance: Double,
+                        msgToShare: String,
+                        voucherID: Int,
+                        orderNumber:String){
+      
+            let viewController: SuccessRechargeVC = SuccessRechargeVC()
+            viewController.denominationValue = denominationValue
+            viewController.mPin = mPin
+            viewController.walletBal = walletBalance
+            viewController.voucherID = voucherID
+            viewController.msgToShare = msgToShare
+            viewController.orderNumber = orderNumber
+            self.navigationController?.pushViewController(viewController, animated: true)
+        
+        
+        
+    }
+    
+
+    
+    
+    
     
     func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout {
-        if vc.contentViewController?.isKind(of: RecentTXNVC.self) == true{
+        if vc.contentViewController?.isKind(of: RecentTXNVC.self) == true || vc.contentViewController?.isKind(of: AllNotificationVC.self) == true {
             return TopPositionedPanelLayout()
         }
         return TopPositionedPanelLayout()
@@ -147,4 +204,5 @@ class TopPositionedPanelLayout: FloatingPanelLayout {
         return 0.6
     }
 }
+
 

@@ -7,8 +7,9 @@
 //
 
 import UIKit
-
-class VoucherHistoryVC: UIViewController {
+import SkeletonView
+import SVProgressHUD
+class VoucherHistoryVC: FloatingPannelHelper {
     
     var viewModel: VoucherHistoryViewModel?
     var pageNum = 1
@@ -17,6 +18,7 @@ class VoucherHistoryVC: UIViewController {
     var isLoading = false
     var SelectedIndex = -1
     
+    @IBOutlet weak var voucherTitle: UILabel!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var profileImage: UIImageView!{
         didSet{
@@ -42,23 +44,47 @@ class VoucherHistoryVC: UIViewController {
         }
     }
     @IBOutlet weak var notificationIcon: UIImageView!
-    @IBOutlet weak var voucherHistoryTable: UITableView!
+    @IBOutlet weak var voucherHistoryTable: UITableView!{
+        didSet {
+            voucherHistoryTable.register(UINib(nibName: "VoucherCell", bundle: nil),
+                                         forCellReuseIdentifier: "VoucherCell")
+            voucherHistoryTable.rowHeight = UITableView.automaticDimension
+            voucherHistoryTable.sectionHeaderHeight = UITableView.automaticDimension
+            voucherHistoryTable.sectionFooterHeight = UITableView.automaticDimension
+            voucherHistoryTable.estimatedRowHeight = 113
+            voucherHistoryTable.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+            voucherHistoryTable.tableFooterView = UIView.init(frame: .zero)
+            voucherHistoryTable.tableHeaderView = UIView.init(frame: .zero)
+            voucherHistoryTable.isSkeletonable = true
+        }
+    }
+    
+    convenience init() {
+        self.init(nibName: xibName.voucherHistoryVC, bundle: .altiencoBundle)
+        viewModel = VoucherHistoryViewModel()
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.isLoading = true
-        viewModel = VoucherHistoryViewModel()
-        voucherHistoryTable.tableFooterView = UIView()
-        self.voucherHistoryTable.register(UINib(nibName: "VoucherCell", bundle: nil), forCellReuseIdentifier: "VoucherCell")
+        onLanguageChange()
         
     }
     
     
-    @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+    func onLanguageChange() {
+        
+        voucherTitle.changeColorAndFont(mainString: lngConst.voucher_History.capitalized,
+                                        stringToColor: lngConst.History.capitalized,
+                                        color: UIColor.init(0xb24a96),
+                                        font: UIFont.SF_Medium(18))
     }
+    
+    @IBAction func notification(_ sender: Any) {
+        setupAllNoti()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.callHistoryData()
@@ -85,13 +111,13 @@ class VoucherHistoryVC: UIViewController {
                 if UserDefaults.getAvtarImage == "1"{
                     self.profileImage.image = UIImage(named: aString)
                 }else{
-                let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
-                 
-                self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
+                    let newString = aString.replacingOccurrences(of: baseURL.imageURL, with: baseURL.imageBaseURl, options: .literal, range: nil)
+                    
+                    self.profileImage.sd_setImage(with: URL(string: newString), placeholderImage: UIImage(named: "defaultUser"))
                 }
             }
         }
-
+        
     }
     @IBAction func redirectProfile(_ sender: Any) {
         let vc = ProfileVC(nibName: "ProfileVC", bundle: nil)
@@ -99,26 +125,49 @@ class VoucherHistoryVC: UIViewController {
     }
     
     func loadMoreData() {
-            if !self.isLoading {
-                self.isLoading = true
-                DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(1)) { // Remove the 1-second delay if you want to load the data without waiting
-                    // Download more data here
-                    self.callHistoryData()
-                }
+        if !self.isLoading {
+            self.isLoading = true
+            DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(1)) { // Remove the 1-second delay if you want to load the data without waiting
+                // Download more data here
+                self.callHistoryData()
             }
         }
+    }
     
     func callHistoryData() {
-        if let customerID = UserDefaults.getUserData?.customerID{
-            let model = VoucherHistoryRequestObj.init(customerId: "\(customerID)", isRequiredAll: true, langCode: "en", operatorId: 0, pinBankUsedStatus: 2, pageNum: self.pageNum, pageSize: self.pageSize, transactionTypeId: 0)
-        viewModel?.getHistory(model: model)
-        viewModel?.historyList.bind(listener: { (data) in
-            if data.isEmpty == false{
-            DispatchQueue.main.async {
-                self.voucherHistoryTable.reloadData()
-                self.isLoading = false
-            }}
-        })
+        if let customerID = UserDefaults.getUserData?.customerID {
+            
+            if viewModel?.historyList.value.count == 0 {
+                voucherHistoryTable.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor.lightGray.withAlphaComponent(0.3)), animation: nil, transition: .crossDissolve(0.26))
+                
+            }
+            else {
+                SVProgressHUD.show()
+            }
+            let model = VoucherHistoryRequestObj.init(customerId: "\(customerID)",
+                                                      isRequiredAll: true,
+                                                      langCode: "en",
+                                                      operatorId: 0,
+                                                      pinBankUsedStatus: 2,
+                                                      pageNum: self.pageNum,
+                                                      pageSize: self.pageSize,
+                                                      transactionTypeId: 0)
+            
+            viewModel?.getHistory(model: model) { [weak self] result in
+                DispatchQueue.main.async {
+                    self?.voucherHistoryTable.stopSkeletonAnimation()
+                    self?.voucherHistoryTable.hideSkeleton()
+                }
+            }
+            
+            viewModel?.historyList.bind(listener: { (data) in
+                if data.isEmpty == false{
+                    DispatchQueue.main.async {
+                        self.voucherHistoryTable.reloadData()
+                        self.isLoading = false
+                    }
+                }
+            })
         }
     }
     
@@ -132,16 +181,20 @@ class VoucherHistoryVC: UIViewController {
 }
 
 
-extension VoucherHistoryVC: UITableViewDelegate, UITableViewDataSource {
+extension VoucherHistoryVC: SkeletonTableViewDelegate, SkeletonTableViewDataSource {
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "VoucherCell"
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.viewModel?.historyList.value.count == 0 {
-                self.voucherHistoryTable.setEmptyMessage("No records found!")
-            } else {
-                self.voucherHistoryTable.restore()
-            }
+            self.voucherHistoryTable.setEmptyMessage("No records found!")
+        } else {
+            self.voucherHistoryTable.restore()
+        }
         return self.viewModel?.historyList.value.count ?? 0
     }
-
+    
     private func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let lastData = (self.viewModel?.historyList.value.count ?? 0) - 1
         if !isLoading && indexPath.row == pageSize - lastData {
@@ -150,12 +203,19 @@ extension VoucherHistoryVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "VoucherCell", for: indexPath) as! VoucherCell
         if let model = self.viewModel?.historyList.value[indexPath.row]{
-//             (model.transactionStatus?.capitalized != "Success".capitalized) ?
-//            (cell.orderStatus.textColor = appColor.buttonRedColor) : (cell.orderStatus.textColor = appColor.buttonGreenColor)
+            //             (model.transactionStatus?.capitalized != "Success".capitalized) ?
+//                        (cell.orderStatus.textColor = appColor.buttonRedColor) : (cell.orderStatus.textColor = appColor.buttonGreenColor)
+            if model.transactionStatus == 1{
+                cell.orderStatus.textColor = appColor.buttonGreenColor
+            }
+            else {
+                cell.orderStatus.textColor = appColor.buttonRedColor
+            }
+            cell.orderStatus.text = model.transactionMessage
             if model.isUsed == false{
                 cell.voucherStatus.text = lngConst.available.uppercased()
                 cell.voucherStatus.textColor = appColor.buttonGreenColor
@@ -179,12 +239,12 @@ extension VoucherHistoryVC: UITableViewDelegate, UITableViewDataSource {
                 cell.date.text = time.convertToDisplayFormat()}
         }
         return cell
-        }
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.SelectedIndex = indexPath.row
         self.showVoucher()
     }
-
+    
     
     @objc func showVoucher() {
         if self.SelectedIndex < (self.viewModel?.historyList.value.count ?? 0) && self.SelectedIndex != -1{
@@ -192,12 +252,12 @@ extension VoucherHistoryVC: UITableViewDelegate, UITableViewDataSource {
             DispatchQueue.main.async {
                 guard let model = self.viewModel?.historyList.value[self.SelectedIndex] else {return}
                 if model.transactionTypeId == TransactionTypeId.PhoneRecharge.rawValue{
-                self.successVoucher(mPin: model.mPIN ?? "",
-                                    denominationValue: "\(model.voucherAmount ?? 0)",
-                                    walletBalance: 0.0, msgToShare: model.msgToShare ?? "",
-                                    voucherID: model.voucherId ?? 0,
-                                    isUsed: model.isUsed,
-                                    orderNumber: model.orderNumber)
+                    self.successVoucher(mPin: model.mPIN ?? "",
+                                        denominationValue: "\(model.voucherAmount ?? 0)",
+                                        walletBalance: 0.0, msgToShare: model.msgToShare ?? "",
+                                        voucherID: model.voucherId ?? 0,
+                                        isUsed: model.isUsed,
+                                        orderNumber: model.orderNumber)
                 }
                 else{
                     self.successCallingCard(mPin: model.mPIN ?? "",

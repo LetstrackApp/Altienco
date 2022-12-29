@@ -9,7 +9,7 @@
 import UIKit
 import FlagKit
 
-class SuccessGiftCardVC: UIViewController {
+class SuccessGiftCardVC: FloatingPannelHelper {
     
     var denominationAmount = 0.0
     var countryCode = ""
@@ -185,6 +185,7 @@ class SuccessGiftCardVC: UIViewController {
                 if status == true, let data = result{
                     if data.processStatusID == GiftCardProcessStatus.Cancelled.rawValue ||  data.processStatusID == GiftCardProcessStatus.Completed.rawValue{
                         self?.giftCardTimer?.invalidate()
+                        self?.giftCardTimer = nil
                     }
                     
                     self?.confirmStatus = data
@@ -305,14 +306,19 @@ class SuccessGiftCardVC: UIViewController {
     
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
         giftCardTimer?.invalidate()
+        giftCardTimer = nil
     }
     
     
     @IBAction func copyTextButton(_ sender: Any) {
         if !(claimCode.text?.isEmpty ?? true){
             UIPasteboard.general.string = claimCode!.text
-            Helper.showToast("Claim Code Copied Successfully")
+            
+            AltienoAlert.initialization().showAlert(with: .profile(lngConst.claim_Code_Copied)) { index, _ in
+
+            }
         }
     }
     
@@ -334,8 +340,7 @@ class SuccessGiftCardVC: UIViewController {
     }
     
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     
     override func viewWillAppear(_ animated: Bool) {

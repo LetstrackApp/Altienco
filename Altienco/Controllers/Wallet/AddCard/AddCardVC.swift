@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddCardVC: UIViewController, UITextFieldDelegate, GoToRootDelegate {
+class AddCardVC: FloatingPannelHelper, UITextFieldDelegate, GoToRootDelegate {
     func CloseToRoot(dismiss: Bool) {
         if dismiss{
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
@@ -56,6 +56,10 @@ class AddCardVC: UIViewController, UITextFieldDelegate, GoToRootDelegate {
     }
     
     @IBOutlet weak var notificationIcon: UIImageView!
+    
+    convenience init() {
+        self.init(nibName: "AddCardVC", bundle: .altiencoBundle)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,8 +111,7 @@ class AddCardVC: UIViewController, UITextFieldDelegate, GoToRootDelegate {
     }
     
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     
     

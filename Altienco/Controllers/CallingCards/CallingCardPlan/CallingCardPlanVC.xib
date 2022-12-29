@@ -23,6 +23,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CallingCardPlanVC" customModule="Altienco" customModuleProvider="target">
             <connections>
                 <outlet property="addButton" destination="YIY-zc-kwC" id="dwo-TE-hLc"/>
+                <outlet property="collectionViewHeight" destination="jXv-eS-WPr" id="Mwj-nJ-JMf"/>
                 <outlet property="generateCollingCard" destination="7b0-7H-5NY" id="g0k-1P-piq"/>
                 <outlet property="imageContainer" destination="wP4-jo-mCh" id="JaO-bf-fVD"/>
                 <outlet property="nextButton" destination="6Cq-R8-fgM" id="6nB-4g-WOx"/>
@@ -201,7 +202,7 @@
                                     <rect key="frame" x="0.0" y="94" width="394" height="585.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PYW-sA-HVl">
-                                            <rect key="frame" x="0.0" y="0.0" width="394" height="618.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="629"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J41-oY-uKE">
                                                     <rect key="frame" x="0.0" y="0.0" width="394" height="200.5"/>
@@ -241,20 +242,26 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Hl-z0-XPD">
-                                                    <rect key="frame" x="0.0" y="200.5" width="394" height="260"/>
+                                                    <rect key="frame" x="0.0" y="200.5" width="394" height="270.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aY0-2Z-7aJ">
-                                                            <rect key="frame" x="10" y="10" width="374" height="240"/>
+                                                            <rect key="frame" x="10" y="10" width="374" height="250.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Select Denomination" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="paB-bg-z1p">
                                                                     <rect key="frame" x="20" y="15" width="334" height="25.5"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="25.5" id="53W-Av-dq7"/>
+                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="18"/>
                                                                     <color key="textColor" red="0.47058823529999999" green="0.4823529412" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="fRr-gE-wX4">
-                                                                    <rect key="frame" x="20" y="50.5" width="334" height="189.5"/>
+                                                                    <rect key="frame" x="20" y="50.5" width="334" height="180"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="180" id="jXv-eS-WPr"/>
+                                                                    </constraints>
                                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WBd-hk-74m">
                                                                         <size key="itemSize" width="128" height="128"/>
                                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -270,7 +277,7 @@
                                                                 <constraint firstAttribute="trailing" secondItem="paB-bg-z1p" secondAttribute="trailing" constant="20" id="VmW-Yh-opq"/>
                                                                 <constraint firstItem="paB-bg-z1p" firstAttribute="leading" secondItem="aY0-2Z-7aJ" secondAttribute="leading" constant="20" id="Yvo-J3-ppJ"/>
                                                                 <constraint firstItem="fRr-gE-wX4" firstAttribute="top" secondItem="paB-bg-z1p" secondAttribute="bottom" constant="10" id="e6x-Fr-fHj"/>
-                                                                <constraint firstAttribute="bottom" secondItem="fRr-gE-wX4" secondAttribute="bottom" id="fmZ-1a-JYx"/>
+                                                                <constraint firstAttribute="bottom" secondItem="fRr-gE-wX4" secondAttribute="bottom" constant="20" id="fmZ-1a-JYx"/>
                                                                 <constraint firstItem="fRr-gE-wX4" firstAttribute="leading" secondItem="aY0-2Z-7aJ" secondAttribute="leading" constant="20" id="gh8-ML-zC9"/>
                                                             </constraints>
                                                         </view>
@@ -280,18 +287,17 @@
                                                         <constraint firstAttribute="bottom" secondItem="aY0-2Z-7aJ" secondAttribute="bottom" constant="10" id="N1E-zL-ezy"/>
                                                         <constraint firstAttribute="trailing" secondItem="aY0-2Z-7aJ" secondAttribute="trailing" constant="10" id="VIL-I7-U9E"/>
                                                         <constraint firstItem="aY0-2Z-7aJ" firstAttribute="leading" secondItem="2Hl-z0-XPD" secondAttribute="leading" constant="10" id="W7A-jT-RLD"/>
-                                                        <constraint firstAttribute="height" constant="260" id="Z1f-j4-CEz"/>
                                                         <constraint firstItem="aY0-2Z-7aJ" firstAttribute="top" secondItem="2Hl-z0-XPD" secondAttribute="top" constant="10" id="aRk-1X-i37"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2B5-xk-YKR" customClass="PaddingLabel" customModule="Altienco" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="460.5" width="394" height="50"/>
+                                                    <rect key="frame" x="0.0" y="471" width="394" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zH0-ix-ppE">
-                                                    <rect key="frame" x="0.0" y="510.5" width="394" height="108"/>
+                                                    <rect key="frame" x="0.0" y="521" width="394" height="108"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Cq-R8-fgM">
                                                             <rect key="frame" x="39.5" y="31.5" width="315" height="45"/>

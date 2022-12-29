@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SuccessCallinCardVC: UIViewController, UITextFieldDelegate {
+class SuccessCallinCardVC: FloatingPannelHelper, UITextFieldDelegate {
     
     var denominationValue = ""
     var mPin = ""
@@ -142,8 +142,7 @@ class SuccessCallinCardVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+       setupAllNoti()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -182,13 +181,22 @@ class SuccessCallinCardVC: UIViewController, UITextFieldDelegate {
     @IBAction func copyTextButton(_ sender: Any) {
         if !(mPinText.text?.isEmpty ?? true){
             UIPasteboard.general.string = mPinText!.text
-            Helper.showToast("Voucher Code Copied Successfully")
+            AltienoAlert.initialization().showAlert(with: .profile(lngConst.voucher_Code_Copied)) { index, _ in
+
+            }
+            
         }
     }
     
     @IBAction func rechargeButton(_ sender: Any) {
-        self.mPin != "" ?
-        self.present(alertEmailAddEditView, animated: true, completion: nil) : Helper.showToast("Please try after Sometime!")
+        if self.mPin != ""  {
+            self.present(alertEmailAddEditView, animated: true, completion: nil)
+        }
+        else {
+            AltienoAlert.initialization().showAlert(with: .other(lngConst.tryAfterSomeTime)) { index, _ in
+                
+            }
+        }
     }
     //Create Alert Controller Dial Object here
     lazy var alertEmailAddEditView:UIAlertController = {

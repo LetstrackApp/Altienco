@@ -12,9 +12,6 @@
         <array key="Poppins-Light.ttf">
             <string>Poppins-Light</string>
         </array>
-        <array key="Poppins-Medium.ttf">
-            <string>Poppins-Medium</string>
-        </array>
         <array key="Poppins-Regular.ttf">
             <string>Poppins-Regular</string>
         </array>
@@ -28,6 +25,7 @@
                 <outlet property="view" destination="hic-qN-V15" id="SO0-Rc-Jg7"/>
                 <outlet property="viewContainer" destination="flp-pa-0jZ" id="Ml7-9p-wtN"/>
                 <outlet property="voucherHistoryTable" destination="B3H-L9-7oG" id="gKp-Dt-JGQ"/>
+                <outlet property="voucherTitle" destination="Bwe-6c-X7t" id="yCx-FX-1s1"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -117,23 +115,17 @@
                             <rect key="frame" x="0.0" y="0.0" width="384" height="709.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voucher" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bwe-6c-X7t">
-                                    <rect key="frame" x="15" y="15" width="75" height="25.5"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" id="4d9-um-FrL"/>
-                                    </constraints>
+                                    <rect key="frame" x="15" y="15" width="354" height="25.5"/>
                                     <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="18"/>
                                     <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j07-SK-TXo">
-                                    <rect key="frame" x="93" y="15" width="63" height="25.5"/>
-                                    <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="18"/>
-                                    <color key="textColor" red="0.69019607839999997" green="0.28627450980000002" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="B3H-L9-7oG">
                                     <rect key="frame" x="0.0" y="50.5" width="384" height="659"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <outlet property="dataSource" destination="-1" id="zz0-hL-cyF"/>
                                         <outlet property="delegate" destination="-1" id="Lrc-wc-PYK"/>
@@ -143,15 +135,16 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="Bwe-6c-X7t" firstAttribute="top" secondItem="flp-pa-0jZ" secondAttribute="top" constant="15" id="1ej-J9-G0S"/>
-                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="j07-SK-TXo" secondAttribute="trailing" constant="10" id="4UL-0r-cJp"/>
                                 <constraint firstAttribute="bottom" secondItem="B3H-L9-7oG" secondAttribute="bottom" id="C1Y-l1-FyK"/>
                                 <constraint firstAttribute="trailing" secondItem="B3H-L9-7oG" secondAttribute="trailing" id="R9A-P5-ShV"/>
                                 <constraint firstItem="B3H-L9-7oG" firstAttribute="leading" secondItem="flp-pa-0jZ" secondAttribute="leading" id="TMc-Bk-gGh"/>
-                                <constraint firstItem="j07-SK-TXo" firstAttribute="centerY" secondItem="Bwe-6c-X7t" secondAttribute="centerY" id="lZs-GS-Kaa"/>
-                                <constraint firstItem="j07-SK-TXo" firstAttribute="leading" secondItem="Bwe-6c-X7t" secondAttribute="trailing" constant="3" id="sBJ-U8-atQ"/>
+                                <constraint firstAttribute="trailing" secondItem="Bwe-6c-X7t" secondAttribute="trailing" constant="15" id="pfY-yv-WWm"/>
                                 <constraint firstItem="Bwe-6c-X7t" firstAttribute="leading" secondItem="flp-pa-0jZ" secondAttribute="leading" constant="15" id="vl3-2t-cfi"/>
                                 <constraint firstItem="B3H-L9-7oG" firstAttribute="top" secondItem="Bwe-6c-X7t" secondAttribute="bottom" constant="10" id="zp7-yE-V9d"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -161,6 +154,9 @@
                         <constraint firstAttribute="trailing" secondItem="flp-pa-0jZ" secondAttribute="trailing" id="WjY-Fa-xec"/>
                         <constraint firstAttribute="bottom" secondItem="flp-pa-0jZ" secondAttribute="bottom" id="aVe-0i-u7N"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="lzF-Ae-xeF"/>
@@ -177,6 +173,9 @@
                 <constraint firstAttribute="bottom" secondItem="A5s-jy-xm4" secondAttribute="bottom" id="qiZ-Y9-TGa"/>
                 <constraint firstItem="Bmt-23-NQ2" firstAttribute="leading" secondItem="hic-qN-V15" secondAttribute="leading" id="u2f-AV-ywy"/>
             </constraints>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="121.73913043478262" y="-14.0625"/>
         </view>
     </objects>

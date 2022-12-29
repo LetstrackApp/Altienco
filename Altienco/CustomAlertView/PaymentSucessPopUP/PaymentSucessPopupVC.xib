@@ -30,10 +30,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eHb-xj-WIM">
-                    <rect key="frame" x="20.5" y="349" width="373" height="397.5"/>
+                    <rect key="frame" x="20.5" y="481" width="373" height="377.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyh-Gm-6IS" customClass="PaddingLabel" customModule="Altienco" customModuleProvider="target">
-                            <rect key="frame" x="15" y="165" width="343" height="122.5"/>
+                            <rect key="frame" x="15" y="155" width="343" height="122.5"/>
                             <string key="text">Thank you for getting in touch!
     
 We appreciate you contacting us. One of our colleagues will get back in touch within 48 hours. We are open Mon to Fri 9.30 am to 5.30 pm.
@@ -44,10 +44,10 @@ Have a great day!</string>
                             <nil key="highlightedColor"/>
                         </label>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3lc-uE-64A">
-                            <rect key="frame" x="0.0" y="297.5" width="373" height="100"/>
+                            <rect key="frame" x="0.0" y="302.5" width="373" height="45"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgB-fB-Zyz">
-                                    <rect key="frame" x="37.5" y="27.5" width="298" height="45"/>
+                                    <rect key="frame" x="37.5" y="0.0" width="298" height="45"/>
                                     <color key="backgroundColor" red="0.0078431372550000003" green="0.1647058824" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="45" id="p5o-TA-XQ5"/>
@@ -63,7 +63,7 @@ Have a great day!</string>
                                 <constraint firstItem="cgB-fB-Zyz" firstAttribute="width" secondItem="3lc-uE-64A" secondAttribute="width" multiplier="0.8" id="793-G8-kry"/>
                                 <constraint firstItem="cgB-fB-Zyz" firstAttribute="centerX" secondItem="3lc-uE-64A" secondAttribute="centerX" id="Gvx-n3-ZfD"/>
                                 <constraint firstItem="cgB-fB-Zyz" firstAttribute="centerY" secondItem="3lc-uE-64A" secondAttribute="centerY" id="uAi-Eh-dFo"/>
-                                <constraint firstAttribute="height" constant="100" id="ubv-8R-ucX"/>
+                                <constraint firstAttribute="height" constant="45" id="ubv-8R-ucX"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -72,7 +72,7 @@ Have a great day!</string>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uNk-HZ-WRr" customClass="AnimationView" customModule="Lottie">
-                            <rect key="frame" x="136.5" y="34" width="100" height="100"/>
+                            <rect key="frame" x="136.5" y="30" width="100" height="100"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="100" id="hPK-Sp-fXp"/>
@@ -83,10 +83,10 @@ Have a great day!</string>
                     <color key="backgroundColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="3lc-uE-64A" secondAttribute="trailing" id="9BE-5H-33G"/>
-                        <constraint firstItem="3lc-uE-64A" firstAttribute="top" secondItem="yyh-Gm-6IS" secondAttribute="bottom" constant="10" id="Fcm-dQ-UGc"/>
-                        <constraint firstAttribute="bottom" secondItem="3lc-uE-64A" secondAttribute="bottom" id="Flg-oU-Q99"/>
-                        <constraint firstItem="uNk-HZ-WRr" firstAttribute="top" secondItem="eHb-xj-WIM" secondAttribute="top" constant="34" id="HQp-BN-bsK"/>
-                        <constraint firstItem="yyh-Gm-6IS" firstAttribute="top" secondItem="uNk-HZ-WRr" secondAttribute="bottom" constant="31" id="M72-QP-2DZ"/>
+                        <constraint firstItem="3lc-uE-64A" firstAttribute="top" secondItem="yyh-Gm-6IS" secondAttribute="bottom" constant="25" id="Fcm-dQ-UGc"/>
+                        <constraint firstAttribute="bottom" secondItem="3lc-uE-64A" secondAttribute="bottom" constant="30" id="Flg-oU-Q99"/>
+                        <constraint firstItem="uNk-HZ-WRr" firstAttribute="top" secondItem="eHb-xj-WIM" secondAttribute="top" constant="30" id="HQp-BN-bsK"/>
+                        <constraint firstItem="yyh-Gm-6IS" firstAttribute="top" secondItem="uNk-HZ-WRr" secondAttribute="bottom" constant="25" id="M72-QP-2DZ"/>
                         <constraint firstItem="3lc-uE-64A" firstAttribute="leading" secondItem="eHb-xj-WIM" secondAttribute="leading" id="MwQ-BF-H6r"/>
                         <constraint firstAttribute="trailing" secondItem="yyh-Gm-6IS" secondAttribute="trailing" constant="15" id="a12-ga-xFW"/>
                         <constraint firstItem="yyh-Gm-6IS" firstAttribute="leading" secondItem="eHb-xj-WIM" secondAttribute="leading" constant="15" id="hWk-hg-4Ii"/>
@@ -98,14 +98,13 @@ Have a great day!</string>
             <color key="backgroundColor" white="0.0" alpha="0.65565238609999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="eHb-xj-WIM" firstAttribute="centerX" secondItem="uKy-3l-wmx" secondAttribute="centerX" id="CRg-RY-AAR"/>
-                <constraint firstAttribute="bottom" secondItem="eHb-xj-WIM" secondAttribute="bottom" multiplier="480/400" id="d7w-6a-BXA"/>
+                <constraint firstAttribute="bottom" secondItem="eHb-xj-WIM" secondAttribute="bottom" multiplier="480/460" id="d7w-6a-BXA"/>
                 <constraint firstItem="eHb-xj-WIM" firstAttribute="width" secondItem="uKy-3l-wmx" secondAttribute="width" multiplier="0.9" id="oIS-xk-qUd"/>
             </constraints>
             <point key="canvasLocation" x="-79.710144927536234" y="-103.125"/>
         </view>
     </objects>
     <designables>
-        <designable name="uNk-HZ-WRr"/>
         <designable name="yyh-Gm-6IS">
             <size key="intrinsicContentSize" width="932.5" height="87.5"/>
         </designable>

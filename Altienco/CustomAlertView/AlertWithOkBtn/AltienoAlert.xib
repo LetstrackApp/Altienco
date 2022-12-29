@@ -32,22 +32,22 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZ8-QL-3UD">
-                    <rect key="frame" x="16" y="107" width="288" height="387"/>
+                    <rect key="frame" x="16" y="179" width="288" height="365.5"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ufe-w0-Qw5">
-                            <rect key="frame" x="15" y="20" width="258" height="277"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ufe-w0-Qw5">
+                            <rect key="frame" x="15" y="30" width="258" height="240.5"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CRT-ia-dfH">
-                                    <rect key="frame" x="0.0" y="0.0" width="258" height="120"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="258" height="90"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sAb-XP-2r2" customClass="AnimationView" customModule="Lottie">
-                                            <rect key="frame" x="87" y="18" width="84" height="84"/>
+                                            <rect key="frame" x="84" y="0.0" width="90" height="90"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jjq-bT-FiW">
-                                                    <rect key="frame" x="21" y="21" width="42" height="42"/>
+                                                    <rect key="frame" x="22.5" y="22.5" width="45" height="45"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o9P-h9-Duv" customClass="AnimationView" customModule="Lottie">
-                                                    <rect key="frame" x="21" y="21" width="42" height="42"/>
+                                                    <rect key="frame" x="22.5" y="22.5" width="45" height="45"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="o9P-h9-Duv" secondAttribute="height" multiplier="1:1" id="SFC-9k-z1s"/>
@@ -69,14 +69,14 @@
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="120" id="Lx2-Zd-5w7"/>
-                                        <constraint firstItem="sAb-XP-2r2" firstAttribute="height" secondItem="CRT-ia-dfH" secondAttribute="height" multiplier="0.7" id="gPJ-nl-CfM"/>
+                                        <constraint firstItem="sAb-XP-2r2" firstAttribute="top" secondItem="CRT-ia-dfH" secondAttribute="top" id="3ZD-ec-DR9"/>
+                                        <constraint firstAttribute="height" constant="90" id="Lx2-Zd-5w7"/>
+                                        <constraint firstItem="sAb-XP-2r2" firstAttribute="height" secondItem="CRT-ia-dfH" secondAttribute="height" id="gPJ-nl-CfM"/>
                                         <constraint firstItem="sAb-XP-2r2" firstAttribute="centerX" secondItem="CRT-ia-dfH" secondAttribute="centerX" id="nbN-0W-te8"/>
-                                        <constraint firstItem="sAb-XP-2r2" firstAttribute="centerY" secondItem="CRT-ia-dfH" secondAttribute="centerY" id="xnH-a3-5sT"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EYX-2t-fvU" customClass="PaddingLabel" customModule="Altienco" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="120" width="258" height="157"/>
+                                    <rect key="frame" x="0.0" y="110" width="258" height="130.5"/>
                                     <string key="text">Thank you for getting in touch!
     
 We appreciate you contacting us. One of our colleagues will get back in touch within 48 hours. We are open Mon to Fri 9.30 am to 5.30 pm.
@@ -94,10 +94,10 @@ Have a great day!</string>
                             </constraints>
                         </stackView>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaZ-Qz-tlV">
-                            <rect key="frame" x="0.0" y="307" width="288" height="80"/>
+                            <rect key="frame" x="0.0" y="290.5" width="288" height="45"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rIq-fj-qLR">
-                                    <rect key="frame" x="29" y="17.5" width="230" height="45"/>
+                                    <rect key="frame" x="29" y="0.0" width="230" height="45"/>
                                     <color key="backgroundColor" red="0.0078431372550000003" green="0.1647058824" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="45" id="Twe-UW-tv8"/>
@@ -111,7 +111,7 @@ Have a great day!</string>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="rIq-fj-qLR" firstAttribute="centerX" secondItem="RaZ-Qz-tlV" secondAttribute="centerX" id="EAI-yG-IXf"/>
-                                <constraint firstAttribute="height" constant="80" id="cZQ-Go-tdO"/>
+                                <constraint firstAttribute="height" constant="45" id="cZQ-Go-tdO"/>
                                 <constraint firstItem="rIq-fj-qLR" firstAttribute="width" secondItem="RaZ-Qz-tlV" secondAttribute="width" multiplier="0.8" id="hre-U4-KQc"/>
                                 <constraint firstItem="rIq-fj-qLR" firstAttribute="centerY" secondItem="RaZ-Qz-tlV" secondAttribute="centerY" id="imq-6P-Yer"/>
                             </constraints>
@@ -126,10 +126,10 @@ Have a great day!</string>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="Ufe-w0-Qw5" secondAttribute="trailing" constant="15" id="58t-DZ-lka"/>
                         <constraint firstAttribute="trailing" secondItem="RaZ-Qz-tlV" secondAttribute="trailing" id="ETh-pi-vMX"/>
-                        <constraint firstItem="Ufe-w0-Qw5" firstAttribute="top" secondItem="sZ8-QL-3UD" secondAttribute="top" constant="20" id="RDa-SE-q1r"/>
+                        <constraint firstItem="Ufe-w0-Qw5" firstAttribute="top" secondItem="sZ8-QL-3UD" secondAttribute="top" constant="30" id="RDa-SE-q1r"/>
                         <constraint firstItem="RaZ-Qz-tlV" firstAttribute="leading" secondItem="sZ8-QL-3UD" secondAttribute="leading" id="aAV-8G-KI9"/>
-                        <constraint firstItem="RaZ-Qz-tlV" firstAttribute="top" secondItem="Ufe-w0-Qw5" secondAttribute="bottom" constant="10" id="fE3-wm-YN1"/>
-                        <constraint firstAttribute="bottom" secondItem="RaZ-Qz-tlV" secondAttribute="bottom" id="qS1-iY-Ymd"/>
+                        <constraint firstItem="RaZ-Qz-tlV" firstAttribute="top" secondItem="Ufe-w0-Qw5" secondAttribute="bottom" constant="20" id="fE3-wm-YN1"/>
+                        <constraint firstAttribute="bottom" secondItem="RaZ-Qz-tlV" secondAttribute="bottom" constant="30" id="qS1-iY-Ymd"/>
                         <constraint firstItem="Ufe-w0-Qw5" firstAttribute="leading" secondItem="sZ8-QL-3UD" secondAttribute="leading" constant="15" id="wkD-4k-3cR"/>
                     </constraints>
                 </view>
@@ -138,14 +138,14 @@ Have a great day!</string>
             <constraints>
                 <constraint firstItem="sZ8-QL-3UD" firstAttribute="width" secondItem="8h5-dH-jO3" secondAttribute="width" multiplier="0.9" id="TAN-1a-ZTs"/>
                 <constraint firstItem="sZ8-QL-3UD" firstAttribute="centerX" secondItem="8h5-dH-jO3" secondAttribute="centerX" id="nDj-85-0Fx"/>
-                <constraint firstAttribute="bottom" secondItem="sZ8-QL-3UD" secondAttribute="bottom" multiplier="460/400" id="vpS-FI-YhP"/>
+                <constraint firstAttribute="bottom" secondItem="sZ8-QL-3UD" secondAttribute="bottom" multiplier="480/460" id="vpS-FI-YhP"/>
             </constraints>
-            <point key="canvasLocation" x="-78.461538461538453" y="-103.08056872037915"/>
+            <point key="canvasLocation" x="-78.75" y="-103.52112676056338"/>
         </view>
     </objects>
     <designables>
         <designable name="EYX-2t-fvU">
-            <size key="intrinsicContentSize" width="976.5" height="98"/>
+            <size key="intrinsicContentSize" width="870.5" height="82"/>
         </designable>
         <designable name="o9P-h9-Duv"/>
         <designable name="sAb-XP-2r2"/>

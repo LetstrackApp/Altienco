@@ -11,7 +11,13 @@ import UIKit
 
 
 enum baseURL {
+    
+    
+    //for development: https://dadmin.altienco.com/api/downloadInvoice
+   // for live: https://admin.altienco.com/api/downloadInvoice
         static let baseURl = "https://testnode.altienco.com/api/"
+    static let baseURldownload = "https://dadmin.altienco.com/api/"
+//    static let baseURldownload = "https://admin.altienco.com/api/"
 //    static let baseURl = "https://node.altienco.com/api/"
     static let imageBaseURl = "http://testnode.eu-west-2.elasticbeanstalk.com/"
     static let termsCondition = "https://www.altienco.com/TermsAndConditions.html"
@@ -21,6 +27,8 @@ enum baseURL {
 }
 
 enum subURL{
+    static let confirmingIntrPINBankVoucher = "confirmingIntrPINBankVoucher"
+
     static let generateOTP = "generateOTP"
     static let verifyOTP = "verifyOTP"
     static let resendOTP = "resendOTP"
@@ -29,7 +37,7 @@ enum subURL{
     static let addMoney = "addMoney"
     static let getOperator = "getOperator"
     static let getOperatorPlans = "getOperatorPlans"
-    static let generateVoucher = "generatePINBankVoucher"
+    static let generateVoucher = "confirmingIntrPINBankVoucher"
     static let history = "getOrderHistory"
     static let transactionHistory = "getTransactionHistory"
     static let voucherHistory = "getVoucherHistory"

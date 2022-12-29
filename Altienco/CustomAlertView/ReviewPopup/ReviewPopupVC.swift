@@ -63,7 +63,7 @@ class ReviewPopupVC: UIViewController {
     }
     @IBOutlet weak var scrollView: UIScrollView!{
         didSet {
-            scrollView.layer.cornerRadius = 8
+            scrollView.layer.cornerRadius = 10
         }
     }
     @IBOutlet weak var viewContainer: UIView!{
@@ -152,13 +152,13 @@ class ReviewPopupVC: UIViewController {
             UIView.animate(withDuration: 1, delay: 0, options: []) {
                 self?.scrollView.alpha = 0.0
                 self?.view.alpha = 0
-               
+                
             } completion: { result in
                 completion(true)
                 self?.view.removeFromSuperview()
                 self?.removeFromParent()
-               
-               
+                
+                
             }
             
             
@@ -180,16 +180,18 @@ class ReviewPopupVC: UIViewController {
         animationView.backgroundBehavior = .pauseAndRestore
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            Helper.shared.playSound()
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self?.opupInAniamtion()
+               
+                self?.opupInAniamtion()
             }
             
             self?.animationView.play(fromProgress: 0,
-                                    toProgress: 1,
-                                    loopMode: LottieLoopMode.playOnce,
-                                    completion: { (finished) in
+                                     toProgress: 1,
+                                     loopMode: LottieLoopMode.playOnce,
+                                     completion: { (finished) in
                 if finished {
-                   
+                    
                     print("Animation Complete")
                 } else {
                     print("Animation cancelled")
@@ -204,10 +206,10 @@ class ReviewPopupVC: UIViewController {
     func opupInAniamtion(){
         imageView.isHidden = false
         self.imageView.transform = CGAffineTransform(scaleX: 0, y: 0)
-
+        
         UIView.animate(withDuration: 0.9, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [],  animations: {
             self.imageView.transform = CGAffineTransform(scaleX: 1, y: 1)
-         })
+        })
     }
     
     func getBottomConstant ()->CGFloat{
@@ -222,18 +224,20 @@ class ReviewPopupVC: UIViewController {
         //        self.operatorTitle = reviewPopupModel?.operatorTitle.replacingOccurrences(of: " ", with: "").trimWhite.shoSpace
         self.confirmButton.showLoading()
         self.view.isUserInteractionEnabled = false
+        
         let dataModel = GenerateVoucherModel.init(customerID: "\(UserDefaults.getUserData?.customerID ?? 0)",
                                                   operatorID: "\(self.reviewPopupModel?.operatorID ?? 0)",
                                                   planName: self.reviewPopupModel?.planName ?? "",
                                                   currency: UserDefaults.getUserData?.currencySymbol ?? "" , dinominationValue: "\(self.reviewPopupModel?.denomination ?? 0)",
                                                   langCode: "en",
                                                   transactionTypeId: self.reviewPopupModel?.transactionTypeId ?? 0)
+        
         self.generateVoucher?.generateVoucher(model: dataModel) { (result,status,msg)   in
             DispatchQueue.main.async { [weak self] in
                 self?.confirmButton.hideLoading()
                 self?.view.isUserInteractionEnabled = true
-                if status == false && msg != ""{
-                    self?.alert(message: msg ?? "", title: "Alert")
+                if status == false {
+                    Helper.showToast(msg, isAlertView: true)
                 }
                 else{
                     if let data = result {
@@ -277,3 +281,6 @@ class ReviewPopupVC: UIViewController {
     
     
 }
+
+
+

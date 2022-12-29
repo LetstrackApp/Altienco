@@ -150,7 +150,7 @@ class ProfileVC: UIViewController {
                         self?.isTextEditing = false
                         DispatchQueue.main.async {
                            
-                            AltienoAlert.initialization().showAlert(with: .profile) { index, _ in
+                            AltienoAlert.initialization().showAlert(with: .profile(lngConst.profileUpdate)) { index, _ in
                                 DispatchQueue.main.async {
                                     self?.navigationController?.popToRootViewController(animated: true)
                                 }

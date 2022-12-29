@@ -14,7 +14,9 @@ class GenerateVoucherViewModel {
     
 //    var voucher : Box<GenerateVoucherResponseObj> = Box(GenerateVoucherResponseObj())
     
-    func generateVoucher(model : GenerateVoucherModel, complition : @escaping(GenerateVoucherResponseObj?, Bool?, String?) -> Void)->Void{
+    func generateVoucher(model : GenerateVoucherModel,
+                         complition : @escaping(GenerateVoucherResponseObj?,
+                                                Bool?, String?) -> Void)->Void{
         //        SVProgressHUD.show()
         let data = try? JSONEncoder().encode(model)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
@@ -23,7 +25,10 @@ class GenerateVoucherViewModel {
             "Authorization": "Bearer \(UserDefaults.getToken)",
             "Content-Type": "application/json"
         ]
-        AFWrapper.requestPOSTURL(strURl, params: json, headers: header, success: { (jsondata) in
+        AFWrapper.requestPOSTURL(strURl,
+                                 params: json,
+                                 headers: header,
+                                 success: { (jsondata) in
             debugPrint("jsondata:", strURl, jsondata as Any)
             SVProgressHUD.dismiss()
             if jsondata?["Message_Code"] as? Bool == true,

@@ -23,6 +23,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OperatorPlanVC" customModule="Altienco" customModuleProvider="target">
             <connections>
                 <outlet property="addButton" destination="x55-Aw-6mU" id="gfj-zT-gSa"/>
+                <outlet property="collectionViewHeight" destination="kZt-IJ-U6K" id="7kk-yR-6yc"/>
                 <outlet property="generateCollingCard" destination="rcW-BM-2wx" id="wsR-DA-5R2"/>
                 <outlet property="imageContainer" destination="VaV-sx-saC" id="ync-md-igg"/>
                 <outlet property="nextButton" destination="su7-Ma-wyH" id="RbM-08-rKZ"/>
@@ -203,7 +204,7 @@
                                     <rect key="frame" x="0.0" y="97" width="384" height="612.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AUJ-Pg-AeW">
-                                            <rect key="frame" x="0.0" y="0.0" width="384" height="589"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384" height="599.5"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N9p-GE-Hex">
                                                     <rect key="frame" x="0.0" y="0.0" width="384" height="200.5"/>
@@ -243,20 +244,26 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYl-cB-Y7u">
-                                                    <rect key="frame" x="0.0" y="200.5" width="384" height="260"/>
+                                                    <rect key="frame" x="0.0" y="200.5" width="384" height="270.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wvz-Td-XQR">
-                                                            <rect key="frame" x="10" y="10" width="364" height="240"/>
+                                                            <rect key="frame" x="10" y="10" width="364" height="250.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Select Denomination" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ox3-8z-9L1">
                                                                     <rect key="frame" x="20" y="15" width="324" height="25.5"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="25.5" id="epA-CK-5v8"/>
+                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="18"/>
                                                                     <color key="textColor" red="0.47058823529411764" green="0.4823529411764706" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="3zf-e5-QBp">
-                                                                    <rect key="frame" x="20" y="50.5" width="324" height="189.5"/>
+                                                                    <rect key="frame" x="20" y="50.5" width="324" height="180"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="180" id="kZt-IJ-U6K"/>
+                                                                    </constraints>
                                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="liA-Zg-EuD">
                                                                         <size key="itemSize" width="128" height="128"/>
                                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -273,7 +280,7 @@
                                                             <constraints>
                                                                 <constraint firstItem="3zf-e5-QBp" firstAttribute="leading" secondItem="wvz-Td-XQR" secondAttribute="leading" constant="20" id="34b-p8-96W"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Ox3-8z-9L1" secondAttribute="trailing" constant="20" id="Ebh-mu-Zdz"/>
-                                                                <constraint firstAttribute="bottom" secondItem="3zf-e5-QBp" secondAttribute="bottom" id="GAF-RI-aDv"/>
+                                                                <constraint firstAttribute="bottom" secondItem="3zf-e5-QBp" secondAttribute="bottom" constant="20" id="GAF-RI-aDv"/>
                                                                 <constraint firstItem="3zf-e5-QBp" firstAttribute="top" secondItem="Ox3-8z-9L1" secondAttribute="bottom" constant="10" id="csW-AC-huL"/>
                                                                 <constraint firstItem="Ox3-8z-9L1" firstAttribute="top" secondItem="wvz-Td-XQR" secondAttribute="top" constant="15" id="i1m-PL-EFe"/>
                                                                 <constraint firstAttribute="trailing" secondItem="3zf-e5-QBp" secondAttribute="trailing" constant="20" id="kg9-vQ-ii2"/>
@@ -287,17 +294,16 @@
                                                         <constraint firstItem="wvz-Td-XQR" firstAttribute="leading" secondItem="BYl-cB-Y7u" secondAttribute="leading" constant="10" id="RG0-1B-5UG"/>
                                                         <constraint firstAttribute="trailing" secondItem="wvz-Td-XQR" secondAttribute="trailing" constant="10" id="W1p-bs-czg"/>
                                                         <constraint firstAttribute="bottom" secondItem="wvz-Td-XQR" secondAttribute="bottom" constant="10" id="WLE-4Y-qS4"/>
-                                                        <constraint firstAttribute="height" constant="260" id="tXz-Cr-z3K"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3B-tS-SlL" customClass="PaddingLabel" customModule="Altienco" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="460.5" width="384" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="471" width="384" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="faS-Wv-3f5">
-                                                    <rect key="frame" x="0.0" y="481" width="384" height="108"/>
+                                                    <rect key="frame" x="0.0" y="491.5" width="384" height="108"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="su7-Ma-wyH">
                                                             <rect key="frame" x="38.5" y="31.5" width="307" height="45"/>

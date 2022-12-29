@@ -106,6 +106,7 @@ class ReviewIntrVC: UIViewController {
         animationView.backgroundBehavior = .pauseAndRestore
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            Helper.shared.playSound()
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self?.opupInAniamtion()
             }

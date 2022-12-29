@@ -10,7 +10,7 @@ import UIKit
 import SideMenu
 import SkeletonView
 import FSPagerView
-class DashboardVC: UIViewController {
+class DashboardVC: FloatingPannelHelper {
     
     var adResponse = [AdvertismentResponseObj]()
     var advertismentModel : AdvertismentViewModel?
@@ -422,8 +422,7 @@ extension DashboardVC {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     @IBAction func transferCard(_ sender: Any) {
         

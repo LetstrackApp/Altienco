@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WalletPaymentVC: UIViewController {
+class WalletPaymentVC: FloatingPannelHelper {
     
     @IBOutlet weak var notificationIcon: UIImageView!
     @IBOutlet weak var viewContainer: UIView! {
@@ -29,6 +29,16 @@ class WalletPaymentVC: UIViewController {
     }
     @IBOutlet weak var userName: UILabel!
     
+    @IBOutlet weak var continueBtn: UIButton! {
+        didSet {
+            self.continueBtn.setupNextButton(title: lngConst.continue_withCard)
+            continueBtn.backgroundColor = .white
+            continueBtn.layer.borderColor = UIColor.init(0x022A72).cgColor
+            continueBtn.setTitleColor(UIColor.init(0x022A72), for: .normal)
+            continueBtn.layer.borderWidth = 1
+            continueBtn.addShadow()
+        }
+    }
     @IBOutlet weak var walletBalance: UILabel!{
         didSet{
             walletBalance.font = UIFont.SF_Bold(30.0)
@@ -129,12 +139,7 @@ class WalletPaymentVC: UIViewController {
             scrollView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         }
     }
-    @IBOutlet weak var orLbl: PaddingLabel! {
-        didSet {
-            orLbl.topInset = 20
-            
-        }
-    }
+    @IBOutlet weak var orLbl: PaddingLabel!
     
     @IBOutlet weak var wallietTitle: PaddingLabel! {
         didSet {
@@ -150,8 +155,7 @@ class WalletPaymentVC: UIViewController {
     }
     
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     
     override func viewWillAppear(_ animated: Bool) {

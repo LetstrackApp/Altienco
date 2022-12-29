@@ -9,7 +9,7 @@
 import UIKit
 import SkeletonView
 
-class DenominationVC: UIViewController {
+class DenominationVC: FloatingPannelHelper {
     
     var viewModel : IntrOperatorPlanViewModel?
     var operatorList = [LastRecharge]()
@@ -103,8 +103,7 @@ class DenominationVC: UIViewController {
     }
     
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

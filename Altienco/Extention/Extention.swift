@@ -429,9 +429,9 @@ extension UIButton{
     
     func setupNextButton(title: String,
                          space: Double = 2.0,
-                         cornerRadius:CGFloat = 0){
+                         cornerRadius:CGFloat = 10){
         self.titleLabel?.text = title
-        self.layer.cornerRadius = cornerRadius == 0 ? self.layer.frame.size.height/3 :  cornerRadius
+        self.layer.cornerRadius = cornerRadius 
         self.titleLabel?.font = UIFont.SF_Regular(14.0)
         self.clipsToBounds=true
         self.layer.shadowColor = UIColor.black.cgColor

@@ -52,3 +52,27 @@ struct GenerateVoucherResponseObj: Codable {
 }
 
 
+
+
+struct ConfirmingIntrPINBankVoucher: Decodable {
+    var apiId : Int?
+    var confirmationExpiryDate :String?
+    var currency :String?
+    var externalId: Int?
+    var firstStep_ActivityDate:String?
+    var processStatusId: Int?
+    var secondStep_ActivityDate:String?
+    var walletAmount :String?
+
+    
+    init(json: [String:Any]){
+        self.apiId = json["apiId"] as? Int
+        self.confirmationExpiryDate = json["confirmationExpiryDate"] as? String
+        self.currency = json["currency"] as? String
+        self.externalId = json["externalId"] as? Int
+        self.firstStep_ActivityDate = json["firstStep_ActivityDate"] as? String
+        self.processStatusId = json["processStatusId"] as? Int
+        self.secondStep_ActivityDate = json["secondStep_ActivityDate"] as? String
+        self.walletAmount = json["walletAmount"] as? String
+    }
+}

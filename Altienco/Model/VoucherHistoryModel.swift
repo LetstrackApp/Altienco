@@ -33,7 +33,8 @@ class VoucherHistoryResponseObj: Codable {
     let operatorID: Int?
     let operatorName, orderNumber, planName, transactionDate, msgToShare, mPIN : String?
     let voucherAmount, transactionTypeId, voucherId: Int?
-
+    let transactionMessage: String?
+    let transactionStatus : Int?
     enum CodingKeys: String, CodingKey {
         case fkUserID
         case currency
@@ -41,11 +42,14 @@ class VoucherHistoryResponseObj: Codable {
         case isUsed
         case operatorID
         case operatorName, orderNumber, planName, transactionDate, voucherAmount, msgToShare
-        case transactionTypeId, voucherId, mPIN
+        case transactionTypeId, voucherId, mPIN,transactionMessage,transactionStatus
     }
 
     
     init(json:[String: Any]) {
+        self.transactionStatus = json["transactionStatus"] as? Int
+
+        self.transactionMessage = json["transactionMessage"] as? String
         self.fkUserID = json["userId"] as? Int
         self.operatorID = json["operatorId"] as? Int
         self.operatorName = json["operatorName"] as? String

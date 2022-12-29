@@ -181,7 +181,7 @@
                                     <rect key="frame" x="0.0" y="75.5" width="382" height="624"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="ilc-Pd-rYo">
-                                            <rect key="frame" x="0.0" y="0.0" width="382" height="517.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="527.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recharge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOH-0P-R4K" customClass="PaddingLabel" customModule="Altienco" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="382" height="25.5"/>
@@ -190,7 +190,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GdH-eE-lcK">
-                                                    <rect key="frame" x="0.0" y="26.5" width="382" height="400"/>
+                                                    <rect key="frame" x="0.0" y="26.5" width="382" height="410"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e8E-fK-53r">
                                                             <rect key="frame" x="10" y="10" width="362" height="380"/>
@@ -245,14 +245,14 @@
                                                         <constraint firstAttribute="trailing" secondItem="e8E-fK-53r" secondAttribute="trailing" constant="10" id="VKW-4R-Eyi"/>
                                                         <constraint firstItem="e8E-fK-53r" firstAttribute="leading" secondItem="GdH-eE-lcK" secondAttribute="leading" constant="10" id="VdQ-gP-TxC"/>
                                                         <constraint firstItem="e8E-fK-53r" firstAttribute="top" secondItem="GdH-eE-lcK" secondAttribute="top" constant="10" id="lGk-fE-XF2"/>
-                                                        <constraint firstAttribute="bottom" secondItem="e8E-fK-53r" secondAttribute="bottom" constant="10" id="v21-S7-3Yp"/>
+                                                        <constraint firstAttribute="bottom" secondItem="e8E-fK-53r" secondAttribute="bottom" constant="20" id="v21-S7-3Yp"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDM-Nf-5Nt">
-                                                    <rect key="frame" x="0.0" y="427.5" width="382" height="90"/>
+                                                    <rect key="frame" x="0.0" y="437.5" width="382" height="90"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wf2-Io-8hU" customClass="LoadingButton" customModule="Altienco" customModuleProvider="target">
                                                             <rect key="frame" x="30" y="20" width="322" height="50"/>

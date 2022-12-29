@@ -8,16 +8,15 @@
 
 import UIKit
 import DropDown
+import SVProgressHUD
+import SkeletonView
 
-class TransactionHistoryVC: UIViewController {
+class TransactionHistoryVC: FloatingPannelHelper {
     
     var viewModel: TransactionHistoryViewModel?
     var dropDownModel: DropDownViewModel?
     var dropDownResponce = [DropDownResponseObj]()
-    var historyResponce = [HistoryResponseObj]()
     let dropDownStatus = DropDown()
-    var header1 = "My"
-    var header2 = "Transaction"
     var pageNum = 1
     var pageSize = 20
     var transactionTypeId = 0
@@ -71,7 +70,18 @@ class TransactionHistoryVC: UIViewController {
             self.viewContainer.clipsToBounds=true
         }
     }
-    @IBOutlet weak var historyTable: UITableView!
+    @IBOutlet weak var historyTable: UITableView!{
+        didSet {
+            historyTable.rowHeight = UITableView.automaticDimension
+            historyTable.sectionHeaderHeight = UITableView.automaticDimension
+            historyTable.sectionFooterHeight = UITableView.automaticDimension
+            historyTable.estimatedRowHeight = 113
+            historyTable.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+            historyTable.tableFooterView = UIView.init(frame: .zero)
+            historyTable.tableHeaderView = UIView.init(frame: .zero)
+            historyTable.isSkeletonable = true
+        }
+    }
     
     @IBOutlet weak var statusText: UILabel!
     @IBOutlet weak var firstHeader: UILabel!
@@ -81,10 +91,6 @@ class TransactionHistoryVC: UIViewController {
         super.viewDidLoad()
         self.isLoading = true
         self.dropDownStatus.direction = .bottom
-        if self.header1 != "" && self.header2 != ""{
-            self.firstHeader.text = header1
-            self.lastHeader.text = header2
-        }
         dropDownModel = DropDownViewModel()
         viewModel = TransactionHistoryViewModel()
         historyTable.tableFooterView = UIView()
@@ -93,7 +99,17 @@ class TransactionHistoryVC: UIViewController {
             self.callHistoryData()
             self.getDropDownData()
         }
+        onLanguageChange()
     }
+    
+    func onLanguageChange(){
+        
+        firstHeader.changeColorAndFont(mainString: lngConst.my_Transaction.capitalized,
+                                       stringToColor: lngConst.transaction.capitalized,
+                                       color: UIColor.init(0xb24a96),
+                                       font: UIFont.SF_Medium(18))
+    }
+    
     func loadMoreData() {
         if !self.isLoading {
             self.isLoading = true
@@ -125,7 +141,7 @@ class TransactionHistoryVC: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 self?.isLoading = status
                 if status == true{
-                    self?.historyResponce = history ?? []
+                    self?.viewModel?.historyList.value = history ?? []
                     self?.historyTable.reloadData()
                 }
             }
@@ -134,17 +150,33 @@ class TransactionHistoryVC: UIViewController {
     }
     
     func callHistoryData() {
-        let model = HistoryRequestObj.init(customerId: UserDefaults.getUserData?.customerID, pageNum: self.pageNum, pageSize: self.pageSize, langCode: "en", transactionTypeId: self.transactionTypeId)
+        
+        let model = HistoryRequestObj.init(customerId: UserDefaults.getUserData?.customerID,
+                                           pageNum: self.pageNum,
+                                           pageSize: self.pageSize,
+                                           langCode: "en",
+                                           transactionTypeId: self.transactionTypeId)
+        if viewModel?.historyList.value.count == 0 {
+            historyTable.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor.lightGray.withAlphaComponent(0.3)), animation: nil, transition: .crossDissolve(0.26))
+
+        }else {
+            SVProgressHUD.show()
+        }
+       
+        
         viewModel?.getTransactionHistory(model: model, complition: { (history, status) in
             DispatchQueue.main.async { [weak self] in
+                self?.historyTable.stopSkeletonAnimation()
+                self?.historyTable.hideSkeleton()
                 self?.isLoading = status
                 if status == true{
-                    self?.historyResponce.append(contentsOf: history ?? [])
-                    self?.historyTable.reloadData()
+                    self?.viewModel?.historyList.value.append(contentsOf: history ?? [])
+                  
                 }
                 if history?.isEmpty == true{
                     self?.isLoading = false
                 }
+                self?.historyTable.reloadData()
             }})
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -158,8 +190,7 @@ class TransactionHistoryVC: UIViewController {
     
     
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     func showNotify(){
         if UserDefaults.isNotificationRead == "1"{
@@ -210,26 +241,31 @@ class TransactionHistoryVC: UIViewController {
 }
 
 
-extension TransactionHistoryVC: UITableViewDelegate, UITableViewDataSource {
+extension TransactionHistoryVC: SkeletonTableViewDelegate, SkeletonTableViewDataSource {
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "HistoryCell"
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.historyResponce.count == 0 {
+        if self.viewModel?.historyList.value.count ?? 0 == 0 {
             self.historyTable.setEmptyMessage("No records found!")
         } else {
             self.historyTable.restore()
         }
-        return self.historyResponce.count
+        return self.viewModel?.historyList.value.count ?? 0
     }
     
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastData = (self.historyResponce.count )
+        let lastData = self.viewModel?.historyList.value.count  ?? 0
         if indexPath.row == lastData - 10, isLoading {
             self.pageNum += 1
             self.callHistoryData()
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let model = self.historyResponce[indexPath.row]
+        if let model = self.viewModel?.historyList.value[indexPath.row] {
         if model.transactionTypeID == 4 {
             let viewController: SuccessGiftCardVC = SuccessGiftCardVC()
             viewController.isFromHistory = true
@@ -251,35 +287,36 @@ extension TransactionHistoryVC: UITableViewDelegate, UITableViewDataSource {
             viewController.orderNumber = model.orderNumber
             self.navigationController?.pushViewController(viewController, animated: true)
         }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as! HistoryCell
-        cell.model = self.historyResponce[indexPath.row]
+        cell.model = self.viewModel?.historyList.value[indexPath.row]
         cell.repeatRecharge.tag = indexPath.row
         cell.repeatRecharge.addTarget(self, action: #selector(callSuccessPopup(sender:)), for: .touchUpInside)
-
+        
         return cell
     }
     
     
     
-    func successVoucher(mPin: String,
-                        denominationValue : String,
-                        walletBalance: Double,
-                        msgToShare: String,
-                        voucherID: Int,
-                        orderNumber:String){
-        let viewController: SuccessRechargeVC = SuccessRechargeVC()
-        viewController.denominationValue = denominationValue
-        viewController.mPin = mPin
-        viewController.walletBal = walletBalance
-        viewController.voucherID = voucherID
-        viewController.msgToShare = msgToShare
-        viewController.orderNumber = orderNumber
-        self.navigationController?.pushViewController(viewController, animated: true)
-        
-    }
+//    func successVoucher(mPin: String,
+//                        denominationValue : String,
+//                        walletBalance: Double,
+//                        msgToShare: String,
+//                        voucherID: Int,
+//                        orderNumber:String){
+//        let viewController: SuccessRechargeVC = SuccessRechargeVC()
+//        viewController.denominationValue = denominationValue
+//        viewController.mPin = mPin
+//        viewController.walletBal = walletBalance
+//        viewController.voucherID = voucherID
+//        viewController.msgToShare = msgToShare
+//        viewController.orderNumber = orderNumber
+//        self.navigationController?.pushViewController(viewController, animated: true)
+//        
+//    }
     
     
     @objc func callSuccessPopup(sender: UIButton){
@@ -288,9 +325,9 @@ extension TransactionHistoryVC: UITableViewDelegate, UITableViewDataSource {
         var denomination, operatorID: Int
         
         if sender.tag >= 0 {
-            let model = self.historyResponce[sender.tag]
-            if let transactionTypeID = model.transactionTypeID,
-               let txnid =  TransactionTypeId(rawValue: transactionTypeID) {
+            if  let model = self.viewModel?.historyList.value[sender.tag],
+                let transactionTypeID = model.transactionTypeID,
+                let txnid =  TransactionTypeId(rawValue: transactionTypeID) {
                 operatorTitle = model.operatorName ?? ""
                 planName = model.planName ?? ""
                 currency = model.currency ?? ""
@@ -309,7 +346,7 @@ extension TransactionHistoryVC: UITableViewDelegate, UITableViewDataSource {
                 ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result, status in
                     DispatchQueue.main.async {
                         if status == true, let val = result{
-                          
+                            
                         }
                     }
                 }

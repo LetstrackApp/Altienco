@@ -9,7 +9,7 @@
 import UIKit
 import DropDown
 
-class TopupVC: UIViewController, UITextFieldDelegate {
+class TopupVC: FloatingPannelHelper, UITextFieldDelegate {
     
     
     var intrOperator: IntrOperatorViewModel?
@@ -181,8 +181,7 @@ class TopupVC: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

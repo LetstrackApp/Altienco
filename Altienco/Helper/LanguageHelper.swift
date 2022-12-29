@@ -124,10 +124,10 @@ the 16 digit pin
     let callingCard = "calling card"
     let supportMsg = "Something went wrong Please try again! If problem persists, please contact our support team"
     let addAnotherCard = "ADD ANOTHER CARD"
+    let home = "GO TO HOME"
     let topUpPlans = "Top-up Plans"
     let plans = "Plans"
     let generate_voucher = "Generate voucher"
-    let generate_your_voucher = "Generate your voucher"
     let voucher = "voucher"
     let add_Balance = "ADD BALANCE"
     let orderNo = "Order No "
@@ -159,7 +159,20 @@ Have a great day!
 """
     let profileUpdate =  "Great. Profile now updated."
     let continue_withCard = "CONTINUE WITH CARD"
-    
+    let my_Order = "My Order"
+    let order = "Order"
+    let my_Transaction = "My Transaction"
+    let transaction = "Transaction"
+    let voucher_History = "Voucher History"
+    let History = "History"
+    let reOrder = "Re-Order"
+    let voucher_Code_Copied = "Voucher Code Copied Successfully"
+    let claim_Code_Copied = "Claim Code Copied Successfully"
+    let tryAfterSomeTime = "Please try after Sometime!"
+    let allNotification = "All Notification"
+    let notification = "Notification"
+
+
 }
 
 

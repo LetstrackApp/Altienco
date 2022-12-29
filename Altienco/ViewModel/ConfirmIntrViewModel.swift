@@ -50,8 +50,9 @@ class ConfirmIntrViewModel {
 
         }) { (Error) in
             SVProgressHUD.dismiss()
-            Helper.showToast(Error?.debugDescription ?? "", delay:Helper.DELAY_LONG,isAlertView:true)
-            if let error = Error{
+            Helper.showToast(Error?.debugDescription ?? "",
+                             delay:Helper.DELAY_LONG,isAlertView:true)
+            if let error = Error {
                 complition(nil, false)
 //                Helper.showToast(error.lowercased(), delay:Helper.DELAY_LONG)
             }

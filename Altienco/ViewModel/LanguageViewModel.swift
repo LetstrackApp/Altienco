@@ -31,18 +31,19 @@ class LanguageViewModel {
                     self.language.value = languageModel
                 }
                 else if  let message = data["message"] as? String {
-                    Helper.showAlertView(message: message)
+                    Helper.shared.showAlertView(message: message)
                 }
                 else {
-                    Helper.showAlertView(message: lngConst.supportMsg)
+                    Helper.shared.showAlertView(message: lngConst.supportMsg)
                 }
             }else {
-                Helper.showAlertView(message: lngConst.supportMsg)
+                Helper.shared.showAlertView(message: lngConst.supportMsg)
                 
             }
         }) {
             (error) -> Void in
-            Helper.showAlertView(message: error.localizedDescription)
+            
+            Helper.shared.showAlertView(message: error.localizedDescription)
             // debugPrint(error.localizedDescription)
         }
     }

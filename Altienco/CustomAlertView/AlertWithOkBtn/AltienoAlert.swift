@@ -14,7 +14,7 @@ enum KindOF {
     case logout
     case retry
     case fail
-    case profile
+    case profile(String)
     case other(String)
     
     var btnTitle : String {
@@ -28,7 +28,7 @@ enum KindOF {
         switch self {
         case .contactus : return lngConst.shareMsgOncontactUS
         case .logout : return lngConst.logoutSuccessfully
-        case .profile: return lngConst.profileUpdate
+        case .profile(let message ): return message 
         case .other(let error):
             return error
         default: return ""
@@ -67,7 +67,7 @@ class AltienoAlert: UIViewController {
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     // MARK:- Public Properties
     @IBOutlet private var viewAlert: UIView!
-    @IBOutlet private var lblAlertText: PaddingLabel?{
+    @IBOutlet  var lblAlertText: PaddingLabel?{
         didSet{
             lblAlertText?.font = UIFont.SF_Regular(15)
         }
@@ -110,7 +110,7 @@ class AltienoAlert: UIViewController {
         viewAlert.layer.shadowRadius = 5
         viewAlert.layer.shadowOpacity = 0.4
         viewAlert.layer.shadowOffset = CGSize(width: 0, height: 0)
-        viewAlert.layer.cornerRadius = 4
+        viewAlert.layer.cornerRadius = 10
         lblAlertText?.text = kind?.title
         lblAlertText?.textAlignment = .center
         btnOK.setTitle(lngConst.ok.uppercased(), for: .normal)
@@ -130,7 +130,9 @@ class AltienoAlert: UIViewController {
         animator.backgroundBehavior = .pauseAndRestore
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            Helper.shared.playSound()
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+              
                 if  self?.kind?.imageName  != nil{
                     self?.opupInAniamtion()
                 }else {
@@ -237,6 +239,7 @@ class AltienoAlert: UIViewController {
     /// Hide Alert Controller
     private func hide(completion:@escaping(Bool)->Void){
         self.view.endEditing(true)
+        Helper.shared.isAlertShown = false
         DispatchQueue.main.asyncAfter(deadline: Dispatch.DispatchTime.now() + 0.1) { [weak self] in
             self?.bottomConstraint?.constant = -(self?.getBottomConstant() ?? 0)
             UIView.animate(withDuration: 1, delay: 0, options: []) {
@@ -276,6 +279,7 @@ class AltienoAlert: UIViewController {
     ///   - completion: retuen the index or title of the button
     public func showAlert(with kind : KindOF?,
                           completion : alertCompletionBlock) {
+        Helper.shared.isAlertShown = true
         self.kind = kind
         show()
         block = completion

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WalletSuccessVC: UIViewController {
+class WalletSuccessVC: FloatingPannelHelper {
 
     var denominationPrice = 0
     var walletBalance = 0
@@ -111,8 +111,7 @@ class WalletSuccessVC: UIViewController {
     
     
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
 
     @IBAction func redirectProfile(_ sender: Any) {

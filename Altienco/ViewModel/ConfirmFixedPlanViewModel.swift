@@ -13,7 +13,7 @@ import SVProgressHUD
 class ConfirmFixedPlanViewModel {
     
     func setFixedPlan(model : ConfirmFixedPlanRequest, complition : @escaping(ConfirmIntrResponseObj?, Bool?) -> Void)->Void{
-        SVProgressHUD.show()
+//        SVProgressHUD.show()
         let data = try? JSONEncoder().encode(model)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
         let strURl = subURL.confirmingGiftCard

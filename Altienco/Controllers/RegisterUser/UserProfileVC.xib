@@ -67,7 +67,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WC4-t6-eEh">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="721.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="716.5"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_altiencoLogo" translatesAutoresizingMaskIntoConstraints="NO" id="6vr-EH-g5a">
                                     <rect key="frame" x="97" y="10" width="126" height="126"/>
@@ -78,7 +78,7 @@
                                     </constraints>
                                 </imageView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwe-vZ-hj8">
-                                    <rect key="frame" x="12" y="181.5" width="296" height="530"/>
+                                    <rect key="frame" x="12" y="181.5" width="296" height="525"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="edz-wC-2r3">
                                             <rect key="frame" x="77" y="90" width="192" height="45"/>
@@ -170,22 +170,22 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="242" height="114"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUC-wr-4cN">
-                                                                    <rect key="frame" x="0.0" y="3" width="242" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="3" width="242" height="16.5"/>
                                                                     <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="14"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fe0-DW-0Xp">
-                                                                    <rect key="frame" x="0.0" y="29" width="242" height="79"/>
+                                                                    <rect key="frame" x="0.0" y="25.5" width="242" height="82.5"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PZj-lC-70d">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="242" height="79"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="242" height="82.5"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZSN-td-JiA">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="40.5" height="79"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="40.5" height="82.5"/>
                                                                                     <subviews>
                                                                                         <textField opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oXO-XL-AjG" customClass="BackTextField" customModule="Altienco" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="40.5" height="79"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="40.5" height="82.5"/>
                                                                                             <color key="tintColor" name="AppThemeBlue"/>
                                                                                             <color key="textColor" systemColor="systemGray6Color"/>
                                                                                             <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
@@ -214,10 +214,10 @@
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a3b-rp-niR">
-                                                                                    <rect key="frame" x="50.5" y="0.0" width="40.5" height="79"/>
+                                                                                    <rect key="frame" x="50.5" y="0.0" width="40.5" height="82.5"/>
                                                                                     <subviews>
                                                                                         <textField opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LCl-rL-u9b" customClass="BackTextField" customModule="Altienco" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="40.5" height="79"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="40.5" height="82.5"/>
                                                                                             <color key="tintColor" name="AppThemeBlue"/>
                                                                                             <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
                                                                                             <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="emailAddress" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
@@ -245,10 +245,10 @@
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gem-qU-SQa">
-                                                                                    <rect key="frame" x="101" y="0.0" width="40" height="79"/>
+                                                                                    <rect key="frame" x="101" y="0.0" width="40" height="82.5"/>
                                                                                     <subviews>
                                                                                         <textField opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d2a-PD-4S8" customClass="BackTextField" customModule="Altienco" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="79"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="82.5"/>
                                                                                             <color key="tintColor" name="AppThemeBlue"/>
                                                                                             <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
                                                                                             <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="emailAddress" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
@@ -276,10 +276,10 @@
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iah-R6-BC9">
-                                                                                    <rect key="frame" x="151" y="0.0" width="40.5" height="79"/>
+                                                                                    <rect key="frame" x="151" y="0.0" width="40.5" height="82.5"/>
                                                                                     <subviews>
                                                                                         <textField opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B4Z-00-1Kl" customClass="BackTextField" customModule="Altienco" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="40.5" height="79"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="40.5" height="82.5"/>
                                                                                             <color key="tintColor" name="AppThemeBlue"/>
                                                                                             <color key="textColor" name="WhideBlack"/>
                                                                                             <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
@@ -308,10 +308,10 @@
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zt8-3s-gS6">
-                                                                                    <rect key="frame" x="201.5" y="0.0" width="40.5" height="79"/>
+                                                                                    <rect key="frame" x="201.5" y="0.0" width="40.5" height="82.5"/>
                                                                                     <subviews>
                                                                                         <textField opaque="NO" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9N1-Au-77m" customClass="BackTextField" customModule="Altienco" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="40.5" height="79"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="40.5" height="82.5"/>
                                                                                             <color key="tintColor" name="AppThemeBlue"/>
                                                                                             <color key="textColor" name="WhideBlack"/>
                                                                                             <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
@@ -395,7 +395,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="I agree with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="unQ-Te-kdr">
-                                                    <rect key="frame" x="28" y="5" width="81" height="20"/>
+                                                    <rect key="frame" x="28" y="7" width="81" height="16.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="81" id="12I-Mb-rHo"/>
                                                     </constraints>
@@ -431,10 +431,10 @@
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IID-bL-P7X">
-                                            <rect key="frame" x="25" y="440" width="246" height="50"/>
+                                            <rect key="frame" x="25" y="440" width="246" height="45"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="v0o-gs-DNm"/>
+                                                <constraint firstAttribute="height" constant="45" id="v0o-gs-DNm"/>
                                             </constraints>
                                             <state key="normal" title="REGISTER">
                                                 <color key="titleColor" systemColor="systemCyanColor"/>
@@ -656,13 +656,13 @@
             <size key="intrinsicContentSize" width="13.5" height="29.5"/>
         </designable>
         <designable name="DXg-Gn-pS1">
-            <size key="intrinsicContentSize" width="162" height="25.5"/>
+            <size key="intrinsicContentSize" width="146" height="21"/>
         </designable>
         <designable name="LCl-rL-u9b">
             <size key="intrinsicContentSize" width="13.5" height="29.5"/>
         </designable>
         <designable name="WYz-mf-db9">
-            <size key="intrinsicContentSize" width="169" height="20"/>
+            <size key="intrinsicContentSize" width="153" height="16.5"/>
         </designable>
         <designable name="d2a-PD-4S8">
             <size key="intrinsicContentSize" width="13.5" height="29.5"/>

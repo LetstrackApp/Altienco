@@ -12,7 +12,8 @@ import SVProgressHUD
 
 
 class AllNotificationViewModel {
-    func getNotification(model : AllNotificationRequest, complition : @escaping([AllNotificationResponce]?, Bool?) -> Void)->Void{
+    func getNotification(model : AllNotificationRequest,
+                         complition : @escaping([AllNotificationResponce]?, Bool?) -> Void)->Void{
         SVProgressHUD.show()
         let data = try? JSONEncoder().encode(model)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
@@ -46,6 +47,7 @@ class AllNotificationViewModel {
         }) { (Error) in
             SVProgressHUD.dismiss()
             if let error = Error{
+                Helper.showToast(error.debugDescription,isAlertView: true)
                 complition(nil, false)
             }
             

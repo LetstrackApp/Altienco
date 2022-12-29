@@ -122,19 +122,19 @@ class VerifyPaymentViewModel {
                     complition(payment, true)
                 }
                 else {
-                    Helper.showToast((resultData["message"] as? String),isAlertView: true)
+                    Helper.showToast((resultData["message"] as? String),isAlertView: false)
                     complition(nil, false)
                 }
             }
             else {
-                Helper.showToast(lngConst.supportMsg,isAlertView: true)
+                Helper.showToast(lngConst.supportMsg,isAlertView: false)
                 
                 complition(nil, false)
             }
             
         }) { (Error) in
             if let error = Error {
-                Helper.showToast(error , isAlertView: true)
+                Helper.showToast(error , isAlertView: false)
             }
             SVProgressHUD.dismiss()
             complition(nil, false)

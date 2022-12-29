@@ -8,7 +8,9 @@
 
 import UIKit
 import StripeCore
+import SkeletonView
 class OperatorPlanVC: FloatingPannelHelper {
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     
     var OperatorID = 0
     var OperatorName = ""
@@ -121,7 +123,7 @@ class OperatorPlanVC: FloatingPannelHelper {
     
     func onLanguageChange(){
         
-        self.generateCollingCard.changeColorAndFont(mainString: lngConst.generate_your_voucher.capitalized,
+        self.generateCollingCard.changeColorAndFont(mainString: lngConst.generate_voucher.capitalized,
                                                     stringToColor: lngConst.voucher.capitalized,
                                                     color: UIColor.init(0xb24a96),
                                                     font: UIFont.SF_Medium(18))
@@ -195,10 +197,20 @@ class OperatorPlanVC: FloatingPannelHelper {
                     self?.planVIew.isHidden = false
                     self?.allOperator = operatorList ?? []
                     self?.recordNotFound.isHidden = true
+                    
                     self?.operatorPlansCollection.reloadData()
+                    if self?.allOperator.count ?? 0 > 0 {
+                        let height = self?.operatorPlansCollection.collectionViewLayout.collectionViewContentSize.height
+                        self?.collectionViewHeight.constant = height ?? 0
+                    }else {
+                        self?.collectionViewHeight.constant = 100
+                    }
+                    self?.operatorPlansCollection.reloadData()
+                    
                     
                 }
                 else{
+                    self?.collectionViewHeight.constant = 100
                     self?.nextButton.isHidden = true
                     self?.planVIew.isHidden = true
                     // self?.showAlert(withTitle: "", message: message)
@@ -216,6 +228,8 @@ class OperatorPlanVC: FloatingPannelHelper {
             guard let selectedAmount = self.allOperator[self.SelectedIndex].denominationValue else {return}
             guard let walletBal = UserDefaults.getUserData?.walletAmount else {return}
             if selectedAmount > Int(walletBal){
+                
+                
                 let alertController = UIAlertController(title: "Insufficent Balance", message: "Please add wallet balance", preferredStyle: .alert)
                 // Create the actions
                 let okAction = UIAlertAction(title: "ADD", style: UIAlertAction.Style.default) {
@@ -249,7 +263,8 @@ class OperatorPlanVC: FloatingPannelHelper {
                 }}
         }
         else{
-            self.showAlert(withTitle: "", message: "Please select denomination!")
+            
+            Helper.shared.showAlertView(message: "Please select denomination!")
         }
     }
     
@@ -340,8 +355,7 @@ extension OperatorPlanVC: UICollectionViewDelegate, UICollectionViewDataSource, 
 //MARK: - Routing
 extension OperatorPlanVC {
     @IBAction func notification(_ sender: Any) {
-        let viewController: AllNotificationVC = AllNotificationVC()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        setupAllNoti()
     }
     
 //    func successVoucher(mPin: String,

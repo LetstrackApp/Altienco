@@ -8,13 +8,13 @@
 
 import Lottie
 import UIKit
-import AVFoundation
+
 
 class PaymentSucessPopupVC: UIViewController {
     
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     private var amount: String? = ""
-    var player: AVAudioPlayer?
+
     
     @IBOutlet weak var animatorView: AnimationView!
     
@@ -25,7 +25,7 @@ class PaymentSucessPopupVC: UIViewController {
     }
     @IBOutlet weak var viewAlert: UIView! {
         didSet {
-            viewAlert.layer.cornerRadius = 20
+            viewAlert.layer.cornerRadius = 10
         }
     }
     
@@ -58,7 +58,7 @@ class PaymentSucessPopupVC: UIViewController {
     }
     
     /// Show Alert Controller
-    private func show(){
+    private func show() {
         if  let rootViewController = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController {
             var topViewController = rootViewController
             while topViewController.presentedViewController != nil {
@@ -88,7 +88,7 @@ class PaymentSucessPopupVC: UIViewController {
     }
     
     
-    func getBottomConstant ()->CGFloat{
+    func getBottomConstant ()->CGFloat {
         let alertViewHeight = viewAlert.bounds.size.height
         let totalHeight = (alertViewHeight +  (viewAlert.bounds.origin.y))
         let viewHeight = UIScreen.main.bounds.height
@@ -139,7 +139,7 @@ extension PaymentSucessPopupVC {
     
     func onLanguageChange(amount:String?) {
         titleView.text = lngConst.wlecomeAddBalance
-        addAnother.setTitle(lngConst.addAnotherCard, for: .normal)
+        addAnother.setTitle(lngConst.home, for: .normal)
         titleView.changeColor(mainString: lngConst.txnSucessMeg(amount: amount ?? "0"),
                               stringToColor: (amount ?? "0"),
                               color: UIColor.init(0x0f4fca))
@@ -160,7 +160,7 @@ extension PaymentSucessPopupVC {
         animatorView.backgroundBehavior = .pauseAndRestore
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            self?.playSound()
+            Helper.shared.playSound()
             self?.animatorView.play(fromProgress: 0,
                                     toProgress: 1,
                                     loopMode: LottieLoopMode.playOnce,
@@ -177,18 +177,6 @@ extension PaymentSucessPopupVC {
         //        }
     }
     
-    func playSound() {
-        guard let path = Bundle.main.path(forResource: "alertSound", ofType:"mpeg") else {
-            return }
-        let url = URL(fileURLWithPath: path)
-        
-        do {
-            player = try AVAudioPlayer(contentsOf: url)
-            player?.play()
-            
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
+    
     
 }
