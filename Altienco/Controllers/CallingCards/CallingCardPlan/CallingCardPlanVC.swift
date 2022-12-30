@@ -8,7 +8,7 @@
 
 import UIKit
 import StripeCore
-
+import SkeletonView
 class CallingCardPlanVC: FloatingPannelHelper {
     
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
@@ -200,28 +200,41 @@ class CallingCardPlanVC: FloatingPannelHelper {
         self.navigationController?.popViewController(animated: true)
     }
     func initiateModel() {
-        viewModel?.getOperatorPlans(OperatorID: self.OperatorID, transactionTypeId: TransactionTypeId.CallingCard.rawValue, langCode: "en") { (operatorList, status, message) in
+        
+        operatorPlansCollection.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor.lightGray.withAlphaComponent(0.3)),
+                                                             animation: nil,
+                                                             transition: .crossDissolve(0.26))
+        viewModel?.getOperatorPlans(OperatorID: self.OperatorID,
+                                    transactionTypeId: TransactionTypeId.CallingCard.rawValue,
+                                    langCode: "en") { [weak self] (operatorList, status, message) in
+            
+            DispatchQueue.main.async {
+                self?.operatorPlansCollection.stopSkeletonAnimation()
+                self?.operatorPlansCollection.hideSkeleton()
+                self?.operatorPlansCollection.reloadData()
+                self?.view.layoutIfNeeded()
+            }
             if status == true && message == ""{
-                self.allOperator = operatorList ?? []
+                self?.allOperator = operatorList ?? []
                 DispatchQueue.main.async {
-                    self.operatorPlansCollection.reloadData()
-                    if self.allOperator.count > 0 {
-                        let height = self.operatorPlansCollection.collectionViewLayout.collectionViewContentSize.height
-                        self.collectionViewHeight.constant = height 
+                    self?.operatorPlansCollection.reloadData()
+                    if self?.allOperator.count ?? 0 > 0 {
+                        let height = self?.operatorPlansCollection.collectionViewLayout.collectionViewContentSize.height ?? 0
+                        self?.collectionViewHeight.constant = height
                     }else {
-                        self.collectionViewHeight.constant = 100
+                        self?.collectionViewHeight.constant = 100
                     }
-                    self.operatorPlansCollection.reloadData()
+                    self?.operatorPlansCollection.reloadData()
                 }
                 
             }
             else{
-                self.nextButton.isHidden = true
-                self.collectionViewHeight.constant = 100
+                self?.nextButton.isHidden = true
+                self?.collectionViewHeight.constant = 100
                 Helper.showToast(message,isAlertView: true)
-              //  self.showAlert(withTitle: "", message: message)
+                //  self.showAlert(withTitle: "", message: message)
             }
-            self.allOperator.count > 0 ? (self.noDataLabelText.isHidden = true) : (self.noDataLabelText.isHidden = false)
+            self?.allOperator.count ?? 0 > 0 ? (self?.noDataLabelText.isHidden = true) : (self?.noDataLabelText.isHidden = false)
         }
         
     }
@@ -231,11 +244,11 @@ class CallingCardPlanVC: FloatingPannelHelper {
     }
     
     func insuffiCentBlanceAlert(){
-        AltienoAlert.initialization().showAlertWithBtn(with: .addBalance("Please add wallet balance"), title: "Insufficent Balance", cancelBtn: "Cancel", okBtn: "ADD") { index, title in
+        AltienoAlert.initialization().showAlertWithBtn(with: .attension("Please add wallet balance"), title: "Insufficent Balance", cancelBtn: "Cancel", okBtn: "ADD") { index, title in
             DispatchQueue.main.async {
                 if index == 0 {
-                let viewController: WalletPaymentVC = WalletPaymentVC()
-                self.navigationController?.pushViewController(viewController, animated: true)
+                    let viewController: WalletPaymentVC = WalletPaymentVC()
+                    self.navigationController?.pushViewController(viewController, animated: true)
                 }
             }
         }
@@ -249,9 +262,9 @@ class CallingCardPlanVC: FloatingPannelHelper {
             guard let selectedAmount = self.allOperator[self.SelectedIndex].denominationValue else {return}
             guard let walletBal = UserDefaults.getUserData?.walletAmount else {return}
             if selectedAmount > Int(walletBal){
-               
+                
                 insuffiCentBlanceAlert()
-               
+                
             }
             else{
                 
@@ -277,14 +290,14 @@ class CallingCardPlanVC: FloatingPannelHelper {
             }
         } else{
             Helper.shared.showAlertView(message: "Please select denomination!")
-
+            
         }
     }
     
     override func successVoucher(thirdPartyVoucher: ConfirmingIntrPINBankVoucherModel?,
                                  altinecoVoucher :GenerateVoucherResponseObj?) {
         
-        let viewController = SuccessCallinCardVC.init(thirdPartyVoucher: thirdPartyVoucher, altinecoVoucher: altinecoVoucher)
+        let viewController = SuccessRechargeVC.init(altinecoVoucher: altinecoVoucher, thirdPartyVoucher: thirdPartyVoucher)
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -306,36 +319,29 @@ class CallingCardPlanVC: FloatingPannelHelper {
         
         ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result,resultThirdParty, status in
             DispatchQueue.main.async {
-                if status == true, let val = result{
+                if status == true {
                     self.successVoucher(thirdPartyVoucher: resultThirdParty, altinecoVoucher: result)
                 }
             }
         }
         
-        //        let viewController: CallingCardReviewVC = CallingCardReviewVC()
-        //        viewController.delegate = self
-        //        viewController.denomination = denomination
-        //        viewController.currency = currency
-        //        viewController.operatorTitle = operatorTitle
-        //        viewController.operatorID = operatorID
-        //        viewController.isEdit = false
-        //        viewController.planName = planName
-        //        viewController.modalPresentationStyle = .overFullScreen
-        //        self.navigationController?.present(viewController, animated: true)
     }
     
 }
 
-//extension CallingCardPlanVC: BackToUKRechargeDelegate {
-//    func BackToPrevious(status: Bool, result: GenerateVoucherResponseObj?) {
-//        if status, let val = result{
-//            self.successVoucher(mPin: val.mPIN ?? "", denominationValue: "\(val.dinominationValue ?? 0)", walletBalance: val.walletAmount ?? 0.0, msgToShare: val.msgToShare ?? "", voucherID: val.voucherID ?? 0)
-//        }
-//        }
-//}
 
 
-extension CallingCardPlanVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+extension CallingCardPlanVC:SkeletonCollectionViewDataSource,
+                            SkeletonCollectionViewDelegate ,
+                            UICollectionViewDelegateFlowLayout {
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "CollectionViewCell"
+    }
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.allOperator.count
     }

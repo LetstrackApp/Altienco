@@ -224,7 +224,7 @@ class AllDenomination: FloatingPannelHelper{
         
     }
     func insuffiCentBlanceAlert(){
-        AltienoAlert.initialization().showAlertWithBtn(with: .addBalance("Please add wallet balance"), title: "Insufficent Balance", cancelBtn: "Cancel", okBtn: "ADD") { index, title in
+        AltienoAlert.initialization().showAlertWithBtn(with: .attension("Please add wallet balance"), title: "Insufficent Balance", cancelBtn: "Cancel", okBtn: "ADD") { index, title in
             DispatchQueue.main.async {
                 if index == 0 {
                 let viewController: WalletPaymentVC = WalletPaymentVC()

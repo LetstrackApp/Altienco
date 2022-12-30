@@ -160,7 +160,7 @@ extension PaymentSucessPopupVC {
         animatorView.backgroundBehavior = .pauseAndRestore
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            Helper.shared.playSound()
+            Helper.shared.playSound(kind: .wallet)
             self?.animatorView.play(fromProgress: 0,
                                     toProgress: 1,
                                     loopMode: LottieLoopMode.playOnce,

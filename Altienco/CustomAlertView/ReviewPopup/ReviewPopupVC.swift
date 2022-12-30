@@ -180,7 +180,7 @@ class ReviewPopupVC: UIViewController {
         animationView.backgroundBehavior = .pauseAndRestore
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            Helper.shared.playSound()
+            Helper.shared.playSound(kind: .reviewPop)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 
                 self?.opupInAniamtion()
@@ -238,8 +238,13 @@ class ReviewPopupVC: UIViewController {
                     Helper.showToast(msg, isAlertView: true)
                     self?.confirmButton.hideLoading()
                     self?.view.isUserInteractionEnabled = true
+                    return
                 }else {
-                    if result?.isOriginAltienco == 0 {
+                    if result?.isOriginAltienco == 0 && self?.reviewPopupModel?.transactionTypeId == 2 {
+                        // go to thirdparty api
+                        self?.callthirdPartyAPI(altiancoResult: result, dataModel: dataModel)
+                        return
+                    }else {
                         self?.confirmButton.hideLoading()
                         self?.view.isUserInteractionEnabled = true
                         if let data = result {
@@ -248,24 +253,6 @@ class ReviewPopupVC: UIViewController {
                             }
                             
                         }
-                        
-                    }else {
-                        
-                        self?.generateVoucher?.confirmingIntrPINBankVoucher(model: dataModel) { resultconfirm, statusconfirm, msgconfirm in
-                            DispatchQueue.main.async { [weak self] in
-                                self?.confirmButton.hideLoading()
-                                self?.view.isUserInteractionEnabled = true
-                                
-                                if status == false {
-                                    Helper.showToast(msgconfirm, isAlertView: true)
-                                }else {
-                                    self?.hide {_ in
-                                        self?.block??(result,resultconfirm ,true)
-                                    }
-                                }
-                            }
-                            // call new Api
-                        }
                     }
                     
                 }
@@ -273,6 +260,24 @@ class ReviewPopupVC: UIViewController {
             }
             
             
+        }
+    }
+    
+    func callthirdPartyAPI(altiancoResult:GenerateVoucherResponseObj?,dataModel : GenerateVoucherModel){
+        generateVoucher?.confirmingIntrPINBankVoucher(model: dataModel) { resultconfirm, statusconfirm, msgconfirm in
+            DispatchQueue.main.async { [weak self] in
+                self?.confirmButton.hideLoading()
+                self?.view.isUserInteractionEnabled = true
+                
+                if statusconfirm == false {
+                    Helper.showToast(msgconfirm, isAlertView: true)
+                    return
+                }else {
+                    self?.hide {_ in
+                        self?.block??(altiancoResult,resultconfirm ,true)
+                    }
+                }
+            }
         }
     }
     

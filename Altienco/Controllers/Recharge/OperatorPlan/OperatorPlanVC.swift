@@ -188,10 +188,19 @@ class OperatorPlanVC: FloatingPannelHelper {
     
     
     func initiateModel() {
+        
+        operatorPlansCollection.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor.lightGray.withAlphaComponent(0.3)),
+                                                             animation: nil,
+                                                             transition: .crossDissolve(0.26))
         viewModel?.getOperatorPlans(OperatorID: self.OperatorID,
                                     transactionTypeId: TransactionTypeId.PhoneRecharge.rawValue,
                                     langCode: "en") { [weak self] (operatorList, status, message) in
+
             DispatchQueue.main.async {
+                self?.operatorPlansCollection.stopSkeletonAnimation()
+                self?.operatorPlansCollection.hideSkeleton()
+                self?.operatorPlansCollection.reloadData()
+                self?.view.layoutIfNeeded()
                 if status == true && message == ""{
                     self?.nextButton.isHidden = false
                     self?.planVIew.isHidden = false
@@ -222,7 +231,7 @@ class OperatorPlanVC: FloatingPannelHelper {
         
     }
     func insuffiCentBlanceAlert(){
-        AltienoAlert.initialization().showAlertWithBtn(with: .addBalance("Please add wallet balance"), title: "Insufficent Balance", cancelBtn: "Cancel", okBtn: "ADD") { index, title in
+        AltienoAlert.initialization().showAlertWithBtn(with: .attension("Please add wallet balance"), title: "Insufficent Balance", cancelBtn: "Cancel", okBtn: "ADD") { index, title in
             DispatchQueue.main.async {
                 if index == 0 {
                 let viewController: WalletPaymentVC = WalletPaymentVC()
@@ -277,7 +286,14 @@ class OperatorPlanVC: FloatingPannelHelper {
 
 
 
-extension OperatorPlanVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension OperatorPlanVC:SkeletonCollectionViewDataSource,
+                         SkeletonCollectionViewDelegate ,
+                         UICollectionViewDelegateFlowLayout {
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "CollectionViewCell"
+    }
+ 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.allOperator.count
     }

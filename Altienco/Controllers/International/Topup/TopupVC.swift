@@ -251,6 +251,9 @@ class TopupVC: FloatingPannelHelper, UITextFieldDelegate {
         ContactPicker.shared.openConatactPiker(cotroller: self) { [weak self] (text) in
             if let contryCode = self?.countryModel?.mobileCode?.replacingOccurrences(of: "+", with: "").replacingOccurrences(of: " ", with: "") {
                 DispatchQueue.main.async {
+                    DispatchQueue.main.async {
+                        self?.setupDefault()
+                    }
                     self?.mobileNumber.text = text.deletingPrefix(contryCode)
                 }
                 

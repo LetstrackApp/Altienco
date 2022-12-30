@@ -172,13 +172,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         deleteData()
         DispatchQueue.main.async {
-        self.navController?.popToRootViewController(animated: false)
-        self.initialPoint(Controller: CountrySelectionVC())
-        DispatchQueue.main.async {
             AltienoAlert.initialization().showAlert(with: .logout) { (index, title) in
-                
+                self.navController?.popToRootViewController(animated: false)
+                DispatchQueue.main.async {
+                    self.initialPoint(Controller: CountrySelectionVC())
+                }
             }
-        }
         }
     }
     

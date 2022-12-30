@@ -135,19 +135,23 @@ class TransactionHistoryVC: FloatingPannelHelper {
         
     }
     
-    func refreshHistoryData() {
-        let model = HistoryRequestObj.init(customerId: UserDefaults.getUserData?.customerID, pageNum: self.pageNum, pageSize: self.pageSize, langCode: "en", transactionTypeId: self.transactionTypeId)
-        viewModel?.getTransactionHistory(model: model, complition: { (history, status) in
-            DispatchQueue.main.async { [weak self] in
-                self?.isLoading = status
-                if status == true{
-                    self?.viewModel?.historyList.value = history ?? []
-                    self?.historyTable.reloadData()
-                }
-            }
-        }
-        )
-    }
+//    func refreshHistoryData() {
+//        let model = HistoryRequestObj.init(customerId: UserDefaults.getUserData?.customerID,
+//                                           pageNum: self.pageNum,
+//                                           pageSize: self.pageSize,
+//                                           langCode: "en",
+//                                           transactionTypeId: self.transactionTypeId)
+//        viewModel?.getTransactionHistory(model: model, complition: { (history, status) in
+//            DispatchQueue.main.async { [weak self] in
+//                self?.isLoading = status
+//                if status == true && history?.count ?? 0 > 0 {
+////                    self?.viewModel?.historyList.value = history ?? []
+//                    self?.historyTable.reloadData()
+//                }
+//            }
+//        }
+//        )
+//    }
     
     func callHistoryData() {
         
@@ -169,10 +173,10 @@ class TransactionHistoryVC: FloatingPannelHelper {
                 self?.historyTable.stopSkeletonAnimation()
                 self?.historyTable.hideSkeleton()
                 self?.isLoading = status
-                if status == true{
-                    self?.viewModel?.historyList.value.append(contentsOf: history ?? [])
-                  
-                }
+//                if status == true{
+//                    self?.viewModel?.historyList.value.append(contentsOf: history ?? [])
+//
+//                }
                 if history?.isEmpty == true{
                     self?.isLoading = false
                 }
@@ -214,7 +218,7 @@ class TransactionHistoryVC: FloatingPannelHelper {
         for name in self.dropDownResponce {
             statusName.append(name.name ?? "")
         }
-        self.dropDownStatus.dataSource = statusName ?? []
+        self.dropDownStatus.dataSource = statusName
         self.dropDownStatus.direction = .bottom
         self.dropDownStatus.width = self.dropDownContainer.frame.size.width
         self.dropDownStatus.anchorView = self.dropDownContainer
@@ -224,10 +228,14 @@ class TransactionHistoryVC: FloatingPannelHelper {
         }
         self.dropDownStatus.selectionAction = { [weak self] (index, item) in
             debugPrint(index, item)
+            self?.viewModel?.historyList.value = []
+            self?.historyTable.reloadData()
             self?.statusText.text = item
+            self?.isLoading = true
             self?.pageNum = 1
-            self?.self.transactionTypeId = self?.dropDownResponce[index].id ?? 0
-            self?.refreshHistoryData()
+            self?.transactionTypeId = self?.dropDownResponce[index].id ?? 0
+            self?.callHistoryData()
+            //self?.refreshHistoryData()
         }
         self.dropDownStatus.show()
     }
@@ -257,13 +265,7 @@ extension TransactionHistoryVC: SkeletonTableViewDelegate, SkeletonTableViewData
     }
     
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastData = self.viewModel?.historyList.value.count  ?? 0
-        if indexPath.row == lastData - 10, isLoading {
-            self.pageNum += 1
-            self.callHistoryData()
-        }
-    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let model = self.viewModel?.historyList.value[indexPath.row] {
         if model.transactionTypeID == 4 {
@@ -300,24 +302,7 @@ extension TransactionHistoryVC: SkeletonTableViewDelegate, SkeletonTableViewData
     }
     
     
-    
-//    func successVoucher(mPin: String,
-//                        denominationValue : String,
-//                        walletBalance: Double,
-//                        msgToShare: String,
-//                        voucherID: Int,
-//                        orderNumber:String){
-//        let viewController: SuccessRechargeVC = SuccessRechargeVC()
-//        viewController.denominationValue = denominationValue
-//        viewController.mPin = mPin
-//        viewController.walletBal = walletBalance
-//        viewController.voucherID = voucherID
-//        viewController.msgToShare = msgToShare
-//        viewController.orderNumber = orderNumber
-//        self.navigationController?.pushViewController(viewController, animated: true)
-//        
-//    }
-    
+
     
     @objc func callSuccessPopup(sender: UIButton){
         
@@ -345,8 +330,8 @@ extension TransactionHistoryVC: SkeletonTableViewDelegate, SkeletonTableViewData
                                                              transactionTypeId: txnid.rawValue)
                 ReviewPopupVC.initialization().showAlert(usingModel: reviewPopupModel) { result, resultThirdParty, status  in
                     DispatchQueue.main.async {
-                        if status == true, let val = result{
-                            
+                        if status == true {
+                            self.successVoucher(thirdPartyVoucher: resultThirdParty, altinecoVoucher: result)
                         }
                     }
                 }
@@ -356,10 +341,26 @@ extension TransactionHistoryVC: SkeletonTableViewDelegate, SkeletonTableViewData
     
 }
 
-//extension TransactionHistoryVC: BackToUKRechargeDelegate {
-//    func BackToPrevious(status: Bool, result: GenerateVoucherResponseObj?) {
-//        if status, let val = result{
-//            self.successVoucher(mPin: val.mPIN ?? "", denominationValue: "\(val.dinominationValue ?? 0)", walletBalance: val.walletAmount ?? 0.0, msgToShare: val.msgToShare ?? "", voucherID: val.voucherID ?? 0)
-//        }
-//        }
-//}
+
+extension TransactionHistoryVC : UIScrollViewDelegate {
+ func scrollViewDidScroll(_ scrollView: UIScrollView) {
+     
+//    if resultSearchController.isActive{
+//        return
+//    }
+    if (((scrollView.contentOffset.y + scrollView.frame.size.height) > scrollView.contentSize.height ) && self.isLoading){
+        self.pageNum += 1
+        self.isLoading = false
+        self.callHistoryData()
+    }
+}
+
+    
+    //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    //        let lastData = self.viewModel?.historyList.value.count  ?? 0
+    //        if indexPath.row == lastData - 10, isLoading {
+    //            self.pageNum += 1
+    //            self.callHistoryData()
+    //        }
+    //    }
+}

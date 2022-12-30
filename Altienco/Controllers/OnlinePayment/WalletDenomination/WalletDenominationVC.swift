@@ -387,18 +387,18 @@ extension WalletDenominationVC: SkeletonCollectionViewDataSource,
 }
 
 
-extension WalletDenominationVC : GoToRootDelegate {
-    func CloseToRoot(dismiss: Bool) {
-        if dismiss{
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-                if let topController = UIApplication.topViewController() {
-                    topController.navigationController?.popToRootViewController(animated: true)
-                }
-            })
-        }
-    }
-    
-}
+//extension WalletDenominationVC : GoToRootDelegate {
+//    func CloseToRoot(dismiss: Bool) {
+//        if dismiss{
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+//                if let topController = UIApplication.topViewController() {
+//                    topController.navigationController?.popToRootViewController(animated: true)
+//                }
+//            })
+//        }
+//    }
+//    
+//}
 
 //MARK: - Routing
 extension WalletDenominationVC {
@@ -412,9 +412,15 @@ extension WalletDenominationVC {
     }
     
     func callFailureScreen(){
-        let viewController: FailedGatwayVC = FailedGatwayVC()
-        viewController.delegate = self
-        viewController.modalPresentationStyle = .overFullScreen
-        self.navigationController?.present(viewController, animated: true)
+        
+        FailedGatwayVC.initialization().showAlert { [weak self] index, name in
+            DispatchQueue.main.async {
+                self?.navigationController?.popToRootViewController(animated: true)
+            }
+        }
+//        let viewController: FailedGatwayVC = FailedGatwayVC()
+//        viewController.delegate = self
+//        viewController.modalPresentationStyle = .overFullScreen
+//        self.navigationController?.present(viewController, animated: true)
     }
 }

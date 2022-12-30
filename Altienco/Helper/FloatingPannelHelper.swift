@@ -77,7 +77,7 @@ class FloatingPannelHelper: UIViewController,FloatingPanelControllerDelegate {
                         self.present(fcb, animated: true, completion: nil)
                         
                     }else {
-                        Helper.showToast("Record not found!",isAlertView: true)
+                        Helper.showToast("Transaction not found!",isAlertView: true)
                     }
                 }
             }

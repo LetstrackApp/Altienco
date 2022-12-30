@@ -67,9 +67,7 @@ class ReviewGiftCardVC: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.setupAlphaVC()
-    }
+  
     
     func setupFlag(countryCode: String, isUpdate: Bool){
         if isUpdate == true{
@@ -194,7 +192,7 @@ class ReviewGiftCardVC: UIViewController {
         animationView.backgroundBehavior = .pauseAndRestore
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            Helper.shared.playSound()
+            Helper.shared.playSound(kind: .reviewPop)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self?.opupInAniamtion()
             }

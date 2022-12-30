@@ -40,6 +40,9 @@
 		04EC3DB62951BEA60084EA72 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC3DB52951BEA60084EA72 /* Date+Extension.swift */; };
 		04EC3DB82951BEC10084EA72 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC3DB72951BEC10084EA72 /* String+Extension.swift */; };
 		04EC3DC229520CAC0084EA72 /* FloatingPannelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC3DC129520CAC0084EA72 /* FloatingPannelHelper.swift */; };
+		04F23A52295EEBE000E95111 /* circle_red.json in Resources */ = {isa = PBXBuildFile; fileRef = 04F23A51295EEBE000E95111 /* circle_red.json */; };
+		04F23A56295EFEEB00E95111 /* CongoPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F23A54295EFEEB00E95111 /* CongoPopupVC.swift */; };
+		04F23A57295EFEEB00E95111 /* CongoPopupVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F23A55295EFEEB00E95111 /* CongoPopupVC.xib */; };
 		04F5FDB729599C0E005C0E7A /* alert.json in Resources */ = {isa = PBXBuildFile; fileRef = 04F5FDB429599C0E005C0E7A /* alert.json */; };
 		04F5FDB829599C0E005C0E7A /* circle_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 04F5FDB529599C0E005C0E7A /* circle_animation.json */; };
 		04F5FDB929599C0E005C0E7A /* thumbs_up.json in Resources */ = {isa = PBXBuildFile; fileRef = 04F5FDB629599C0E005C0E7A /* thumbs_up.json */; };
@@ -245,8 +248,6 @@
 		C6ABD22528D56BF400629168 /* HandleApiException.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6ABD22428D56BF400629168 /* HandleApiException.swift */; };
 		C6ACA77928C80D6F00F0A042 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6ACA77728C80D6F00F0A042 /* ProfileVC.swift */; };
 		C6ACA77A28C80D6F00F0A042 /* ProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6ACA77828C80D6F00F0A042 /* ProfileVC.xib */; };
-		C6ACE7C728B9D9480004E671 /* CongoPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6ACE7C528B9D9480004E671 /* CongoPopupVC.swift */; };
-		C6ACE7C828B9D9480004E671 /* CongoPopupVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6ACE7C628B9D9480004E671 /* CongoPopupVC.xib */; };
 		C6ACE7CE28B9FA080004E671 /* OPeratorListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6ACE7CC28B9FA080004E671 /* OPeratorListCell.swift */; };
 		C6ACE7CF28B9FA080004E671 /* OPeratorListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6ACE7CD28B9FA080004E671 /* OPeratorListCell.xib */; };
 		C6AD0125291CCC0A00C5DEC9 /* GiftCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AD0123291CCC0A00C5DEC9 /* GiftCardVC.swift */; };
@@ -263,8 +264,6 @@
 		C6AF1C7D293F704100AF9D59 /* AllCallingCardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6AF1C7B293F704100AF9D59 /* AllCallingCardVC.xib */; };
 		C6AF1C81293F882600AF9D59 /* CallingCardPlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1C7F293F882600AF9D59 /* CallingCardPlanVC.swift */; };
 		C6AF1C82293F882600AF9D59 /* CallingCardPlanVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6AF1C80293F882600AF9D59 /* CallingCardPlanVC.xib */; };
-		C6AF1C8C293FB1F700AF9D59 /* SuccessCallinCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1C8A293FB1F700AF9D59 /* SuccessCallinCardVC.swift */; };
-		C6AF1C8D293FB1F700AF9D59 /* SuccessCallinCardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6AF1C8B293FB1F700AF9D59 /* SuccessCallinCardVC.xib */; };
 		C6B3688C294498BD0084733C /* ukImage.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B3688B294498BD0084733C /* ukImage.png */; };
 		C6B4C09A2940C82C000AC85F /* BackTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B4C0992940C82C000AC85F /* BackTextField.swift */; };
 		C6C2723B292BBEA60091CEFC /* countryCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = C6C2723A292BBEA50091CEFC /* countryCodes.json */; };
@@ -313,6 +312,9 @@
 		04EC3DB52951BEA60084EA72 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		04EC3DB72951BEC10084EA72 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		04EC3DC129520CAC0084EA72 /* FloatingPannelHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPannelHelper.swift; sourceTree = "<group>"; };
+		04F23A51295EEBE000E95111 /* circle_red.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = circle_red.json; sourceTree = "<group>"; };
+		04F23A54295EFEEB00E95111 /* CongoPopupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongoPopupVC.swift; sourceTree = "<group>"; };
+		04F23A55295EFEEB00E95111 /* CongoPopupVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CongoPopupVC.xib; sourceTree = "<group>"; };
 		04F5FDB429599C0E005C0E7A /* alert.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = alert.json; sourceTree = "<group>"; };
 		04F5FDB529599C0E005C0E7A /* circle_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = circle_animation.json; sourceTree = "<group>"; };
 		04F5FDB629599C0E005C0E7A /* thumbs_up.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thumbs_up.json; sourceTree = "<group>"; };
@@ -519,8 +521,6 @@
 		C6ABD22428D56BF400629168 /* HandleApiException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleApiException.swift; sourceTree = "<group>"; };
 		C6ACA77728C80D6F00F0A042 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		C6ACA77828C80D6F00F0A042 /* ProfileVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileVC.xib; sourceTree = "<group>"; };
-		C6ACE7C528B9D9480004E671 /* CongoPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongoPopupVC.swift; sourceTree = "<group>"; };
-		C6ACE7C628B9D9480004E671 /* CongoPopupVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CongoPopupVC.xib; sourceTree = "<group>"; };
 		C6ACE7CC28B9FA080004E671 /* OPeratorListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OPeratorListCell.swift; sourceTree = "<group>"; };
 		C6ACE7CD28B9FA080004E671 /* OPeratorListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OPeratorListCell.xib; sourceTree = "<group>"; };
 		C6AD0123291CCC0A00C5DEC9 /* GiftCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCardVC.swift; sourceTree = "<group>"; };
@@ -537,8 +537,6 @@
 		C6AF1C7B293F704100AF9D59 /* AllCallingCardVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllCallingCardVC.xib; sourceTree = "<group>"; };
 		C6AF1C7F293F882600AF9D59 /* CallingCardPlanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingCardPlanVC.swift; sourceTree = "<group>"; };
 		C6AF1C80293F882600AF9D59 /* CallingCardPlanVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CallingCardPlanVC.xib; sourceTree = "<group>"; };
-		C6AF1C8A293FB1F700AF9D59 /* SuccessCallinCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessCallinCardVC.swift; sourceTree = "<group>"; };
-		C6AF1C8B293FB1F700AF9D59 /* SuccessCallinCardVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuccessCallinCardVC.xib; sourceTree = "<group>"; };
 		C6B3688B294498BD0084733C /* ukImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ukImage.png; sourceTree = "<group>"; };
 		C6B4C0992940C82C000AC85F /* BackTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackTextField.swift; sourceTree = "<group>"; };
 		C6C2723A292BBEA50091CEFC /* countryCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryCodes.json; sourceTree = "<group>"; };
@@ -594,6 +592,9 @@
 		0466135A294E113F00EC444B /* CustomAlertView */ = {
 			isa = PBXGroup;
 			children = (
+				04F23A53295EFED200E95111 /* congoPoup */,
+				C687FCA328B8915900A85040 /* FailureWallet */,
+				C6342CED2937A43300814F40 /* FailureScreen */,
 				04EC3DB92952000F0084EA72 /* AddAndShowBalance */,
 				044BB5DC29547A4E00D5A666 /* PaymentSucessPopUP */,
 				C688F24C292100E0009C1EC3 /* ReviewGiftCard */,
@@ -607,6 +608,7 @@
 		04661362294E155800EC444B /* json */ = {
 			isa = PBXGroup;
 			children = (
+				04F23A51295EEBE000E95111 /* circle_red.json */,
 				04F5FDB429599C0E005C0E7A /* alert.json */,
 				04F5FDB529599C0E005C0E7A /* circle_animation.json */,
 				04F5FDB629599C0E005C0E7A /* thumbs_up.json */,
@@ -649,6 +651,15 @@
 				049F8755294D971400B3ED6B /* AddAndShowBalance.xib */,
 			);
 			path = AddAndShowBalance;
+			sourceTree = "<group>";
+		};
+		04F23A53295EFED200E95111 /* congoPoup */ = {
+			isa = PBXGroup;
+			children = (
+				04F23A54295EFEEB00E95111 /* CongoPopupVC.swift */,
+				04F23A55295EFEEB00E95111 /* CongoPopupVC.xib */,
+			);
+			path = congoPoup;
 			sourceTree = "<group>";
 		};
 		184DEAAB257655D7004406AF /* History */ = {
@@ -1289,7 +1300,6 @@
 			isa = PBXGroup;
 			children = (
 				C6342CEE2937A43E00814F40 /* SuccessScreen */,
-				C6342CED2937A43300814F40 /* FailureScreen */,
 				C68B129B292C966900856156 /* WalletDenomination */,
 				C68B1296292C80CE00856156 /* WalletPayment */,
 			);
@@ -1366,8 +1376,6 @@
 		C6A563D328A264BE0084295F /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
-				C6ACE7C428B9D9250004E671 /* CongoPopup */,
-				C687FCA328B8915900A85040 /* FailureWallet */,
 				C687FC9E28B88C1900A85040 /* SuccessWallet */,
 				C6A33C4428B6B62200F9EB36 /* AddCard */,
 				C6A33C4328B6B57B00F9EB36 /* ShowWallet */,
@@ -1488,15 +1496,6 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		C6ACE7C428B9D9250004E671 /* CongoPopup */ = {
-			isa = PBXGroup;
-			children = (
-				C6ACE7C528B9D9480004E671 /* CongoPopupVC.swift */,
-				C6ACE7C628B9D9480004E671 /* CongoPopupVC.xib */,
-			);
-			path = CongoPopup;
-			sourceTree = "<group>";
-		};
 		C6ACE7CA28B9EB190004E671 /* Recharge */ = {
 			isa = PBXGroup;
 			children = (
@@ -1570,7 +1569,6 @@
 		C6AF1C78293F701800AF9D59 /* CallingCards */ = {
 			isa = PBXGroup;
 			children = (
-				C6AF1C89293FB1CC00AF9D59 /* SuccessCallingCard */,
 				C6AF1C7E293F87FF00AF9D59 /* CallingCardPlan */,
 				C6AF1C79293F702400AF9D59 /* AllCallingCard */,
 			);
@@ -1593,15 +1591,6 @@
 				C6AF1C80293F882600AF9D59 /* CallingCardPlanVC.xib */,
 			);
 			path = CallingCardPlan;
-			sourceTree = "<group>";
-		};
-		C6AF1C89293FB1CC00AF9D59 /* SuccessCallingCard */ = {
-			isa = PBXGroup;
-			children = (
-				C6AF1C8A293FB1F700AF9D59 /* SuccessCallinCardVC.swift */,
-				C6AF1C8B293FB1F700AF9D59 /* SuccessCallinCardVC.xib */,
-			);
-			path = SuccessCallingCard;
 			sourceTree = "<group>";
 		};
 		C6C27239292BBEA50091CEFC /* Data */ = {
@@ -1720,11 +1709,11 @@
 				C6A94A8E28E41AEA00FA9E9F /* searchCell.xib in Resources */,
 				C683E80128ADF20F00C07536 /* ImageHeaderView.xib in Resources */,
 				04F5FDB729599C0E005C0E7A /* alert.json in Resources */,
+				04F23A57295EFEEB00E95111 /* CongoPopupVC.xib in Resources */,
 				C6AF1C7D293F704100AF9D59 /* AllCallingCardVC.xib in Resources */,
 				C6CD5AC828D95B7F004E6F33 /* TopupVC.xib in Resources */,
 				C6A9BB4F28ED7D710077A9A1 /* SliderCell.xib in Resources */,
 				C6A8190628CAAFCB0097E595 /* VoucherHistoryVC.xib in Resources */,
-				C6ACE7C828B9D9480004E671 /* CongoPopupVC.xib in Resources */,
 				A7C28D36260232BE009E8838 /* Arial Unicode.ttf in Resources */,
 				C6AF1C77293F5A8900AF9D59 /* ios_distribution.cer in Resources */,
 				184DEAB725765783004406AF /* HistoryCell.xib in Resources */,
@@ -1760,7 +1749,6 @@
 				049F8756294D971400B3ED6B /* AddAndShowBalance.xib in Resources */,
 				0464E40B295D69BE00323ECA /* errorbuzz.mpeg in Resources */,
 				C6A103EE28B35549000E50A1 /* Poppins-Regular.ttf in Resources */,
-				C6AF1C8D293FB1F700AF9D59 /* SuccessCallinCardVC.xib in Resources */,
 				C6AF1C75293F2D4B00AF9D59 /* ReferAppVC.xib in Resources */,
 				C6AEC82B291DEF180029C6D2 /* googlepay.png in Resources */,
 				C68B129F292C968700856156 /* WalletDenominationVC.xib in Resources */,
@@ -1784,6 +1772,7 @@
 				C6A103EC28B35549000E50A1 /* Poppins-Medium.ttf in Resources */,
 				C687FCA228B88C3D00A85040 /* WalletSuccessVC.xib in Resources */,
 				C687141128E65E7A002E7254 /* IntrSuccessVC.xib in Resources */,
+				04F23A52295EEBE000E95111 /* circle_red.json in Resources */,
 				040EDDDA295430F100ECAE53 /* AltienoAlert.xib in Resources */,
 				C688454F2920B1F500AB50DD /* AllDenomination.xib in Resources */,
 				C683E80428ADF20F00C07536 /* LeftNavCell.xib in Resources */,
@@ -1980,7 +1969,6 @@
 				049F875C294D9D7300B3ED6B /* XIBEnum.swift in Sources */,
 				C6A6816428DAC01900AE9D62 /* DenominationVC.swift in Sources */,
 				18E287F5250F858E00F25971 /* CountryModel.swift in Sources */,
-				C6ACE7C728B9D9480004E671 /* CongoPopupVC.swift in Sources */,
 				C68B12A1292CC6D300856156 /* WalletDenomination.swift in Sources */,
 				185C09642525F5BB005560A8 /* ImageUpload.swift in Sources */,
 				C6AF1C7C293F704100AF9D59 /* AllCallingCardVC.swift in Sources */,
@@ -2029,8 +2017,8 @@
 				C6A8190528CAAFCB0097E595 /* VoucherHistoryVC.swift in Sources */,
 				C68B129E292C968700856156 /* WalletDenominationVC.swift in Sources */,
 				04312457294C501B00830CF2 /* UIView+Extension.swift in Sources */,
-				C6AF1C8C293FB1F700AF9D59 /* SuccessCallinCardVC.swift in Sources */,
 				18E28800251094E500F25971 /* VerifyOTP.swift in Sources */,
+				04F23A56295EFEEB00E95111 /* CongoPopupVC.swift in Sources */,
 				18D7C4F425AC69690051AA73 /* CalenderVC.swift in Sources */,
 				C6A6B6E928C558E900BCF7E2 /* OperatorListViewModel.swift in Sources */,
 				C6342CF52937AB4F00814F40 /* SuccessGatwayVC.swift in Sources */,
@@ -2182,7 +2170,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Altienco/Altienco.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z8W4WTERGN;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Altienco/Info.plist";
@@ -2191,7 +2179,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.04;
+				MARKETING_VERSION = 1.0.05;
 				PRODUCT_BUNDLE_IDENTIFIER = com.altienco.users;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2208,7 +2196,7 @@
 				CODE_SIGN_ENTITLEMENTS = Altienco/Altienco.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z8W4WTERGN;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Altienco/Info.plist";
@@ -2217,7 +2205,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.04;
+				MARKETING_VERSION = 1.0.05;
 				PRODUCT_BUNDLE_IDENTIFIER = com.altienco.users;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

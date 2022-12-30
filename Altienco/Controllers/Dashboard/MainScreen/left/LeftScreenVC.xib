@@ -644,7 +644,6 @@
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <connections>
                                                                 <action selector="deleteButton:" destination="-1" eventType="touchUpInside" id="fMk-xp-ve0"/>
-                                                                <action selector="logoutUser:" destination="-1" eventType="touchUpInside" id="Iuc-Mm-0Kc"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>

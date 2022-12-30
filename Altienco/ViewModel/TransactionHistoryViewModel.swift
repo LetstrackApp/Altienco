@@ -28,13 +28,15 @@ class TransactionHistoryViewModel {
             debugPrint("jsondata:", strURl, jsondata as Any)
             var historyData = [HistoryResponseObj]()
             if jsondata?["Message_Code"] as? Bool == true,
-                let resultData = jsondata?["Result"] as? NSDictionary
+               let resultData = jsondata?["Result"] as? NSDictionary
             {
-                if resultData["status"] as? Bool == true{
+                if resultData["status"] as? Bool == true {
                     for dict in resultData["data"] as? Array ?? []{
-                        historyData.append(HistoryResponseObj.init(json: dict as! [String : Any]))
-                        }
-                    self.historyList.value = historyData
+                        let data = HistoryResponseObj.init(json: dict as! [String : Any])
+                        self.historyList.value.append(data)
+                        historyData.append(data)
+                    }
+
                     complition(historyData, true)
                     
                 }
@@ -45,14 +47,14 @@ class TransactionHistoryViewModel {
                 }
             }else {
                 Helper.showToast(lngConst.supportMsg, isAlertView: true)
-
+                
                 complition(nil, false)
             }
-
-//                else{
-//                    Helper.showToast((jsondata?["Message_Code"] as? String)!, delay:Helper.DELAY_LONG)
-//                }
-
+            
+            //                else{
+            //                    Helper.showToast((jsondata?["Message_Code"] as? String)!, delay:Helper.DELAY_LONG)
+            //                }
+            
         }) { (Error) in
             SVProgressHUD.dismiss()
             if let error = Error{

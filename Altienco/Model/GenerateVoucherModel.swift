@@ -50,7 +50,7 @@ struct GenerateVoucherResponseObj: Codable {
         self.dinominationValue = json["dinominationValue"] as? Int
         self.mPIN = json["mPIN"] as? String
         self.msgToShare = json["msgToShare"] as? String
-        self.isOriginAltienco = json["dinominationValue"] as? Int
+        self.isOriginAltienco = json["isOriginAltienco"] as? Int
     }
 }
 

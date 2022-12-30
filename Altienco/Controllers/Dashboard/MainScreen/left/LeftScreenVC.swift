@@ -252,46 +252,36 @@ class LeftScreenVC: UIViewController {
     }
     @IBAction func deleteButton(_ sender: Any) {
         
-        let alertController =
-        UIAlertController(title: "", message: "If you delete your account permanently, you will not able to get retrive current balance in the app. Do you still want to proceed?", preferredStyle: .alert)
-            // Create the actions
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel) {
-                UIAlertAction in
-            self.diableUser()
-            }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) {
-                UIAlertAction in
-                NSLog("Cancel Pressed")
-            }
-            // Add the actions
-        alertController.view.tintColor = .systemBlue
-        alertController.addAction(okAction)
-        alertController.addAction(cancelAction)
         
-        self.present(alertController, animated: true, completion: nil)
+        AltienoAlert.initialization().showAlertWithBtn(with: .attension(lngConst.deleteAcDes),
+                                                       title: lngConst.deleteAccount,
+                                                       cancelBtn: lngConst.cancel,
+                                                       okBtn: lngConst.ok.capitalized) { index, title in
+            if index == 0 {
+                DispatchQueue.main.async {
+                    self.diableUser()
+                }
+            }
+        }
+        
+     
     }
     
     @IBAction func logoutUser(_ sender: Any) {
 
-        
+            AltienoAlert.initialization().showAlertWithBtn(with: .attension(lngConst.logoutDes),
+                                                           title: lngConst.logout,
+                                                           cancelBtn: lngConst.cancel,
+                                                           okBtn: lngConst.ok.capitalized) { index, title in
+                if index == 0 {
+                    DispatchQueue.main.async {
+                        appDelegate.setupLogout()
+                    }
+                }
+        }
        
-        
-        let alertController = UIAlertController(title: "", message: "Security Reset. Please log in again", preferredStyle: .alert)
-            // Create the actions
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) {
-                UIAlertAction in
-            appDelegate.setupLogout()
-            
-            }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) {
-                UIAlertAction in
-                NSLog("Cancel Pressed")
-            }
-            // Add the actions
-        
-        alertController.addAction(okAction)
-        alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
+       
+      
     }
     
     func changeViewController(_ menu: LeftMenu) {

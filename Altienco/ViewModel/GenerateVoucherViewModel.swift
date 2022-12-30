@@ -33,20 +33,20 @@ class GenerateVoucherViewModel {
             SVProgressHUD.dismiss()
             if jsondata?["Message_Code"] as? Bool == true,
                let resultData = jsondata?["Result"] as? NSDictionary{
+                let msg = resultData["message"] as? String ?? lngConst.supportMsg
+
                 if resultData["status"] as? Bool == true{
-                    if let jsondata = resultData["data"] as! NSDictionary? {
+                    if let jsondata = resultData["data"] as! NSDictionary?,jsondata.count > 0 {
                         let model = GenerateVoucherResponseObj.init(json: jsondata as! [String : Any])
-                        
                         complition(model, true, "")
                         return
                     }else {
-                        complition(nil, false, lngConst.supportMsg)
+                        complition(nil, false, msg)
                         return
                     }
                 }
                 else
                 {
-                    let msg = resultData["message"] as? String
                     complition(nil, false, msg)
                     return
                 }
@@ -83,21 +83,22 @@ class GenerateVoucherViewModel {
             debugPrint("jsondata:", strURl, jsondata as Any)
             SVProgressHUD.dismiss()
             if jsondata?["Message_Code"] as? Bool == true,
-               let resultData = jsondata?["Result"] as? NSDictionary{
+               let resultData = jsondata?["Result"] as? NSDictionary {
+                let msg = resultData["message"] as? String
                 if resultData["status"] as? Bool == true{
-                    if let jsondata = resultData["data"] as! NSDictionary? {
+                    if let jsondata = resultData["data"] as! NSDictionary?,jsondata.count > 0 {
                         let model = ConfirmingIntrPINBankVoucherModel.init(json: jsondata as! [String : Any])
                         
                         complition(model, true, "")
                         return
                     }else {
-                        complition(nil, false, lngConst.supportMsg)
+                        complition(nil, false, msg)
                         return
                     }
                 }
                 else
                 {
-                    let msg = resultData["message"] as? String
+                   
                     complition(nil, false, msg)
                     return
                 }

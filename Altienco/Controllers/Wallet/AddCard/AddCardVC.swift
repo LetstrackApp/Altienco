@@ -157,10 +157,11 @@ class AddCardVC: FloatingPannelHelper, UITextFieldDelegate, GoToRootDelegate {
         
         
         if pincode.count  < 8{
-            let vc: FailureWalletVC = FailureWalletVC()
-            vc.modalPresentationStyle = .overFullScreen
-            vc.view.backgroundColor = .clear
-            self.present(vc, animated: false, completion: nil)
+            showFailAlert()
+//            let vc: FailureWalletVC = FailureWalletVC()
+//            vc.modalPresentationStyle = .overFullScreen
+//            vc.view.backgroundColor = .clear
+//            self.present(vc, animated: false, completion: nil)
         }
         else{
             let dataModel = AddMoneyModel.init(pinNumber: pincode,
@@ -174,11 +175,15 @@ class AddCardVC: FloatingPannelHelper, UITextFieldDelegate, GoToRootDelegate {
                         self?.callSuccessPopup(Msg: "", cardValue: result?.cardValue ?? 0, walletBalance: result?.walletAmount ?? 0.0)
                     }
                     else{
-                        let viewController: FailureWalletVC = FailureWalletVC()
-                        viewController.modalPresentationStyle = .overFullScreen
-                        self?.navigationController?.present(viewController, animated: true)
+                        self?.showFailAlert()
                     }
                 }}
+        }
+    }
+    
+    func showFailAlert(){
+        FailureWalletVC.initialization().showAlert { (index,name) in
+            
         }
     }
     

@@ -171,7 +171,12 @@ Have a great day!
     let tryAfterSomeTime = "Please try after Sometime!"
     let allNotification = "All Notification"
     let notification = "Notification"
-    let voucher_Generating = "Generating Voucher" 
+    let voucher_Generating = "Generating Voucher"
+    let deleteAcDes = "If you delete your account permanently, you will not able to get retrive current balance in the app. Do you still want to proceed?"
+    let logoutDes = "Security Reset. Please log in again"
+    let deleteAccount = "Delete Account"
+    let logout = "Logout"
+    let cancel = "Cancel"
 
 
 }

@@ -1,6 +1,7 @@
 //
 //  AltienoAlert.swift
 //  Altienco
+
 //
 //  Created by mac on 22/12/22.
 //  Copyright © 2022 Letstrack. All rights reserved.
@@ -12,15 +13,15 @@ import Lottie
 enum KindOF {
     case contactus
     case logout
-    case retry
-    case fail
+    case fail(String)
     case profile(String)
     case other(String)
-    case addBalance(String)
+    case attension(String)
+    case reviewPop
+    case wallet
     
     var btnTitle : String {
         switch self {
-        case .retry,.fail : return lngConst.try_Again.uppercased()
         default: return lngConst.ok.uppercased()
         }
     }
@@ -29,7 +30,9 @@ enum KindOF {
         switch self {
         case .contactus : return lngConst.shareMsgOncontactUS
         case .logout : return lngConst.logoutSuccessfully
-        case .profile(let message ): return message 
+        case .fail(let message ): return message
+        case .profile(let message ): return message
+        case .attension(let message ): return message
         case .other(let error):
             return error
         default: return ""
@@ -40,11 +43,23 @@ enum KindOF {
         switch self {
         case .contactus : return "ic_other"
         case .logout : return "ic_logoutnew"
-        case .retry,.fail,.profile : return nil
-            
+        case .attension : return "ic_attention"
+        case .fail: return "red_corss"
+        case .profile : return nil
         default: return "ic_other"
         }
     }
+    
+    var soundName: String? {
+        switch self{
+        case .fail,.attension:
+            return "errorbuzz"
+        case .profile,.reviewPop,.contactus,.wallet,.other:
+            return "alertSound"
+        default: return nil
+        }
+    }
+    
 }
 
 class AltienoAlert: UIViewController {
@@ -52,7 +67,7 @@ class AltienoAlert: UIViewController {
     private var okbtnTitle:String?
     private var cancelbtnTitle:String?
     private var alertTitle:String?
-
+    
     
     @IBOutlet weak var titleLbl: PaddingLabel! {
         didSet {
@@ -85,12 +100,21 @@ class AltienoAlert: UIViewController {
         }
     }
     @IBOutlet weak var viewok: UIView!
-    @IBOutlet weak var cancelView: UIView!
+    @IBOutlet weak var cancelView: UIView! {
+        didSet {
+            cancelView.isHidden = true
+        }
+    }
     @IBOutlet weak var btnCancel: UIButton!{
         didSet{
             btnCancel.setupNextButton(title: lngConst.ok.uppercased())
             btnCancel.titleLabel?.font = UIFont.SF_Regular(15)
             btnCancel.addTarget(self, action: #selector(btnCancelTapped(_:)), for: .touchUpInside)
+            btnCancel.layer.borderWidth = 1
+            let color = UIColor.init(0x012667)
+            btnCancel.layer.borderColor = color.cgColor
+            btnCancel.setTitleColor(color, for: .normal)
+            btnCancel.backgroundColor = .white
             
         }
     }
@@ -143,27 +167,35 @@ class AltienoAlert: UIViewController {
         }
         
         switch kind {
-        case .addBalance :
+        case .attension :
             cancelView.isHidden = false
             titleLbl.isHidden = false
         default:break
         }
-
+        
         
         
     }
     
     
     func animateView() {
-        let animation = Animation.named("circle_animation")
+        var animation: Animation?
+        switch kind {
+        case .fail:
+            animation = Animation.named("circle_red")
+        default:
+            animation = Animation.named("circle_animation")
+        }
+        
+        guard let animation = animation else { return  }
         animator.animation = animation
         animator.contentMode = .scaleAspectFit
         animator.backgroundBehavior = .pauseAndRestore
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            Helper.shared.playSound()
+            Helper.shared.playSound(kind: self?.kind)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-              
+                
                 if  self?.kind?.imageName  != nil{
                     self?.opupInAniamtion()
                 }else {
@@ -233,17 +265,21 @@ class AltienoAlert: UIViewController {
     /// Show Alert Controller
     private func show(){
         if  let rootViewController = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController {
+            
+            
             var topViewController = rootViewController
             while topViewController.presentedViewController != nil {
                 topViewController = topViewController.presentedViewController!
             }
             topViewController.addChild(self)
             topViewController.view.addSubview(view)
-            
             viewWillAppear(true)
             didMove(toParent: topViewController)
             view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            view.frame = topViewController.view.bounds
+            
+            view.frame = UIScreen.main.bounds
+            
+            
             self.bottomConstraint.constant = -getBottomConstant()
             self.view.backgroundColor = UIColor.clear
             self.animateView()
@@ -257,7 +293,7 @@ class AltienoAlert: UIViewController {
                 self.titleLbl.text = alertTitle
             }
             switch kind {
-            case .addBalance :
+            case .attension :
                 self.cancelView.isHidden = false
                 self.titleLbl.isHidden = false
             default:break
@@ -342,7 +378,7 @@ class AltienoAlert: UIViewController {
                                  title:String?,
                                  cancelBtn:String?,
                                  okBtn:String?,
-                          completion : alertCompletionBlock) {
+                                 completion : alertCompletionBlock) {
         self.alertTitle = title
         self.cancelbtnTitle = cancelBtn
         self.okbtnTitle = okBtn

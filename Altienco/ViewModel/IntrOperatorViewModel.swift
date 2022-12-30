@@ -42,7 +42,7 @@ class IntrOperatorViewModel {
                 }
                 else
                 {
-                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG)
+                    Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG, isError: true)
                     complition(nil, nil)
                 }
                 
@@ -50,12 +50,14 @@ class IntrOperatorViewModel {
 
                 else{
                     complition(nil, nil)
-                    Helper.showToast((jsondata?["Message"] as? String),isAlertView: true)
+                    Helper.showToast((jsondata?["Message"] as? String),isAlertView: true, isError: true)
                 }
 
         }) { (Error) in
             complition(nil, nil)
             if let error = Error{
+                Helper.showToast(error.description,isAlertView: true, isError: true)
+
 //                Helper.showToast(error , delay:Helper.DELAY_LONG)
             }
         }

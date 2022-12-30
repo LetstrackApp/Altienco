@@ -167,7 +167,7 @@ class SuccessRechargeVC: FloatingPannelHelper, UITextFieldDelegate {
                 self.rechargeView.isHidden = true
 
             }else {
-                self.sucessVIew.isHidden = true
+                self.sucessVIew.isHidden = false
                 self.rechargeView.isHidden = false
 
             }

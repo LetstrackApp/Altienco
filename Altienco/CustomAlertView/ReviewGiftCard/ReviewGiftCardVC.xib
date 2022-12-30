@@ -351,6 +351,7 @@
         <designable name="Wx4-Vc-06C">
             <size key="intrinsicContentSize" width="112" height="32"/>
         </designable>
+        <designable name="wp1-5D-4oq"/>
     </designables>
     <resources>
         <image name="ic_country" width="30" height="46"/>

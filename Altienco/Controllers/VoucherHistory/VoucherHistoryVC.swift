@@ -251,23 +251,23 @@ extension VoucherHistoryVC: SkeletonTableViewDelegate, SkeletonTableViewDataSour
             
             DispatchQueue.main.async {
                 guard let model = self.viewModel?.historyList.value[self.SelectedIndex] else {return}
-                if model.transactionTypeId == TransactionTypeId.PhoneRecharge.rawValue{
+//                if model.transactionTypeId == TransactionTypeId.PhoneRecharge.rawValue{
                     self.successVoucher(mPin: model.mPIN ?? "",
                                         denominationValue: "\(model.voucherAmount ?? 0)",
                                         walletBalance: 0.0, msgToShare: model.msgToShare ?? "",
                                         voucherID: model.voucherId ?? 0,
                                         isUsed: model.isUsed,
                                         orderNumber: model.orderNumber)
-                }
-                else{
-                    self.successCallingCard(mPin: model.mPIN ?? "",
-                                            denominationValue: "\(model.voucherAmount ?? 0)",
-                                            walletBalance: 0.0,
-                                            msgToShare: model.msgToShare ?? "",
-                                            voucherID: model.voucherId ?? 0,
-                                            isUsed: model.isUsed,
-                                            orderNumber: model.orderNumber)
-                }
+//                }
+//                else{
+//                    self.successCallingCard(mPin: model.mPIN ?? "",
+//                                            denominationValue: "\(model.voucherAmount ?? 0)",
+//                                            walletBalance: 0.0,
+//                                            msgToShare: model.msgToShare ?? "",
+//                                            voucherID: model.voucherId ?? 0,
+//                                            isUsed: model.isUsed,
+//                                            orderNumber: model.orderNumber)
+//                }
             }
         }
     }
@@ -290,23 +290,23 @@ extension VoucherHistoryVC: SkeletonTableViewDelegate, SkeletonTableViewDataSour
         self.navigationController?.pushViewController(viewController, animated: true)
         
     }
-    func successCallingCard(mPin: String,
-                            denominationValue : String,
-                            walletBalance: Double,
-                            msgToShare: String, voucherID: Int,
-                            isUsed: Bool,
-                            orderNumber:String?){
-        let viewController: SuccessCallinCardVC = SuccessCallinCardVC()
-        viewController.denominationValue = denominationValue
-        viewController.mPin = mPin
-        viewController.isUsed = isUsed
-        viewController.isHideVoucherButton = true
-        viewController.walletBal = walletBalance
-        viewController.voucherID = voucherID
-        viewController.msgToShare = msgToShare
-        viewController.orderNumber = orderNumber
-        self.navigationController?.pushViewController(viewController, animated: true)
-        
-    }
+//    func successCallingCard(mPin: String,
+//                            denominationValue : String,
+//                            walletBalance: Double,
+//                            msgToShare: String, voucherID: Int,
+//                            isUsed: Bool,
+//                            orderNumber:String?){
+//        let viewController: SuccessRechargeVC = SuccessRechargeVC()
+//        viewController.denominationValue = denominationValue
+//        viewController.mPin = mPin
+//        viewController.isUsed = isUsed
+//        viewController.isHideVoucherButton = true
+//        viewController.walletBal = walletBalance
+//        viewController.voucherID = voucherID
+//        viewController.msgToShare = msgToShare
+//        viewController.orderNumber = orderNumber
+//        self.navigationController?.pushViewController(viewController, animated: true)
+//
+//    }
     
 }

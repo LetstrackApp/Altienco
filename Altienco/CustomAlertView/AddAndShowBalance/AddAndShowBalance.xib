@@ -27,10 +27,10 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CGx-0v-2l8">
-                                    <rect key="frame" x="15" y="15" width="145" height="50"/>
+                                    <rect key="frame" x="15" y="15" width="135" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="£0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M49-HF-Jo9">
-                                            <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="135" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="uEC-J6-dXJ"/>
                                             </constraints>
@@ -39,7 +39,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UGp-3f-EFv">
-                                            <rect key="frame" x="0.0" y="30" width="145" height="20"/>
+                                            <rect key="frame" x="0.0" y="30" width="135" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="aQ5-OO-M5M"/>
                                             </constraints>
@@ -50,9 +50,9 @@
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gaf-wd-hBM">
-                                    <rect key="frame" x="175" y="28" width="130" height="24"/>
+                                    <rect key="frame" x="165" y="28" width="140" height="24"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="130" id="62W-zM-BnZ"/>
+                                        <constraint firstAttribute="width" constant="140" id="62W-zM-BnZ"/>
                                         <constraint firstAttribute="height" constant="24" id="9QD-9j-AcH"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>

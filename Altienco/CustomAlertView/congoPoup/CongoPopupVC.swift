@@ -48,7 +48,7 @@ class CongoPopupVC: UIViewController{
     }
     override func viewWillAppear(_ animated: Bool) {
         self.setupDefaultValue()
-        self.setupAlphaVC()
+        //self.setupAlphaVC()
     }
     
     private func show(){
@@ -71,14 +71,14 @@ class CongoPopupVC: UIViewController{
     }
     
     @IBAction func addWallet(_ sender: Any) {
-        DispatchQueue.main.async {
-            if let topController = UIApplication.topViewController() {
-                topController.dismissAlphaView()
-            }
-            else{
-                self.dismissAlphaView()
-            }
-        }
+//        DispatchQueue.main.async {
+//            if let topController = UIApplication.topViewController() {
+//                topController.dismissAlphaView()
+//            }
+//            else{
+//                self.dismissAlphaView()
+//            }
+//        }
     }
     
     @IBAction func homeBuuton(_ sender: Any) {

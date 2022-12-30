@@ -37,16 +37,16 @@ class VerifyPinViewModel {
                 else
                 {
                     complition(nil, false)
-                    Helper.showToast((resultData["message"] as? String),isAlertView: true)
+                    Helper.showToast((resultData["message"] as? String),isAlertView: true, isError: true)
                 }
             }
                 else{
-                    Helper.showToast((jsondata?["Message_Code"] as? String), isAlertView: true)
+                    Helper.showToast((jsondata?["Message_Code"] as? String), isAlertView: true, isError: true)
                     complition(nil, false)
                 }
         }) { (Error) in
             if let error = Error{
-                Helper.showToast(error , isAlertView: true)
+                Helper.showToast(error , isAlertView: true, isError: true)
             }
             complition(nil, false)
         }

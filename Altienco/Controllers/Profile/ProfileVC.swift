@@ -54,6 +54,8 @@ class ProfileVC: UIViewController {
         self.registerUser = RegistrationViewModel()
         self.initializeView()
         self.initializeValue()
+        self.isAvatarImage = UserDefaults.getAvtarImage == "1" ? true : false
+        //self.isAvatarImage = UserDefaults.getAvtarImage
         // Do any additional setup after loading the view.
     }
     
@@ -134,6 +136,7 @@ class ProfileVC: UIViewController {
     func updateProfilePic(){
         
         if self.profileImage != "" {
+            
             let dataModel = RegistrationModel.init(mobileCode: UserDefaults.getMobileCode,
                                                    mobileNumber: UserDefaults.getMobileNumber,
                                                    profileImage: self.profileImage,
@@ -160,7 +163,7 @@ class ProfileVC: UIViewController {
 //                        Helper.showToast("Great. Profile now updated.", delay: Helper.DELAY_SHORT)
                     }
                     else{
-                        Helper.showToast(message,isAlertView: true)
+                        Helper.showToast(message,isAlertView: true, isError: true)
                     }
                 }
 
@@ -199,7 +202,7 @@ class ProfileVC: UIViewController {
         model?.profileImage = url
         if model != nil{
             UserDefaults.setUserData(data: model!)
-            if let profileImage = UserDefaults.getUserData?.profileImage{
+            if let profileImage = UserDefaults.getUserData?.profileImage {
                 self.userImage.contentMode = .scaleToFill
                 self.userImage.sd_setImage(with: URL(string: profileImage), placeholderImage: UIImage(named: "defaultUser"))
             }

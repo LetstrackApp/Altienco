@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -130,7 +130,7 @@
                                                                                                 <constraint firstAttribute="height" constant="40" id="Pla-CL-4zg"/>
                                                                                             </constraints>
                                                                                             <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="21"/>
-                                                                                            <textInputTraits key="textInputTraits"/>
+                                                                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
                                                                                             <connections>
                                                                                                 <outlet property="delegate" destination="-1" id="bYs-As-FWL"/>
                                                                                             </connections>
@@ -223,7 +223,7 @@
                                                                                                 <constraint firstAttribute="height" constant="40" id="1m0-6R-zvi"/>
                                                                                             </constraints>
                                                                                             <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="21"/>
-                                                                                            <textInputTraits key="textInputTraits"/>
+                                                                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="family-name"/>
                                                                                             <connections>
                                                                                                 <outlet property="delegate" destination="-1" id="npt-fJ-VIp"/>
                                                                                             </connections>
@@ -316,7 +316,7 @@
                                                                                                 <constraint firstAttribute="height" constant="40" id="a5c-c0-U5U"/>
                                                                                             </constraints>
                                                                                             <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="21"/>
-                                                                                            <textInputTraits key="textInputTraits"/>
+                                                                                            <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                                                                             <connections>
                                                                                                 <outlet property="delegate" destination="-1" id="1rE-q7-a8n"/>
                                                                                             </connections>
@@ -408,7 +408,7 @@
                                                                                                 <constraint firstAttribute="height" constant="40" id="R8h-SG-7xb"/>
                                                                                             </constraints>
                                                                                             <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="21"/>
-                                                                                            <textInputTraits key="textInputTraits"/>
+                                                                                            <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                                                         </textField>
                                                                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Avt-Ra-zWa">
                                                                                             <rect key="frame" x="273.5" y="27" width="80.5" height="28"/>
