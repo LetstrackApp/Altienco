@@ -29,6 +29,7 @@ class CountrySelectionVC: UIViewController {
     }
     @IBOutlet weak var mobileNumber: TextField!{
         didSet{
+            
             mobileNumber.layer.cornerRadius = 8
             mobileNumber.layer.borderWidth = 1
             mobileNumber.layer.borderColor =  UIColor.init(0xe1f5fc).cgColor
@@ -38,6 +39,10 @@ class CountrySelectionVC: UIViewController {
             mobileNumber.defaultTextAttributes.updateValue(3.7,
                                                            forKey: NSAttributedString.Key.kern)
             mobileNumber.addTarget(self, action: #selector(handleTextFieldDidChange), for: .editingChanged)
+            mobileNumber.autocorrectionType = .yes
+            mobileNumber.textContentType = .telephoneNumber
+            mobileNumber.keyboardType = .numbersAndPunctuation
+            
             
         }
     }
@@ -239,13 +244,19 @@ extension CountrySelectionVC {
 //MARK: - UITextFieldDelegate
 extension CountrySelectionVC: UITextFieldDelegate {
     
-     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    
+    func formateTextNumber(){
+        let newString = mobileNumber.text!.replacingOccurrences(of: " ", with: "").deletingPrefix("0").deletingPrefix(self.countryCodeLabel.text!).trimWhiteSpace.trimWhiteSpace.replacingOccurrences(of: "+", with: "")
+        self.mobileNumber.text  = newString
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var result = true
-        let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-      
+        let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string).replacingOccurrences(of: " ", with: "").deletingPrefix("0").deletingPrefix(self.countryCodeLabel.text!).trimWhiteSpace.replacingOccurrences(of: "+", with: "")
+        
         
         if textField == mobileNumber{
-            let disallowedCharacterSet = NSCharacterSet(charactersIn:textfiledchar.circleCode).inverted
+            let disallowedCharacterSet = NSCharacterSet(charactersIn:textfiledchar.phpad).inverted
             let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
             result = replacementStringIsLegal
         }
@@ -253,6 +264,7 @@ extension CountrySelectionVC: UITextFieldDelegate {
         if (textField == mobileNumber) && result == true {
             return newString.count <= 10
         }
+      
        
         return result
     }
@@ -268,12 +280,15 @@ extension CountrySelectionVC: UITextFieldDelegate {
     
     @objc func handleTextFieldDidChange(_ textField: UITextField) {
         fontChange(textField)
+        textField.setError()
+        formateTextNumber()
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        formateTextNumber()
         fontChange(textField)
         textField.setError()
         //        Validator.isValidEmail(field: textField, show: false)
@@ -290,13 +305,13 @@ extension CountrySelectionVC: UITextFieldDelegate {
         return true
     }
     
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        textField.setError()
-//        let newLength = (mobileNumber.text ?? "").count + string.count - range.length
-//        if(textField == mobileNumber) {
-//            return newLength <= 13
-//        }
-//        
-//        return true
-//    }
+    //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    //        textField.setError()
+    //        let newLength = (mobileNumber.text ?? "").count + string.count - range.length
+    //        if(textField == mobileNumber) {
+    //            return newLength <= 13
+    //        }
+    //
+    //        return true
+    //    }
 }
