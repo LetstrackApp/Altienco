@@ -43,7 +43,7 @@ class CongoPopupVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.show()
-        self.view.bounds.origin.y = -self.view.bounds.height
+       // self.view.bounds.origin.y = -self.view.bounds.height
 //        verifyOTPViewModel = VerifyOTPViewModel()
     }
     override func viewWillAppear(_ animated: Bool) {

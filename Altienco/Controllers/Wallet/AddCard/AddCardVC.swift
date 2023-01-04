@@ -8,6 +8,15 @@
 
 import UIKit
 
+class NMTextField: UITextField {
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(UIResponderStandardEditActions.paste(_:)) {
+            return false
+        }
+        return super.canPerformAction(action, withSender: sender)
+    }
+}
+
 class AddCardVC: FloatingPannelHelper, UITextFieldDelegate, GoToRootDelegate {
     func CloseToRoot(dismiss: Bool) {
         if dismiss{
@@ -42,16 +51,14 @@ class AddCardVC: FloatingPannelHelper, UITextFieldDelegate, GoToRootDelegate {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var walletBalance: UILabel!
     
-    @IBOutlet weak var cardPinText: UITextField!{didSet{
+    @IBOutlet weak var cardPinText: NMTextField!{didSet{
         self.cardPinText.font = UIFont.SF_Bold(20.0)
         self.cardPinText.textColor = appColor.blackText
     }}
     
-    @IBOutlet weak var verifyPin: UIButton!{
+    @IBOutlet weak var verifyPin: LoadingButton!{
         didSet{
-            DispatchQueue.main.async {
                 self.verifyPin.setupNextButton(title: "VERIFY PIN")
-            }
         }
     }
     
@@ -153,10 +160,12 @@ class AddCardVC: FloatingPannelHelper, UITextFieldDelegate, GoToRootDelegate {
     
     
     @IBAction func verifyPin(_ sender: Any) {
+        
+        
         let pincode = self.cardPinText.text!.replacingOccurrences(of: " ", with: "").trimWhiteSpace
         
         
-        if pincode.count  < 8{
+        if pincode.count  < 16{
             showFailAlert()
 //            let vc: FailureWalletVC = FailureWalletVC()
 //            vc.modalPresentationStyle = .overFullScreen
@@ -169,10 +178,25 @@ class AddCardVC: FloatingPannelHelper, UITextFieldDelegate, GoToRootDelegate {
                                                transactionTypeID: 1,
                                                customerId: UserDefaults.getUserData?.customerID ?? 0)
             
+            self.verifyPin.showLoading()
+            self.view.isUserInteractionEnabled = false
             addMoneyViewModel?.addMoney(model: dataModel) { (result, status)  in
                 DispatchQueue.main.async { [weak self] in
+                    self?.verifyPin.hideLoading()
+                    self?.view.isUserInteractionEnabled = true
                     if  (result != nil) && status == true{
-                        self?.callSuccessPopup(Msg: "", cardValue: result?.cardValue ?? 0, walletBalance: result?.walletAmount ?? 0.0)
+                        
+                        if let amount = result?.cardValue,
+                           let currency = UserDefaults.getUserData?.currencySymbol {
+                            PaymentSucessPopupVC.initialization().showAlert(with:"\(currency)\(amount)") { index, result in
+                                DispatchQueue.main.async {
+                                    self?.navigationController?.popToRootViewController(animated: true)
+                                }
+                            }
+                            
+                            
+                        }
+//                        self?.callSuccessPopup(Msg: "", cardValue: result?.cardValue ?? 0, walletBalance: result?.walletAmount ?? 0.0)
                     }
                     else{
                         self?.showFailAlert()
@@ -188,16 +212,16 @@ class AddCardVC: FloatingPannelHelper, UITextFieldDelegate, GoToRootDelegate {
     }
     
     
-    func callSuccessPopup(Msg: String, cardValue: Int, walletBalance: Double){
-        
-        let viewController: CongoPopupVC = CongoPopupVC()
-        viewController.walletBalance = walletBalance
-        viewController.Message = Msg
-        viewController.cardValue = cardValue
-        viewController.modalPresentationStyle = .overFullScreen
-        viewController.delegate = self
-        self.navigationController?.present(viewController, animated: true)
-    }
+//    func callSuccessPopup(Msg: String, cardValue: Int, walletBalance: Double){
+//
+//        let viewController: CongoPopupVC = CongoPopupVC()
+//        viewController.walletBalance = walletBalance
+//        viewController.Message = Msg
+//        viewController.cardValue = cardValue
+//        viewController.modalPresentationStyle = .overFullScreen
+//        viewController.delegate = self
+//        self.navigationController?.present(viewController, animated: true)
+//    }
 }
 
 

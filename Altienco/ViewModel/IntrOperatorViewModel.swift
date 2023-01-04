@@ -11,7 +11,7 @@ import Alamofire
 
 class IntrOperatorViewModel {
     
-//    var operatorList : Box<IntrOperatorResponseObj> = Box(IntrOperatorResponseObj())
+    //    var operatorList : Box<IntrOperatorResponseObj> = Box(IntrOperatorResponseObj())
     func getOperator(model : IntrOperatorRequestObj, complition : @escaping([LastRecharge]?, [OperatorList]?) -> Void)->Void{
         let data = try? JSONEncoder().encode(model)
         let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
@@ -20,9 +20,9 @@ class IntrOperatorViewModel {
             "Authorization": "Bearer \(UserDefaults.getToken)",
             "Content-Type": "application/json"
         ]
-        debugPrint("subURL.intrOperator",json)
+        //        debugPrint("subURL.intrOperator",json)
         AFWrapper.requestPOSTURL(strURl, params: json, headers: header, success: { (jsondata) in
-            debugPrint("jsondata:", strURl, jsondata as Any)
+            //            debugPrint("jsondata:", strURl, jsondata as Any)
             var operatorList = [OperatorList]()
             var lastRecharge = [LastRecharge]()
             if jsondata?["Message_Code"] as? Bool == true, let resultData = jsondata?["Result"] as? NSDictionary
@@ -37,6 +37,8 @@ class IntrOperatorViewModel {
                         }
                         complition(lastRecharge, operatorList)
                     }else {
+                        Helper.showToast((resultData["message"] as? String)!, delay:Helper.DELAY_LONG, isError: true)
+                        
                         complition(nil, nil)
                     }
                 }
@@ -47,18 +49,18 @@ class IntrOperatorViewModel {
                 }
                 
             }
-
-                else{
-                    complition(nil, nil)
-                    Helper.showToast((jsondata?["Message"] as? String),isAlertView: true, isError: true)
-                }
-
+            
+            else{
+                complition(nil, nil)
+                Helper.showToast((jsondata?["Message"] as? String),isAlertView: true, isError: true)
+            }
+            
         }) { (Error) in
             complition(nil, nil)
             if let error = Error{
                 Helper.showToast(error.description,isAlertView: true, isError: true)
-
-//                Helper.showToast(error , delay:Helper.DELAY_LONG)
+                
+                //                Helper.showToast(error , delay:Helper.DELAY_LONG)
             }
         }
     }

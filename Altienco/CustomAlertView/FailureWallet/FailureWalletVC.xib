@@ -11,9 +11,6 @@
         <array key="Poppins-Light.ttf">
             <string>Poppins-Light</string>
         </array>
-        <array key="Poppins-Medium.ttf">
-            <string>Poppins-Medium</string>
-        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FailureWalletVC" customModule="Altienco" customModuleProvider="target">
@@ -21,6 +18,7 @@
                 <outlet property="bottomConstarint" destination="aK2-Vx-Rzu" id="b1C-RJ-Adt"/>
                 <outlet property="failedImageView" destination="0KU-xn-1Uf" id="J7Q-dt-vLr"/>
                 <outlet property="reEnter" destination="Zg6-lD-tbq" id="Nrz-WO-KSZ"/>
+                <outlet property="titleLBl" destination="Nwe-bl-yai" id="hif-hz-jdR"/>
                 <outlet property="view" destination="Ex7-AL-PVU" id="nOq-Ea-AR1"/>
                 <outlet property="viewContainer" destination="qre-gc-Ayt" id="Cgr-ae-Ocj"/>
                 <outlet property="walletBalance" destination="H6m-x5-BsL" id="5te-9H-7jj"/>
@@ -92,33 +90,21 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHj-R8-pKR">
                                     <rect key="frame" x="0.0" y="100.5" width="384" height="31"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add money from " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwe-bl-yai">
-                                            <rect key="frame" x="15" y="0.0" width="156" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add money from altienco card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwe-bl-yai">
+                                            <rect key="frame" x="15" y="0.0" width="354" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" id="9Op-Ca-Pgn"/>
                                                 <constraint firstAttribute="height" constant="21" id="RXM-ye-3Uc"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="altienco card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyn-KL-LiC">
-                                            <rect key="frame" x="174" y="0.0" width="120.5" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="zTJ-Yq-cPa"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="18"/>
-                                            <color key="textColor" red="0.69019607839999997" green="0.28627450980000002" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Zyn-KL-LiC" secondAttribute="trailing" constant="15" id="BcT-As-nWk"/>
-                                        <constraint firstItem="Zyn-KL-LiC" firstAttribute="leading" secondItem="Nwe-bl-yai" secondAttribute="trailing" constant="3" id="GMD-3q-Tx5"/>
                                         <constraint firstItem="Nwe-bl-yai" firstAttribute="leading" secondItem="mHj-R8-pKR" secondAttribute="leading" constant="15" id="KYk-C9-KAQ"/>
                                         <constraint firstItem="Nwe-bl-yai" firstAttribute="top" secondItem="mHj-R8-pKR" secondAttribute="top" id="ShI-6k-me8"/>
-                                        <constraint firstItem="Zyn-KL-LiC" firstAttribute="centerY" secondItem="Nwe-bl-yai" secondAttribute="centerY" id="gQX-0R-25a"/>
+                                        <constraint firstAttribute="trailing" secondItem="Nwe-bl-yai" secondAttribute="trailing" constant="15" id="k6c-d5-WC3"/>
                                         <constraint firstAttribute="bottom" secondItem="Nwe-bl-yai" secondAttribute="bottom" constant="10" id="qjV-3q-XQA"/>
                                     </constraints>
                                 </view>

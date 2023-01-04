@@ -121,10 +121,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="382" height="70"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bbJ-EX-SCc">
-                                            <rect key="frame" x="15" y="15" width="98" height="55"/>
+                                            <rect key="frame" x="15" y="15" width="86" height="55"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="£100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDe-bx-U4R">
-                                                    <rect key="frame" x="0.0" y="0.0" width="98" height="30"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="86" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="YuV-I4-Pjt"/>
                                                     </constraints>
@@ -133,7 +133,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykj-YH-a89">
-                                                    <rect key="frame" x="0.0" y="35" width="98" height="20"/>
+                                                    <rect key="frame" x="0.0" y="35" width="86" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="o9g-5C-AWO"/>
                                                     </constraints>
@@ -189,7 +189,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="382" height="31"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Money From " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isn-8P-Ixe">
-                                                                            <rect key="frame" x="15" y="0.0" width="155.5" height="21"/>
+                                                                            <rect key="frame" x="15" y="0.0" width="144.5" height="21"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="21" id="T1N-vQ-oth"/>
                                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" id="wr6-pw-TEO"/>
@@ -199,7 +199,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Altienco Card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZb-p9-Z6t">
-                                                                            <rect key="frame" x="173.5" y="0.0" width="124" height="21"/>
+                                                                            <rect key="frame" x="162.5" y="0.0" width="109.5" height="21"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="21" id="nNt-jS-Qq1"/>
                                                                             </constraints>
@@ -225,7 +225,7 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="382" height="34"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLk-YT-DsF">
-                                                                                    <rect key="frame" x="15" y="10" width="35.5" height="21"/>
+                                                                                    <rect key="frame" x="15" y="10" width="33" height="21"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" id="H6e-c5-CaQ"/>
                                                                                         <constraint firstAttribute="height" constant="21" id="HIT-bu-Gt9"/>
@@ -235,7 +235,7 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16 digit pin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8uQ-ty-Xd7">
-                                                                                    <rect key="frame" x="53.5" y="10" width="74" height="21"/>
+                                                                                    <rect key="frame" x="51" y="10" width="70" height="21"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="21" id="1GD-BE-o9U"/>
                                                                                     </constraints>
@@ -254,18 +254,18 @@
                                                                                 <constraint firstAttribute="bottom" secondItem="fLk-YT-DsF" secondAttribute="bottom" constant="3" id="zOk-W4-nfK"/>
                                                                             </constraints>
                                                                         </view>
-                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="**** **** **** ****" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zn9-24-w7m">
+                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="**** **** **** ****" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zn9-24-w7m" customClass="NMTextField" customModule="Altienco" customModuleProvider="target">
                                                                             <rect key="frame" x="15" y="39" width="352" height="50"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="50" id="ZrC-WF-8f6"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="20"/>
-                                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="tel"/>
+                                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
                                                                             <connections>
                                                                                 <outlet property="delegate" destination="-1" id="G5K-KC-qaS"/>
                                                                             </connections>
                                                                         </textField>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dw-Cb-gim">
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dw-Cb-gim" customClass="LoadingButton" customModule="Altienco" customModuleProvider="target">
                                                                             <rect key="frame" x="15" y="119" width="352" height="50"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="50" id="gyJ-cU-L5h"/>
@@ -648,6 +648,11 @@
             <point key="canvasLocation" x="121.73913043478262" y="-14.0625"/>
         </view>
     </objects>
+    <designables>
+        <designable name="zn9-24-w7m">
+            <size key="intrinsicContentSize" width="187" height="34"/>
+        </designable>
+    </designables>
     <resources>
         <image name="ic_card_recharged" width="41" height="41"/>
         <image name="ic_cardpin" width="41" height="41"/>

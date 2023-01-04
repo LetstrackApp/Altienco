@@ -12,6 +12,7 @@ class FailureWalletVC: UIViewController {
     typealias alertCompletionBlock = ((Int, String) -> Void)?
     private var block : alertCompletionBlock?
 
+    @IBOutlet weak var titleLBl: UILabel!
     @IBOutlet weak var bottomConstarint: NSLayoutConstraint!
     var denominationPrice = ""
     var walletAmount = ""
@@ -38,6 +39,7 @@ class FailureWalletVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.failedImageView.rotate(duration: 0.5)
+        onLanguageChange()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +54,14 @@ class FailureWalletVC: UIViewController {
         if let currencySymbol = UserDefaults.getUserData?.currencySymbol, let walletAmount = UserDefaults.getUserData?.walletAmount{
         self.walletBalance.text = "\(currencySymbol)" + "\(walletAmount)"
         }
+    }
+    
+    func onLanguageChange(){
+        self.titleLBl.changeColorAndFont(mainString: lngConst.addMoneyToAltiencocard.capitalized,
+                                                    stringToColor: lngConst.altiencoCard.capitalized,
+                                                    color: UIColor.init(0xb24a96),
+                                                    font: UIFont.SF_Medium(18))
+
     }
 
     @IBAction func backVew(_ sender: Any) {
