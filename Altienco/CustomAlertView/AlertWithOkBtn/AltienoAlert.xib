@@ -39,7 +39,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZ8-QL-3UD">
-                    <rect key="frame" x="16" y="218.5" width="288" height="326"/>
+                    <rect key="frame" x="16" y="225.5" width="288" height="319"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CRT-ia-dfH">
                             <rect key="frame" x="15" y="28" width="258" height="75"/>
@@ -80,17 +80,17 @@
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1bK-1u-R1I">
-                            <rect key="frame" x="15" y="123" width="258" height="48"/>
+                            <rect key="frame" x="15" y="123" width="258" height="41"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1Q-ES-RIF" customClass="PaddingLabel" customModule="Altienco" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="258" height="20"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="258" height="16.5"/>
                                     <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="14"/>
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                     <string key="userLabel">Thank you for getting in touch!      We appreciate you contacting us. One of our colleagues will get back in touch within 48 hours. We are open Mon to Fri 9.30 am to 5.30 pm.  Have a great day!</string>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EYX-2t-fvU" customClass="PaddingLabel" customModule="Altienco" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="28" width="258" height="20"/>
+                                    <rect key="frame" x="0.0" y="24.5" width="258" height="16.5"/>
                                     <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="14"/>
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -99,7 +99,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8Bv-DH-1dg">
-                            <rect key="frame" x="15" y="196" width="258" height="100"/>
+                            <rect key="frame" x="15" y="189" width="258" height="100"/>
                             <subviews>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaZ-Qz-tlV">
                                     <rect key="frame" x="0.0" y="0.0" width="258" height="45"/>
@@ -191,10 +191,10 @@
     </objects>
     <designables>
         <designable name="EYX-2t-fvU">
-            <size key="intrinsicContentSize" width="81" height="20"/>
+            <size key="intrinsicContentSize" width="70" height="16.5"/>
         </designable>
         <designable name="X1Q-ES-RIF">
-            <size key="intrinsicContentSize" width="31" height="20"/>
+            <size key="intrinsicContentSize" width="26.5" height="16.5"/>
         </designable>
         <designable name="o9P-h9-Duv"/>
         <designable name="sAb-XP-2r2"/>

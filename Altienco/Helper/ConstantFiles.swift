@@ -11,10 +11,10 @@ import UIKit
 
 
 enum baseURL {
-    static let baseURl = "https://testnode.altienco.com/api/"
-    static let baseURldownload = "https://dadmin.altienco.com/api/"
-    //    static let baseURldownload = "https://admin.altienco.com/api/"
-    //    static let baseURl = "https://node.altienco.com/api/"
+    //    static let baseURl = "https://testnode.altienco.com/api/"
+    //    static let baseURldownload = "https://dadmin.altienco.com/api/"
+    static let baseURldownload = "https://admin.altienco.com/api/"
+    static let baseURl = "https://node.altienco.com/api/"
     static let imageBaseURl = "http://testnode.eu-west-2.elasticbeanstalk.com/"
     static let termsCondition = "https://www.altienco.com/TermsAndConditions.html"
     static let helpAndSupport =  "https://www.altienco.com/help.html"

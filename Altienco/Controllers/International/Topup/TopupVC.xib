@@ -776,14 +776,6 @@
             <point key="canvasLocation" x="121.73913043478262" y="-14.0625"/>
         </view>
     </objects>
-    <designables>
-        <designable name="EqW-IK-reQ">
-            <size key="intrinsicContentSize" width="59" height="30"/>
-        </designable>
-        <designable name="c6e-fN-TC5">
-            <size key="intrinsicContentSize" width="113" height="25.5"/>
-        </designable>
-    </designables>
     <resources>
         <image name="ic_country" width="30" height="46"/>
         <image name="ic_dropdownBlue" width="9" height="8.5"/>

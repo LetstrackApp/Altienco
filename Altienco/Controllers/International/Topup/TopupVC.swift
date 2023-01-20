@@ -231,10 +231,13 @@ class TopupVC: FloatingPannelHelper, UITextFieldDelegate {
             Helper.showToast("Please select country!")
         }
         
-        else if mobileNumber.text?.count ?? 0 > 9 {
+        else if mobileNumber.text?.count ?? 0 > 8 {
             
-            if let countryid = self.countryModel?.countryID, let mobileCode = self.countryModel?.mobileCode{
-                self.searchOperator(mobileNumber: self.mobileNumber.text ?? "", countryId: countryid, mobileCode: mobileCode)
+            if let countryid = self.countryModel?.countryID,
+               let mobileCode = self.countryModel?.mobileCode {
+                self.searchOperator(mobileNumber: self.mobileNumber.text ?? "",
+                                    countryId: countryid,
+                                    mobileCode: mobileCode)
             }}
         else{
             Helper.showToast("Please enter valid number!")

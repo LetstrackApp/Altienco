@@ -35,21 +35,25 @@ extension UIFont{
     
     
     
-   class func sizeAccordingToDevice(_ size : CGFloat) ->CGFloat{
-        
-        switch UIDevice().type {
-        case .iPhone4,.iPhone4S:
-            return size - 3
-        case .iPhone5,.iPhone5S,.iPhone5C:
-            return size - 2
-        case .iPhone6,.iPhone7,.iPhone8,.iPhoneSE,.iPhone6S:
-            return size
-        case .iPhone6plus,.iPhone7plus,.iPhone8plus,.iPhoneX,.iPhoneXR,.iPhone11,.iPhoneXS,.simulator:
-            return size + 1
-        case .iPhoneXSmax,.iPhone11Pro,.iPhone11ProMax:
-            return size + 2
-        default:return size
-            
+    class func sizeAccordingToDevice(_ size : CGFloat) ->CGFloat{
+        if (UI_USER_INTERFACE_IDIOM() == .pad)
+        {
+            return size + 4
+        }else {
+            switch UIDevice().type {
+            case .iPhone4,.iPhone4S:
+                return size - 3
+            case .iPhone5,.iPhone5S,.iPhone5C:
+                return size - 2
+            case .iPhone6,.iPhone7,.iPhone8,.iPhoneSE,.iPhone6S:
+                return size
+            case .iPhone6plus,.iPhone7plus,.iPhone8plus,.iPhoneX,.iPhoneXR,.iPhone11,.iPhoneXS,.simulator:
+                return size + 1
+            case .iPhoneXSmax,.iPhone11Pro,.iPhone11ProMax:
+                return size + 2
+            default:return size
+                
+            }
         }
     }
     
